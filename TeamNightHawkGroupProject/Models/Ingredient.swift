@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+class Ingredient {
+    let name: String
+    let measurement: String
+    
+    init(name: String, measurement: String) {
+        self.name = name
+        self.measurement = measurement
+    }
+}
