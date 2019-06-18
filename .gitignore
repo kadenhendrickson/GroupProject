@@ -27,6 +27,7 @@ xcuserdata/
 *.DS_Store
 
 ## Files
+
 Podfile.lock
 Manifest.lock
 
@@ -72,3 +73,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+#GlobalStuff
+*.framework
+GoogleService-Info.plist
