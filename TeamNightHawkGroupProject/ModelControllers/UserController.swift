@@ -88,7 +88,7 @@ extension UserController {
     
     private func fileURL() -> URL {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let filename = "TeamNightHawkGroupProject.json"
+        let filename = "user.json"
         let documentaryDirectoryUrl = urls[0].appendingPathComponent(filename)
         return documentaryDirectoryUrl
     }
