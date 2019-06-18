@@ -10,16 +10,18 @@ import Foundation
 
 class Ingredient: Codable {
     var name: String
-    var measurement: String
+    var measurementName: String
+    var measurementQuantity: String
     
-    init(name: String, measurement: String) {
+    init(name: String, measurementName: String, measurementQuantity: String) {
         self.name = name
-        self.measurement = measurement
+        self.measurementName = measurementName
+        self.measurementQuantity = measurementQuantity
     }
 }
 
 extension Ingredient: Equatable {
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
-        return lhs.name == rhs.name && lhs.measurement == rhs.measurement
+        return lhs.name == rhs.name && lhs.measurementName == rhs.measurementName && rhs.measurementQuantity == lhs.measurementQuantity
     }
 }
