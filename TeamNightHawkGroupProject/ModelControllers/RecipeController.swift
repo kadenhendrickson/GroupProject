@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+class RecipeController {
+    //SharedInstance
+    static let shared = RecipeController()
+    //current user
+    var currentUser: User?
+    //sourceoftruth
+    var recipes: [String : Any]?
+    
+    //CRUD
+    func createRecipe() {
+        
+    }
+    
+}

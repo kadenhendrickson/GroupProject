@@ -15,15 +15,15 @@ class Recipe {
     var image: UIImage?
     let ingredients: [Ingredient]
     let steps: [String]?
-    let prepTime: String?
-    let servings: Int?
+    let prepTime: String
+    let servings: String
     let tags: [String]?
     let savedByUsers: [String]
     var saveCount: Int {
         return savedByUsers.count
     }
     
-    init(userReference: String, recipeID: String, name: String, image: UIImage?, ingredients: [Ingredient], steps: [String]?, prepTime: String?, servings: Int?, tags: [String]?, savedByUsers: [String] = []) {
+    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient], steps: [String]?, prepTime: String = "--", servings: String = "--", tags: [String]?, savedByUsers: [String] = []) {
         self.userReference = userReference
         self.recipeID = recipeID
         self.name = name
