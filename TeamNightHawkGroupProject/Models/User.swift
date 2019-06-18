@@ -11,9 +11,9 @@ import UIKit
 class User {
     let userID: String
     let recipesRef: [String]
-    let email: String
-    let displayName: String
-    let biography: String?
+    var email: String
+    var displayName: String
+    var biography: String?
     var profileImage: UIImage?
     var savedRecipeRefs: [String]
     var followedByRefs: [String]
@@ -30,4 +30,12 @@ class User {
         self.recipesRef = recipesRef
         self.profileImage = profileImage
     } 
+}
+
+
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.userID == rhs.userID
+    }
+    
 }
