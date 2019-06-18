@@ -8,14 +8,11 @@
 
 import UIKit
 
-
-
 class UserController {
     
     //MARK: - Singleton
     static let shared = UserController()
     
-    // Dummy user's dictionary, deleting this later when we have a Source of Truth file to refer to
     var users: [String:User] = [:]
     var currentUser: User?
     
@@ -28,6 +25,8 @@ class UserController {
         // Make that user has current user as a follower, and add that user to current user's following
         userToFollow.followedByRefs.append(currentUser.userID)
         currentUser.followingRefs.append(userToFollow.userID)
+        
+        saveUsersToPersistence()
     }
 
     
@@ -43,6 +42,8 @@ class UserController {
         // Remove current user from that user's follower, and from current user's following
         userToUnfollow.followedByRefs.remove(at: indexInFollowedByRef)
         currentUser.followingRefs.remove(at: indexInFollowingRef)
+        
+        saveUsersToPersistence()
     }
 
     
@@ -51,6 +52,8 @@ class UserController {
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: profileImage)
         let userID = user.userID
         users[userID] = user
+        
+        saveUsersToPersistence()
     }
     
     func updateUser(withID userID: String, email: String, displayName: String, biography: String, profileImage: UIImage?){
@@ -60,7 +63,9 @@ class UserController {
         user.email = email
         user.displayName = displayName
         user.biography = biography
-        user.profileImage = profileImage
+        user.profileImage = profileImage?.pngData()
+        
+        saveUsersToPersistence()
     }
     
     func deleteUser(withID userID: String){
@@ -72,15 +77,43 @@ class UserController {
         }
         
         users.removeValue(forKey: userID)
-    }
-    
-    //MARK: - Persistence
-    func saveToPersistence(){
         
+        saveUsersToPersistence()
+    }
+}
+
+extension UserController {
+    
+    //MARK: - Local Persistence
+    
+    private func fileURL() -> URL {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let filename = "TeamNightHawkGroupProject.json"
+        let documentaryDirectoryUrl = urls[0].appendingPathComponent(filename)
+        return documentaryDirectoryUrl
     }
     
-    func loadFromPersistence(){
-        
+    func saveUsersToPersistence(){
+        let jsonEncoder = JSONEncoder()
+        do {
+            let data = try jsonEncoder.encode(users)
+            let url = fileURL()
+            try data.write(to: url)
+        } catch {
+            print("There was an error saving users \(error.localizedDescription)")
+        }
     }
     
+    func loadUsersFromPersistence() -> [String: User]{
+        let jsonDecoder = JSONDecoder()
+        do {
+            let url = fileURL()
+            let data = try Data(contentsOf: url)
+            let users = try jsonDecoder.decode([String : User].self, from: data)
+            return users
+        } catch {
+            print("There was an error loading user data \(error.localizedDescription)")
+            return [:]
+        }
+    }
 }

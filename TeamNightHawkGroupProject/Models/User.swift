@@ -8,13 +8,13 @@
 
 import UIKit
 
-class User {
+class User: Codable {
     let userID: String
     let recipesRef: [String]
     var email: String
     var displayName: String
     var biography: String?
-    var profileImage: UIImage?
+    var profileImage: Data?
     var savedRecipeRefs: [String]
     var followedByRefs: [String]
     var followingRefs: [String]
@@ -28,8 +28,8 @@ class User {
         self.followedByRefs = followedBy
         self.followingRefs = following
         self.recipesRef = recipesRef
-        self.profileImage = profileImage
-    } 
+        self.profileImage = profileImage?.pngData()
+    }
 }
 
 
