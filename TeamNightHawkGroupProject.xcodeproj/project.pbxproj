@@ -16,6 +16,7 @@
 		DC2C1AE122B947FA0098F68D /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE022B947FA0098F68D /* Ingredient.swift */; };
 		DC2C1AE322B948040098F68D /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE222B948040098F68D /* UserController.swift */; };
 		DC2C1AE522B9480A0098F68D /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE422B9480A0098F68D /* RecipeController.swift */; };
+		DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE622B98A970098F68D /* IngredientsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DC2C1AE022B947FA0098F68D /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		DC2C1AE222B948040098F68D /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		DC2C1AE422B9480A0098F68D /* RecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeController.swift; sourceTree = "<group>"; };
+		DC2C1AE622B98A970098F68D /* IngredientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				DC2C1AE222B948040098F68D /* UserController.swift */,
+				DC2C1AE622B98A970098F68D /* IngredientsController.swift */,
 				DC2C1AE422B9480A0098F68D /* RecipeController.swift */,
 			);
 			path = ModelControllers;
@@ -172,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC2C1AE122B947FA0098F68D /* Ingredient.swift in Sources */,
+				DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */,
 				DC2C1ADF22B947F30098F68D /* Recipe.swift in Sources */,
 				DC2C1AE322B948040098F68D /* UserController.swift in Sources */,
 				DC2C1ADD22B947E90098F68D /* User.swift in Sources */,

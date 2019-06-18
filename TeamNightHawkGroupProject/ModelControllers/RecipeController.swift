@@ -44,6 +44,7 @@ class RecipeController {
         currentUser.savedRecipeRefs.append(id)
         recipe.savedByUsers.append(currentUser.userID)
     }
+    
     func deleteRecipeFromUsersSavedList(WithRecipeID id: String) {
         guard let recipeIndexOnUser = currentUser?.savedRecipeRefs.firstIndex(of: id),
                 let currentUser = currentUser,
@@ -73,6 +74,7 @@ extension RecipeController {
             print("There was an error saving recipes \(error.localizedDescription)")
         }
     }
+    
     func loadRecipeFromPersistentStore() -> [String : Recipe] {
         let jsonDecoder = JSONDecoder()
         do {

@@ -9,8 +9,8 @@
 import Foundation
 
 class Ingredient: Codable {
-    let name: String
-    let measurement: String
+    var name: String
+    var measurement: String
     
     init(name: String, measurement: String) {
         self.name = name
