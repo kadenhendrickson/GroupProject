@@ -13,7 +13,7 @@
         <!--SignIn-->
         <scene sceneID="cqC-Nl-mQG">
             <objects>
-                <viewController id="302-AR-mn8" userLabel="SignIn" sceneMemberID="viewController">
+                <viewController id="302-AR-mn8" userLabel="SignIn" customClass="SignInViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abd-og-RHa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,7 +70,7 @@
         <!--Home-->
         <scene sceneID="xuC-sv-UcK">
             <objects>
-                <tableViewController id="Hly-fP-3vJ" sceneMemberID="viewController">
+                <tableViewController id="Hly-fP-3vJ" customClass="UserFeedTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dlh-RU-T9C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,7 +216,7 @@
         <!--Explore-->
         <scene sceneID="xvP-bf-Hn1">
             <objects>
-                <viewController id="SbK-5E-zSV" sceneMemberID="viewController">
+                <viewController id="SbK-5E-zSV" customClass="ExploreCollectionViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FSo-NE-tKE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -270,7 +270,7 @@
         <!--Add-->
         <scene sceneID="WsT-D9-1kk">
             <objects>
-                <tableViewController id="3P6-Ln-CnM" sceneMemberID="viewController">
+                <tableViewController id="3P6-Ln-CnM" customClass="AddRecipeTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CCv-Xv-wof">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -595,7 +595,7 @@
         <!--Saved-->
         <scene sceneID="ioD-oz-KiQ">
             <objects>
-                <tableViewController id="Byq-Hl-WiZ" sceneMemberID="viewController">
+                <tableViewController id="Byq-Hl-WiZ" customClass="SavedRecipesTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="41t-q1-Ydx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -741,7 +741,7 @@
         <!--ProfileEditVC-->
         <scene sceneID="v92-mp-GNY">
             <objects>
-                <viewController id="SLi-Kc-BxM" userLabel="ProfileEditVC" sceneMemberID="viewController">
+                <viewController id="SLi-Kc-BxM" userLabel="ProfileEditVC" customClass="EditProfileViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3w5-gY-i7b">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -840,7 +840,7 @@
         <!--Profile-->
         <scene sceneID="00L-zY-ikQ">
             <objects>
-                <tableViewController id="eph-dD-5CE" sceneMemberID="viewController">
+                <tableViewController id="eph-dD-5CE" customClass="ProfileTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dIT-EU-c5b">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1073,7 +1073,7 @@
         <!--CreateUser-->
         <scene sceneID="HuC-dt-9BE">
             <objects>
-                <viewController title="CreateUser" id="bh7-Ra-5CO" sceneMemberID="viewController">
+                <viewController title="CreateUser" id="bh7-Ra-5CO" customClass="CreateUserViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ngy-ol-9gT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1182,7 +1182,7 @@
         <!--EditVC-->
         <scene sceneID="uc8-hK-iz7">
             <objects>
-                <tableViewController id="hvQ-lp-SG6" userLabel="EditVC" sceneMemberID="viewController">
+                <tableViewController id="hvQ-lp-SG6" userLabel="EditVC" customClass="EditRecipeTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IkC-se-aWV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1290,7 +1290,7 @@
         <!--UserProfile-->
         <scene sceneID="k8a-ew-cdI">
             <objects>
-                <tableViewController id="tUb-q2-AJo" userLabel="UserProfile" sceneMemberID="viewController">
+                <tableViewController id="tUb-q2-AJo" userLabel="UserProfile" customClass="UserViewedTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YzF-FO-lpG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1509,7 +1509,7 @@
         <!--DetailVC-->
         <scene sceneID="azp-tg-QMy">
             <objects>
-                <tableViewController id="q52-xY-s8f" userLabel="DetailVC" sceneMemberID="viewController">
+                <tableViewController id="q52-xY-s8f" userLabel="DetailVC" customClass="RecipeDetailTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OO7-Jf-wK1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1647,7 +1647,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MGm-2E-YWS"/>
+        <segue reference="YQD-yL-DhJ"/>
         <segue reference="ge4-95-uET"/>
     </inferredMetricsTieBreakers>
 </document>
