@@ -18,8 +18,9 @@ class User: Codable {
     var savedRecipeRefs: [String]
     var followedByRefs: [String]
     var followingRefs: [String]
+    var blockedUserRefs: [String]
     
-    init(userID: String = UUID().uuidString, recipesRef: [String] = [], email: String, displayName: String, biography: String?, profileImage: UIImage?, savedRecipeRefs: [String] = [], followedBy: [String] = [], following: [String] = []) {
+    init(userID: String = UUID().uuidString, recipesRef: [String] = [], email: String, displayName: String, biography: String?, profileImage: UIImage?, savedRecipeRefs: [String] = [], followedBy: [String] = [], following: [String] = [], blockedUserRefs = []) {
         self.userID = userID
         self.email = email
         self.displayName = displayName
@@ -27,6 +28,7 @@ class User: Codable {
         self.savedRecipeRefs = savedRecipeRefs
         self.followedByRefs = followedBy
         self.followingRefs = following
+        self.blockedUserRefs = blockedUserRefs
         self.recipesRef = recipesRef
         self.profileImage = profileImage?.pngData()
     }
