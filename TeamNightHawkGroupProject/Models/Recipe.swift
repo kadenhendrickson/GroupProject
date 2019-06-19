@@ -35,6 +35,12 @@ class Recipe: Codable {
         self.savedByUsers = savedByUsers
         self.image = image?.pngData()
     }
+    
+    var dictionaryRepresentation: [String:Any] {
+        return ["userReference": userReference,
+                
+        ]
+    }
 }
 
 extension Recipe: Equatable {

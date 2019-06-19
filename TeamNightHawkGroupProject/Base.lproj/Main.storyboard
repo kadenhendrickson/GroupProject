@@ -1596,6 +1596,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAR-es-5L6">
                                                     <rect key="frame" x="300" y="0.0" width="34" height="30"/>
                                                     <state key="normal" title="Back"/>
+                                                    <connections>
+                                                        <action selector="backButtonTapped:" destination="q52-xY-s8f" eventType="touchUpInside" id="CKT-uG-Mkm"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -1640,6 +1643,14 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Add" id="1hO-3s-B7N"/>
                     <navigationItem key="navigationItem" title="Title" id="rgP-5z-lsA"/>
+                    <connections>
+                        <outlet property="nameLabel" destination="2rY-0a-WsF" id="GPo-xd-EQk"/>
+                        <outlet property="prepTimeLabel" destination="jLS-av-twd" id="wEQ-i4-cE9"/>
+                        <outlet property="recipeImage" destination="K9s-bR-wBY" id="lgu-QZ-aBt"/>
+                        <outlet property="servingsLabel" destination="Da8-jb-oAH" id="cR6-Fe-mGk"/>
+                        <outlet property="userImage" destination="FGJ-HI-jOJ" id="s95-Pw-6MI"/>
+                        <outlet property="userNameLabel" destination="s0x-rB-q53" id="MGZ-RB-KGr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7E-rA-4y0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
