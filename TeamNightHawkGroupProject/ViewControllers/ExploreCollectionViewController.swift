@@ -11,10 +11,13 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class ExploreCollectionViewController: UICollectionViewController {
-
-    var recipesList: [Recipe] = {
+    //MARK: - Properties
+    var recipesList: [Recipe] {
         return []
     }
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var exploreRecipeImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +29,16 @@ class ExploreCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "fromExploreToRecipeDVC" {
+            let 
+            guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
+                let index = collectionView.indexPath(for: <#T##UICollectionViewCell#>)
+        }
     }
-    */
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -44,9 +48,9 @@ class ExploreCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let recipe = recipesList[indexPath.row]
+        guard let recipeImage = recipe.image else {return cell}
+        exploreRecipeImage.image = UIImage(data: recipeImage)
         return cell
     }
 
