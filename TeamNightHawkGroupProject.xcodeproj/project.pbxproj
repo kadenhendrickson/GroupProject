@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02C1909B22BA820500B33086 /* Section1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C1909A22BA820500B33086 /* Section1TableViewCell.swift */; };
 		DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C1A6422B4516500B219CB /* AppDelegate.swift */; };
 		DC0C1A6A22B4516500B219CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0C1A6822B4516500B219CB /* Main.storyboard */; };
 		DC0C1A6C22B4516500B219CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC0C1A6B22B4516500B219CB /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02C1909A22BA820500B33086 /* Section1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section1TableViewCell.swift; sourceTree = "<group>"; };
 		DC0C1A6122B4516500B219CB /* TeamNightHawkGroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamNightHawkGroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0C1A6422B4516500B219CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC0C1A6922B4516500B219CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				DC2C1ADA22B947930098F68D /* Models */,
 				DC0C1A7622B4517000B219CB /* Resources */,
 				DC0C1A6822B4516500B219CB /* Main.storyboard */,
+				02C1909A22BA820500B33086 /* Section1TableViewCell.swift */,
 			);
 			path = TeamNightHawkGroupProject;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C1909B22BA820500B33086 /* Section1TableViewCell.swift in Sources */,
 				DC2C1AE122B947FA0098F68D /* Ingredient.swift in Sources */,
 				DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */,
 				DC2C1ADF22B947F30098F68D /* Recipe.swift in Sources */,
