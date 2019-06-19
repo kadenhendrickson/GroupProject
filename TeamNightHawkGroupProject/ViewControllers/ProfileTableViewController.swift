@@ -29,9 +29,6 @@ class ProfileTableViewController: UITableViewController {
     }
     
     
-    @IBAction func editProfileButtonTapped(sender: Any){
-    }
-    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeList.count
@@ -73,10 +70,6 @@ class ProfileTableViewController: UITableViewController {
             guard let destinationVC = segue.destination as? EditRecipeTableViewController else { return }
             destinationVC.recipe = recipeToPass
         }
-    
-    
      }
-
-    
 }
 
