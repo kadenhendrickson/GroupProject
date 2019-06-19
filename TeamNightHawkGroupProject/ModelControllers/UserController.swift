@@ -14,6 +14,10 @@ class UserController {
     static let shared = UserController()
     
     var users: [String:User] = [:]
+    
+    /**
+     This current user got assigned after a new user is created.
+     */
     var currentUser: User?
     
     //MARK: - Methods
@@ -51,7 +55,7 @@ class UserController {
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: profileImage)
         let userID = user.userID
         users[userID] = user
-        
+        self.currentUser = user
         saveUsersToPersistence()
     }
     
