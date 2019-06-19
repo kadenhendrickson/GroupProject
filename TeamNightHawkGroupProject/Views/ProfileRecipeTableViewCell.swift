@@ -9,16 +9,40 @@
 import UIKit
 
 class ProfileRecipeTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    // Landing pad
+    var recipe: Recipe? {
+        didSet {
+            updateViews()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    // MARK: - IBOutlet
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var userDisplayName: UIButton!
+    @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var recipeNameTextLabel: UILabel!
+    @IBOutlet weak var recipeServingsTextLabel: UILabel!
+    @IBOutlet weak var recipePrepTimeTextLabel: UILabel!
+    @IBOutlet weak var recipeSaveCountTextLabel: UILabel!
+    
+    // MARK: - Methods
+    func updateViews(){
+        
+        guard let user = UserController.shared.currentUser,
+            let recipe = self.recipe,
+            let recipeImageData = recipe.image,
+            let userImageData = user.profileImage else { return }
+        
+        userProfileImageView.image = UIImage(data: userImageData)
+        userDisplayName.setTitle(user.displayName, for: .normal)
+        
+        recipeImageView.image = UIImage(data: recipeImageData)
+        recipeNameTextLabel.text = recipe.name
+        recipeServingsTextLabel.text = recipe.servings
+        recipePrepTimeTextLabel.text = recipe.prepTime
+        recipeSaveCountTextLabel.text = "\(recipe.saveCount)"
+        
     }
-
+    
 }
