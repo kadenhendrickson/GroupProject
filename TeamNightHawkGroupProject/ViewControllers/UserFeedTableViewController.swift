@@ -24,7 +24,7 @@ class UserFeedTableViewController: UITableViewController {
     }
     //dont forget to change reuseIdentifier
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? UserFeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userFeedRecipeCell", for: indexPath) as? UserFeedTableViewCell
         let recipe = recipesList[indexPath.row]
         cell?.recipe = recipe
         return cell ?? UITableViewCell()
@@ -32,7 +32,11 @@ class UserFeedTableViewController: UITableViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "toRecipeDetailVC" {
+            guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
+                let indexPath = tableView.indexPathForSelectedRow else {return}
+            let recipe = recipesList[indexPath.row]
+            destinationVC.recipe = recipe
+        }
     }
-
 }
