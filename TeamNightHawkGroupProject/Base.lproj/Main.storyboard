@@ -76,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="499" id="zHJ-Cb-cHl">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userFeedRecipeCell" rowHeight="499" id="zHJ-Cb-cHl">
                                 <rect key="frame" x="0.0" y="28" width="414" height="499"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zHJ-Cb-cHl" id="6RS-kJ-Dpz">
@@ -198,7 +198,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="q52-xY-s8f" kind="show" id="uRm-0S-lau"/>
+                                    <segue destination="q52-xY-s8f" kind="show" identifier="fromFeedToRecipeDVC" id="uRm-0S-lau"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -243,7 +243,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <connections>
-                                            <segue destination="q52-xY-s8f" kind="show" id="KjQ-jq-qkU"/>
+                                            <segue destination="q52-xY-s8f" kind="show" identifier="fromExploreToRecipeDVC" id="KjQ-jq-qkU"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -723,7 +723,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="q52-xY-s8f" kind="show" id="MGm-2E-YWS"/>
+                                    <segue destination="q52-xY-s8f" kind="show" identifier="fromSavedToRecipeDVC" id="MGm-2E-YWS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -937,7 +937,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="499" id="1gn-IJ-dW7">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileRecipeCell" rowHeight="499" id="1gn-IJ-dW7">
                                 <rect key="frame" x="0.0" y="309" width="414" height="499"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1gn-IJ-dW7" id="r8v-eg-mqK">
@@ -964,7 +964,7 @@
                                                             <rect key="frame" x="304" y="0.0" width="30" height="24"/>
                                                             <state key="normal" title="Edit"/>
                                                             <connections>
-                                                                <segue destination="hvQ-lp-SG6" kind="show" id="FQc-f1-l55"/>
+                                                                <segue destination="hvQ-lp-SG6" kind="show" identifier="toEditVC" id="FQc-f1-l55"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -1055,7 +1055,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="q52-xY-s8f" kind="show" id="YQD-yL-DhJ"/>
+                                    <segue destination="q52-xY-s8f" kind="show" identifier="fromProfileToRecipeDVC" id="YQD-yL-DhJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1624,7 +1624,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bJh-98-LZL">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="bJh-98-LZL">
                                 <rect key="frame" x="0.0" y="531" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bJh-98-LZL" id="gbj-2W-mHa">
