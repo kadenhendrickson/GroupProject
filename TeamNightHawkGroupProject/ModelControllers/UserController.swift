@@ -45,7 +45,6 @@ class UserController {
         
         saveUsersToPersistence()
     }
-
     
     //MARK: - CRUDs
     func createUser(withEmail email: String, displayName: String, biography: String, profileImage: UIImage?){

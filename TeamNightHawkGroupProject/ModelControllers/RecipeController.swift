@@ -36,6 +36,7 @@ class RecipeController {
         recipe.ingredients = ingredients
         recipe.steps = steps
         recipe.tags = tags
+        saveRecipeToPersistentStore()
     }
     
     func addRecipeToUsersSavedList(WithRecipeID id: String) {
