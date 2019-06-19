@@ -15,6 +15,7 @@ class RecipeController {
     var currentUser: User?
     //sourceoftruth
     var recipes: [String : Recipe] = [:]
+
     
     //CRUD
     func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?) {
