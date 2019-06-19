@@ -12,6 +12,7 @@ import UIKit
 
 class Section1TableViewCell: UITableViewCell {
 
+    
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
     }
@@ -41,8 +42,9 @@ class Section1TableViewCell: UITableViewCell {
     }
 
     
+    
     let measurementQuantity: UITextField = {
-       let text = UITextField()
+        let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         
         return text
@@ -59,6 +61,7 @@ class Section1TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
 
+        
         return text
     }()
     

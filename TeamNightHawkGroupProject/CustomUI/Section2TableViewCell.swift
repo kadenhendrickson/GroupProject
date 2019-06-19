@@ -10,6 +10,7 @@ import UIKit
 
 class Section2TableViewCell: UITableViewCell {
 
+    
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
     }
@@ -18,7 +19,8 @@ class Section2TableViewCell: UITableViewCell {
         super.awakeFromNib()
         setUpStackView()
         addAllSubViews()
-    
+
+        
     }
     func addAllSubViews(){
         self.addSubview(directionSteps)
