@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */; };
+		0211C69722BAAE3E00D5F8C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69622BAAE3E00D5F8C6 /* Constants.swift */; };
 		02C1909B22BA820500B33086 /* Section1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C1909A22BA820500B33086 /* Section1TableViewCell.swift */; };
 		9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */; };
 		DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C1A6422B4516500B219CB /* AppDelegate.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section2TableViewCell.swift; sourceTree = "<group>"; };
+		0211C69622BAAE3E00D5F8C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		02C1909A22BA820500B33086 /* Section1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section1TableViewCell.swift; sourceTree = "<group>"; };
 		9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		DC0C1A6122B4516500B219CB /* TeamNightHawkGroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamNightHawkGroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +98,8 @@
 				DC0C1A7622B4517000B219CB /* Resources */,
 				DC0C1A6822B4516500B219CB /* Main.storyboard */,
 				02C1909A22BA820500B33086 /* Section1TableViewCell.swift */,
+				0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */,
+				0211C69622BAAE3E00D5F8C6 /* Constants.swift */,
 				9732277A22BAA924006F0A15 /* ViewControllers */,
 				9732277B22BAA93E006F0A15 /* Views */,
 			);
@@ -209,7 +215,9 @@
 				DC2C1ADF22B947F30098F68D /* Recipe.swift in Sources */,
 				DC2C1AE322B948040098F68D /* UserController.swift in Sources */,
 				DC2C1ADD22B947E90098F68D /* User.swift in Sources */,
+				0211C69722BAAE3E00D5F8C6 /* Constants.swift in Sources */,
 				DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */,
+				0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */,
 				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
 				9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */,
 				DC2C1AE522B9480A0098F68D /* RecipeController.swift in Sources */,
