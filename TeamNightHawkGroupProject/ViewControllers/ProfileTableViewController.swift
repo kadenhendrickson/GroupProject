@@ -18,7 +18,7 @@ class ProfileTableViewController: UITableViewController {
     }
     
     // MARK: - IBOutlets
-    @IBOutlet weak var profileImageLabel: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followingsCountLabel: UILabel!
@@ -26,6 +26,10 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - Methods
+    func updateViews(){
     }
     
     
@@ -36,10 +40,12 @@ class ProfileTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
-        // Configure the cell...
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "profileRecipeCell", for: indexPath) as? ProfileRecipeTableViewCell
+            else { return UITableViewCell() }
         
+        let recipe = recipeList[indexPath.row]
+        cell.recipe = recipe
         return cell
     }
     
