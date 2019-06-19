@@ -32,11 +32,7 @@ class ExploreCollectionViewController: UICollectionViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "fromExploreToRecipeDVC" {
-            let 
-            guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
-                let index = collectionView.indexPath(for: <#T##UICollectionViewCell#>)
-        }
+      
     }
     
 

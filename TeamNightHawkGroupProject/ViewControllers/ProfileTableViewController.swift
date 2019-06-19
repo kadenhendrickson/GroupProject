@@ -62,8 +62,6 @@ class ProfileTableViewController: UITableViewController {
         
         let recipeToPass = self.recipeList[indexPath.row]
 
-        #warning("🍒 Need segue identifiers later")
-
         if segue.identifier == "fromProfileToRecipeDVC"{
             
         // from recipe cell to recipe's detailVC

@@ -12,7 +12,7 @@ class RecipeController {
     //SharedInstance
     static let shared = RecipeController()
     //current user
-    var currentUser: User?
+    var currentUser = UserController.shared.currentUser
     //sourceoftruth
     var recipes: [String : Recipe] = [:]
 

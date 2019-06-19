@@ -33,7 +33,6 @@ class UserController {
         saveUsersToPersistence()
     }
 
-    
     func unfollowUser(withID userID: String){
         guard let currentUser = currentUser,
             let userToUnfollow = users[userID]
