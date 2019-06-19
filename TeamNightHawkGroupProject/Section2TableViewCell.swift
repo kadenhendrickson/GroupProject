@@ -1,5 +1,5 @@
 //
-//  Section1TableViewCell.swift
+//  Section2TableViewCell.swift
 //  TeamNightHawkGroupProject
 //
 //  Created by Bobba Kadush on 6/19/19.
@@ -8,9 +8,7 @@
 
 import UIKit
 
-//Need Function to tap button
-
-class Section1TableViewCell: UITableViewCell {
+class Section2TableViewCell: UITableViewCell {
 
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
@@ -18,50 +16,30 @@ class Section1TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        addAllSubViews()
         setUpStackView()
-    }
+        addAllSubViews()
     
+    }
     func addAllSubViews(){
-        self.addSubview(measuremenType)
-        self.addSubview(measurementQuantity)
-        self.addSubview(ingredient)
+        self.addSubview(directionSteps)
         self.addSubview(addSection)
         self.addSubview(stackView)
+        
     }
-    
-    
     
     func setUpStackView(){
-        stackView.addArrangedSubview(measurementQuantity)
-        stackView.addArrangedSubview(measuremenType)
-        stackView.addArrangedSubview(ingredient)
+        stackView.addArrangedSubview(directionSteps)
         stackView.addArrangedSubview(addSection)
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
+        
     }
-
     
-    let measurementQuantity: UITextField = {
-       let text = UITextField()
-        text.font = UIFont(name: fontName, size: fontSize)
-        
-        return text
-    }()
-    
-    let measuremenType: UITextField = {
+    let directionSteps: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         
         return text
     }()
-    
-    let ingredient: UITextField = {
-        let text = UITextField()
-        text.font = UIFont(name: fontName, size: fontSize)
-
-        return text
-    }()
-    
     
     let addSection: UIButton = {
         let button = UIButton()
@@ -73,7 +51,6 @@ class Section1TableViewCell: UITableViewCell {
         
         return button
     }()
-    
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
