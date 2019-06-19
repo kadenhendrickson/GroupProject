@@ -20,3 +20,4 @@ let saveButtonColor: UIColor = .blue
 let addSectionButtonSize: CGFloat = 20
 let addSectionButtonColor: UIColor = .blue
 let addSectionButtonCorner : CGFloat = 4
+

@@ -11,6 +11,7 @@ import UIKit
 //Need Function to tap button
 
 class Section1TableViewCell: UITableViewCell {
+
     
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
@@ -39,6 +40,7 @@ class Section1TableViewCell: UITableViewCell {
         stackView.addArrangedSubview(addSection)
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
     }
+
     
     
     let measurementQuantity: UITextField = {
@@ -58,6 +60,7 @@ class Section1TableViewCell: UITableViewCell {
     let ingredient: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
+
         
         return text
     }()
