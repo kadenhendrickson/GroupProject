@@ -59,6 +59,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0211C69A22BAAF8D00D5F8C6 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				02C1909A22BA820500B33086 /* Section1TableViewCell.swift */,
+				0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */,
+				0211C69622BAAE3E00D5F8C6 /* Constants.swift */,
+				0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
 		9732277A22BAA924006F0A15 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +110,7 @@
 				DC2C1ADA22B947930098F68D /* Models */,
 				DC0C1A7622B4517000B219CB /* Resources */,
 				DC0C1A6822B4516500B219CB /* Main.storyboard */,
-				02C1909A22BA820500B33086 /* Section1TableViewCell.swift */,
-				0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */,
-				0211C69622BAAE3E00D5F8C6 /* Constants.swift */,
-				0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */,
+				0211C69A22BAAF8D00D5F8C6 /* CustomUI */,
 				9732277A22BAA924006F0A15 /* ViewControllers */,
 				9732277B22BAA93E006F0A15 /* Views */,
 			);
