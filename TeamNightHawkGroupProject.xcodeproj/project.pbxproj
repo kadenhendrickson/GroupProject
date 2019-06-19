@@ -36,6 +36,7 @@
 		DC2C1AFB22BAB4A30098F68D /* AddRecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AFA22BAB4A30098F68D /* AddRecipeTableViewController.swift */; };
 		DC2C1AFD22BAB5380098F68D /* UserViewedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AFC22BAB5380098F68D /* UserViewedTableViewController.swift */; };
 		DC2C1AFF22BAB58F0098F68D /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AFE22BAB58F0098F68D /* EditProfileViewController.swift */; };
+		DC2C1B0122BAEA730098F68D /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1B0022BAEA730098F68D /* MockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		DC2C1AFA22BAB4A30098F68D /* AddRecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeTableViewController.swift; sourceTree = "<group>"; };
 		DC2C1AFC22BAB5380098F68D /* UserViewedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewedTableViewController.swift; sourceTree = "<group>"; };
 		DC2C1AFE22BAB58F0098F68D /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		DC2C1B0022BAEA730098F68D /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				DC2C1ADC22B947E90098F68D /* User.swift */,
 				DC2C1ADE22B947F30098F68D /* Recipe.swift */,
 				DC2C1AE022B947FA0098F68D /* Ingredient.swift */,
+				DC2C1B0022BAEA730098F68D /* MockData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */,
 				DC2C1AF122BAB3B40098F68D /* SignInViewController.swift in Sources */,
 				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
+				DC2C1B0122BAEA730098F68D /* MockData.swift in Sources */,
 				9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */,
 				0226F25B22BAD5F900856910 /* StepsTableViewCell.swift in Sources */,
 				9732277F22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift in Sources */,

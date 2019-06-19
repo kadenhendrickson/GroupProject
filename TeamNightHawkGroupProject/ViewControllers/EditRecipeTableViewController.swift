@@ -10,6 +10,8 @@ import UIKit
 
 class EditRecipeTableViewController: UITableViewController {
 
+    var recipe: Recipe?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
