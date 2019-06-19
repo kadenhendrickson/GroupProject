@@ -61,13 +61,13 @@ class ProfileTableViewController: UITableViewController {
 
         #warning("🍒 Need segue identifiers later")
 
-        if segue.identifier == "<# identifier #>"{
+        if segue.identifier == "fromProfileToRecipeDVC"{
             
         // from recipe cell to recipe's detailVC
             guard let destinationVC = segue.destination as? RecipeDetailTableViewController else { return }
             destinationVC.recipe = recipeToPass
 
-        } else if segue.identifier == "<# identifier #>" {
+        } else if segue.identifier == "toEditVC" {
             
         // from recipe's edit button to recipe's EditVC scene
             guard let destinationVC = segue.destination as? EditRecipeTableViewController else { return }
