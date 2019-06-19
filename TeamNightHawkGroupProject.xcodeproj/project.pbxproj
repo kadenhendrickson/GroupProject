@@ -18,6 +18,8 @@
 		DC2C1AE322B948040098F68D /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE222B948040098F68D /* UserController.swift */; };
 		DC2C1AE522B9480A0098F68D /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE422B9480A0098F68D /* RecipeController.swift */; };
 		DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE622B98A970098F68D /* IngredientsController.swift */; };
+		DC2C1AE922BA99410098F68D /* UserFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AE822BA99410098F68D /* UserFeedTableViewController.swift */; };
+		DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C1AEA22BA9CB00098F68D /* UserFeedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		DC2C1AE222B948040098F68D /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		DC2C1AE422B9480A0098F68D /* RecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeController.swift; sourceTree = "<group>"; };
 		DC2C1AE622B98A970098F68D /* IngredientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsController.swift; sourceTree = "<group>"; };
+		DC2C1AE822BA99410098F68D /* UserFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedTableViewController.swift; sourceTree = "<group>"; };
+		DC2C1AEA22BA9CB00098F68D /* UserFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 				DC0C1A7622B4517000B219CB /* Resources */,
 				DC0C1A6822B4516500B219CB /* Main.storyboard */,
 				02C1909A22BA820500B33086 /* Section1TableViewCell.swift */,
+				DC2C1AE822BA99410098F68D /* UserFeedTableViewController.swift */,
+				DC2C1AEA22BA9CB00098F68D /* UserFeedTableViewCell.swift */,
 			);
 			path = TeamNightHawkGroupProject;
 			sourceTree = "<group>";
@@ -177,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC2C1AE922BA99410098F68D /* UserFeedTableViewController.swift in Sources */,
 				02C1909B22BA820500B33086 /* Section1TableViewCell.swift in Sources */,
 				DC2C1AE122B947FA0098F68D /* Ingredient.swift in Sources */,
 				DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */,
@@ -184,6 +191,7 @@
 				DC2C1AE322B948040098F68D /* UserController.swift in Sources */,
 				DC2C1ADD22B947E90098F68D /* User.swift in Sources */,
 				DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */,
+				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
 				DC2C1AE522B9480A0098F68D /* RecipeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
