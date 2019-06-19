@@ -12,6 +12,7 @@
 		0211C69922BAAED200D5F8C6 /* AnchorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */; };
 		02C1909B22BA820500B33086 /* Section1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C1909A22BA820500B33086 /* Section1TableViewCell.swift */; };
 		9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */; };
+		9732277F22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */; };
 		DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C1A6422B4516500B219CB /* AppDelegate.swift */; };
 		DC0C1A6A22B4516500B219CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0C1A6822B4516500B219CB /* Main.storyboard */; };
 		DC0C1A6C22B4516500B219CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC0C1A6B22B4516500B219CB /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorExtension.swift; sourceTree = "<group>"; };
 		02C1909A22BA820500B33086 /* Section1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section1TableViewCell.swift; sourceTree = "<group>"; };
 		9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileRecipeTableViewCell.swift; path = TeamNightHawkGroupProject/Views/ProfileRecipeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		DC0C1A6122B4516500B219CB /* TeamNightHawkGroupProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamNightHawkGroupProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0C1A6422B4516500B219CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC0C1A6922B4516500B219CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		9732277B22BAA93E006F0A15 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */,
 				DC2C1AEA22BA9CB00098F68D /* UserFeedTableViewCell.swift */,
 			);
 			path = Views;
@@ -268,6 +271,7 @@
 				DC2C1AF122BAB3B40098F68D /* SignInViewController.swift in Sources */,
 				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
 				9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */,
+				9732277F22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift in Sources */,
 				DC2C1AE522B9480A0098F68D /* RecipeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
