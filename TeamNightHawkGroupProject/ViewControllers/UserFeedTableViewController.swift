@@ -10,8 +10,12 @@ import UIKit
 
 class UserFeedTableViewController: UITableViewController {
     //MARK: - Properties
-    var recipesList: [Recipe] {
-        return []
+    var recipesList: [Recipe]  {
+        var recipeArray: [Recipe] = []
+        for (_, recipe) in RecipeController.shared.recipes {
+            recipeArray.append(recipe)
+        }
+        return recipeArray
     }
     
     override func viewDidLoad() {
