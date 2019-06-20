@@ -44,13 +44,16 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func updateProfileButtonTapped(_ sender: Any) {
-        guard let currentUser = currentUser
-        else { /* pop alert */ return }
+        guard let currentUser = currentUser else { return }
         
+        guard let displayName = displayNameTextField.text else {
+            return
+        }
+
         let image = profileImageView.image ?? nil
         
+        UserController.shared.updateUser(withID: currentUser.userID, email: currentUser.email, displayName: displayName, biography: bioTextView.text, profileImage: image)
         
-//        UserController.shared.updateUser(withID: <#T##String#>, email: <#T##String#>, displayName: <#T##String#>, biography: <#T##String#>, profileImage: <#T##UIImage?#>)
     }
     
     // MARK: - Method
