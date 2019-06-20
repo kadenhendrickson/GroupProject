@@ -49,12 +49,31 @@ class UserController {
         saveUsersToPersistence()
     }
     
+    func blockUser(withID userID: String){
+        
+        guard let currentUser = currentUser else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
+        
+        currentUser.blockedUserRefs.append(userID)
+        
+    }
+    
+    func unblockUser(withID blockedUserID: String){
+        
+        guard let currentUser = currentUser,
+            let refIndex = currentUser.blockedUserRefs.firstIndex(of: blockedUserID)
+            else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
+        
+        currentUser.blockedUserRefs.remove(at: refIndex)
+    }
+    
+    
     //MARK: - CRUDs
     func createUser(withEmail email: String, displayName: String, biography: String, profileImage: UIImage?){
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: profileImage)
         let userID = user.userID
         users[userID] = user
         currentUser = user
+        RecipeController.shared.currentUser = user
         saveUsersToPersistence()
     }
     
