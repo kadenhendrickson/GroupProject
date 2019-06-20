@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        MockData.shared.loadUser()
-        MockData.shared.printDummyInfo()
+//        MockData.shared.loadUser()
+//        MockData.shared.printDummyInfo()
         
         return true
     }
