@@ -8,19 +8,91 @@
 
 import UIKit
 
+/**
+ Conform to this class to present preset UIImagePicker and create actions to handle data.
+ 
+ ## Require:
+    [fireActionsForSelectedImage()](x-source-tag://fireActionsForSelectedImage)
+ 
+ ## Related:
+    [ImagePickerHelper](x-source-tag://ImagePickerHelper).
+ */
+/// - Tag: ImagePickerHelperDelegate
 protocol ImagePickerHelperDelegate {
-    func updateImageView(withImage image: UIImage)
+    
+    /**
+     This function fire actions in the body after an image is selected from [ImagePickerHelper](x-source-tag://ImagePickerHelper).
+     
+     ## Implementation:
+     Please declare this function's **body** when conforming to [ImagePickerHelperDelegate](x-source-tag://ImagePickerHelperDelegate).
+     You can declare it with actions you want to happen after an image is selected from picker.
+     
+     ## Example:
+     ```
+     extension AddUserTableViewController: ImagePickerHelperDelegate {
+     
+        func fireActionsForSelectedImage(_ image: UIImage){
+     
+            selectedImageView.image = image
+    
+            guard let imageData = image.somethingData else { return }
+            createNewUser(with: imageData)
+            popView()
+        }
+     
+     }
+     ```
+     
+     - parameters:
+         - image: a valid `UIImage` selected from the picker.
+    */
+    /// - Tag: fireActionsForSelectedImage
+    func fireActionsForSelectedImage(_ image: UIImage)
+    
 }
 
+/**
+ Create an instance of this helper to access [presentImagePicker()](x-source-tag://presentImagePicker) method.
+ 
+ ## Implementation:
+ 
+ 1. Declare an instance of this class at class level.
+ 
+    ```
+    let imagePickerHelper = ImagePickerHelper()
+    ```
+ 
+ 2. In `viewDidLoad`, set the delegate for the helper.
+ 
+    ```
+    imagePickerHelper.delegate = self
+    ```
+ 
+ 3. Call [presentImagePicker()](x-source-tag://presentImagePicker) method inside IBaction or use selector to add action.
+
+     ```
+     @IBAction func selectImageButtonTapped(_ sender: Any) {
+         imagePickerHelper.presentImagePicker(for: self)
+     }
+     ```
+ 
+ # Required:
+ Conforming to [ImagePickerHelperDelegate](x-source-tag://ImagePickerHelperDelegate).
+*/
+/// - Tag: ImagePickerHelper
 class ImagePickerHelper: UIViewController {
     
     var delegate: ImagePickerHelperDelegate?
+    weak var controller: UIViewController?
     
-    func presentImagePicker(toView view: UIView){
+    /// Present an action sheet to choose between library and camera, then present a `UIImagePicker`.
+    /// - Tag: presentImagePicker
+    @objc func presentImagePicker(for controller: UIViewController){
         /* Image Picker */
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-
+        self.controller = controller
+        
         /* Alert Controller */
         let alertController = UIAlertController(title: "Add new photo from ..", message: nil, preferredStyle: .actionSheet)
 
@@ -32,7 +104,7 @@ class ImagePickerHelper: UIViewController {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let openCameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
                 imagePickerController.sourceType = .camera
-                self.present(imagePickerController, animated: true, completion: nil)
+                controller.present(imagePickerController, animated: true, completion: nil)
             }
             alertController.addAction(openCameraAction)
         }
@@ -40,16 +112,19 @@ class ImagePickerHelper: UIViewController {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let openLibraryAction = UIAlertAction(title: "Library", style: .default) { (action) in
                 imagePickerController.sourceType = .photoLibrary
-                self.present(imagePickerController, animated: true, completion: nil)
+                controller.present(imagePickerController, animated: true, completion: nil)
             }
             alertController.addAction(openLibraryAction)
         }
 
         alertController.addAction(cancelAction)
 
-        self.present(alertController, animated: true, completion: nil)
+        controller.present(alertController, animated: true, completion: nil)
     }
 
+    func dismissPicker(){
+        self.controller?.dismiss(animated: true, completion: nil)
+    }
 
 }
 
@@ -57,7 +132,7 @@ class ImagePickerHelper: UIViewController {
 extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -71,11 +146,10 @@ extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationContr
             print("🍒 Please extend your viewcontroller with ImagePickerHelper and conform to ImagePickerHelperDelegate. Printing from \(#function) \n In \(String(describing: ImagePickerHelperDelegate.self)) 🍒"); return
         }
         
-        // Set photoImageView to display the selected image.
-        delegate.updateImageView(withImage: selectedImage)
+        dismissPicker()
         
-        // Dismiss the picker.
-        dismiss(animated: true, completion: nil)
+        // Set photoImageView to display the selected image.
+        delegate.fireActionsForSelectedImage(selectedImage)
         
     }
  
