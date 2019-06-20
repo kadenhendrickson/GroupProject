@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let randomUserKey = UserController.shared.users.randomElement()?.key
         let randomUser = UserController.shared.users[randomUserKey!]
         UserController.shared.currentUser = randomUser
-        print(randomUser?.userID)
+        print("Random current user is \(randomUser?.userID)")
         
         return true
     }

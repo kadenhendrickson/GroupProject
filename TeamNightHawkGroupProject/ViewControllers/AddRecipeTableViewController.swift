@@ -29,6 +29,7 @@ class AddRecipeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")

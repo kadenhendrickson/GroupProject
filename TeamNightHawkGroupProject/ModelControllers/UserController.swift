@@ -18,7 +18,11 @@ class UserController {
     /**
      This get assigned when a new user is created.
      */
-    var currentUser: User?
+    var currentUser: User? {
+        didSet {
+            RecipeController.shared.currentUser = self.currentUser
+        }
+    }
     
     //MARK: - Methods
     func followUser(withID userID: String){
