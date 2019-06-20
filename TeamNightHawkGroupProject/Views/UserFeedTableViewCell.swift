@@ -38,10 +38,11 @@ class UserFeedTableViewCell: UITableViewCell {
     func updateViews() {
         guard let userRef = recipe?.userReference,
             let user = UserController.shared.users[userRef],
-            let userImage = user.profileImage,
             let recipeImage = recipe?.image else {return}
-            
-        userProfileImageView.image = UIImage(data: userImage)
+        
+        if let userImage = user.profileImage{userProfileImageView.image = UIImage(data: userImage)}
+        else {userProfileImageView.image = UIImage(named: "ProfileDefault")}
+        
         userDisplayName.setTitle(user.displayName, for: .normal)
         recipeImageView.image = UIImage(data: recipeImage)
         recipeNameTextLabel.text = recipe?.name
@@ -49,5 +50,7 @@ class UserFeedTableViewCell: UITableViewCell {
         recipePrepTimeTextLabel.text = recipe?.prepTime
         recipeSaveCountTextLabel.text = "\(recipe?.saveCount ?? 0)"
     }
+    
+    
 
 }
