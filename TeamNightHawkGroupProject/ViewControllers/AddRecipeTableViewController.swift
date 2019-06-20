@@ -14,7 +14,7 @@ class AddRecipeTableViewController: UITableViewController {
      static var ingredientRows: Int = 1
      static var stepRows: Int = 3
      static var tagRows: Int = 2
-    var cellType: UITableViewCell = UITableViewCell()
+    var tableViewCell: Int?
     var rows: Int = 0
     
     override func viewDidLoad() {
@@ -22,6 +22,21 @@ class AddRecipeTableViewController: UITableViewController {
 
     }
     
+    @IBAction func segmentControllerTapped(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            tableViewCell = 1
+            print("⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️")
+        case 1:
+            tableViewCell = 2
+            print("🌋🌋🌋🌋🌋🌋🌋🌋🌋🌋🌋")
+        case 2:
+            tableViewCell = 3
+            print("🗻🗻🗻🗻🗻🗻🗻🗻🗻🗻🗻🗻")
+        default:
+            break
+        }
+    }
     
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -37,9 +52,19 @@ class AddRecipeTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableViewCell == 1 {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
             
             return cell
+        } else if tableViewCell == 2 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
+            
+            return cell
+        }
 
     }
 
