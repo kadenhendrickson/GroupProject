@@ -12,45 +12,6 @@ class MockData {
     
     static let shared = MockData()
     
-    func printDummyInfo() {
-        print("🍒 Printing Users and Their Recipes 🍒")
-        
-        for (id, user) in UserController.shared.users {
-            print("\n\n----------------")
-            print("\(user.displayName)\n")
-            print("\(user.biography ?? "No bio")")
-            print("\(user.email)\n")
-            print("\(user.userID)\n")
-            print("-----RECIPES-----\n")
-            
-            // Print that user's recipes
-            //            for recipeRef in user.recipesRef {
-            //                guard let recipe = RecipeController.shared.recipes[recipeRef] else { return }
-            //                print("\t- \(recipe.name)\n")
-            //                    for ingredient in recipe.ingredients {
-            //                        print("\t\t\(ingredient.name) \t\(ingredient.measurementQuantity) \(ingredient.measurementName)\n")
-            //                    }
-            //            }
-        }
-        
-        // Print all recipes
-        
-        
-
-    }
-    
-    func loadUserIfEmpty(){
-//        if UserController.shared.users.count < 1 {
-//            UserController.shared.users = UserController.shared.loadUsersFromPersistence()
-//            RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
-//        } else {
-            createDummyData()
-//        }
-    }
-    
-    
-    // MARK: - Ingredients
-    
     let greenStuff = Ingredient(name: "chlorophyll", measurementName: "cups", measurementQuantity: "12")
     let hardStuff = Ingredient(name: "stalk", measurementName: "miligrams", measurementQuantity: "10000000")
     let whey = Ingredient(name: "whey", measurementName: "spoons", measurementQuantity: "2")
@@ -59,7 +20,62 @@ class MockData {
     let chicken = Ingredient(name: "chicken meat", measurementName: "chicken", measurementQuantity: "1/2")
     let meat = Ingredient(name: "meat", measurementName: "lbs", measurementQuantity: "5")
     
+    
+    func printDummyInfo() {
+        
+        printAllUsers()
+        printAllRecipes()
+
+    }
+    
+    func loadUser(){
+        guard UserController.shared.users.count < 1 else {
+            UserController.shared.users = UserController.shared.loadUsersFromPersistence()
+            RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
+            return
+        }
+        
+        createDummyData()
+        
+    }
+    
+
     // Private methods
+    
+    private func printAllUsers(){
+        for (_, user) in UserController.shared.users {
+            print("\n\n----------------")
+            print("\(user.displayName)\n")
+            print("\(user.biography ?? "No bio")")
+            print("\(user.email)\n")
+            print("\(user.userID)\n")
+            
+        }
+    }
+    
+    private func printAllRecipes(){
+        // Print all recipes
+        print("-----RECIPES-----\n")
+        for (_, recipe) in RecipeController.shared.recipes {
+            print("\t\(recipe.name)\n")
+            for ingredient in recipe.ingredients {
+                print("\t\t- \(ingredient.name) \t\t\t\(ingredient.measurementQuantity) \(ingredient.measurementName)\n")
+            }
+            let creator = UserController.shared.users[recipe.userReference]
+            print("\n\tCreated by 🎖 \(creator!.displayName) 🎖\n")
+            print("--------------------------------------------")
+        }
+    }
+    
+    private func printRecipesOf(user: User){
+        for recipeRef in user.recipesRef {
+            guard let recipe = RecipeController.shared.recipes[recipeRef] else { return }
+            print("\t- \(recipe.name)\n")
+                for ingredient in recipe.ingredients {
+                    print("\t\t\(ingredient.name) \t\(ingredient.measurementQuantity) \(ingredient.measurementName)\n")
+                }
+        }
+    }
     
     private func createDummyData() {
         
@@ -115,7 +131,7 @@ class MockData {
     
     private func makeFood() -> String {
         let foodPrefix = ["chicken", "meat", "chocolate", "strawberry", "celery", "sirloin", "salt", "cinnamon", "jalapeno", "carrot"]
-        let foodSuffix = ["pizz", "sandwiches", "cake", "smoothie", "hotdog", "wings", "burger"]
+        let foodSuffix = ["pizza", "sandwiches", "cake", "smoothie", "hotdog", "wings", "burger", "pie"]
         
         let randomPrefix = foodPrefix.randomElement()!
         let randomSuffix = foodSuffix.randomElement()!
