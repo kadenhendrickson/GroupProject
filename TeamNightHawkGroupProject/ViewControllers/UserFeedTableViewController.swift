@@ -17,6 +17,10 @@ class UserFeedTableViewController: UITableViewController {
         }
         return recipeArray
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +45,13 @@ class UserFeedTableViewController: UITableViewController {
                 let indexPath = tableView.indexPathForSelectedRow else {return}
             let recipe = recipesList[indexPath.row]
             destinationVC.recipe = recipe
+        }
+        if segue.identifier == "fromFeedToOtherUserVC" {
+            guard let destinationVC = segue.destination as? UserViewedTableViewController,
+                let indexPath = tableView.indexPathForSelectedRow else {return}
+            let recipe = recipesList[indexPath.row]
+            let user = UserController.shared.users[recipe.userReference]
+            destinationVC.user = user
         }
     }
 }

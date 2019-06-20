@@ -9,16 +9,40 @@
 import UIKit
 
 class ViewedUserRecipeTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    //MARK: - properties
+    var user: User? {
+        didSet {
+            updateViews()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    var recipe: Recipe?
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var viewedUserProfileImage: UIImageView!
+    @IBOutlet weak var viewedUserDisplayName: UIButton!
+    @IBOutlet weak var viewedUserRecipeImage: UIImageView!
+    @IBOutlet weak var viewedUserRecipeNameLabel: UILabel!
+    @IBOutlet weak var viewedUserServingsLabel: UILabel!
+    @IBOutlet weak var viewedUserPrepTimeLabel: UILabel!
+    @IBOutlet weak var viewedUserSaveCountLabel: UILabel!
+    @IBOutlet weak var viewedUserSaveButton: UIButton!
+    
+    
+    func updateViews() {
+        guard let user = user,
+                let recipe = recipe,
+                let userImageData = user.profileImage,
+                let recipeImageData = recipe.image else {return}
+        
+        viewedUserProfileImage.image = UIImage(data: userImageData)
+        viewedUserDisplayName.setTitle(user.displayName, for: .normal)
+        viewedUserRecipeImage.image = UIImage(data: recipeImageData)
+        viewedUserRecipeNameLabel.text = recipe.name
+        viewedUserServingsLabel.text = recipe.servings
+        viewedUserPrepTimeLabel.text = recipe.prepTime
+        viewedUserSaveCountLabel.text = "\(recipe.saveCount)"
     }
-
+    
+   
 }
