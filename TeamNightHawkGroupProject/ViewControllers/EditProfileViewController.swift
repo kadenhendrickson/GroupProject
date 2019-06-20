@@ -46,9 +46,7 @@ class EditProfileViewController: UIViewController {
     @IBAction func updateProfileButtonTapped(_ sender: Any) {
         guard let currentUser = currentUser else { return }
         
-        guard let displayName = displayNameTextField.text else {
-            return
-        }
+        guard let displayName = displayNameTextField.text else { return }
 
         let image = profileImageView.image ?? nil
         
