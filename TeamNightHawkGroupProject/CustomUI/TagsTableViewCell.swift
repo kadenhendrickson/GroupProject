@@ -1,5 +1,5 @@
 //
-//  Section2TableViewCell.swift
+//  TagsTableViewCell.swift
 //  TeamNightHawkGroupProject
 //
 //  Created by Bobba Kadush on 6/19/19.
@@ -8,10 +8,8 @@
 
 import UIKit
 
-class Section2TableViewCell: UITableViewCell {
-
-    var stepsArray: [String]?
-    
+class TagsTableViewCell: UITableViewCell {
+   
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
     }
@@ -20,49 +18,26 @@ class Section2TableViewCell: UITableViewCell {
         super.awakeFromNib()
         setUpStackView()
         addAllSubViews()
-
+        
         
     }
     func addAllSubViews(){
-        self.addSubview(directionSteps)
-        self.addSubview(addSection)
+        self.addSubview(hashTag)
         self.addSubview(stackView)
         
     }
     
     func setUpStackView(){
-        stackView.addArrangedSubview(directionSteps)
-        stackView.addArrangedSubview(addSection)
+        stackView.addArrangedSubview(hashTag)
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
-        addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-
+        
     }
     
-    
-    
-    let directionSteps: UITextField = {
-        let text = UITextField()
+    let hashTag: UILabel = {
+        let text = UILabel()
         text.font = UIFont(name: fontName, size: fontSize)
-        text.placeholder = "Step-by-step directions"
         
         return text
-    }()
-    
-    @objc func addButtonTapped(){
-        AddRecipeTableViewController.stepRows += 1
-        AddRecipeTableViewController.load()
-
-    }
-    
-    let addSection: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(addSectionButtonColor, for: .normal)
-        button.setTitle("+", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: addSectionButtonSize)
-        button.contentHorizontalAlignment = .center
-        button.layer.cornerRadius = addSectionButtonCorner
-        
-        return button
     }()
     
     let stackView: UIStackView = {
@@ -73,4 +48,5 @@ class Section2TableViewCell: UITableViewCell {
         stackView.spacing = 8
         return stackView
     }()
+
 }

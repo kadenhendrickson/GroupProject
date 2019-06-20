@@ -23,7 +23,7 @@ class Recipe: Codable {
         return savedByUsers.count
     }
     //changed image to 'Data?' from 'UIImage?' to test local Persistence. also changed self.image = image to self.image = image.png?Data()
-    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient], steps: [String]?, prepTime: String = "--", servings: String = "--", tags: [String]?, savedByUsers: [String] = []) {
+    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
         self.userReference = userReference
         self.recipeID = recipeID
         self.name = name

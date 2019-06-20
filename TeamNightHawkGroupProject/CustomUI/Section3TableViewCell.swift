@@ -1,5 +1,5 @@
 //
-//  Section2TableViewCell.swift
+//  Section3TableViewCell.swift
 //  TeamNightHawkGroupProject
 //
 //  Created by Bobba Kadush on 6/19/19.
@@ -8,9 +8,7 @@
 
 import UIKit
 
-class Section2TableViewCell: UITableViewCell {
-
-    var stepsArray: [String]?
+class Section3TableViewCell: UITableViewCell {
     
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
@@ -20,38 +18,36 @@ class Section2TableViewCell: UITableViewCell {
         super.awakeFromNib()
         setUpStackView()
         addAllSubViews()
-
+        
         
     }
     func addAllSubViews(){
-        self.addSubview(directionSteps)
+        self.addSubview(tags)
         self.addSubview(addSection)
         self.addSubview(stackView)
         
     }
     
     func setUpStackView(){
-        stackView.addArrangedSubview(directionSteps)
+        stackView.addArrangedSubview(tags)
         stackView.addArrangedSubview(addSection)
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
 
+        
     }
     
-    
-    
-    let directionSteps: UITextField = {
+    let tags: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
-        text.placeholder = "Step-by-step directions"
+        text.placeholder = "tags"
         
         return text
     }()
     
     @objc func addButtonTapped(){
-        AddRecipeTableViewController.stepRows += 1
+        AddRecipeTableViewController.tagRows += 1
         AddRecipeTableViewController.load()
-
     }
     
     let addSection: UIButton = {
