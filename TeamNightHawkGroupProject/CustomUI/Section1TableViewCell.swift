@@ -38,7 +38,8 @@ class Section1TableViewCell: UITableViewCell {
         stackView.addArrangedSubview(measuremenType)
         stackView.addArrangedSubview(ingredient)
         stackView.addArrangedSubview(addSection)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0,width: 300, height: 32)
+        addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
 
     
@@ -46,6 +47,7 @@ class Section1TableViewCell: UITableViewCell {
     let measurementQuantity: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
+        text.placeholder = "0"
         
         return text
     }()
@@ -53,6 +55,7 @@ class Section1TableViewCell: UITableViewCell {
     let measuremenType: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
+        text.placeholder = "Teaspoon"
         
         return text
     }()
@@ -60,13 +63,18 @@ class Section1TableViewCell: UITableViewCell {
     let ingredient: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
+        text.placeholder = "Ingredient"
 
-        
         return text
     }()
     
+    @objc func addButtonTapped(){
+        AddRecipeTableViewController.ingredientRows += 1
+        AddRecipeTableViewController.load()
+
+    }
     
-    let addSection: UIButton = {
+    lazy var addSection: UIButton = {
         let button = UIButton()
         button.setTitleColor(addSectionButtonColor, for: .normal)
         button.setTitle("+", for: .normal)
