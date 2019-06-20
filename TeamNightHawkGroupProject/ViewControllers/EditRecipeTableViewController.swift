@@ -9,7 +9,14 @@
 import UIKit
 
 class EditRecipeTableViewController: UITableViewController {
-
+    
+    @IBOutlet weak var recipeImage: UIImageView!
+    
+    @IBOutlet weak var editImageButton: UIButton!
+    @IBOutlet weak var prepTimeTextField: UITextField!
+    @IBOutlet weak var servingTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    
     var recipe: Recipe?
     
     override func viewDidLoad() {
@@ -22,6 +29,12 @@ class EditRecipeTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    @IBAction func editImageTapped(_ sender: Any) {
+    }
+    @IBAction func deleteRecipeTapped(_ sender: Any) {
+    }
+    @IBAction func editRecipeSegmentTapped(_ sender: Any) {
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
