@@ -82,12 +82,26 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-3Y-aep">
-                                <rect key="frame" x="160.5" y="674" width="93" height="30"/>
+                                <rect key="frame" x="158" y="674" width="98" height="30"/>
                                 <state key="normal" title="Delete Profile"/>
+                                <connections>
+                                    <action selector="deleteProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="PGR-Bw-ASZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYo-4L-Dts">
                                 <rect key="frame" x="20" y="215.5" width="143.5" height="30"/>
                                 <state key="normal" title="Change Image"/>
+                                <connections>
+                                    <action selector="changeImageButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="bSg-5a-fPb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaB-fa-2BS">
+                                <rect key="frame" x="158" y="732" width="98" height="30"/>
+                                <state key="normal" title="Update Profile"/>
+                                <connections>
+                                    <action selector="deleteProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="IG4-Se-nuw"/>
+                                    <action selector="updateProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="lfu-pn-rzb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,6 +110,8 @@
                             <constraint firstItem="dYo-4L-Dts" firstAttribute="leading" secondItem="jsT-Tn-Kbg" secondAttribute="leading" constant="20" id="FbC-QX-0Jz"/>
                             <constraint firstItem="GEx-sA-Kwc" firstAttribute="height" secondItem="3w5-gY-i7b" secondAttribute="height" multiplier="0.16" id="LFh-76-WuL"/>
                             <constraint firstItem="Qdy-3Y-aep" firstAttribute="centerX" secondItem="3w5-gY-i7b" secondAttribute="centerX" id="NQS-CO-UQR"/>
+                            <constraint firstItem="JaB-fa-2BS" firstAttribute="width" secondItem="Qdy-3Y-aep" secondAttribute="width" id="P3A-IJ-KC2"/>
+                            <constraint firstItem="JaB-fa-2BS" firstAttribute="top" secondItem="Qdy-3Y-aep" secondAttribute="bottom" constant="28" id="QMu-Mm-n4A"/>
                             <constraint firstItem="Qdy-3Y-aep" firstAttribute="top" secondItem="fhe-ap-JKy" secondAttribute="bottom" constant="50" id="SaC-XN-jWf"/>
                             <constraint firstItem="dYo-4L-Dts" firstAttribute="width" secondItem="GEx-sA-Kwc" secondAttribute="width" id="WED-f7-v6E"/>
                             <constraint firstItem="fhe-ap-JKy" firstAttribute="centerX" secondItem="3w5-gY-i7b" secondAttribute="centerX" id="XNb-NL-737"/>
@@ -104,9 +120,17 @@
                             <constraint firstItem="GEx-sA-Kwc" firstAttribute="leading" secondItem="jsT-Tn-Kbg" secondAttribute="leading" constant="20" id="rGI-WY-RhS"/>
                             <constraint firstItem="fhe-ap-JKy" firstAttribute="top" secondItem="dYo-4L-Dts" secondAttribute="bottom" constant="20" id="rKm-Zy-4Nq"/>
                             <constraint firstItem="fhe-ap-JKy" firstAttribute="width" secondItem="3w5-gY-i7b" secondAttribute="width" multiplier="0.8" id="v84-RL-Jz6"/>
+                            <constraint firstItem="JaB-fa-2BS" firstAttribute="centerX" secondItem="3w5-gY-i7b" secondAttribute="centerX" id="zac-vh-GbW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jsT-Tn-Kbg"/>
                     </view>
+                    <connections>
+                        <outlet property="bioTextView" destination="fhe-ap-JKy" id="TO1-od-NU1"/>
+                        <outlet property="displayNameTextField" destination="bL9-id-MkG" id="E85-pJ-JGc"/>
+                        <outlet property="followersCountLabel" destination="p9G-AN-kOV" id="60p-bh-47b"/>
+                        <outlet property="followingCountTextLabel" destination="h32-gW-Ych" id="bth-Hd-Yvc"/>
+                        <outlet property="profileImageView" destination="GEx-sA-Kwc" id="O69-Sx-VWW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Sh-bm-BF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
