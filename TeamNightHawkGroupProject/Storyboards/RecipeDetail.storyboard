@@ -253,16 +253,6 @@
                                 <constraint firstItem="K9s-bR-wBY" firstAttribute="leading" secondItem="v1D-iO-7BW" secondAttribute="leading" id="zZY-WE-CxC"/>
                             </constraints>
                         </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="bJh-98-LZL">
-                                <rect key="frame" x="0.0" y="531" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bJh-98-LZL" id="gbj-2W-mHa">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="q52-xY-s8f" id="0fd-BO-DdW"/>
                             <outlet property="delegate" destination="q52-xY-s8f" id="pDZ-Ap-hRz"/>

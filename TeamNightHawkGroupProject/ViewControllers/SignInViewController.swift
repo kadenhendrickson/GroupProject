@@ -10,6 +10,8 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
+    @IBOutlet weak var userEmail: UITextField!
+    @IBOutlet weak var userPassword: UITextField!
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +19,13 @@ class SignInViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func loginUserButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func createUserButtonTapped(_ sender: UIButton){
+        self.performSegue(withIdentifier: "toCreateUserVC", sender: nil)
+
+    }
     
     /*
      // MARK: - Navigation

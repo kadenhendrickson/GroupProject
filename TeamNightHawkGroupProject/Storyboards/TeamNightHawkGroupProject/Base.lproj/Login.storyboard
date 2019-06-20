@@ -46,7 +46,7 @@
                                         <rect key="frame" x="0.0" y="52" width="82" height="30"/>
                                         <state key="normal" title="Create User"/>
                                         <connections>
-                                            <segue destination="bh7-Ra-5CO" kind="show" id="yAe-I3-1KN"/>
+                                            <segue destination="bh7-Ra-5CO" kind="show" identifier="toCreateUserVC" id="yAe-I3-1KN"/>
                                         </connections>
                                     </button>
                                 </subviews>
