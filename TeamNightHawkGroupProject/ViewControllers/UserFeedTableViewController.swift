@@ -36,7 +36,7 @@ class UserFeedTableViewController: UITableViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toRecipeDetailVC" {
+        if segue.identifier == "fromFeedToRecipeDVC" {
             guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
                 let indexPath = tableView.indexPathForSelectedRow else {return}
             let recipe = recipesList[indexPath.row]
