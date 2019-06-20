@@ -83,7 +83,7 @@ class MockData {
 
         UserController.shared.createUser(withEmail: "kadenhendrickson4@gmail.com", displayName: "kadenHendrickson", biography: "i am a student", profileImage: nil)
         
-        RecipeController.shared.createRecipe(name: "Celery", image: UIImage(named: "AnneCelery")!, ingredients: [greenStuff, hardStuff], steps: ["first, wash it.", "second, chop it.", "third, chomp it.", "fourth, poop it."], tags: ["healthy", "crunchy", "green"])
+        RecipeController.shared.createRecipe(name: "Celery", image: UIImage(named: "AnneCelery")!, ingredients: [greenStuff, hardStuff], steps: ["first, wash it.", "second, chop it.", "third, chomp it.", "fourth, poop it."], tags: ["healthy", "crunchy", "green"], servingSize: "2", prepTime: "10 minutes")
         
         makeALotsOf(recipes: "smoothies", "pizza", "hummus")
 
@@ -126,7 +126,7 @@ class MockData {
         print("Making recipe for \(String(UserController.shared.currentUser!.displayName)), now we have \(RecipeController.shared.recipes.count) recipes.")
         let ingredients = getRamdonIngredients()
         let tags = getRamdomTags()
-        RecipeController.shared.createRecipe(name: name, image: UIImage(named: "AnneCelery")!, ingredients: ingredients, steps: steps, tags: tags)
+        RecipeController.shared.createRecipe(name: name, image: UIImage(named: "AnneCelery")!, ingredients: ingredients, steps: steps, tags: tags, servingSize: "2", prepTime: "10 minutes")
     }
     
     private func makeFood() -> String {
