@@ -26,6 +26,9 @@ class ProfileRecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipePrepTimeTextLabel: UILabel!
     @IBOutlet weak var recipeSaveCountTextLabel: UILabel!
     
+    @IBAction func editButtonTapped(_ sender: Any) {
+    }
+    
     // MARK: - Methods
     func updateViews(){
         

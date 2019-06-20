@@ -28,6 +28,10 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    @IBAction func editProfileButtonTapped(_ sender: Any) {
+        
+    }
+    
     // MARK: - Methods
     func updateViews(){
     }
