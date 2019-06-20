@@ -9,10 +9,19 @@
 import UIKit
 
 //Need Function to tap button
+protocol ingredientCellDelegate {
+    func reloadData()
+}
 
 class Section1TableViewCell: UITableViewCell {
-
-   
+    
+    var delegate: ingredientCellDelegate?
+    var ingredient: Ingredient?
+    var measurmentName: String = ""
+    var measurmentQuantity: String = ""
+    var ingredientName: String = ""
+    
+    
     
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
@@ -29,20 +38,19 @@ class Section1TableViewCell: UITableViewCell {
     }
     
     func addAllSubViews(){
-        self.addSubview(measuremenType)
-        
-        self.addSubview(measurementQuantity)
-        self.addSubview(ingredient)
+        self.addSubview(measuremenTypeLabel)
+        self.addSubview(measurementQuantityLabel)
+        self.addSubview(ingredientLabel)
         self.addSubview(addSection)
         self.addSubview(stackView)
-        contentView.addSubview(measuremenType)
-        measuremenType.frame = CGRect(x: self.contentView.frame.origin.x, y: self.contentView.frame.origin.y, width: 20, height: 20)
+        contentView.addSubview(measuremenTypeLabel)
+        measuremenTypeLabel.frame = CGRect(x: self.contentView.frame.origin.x, y: self.contentView.frame.origin.y, width: 20, height: 20)
     }
     
     func setUpStackView(){
-        stackView.addArrangedSubview(measurementQuantity)
-        stackView.addArrangedSubview(measuremenType)
-        stackView.addArrangedSubview(ingredient)
+        stackView.addArrangedSubview(measurementQuantityLabel)
+        stackView.addArrangedSubview(measuremenTypeLabel)
+        stackView.addArrangedSubview(ingredientLabel)
         stackView.addArrangedSubview(addSection)
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 1, paddingBottom: 8, paddingLeading: 1, paddingTrailing: 8, width: 300, height: 32)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
@@ -50,7 +58,7 @@ class Section1TableViewCell: UITableViewCell {
 
     
     
-    let measurementQuantity: UITextField = {
+    let measurementQuantityLabel: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "0"
@@ -58,7 +66,7 @@ class Section1TableViewCell: UITableViewCell {
         return text
     }()
     
-    let measuremenType: UITextField = {
+    let measuremenTypeLabel: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Teaspoon"
@@ -66,7 +74,7 @@ class Section1TableViewCell: UITableViewCell {
         return text
     }()
     
-    let ingredient: UITextField = {
+    let ingredientLabel: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Ingredient"
@@ -77,9 +85,15 @@ class Section1TableViewCell: UITableViewCell {
     @objc func addButtonTapped(){
         AddRecipeTableViewController.ingredientRows += 1
         AddRecipeTableViewController().tableView.reloadData()
-        print("🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️")
+        guard let name = ingredientLabel.text,
+            let measurmentName = measuremenTypeLabel.text,
+            let measurementQuantity = measurementQuantityLabel.text
+            else {return}
+        let newIngredient = Ingredient(name: name, measurementName: measurmentName, measurementQuantity: measurmentQuantity)
         
-
+        AddRecipeTableViewController.ingredients.append(newIngredient)
+    delegate?.reloadData()
+        print("🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️")
     }
     
     lazy var addSection: UIButton = {
@@ -104,8 +118,9 @@ class Section1TableViewCell: UITableViewCell {
     }()
 }
 
-extension Section1TableViewCell{
-    func cellOneSetup(){
+extension Section1TableViewCell: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
         
     }
 }
