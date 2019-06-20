@@ -32,9 +32,10 @@ class MockData {
         UserController.shared.users = UserController.shared.loadUsersFromPersistence()
         RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
         
-        guard UserController.shared.users.count < 1 else { return }
+        //guard UserController.shared.users.count < 1 else { return }
         
-        createDummyData()
+        
+        //createDummyData()
         
     }
     
@@ -80,17 +81,17 @@ class MockData {
         
         // MARK: - Users Creation
 
-        UserController.shared.createUser(withEmail: "kadenhendrickson4@gmail.com", displayName: "kadenHendrickson", biography: "i am a student", profileImage: nil)
+        UserController.shared.createUser(withEmail: "kadenhendrickson4@gmail.com", displayName: "kadenHendrickson", biography: "i am a student", profileImage: UIImage(named: "ProfileCelery")!)
         
         RecipeController.shared.createRecipe(name: "Celery", image: UIImage(named: "AnneCelery")!, ingredients: [greenStuff, hardStuff], steps: ["first, wash it.", "second, chop it.", "third, chomp it.", "fourth, poop it."], tags: ["healthy", "crunchy", "green"], servingSize: "2", prepTime: "10 minutes")
         
         makeALotsOf(recipes: "smoothies", "pizza", "hummus")
 
-        UserController.shared.createUser(withEmail: "anneishungry@gmail.com", displayName: "annedog", biography: "computer programmer", profileImage: nil)
+        UserController.shared.createUser(withEmail: "anneishungry@gmail.com", displayName: "annedog", biography: "computer programmer", profileImage: UIImage(named: "ProfileCelery")!)
         
         makeALotsOf(recipes: "ice cream", "pasta", "fried rice")
         
-        UserController.shared.createUser(withEmail: "shanehasabigbeard@gmail.com", displayName: "bigBeardShane", biography: "I have a big beard", profileImage: nil)
+        UserController.shared.createUser(withEmail: "shanehasabigbeard@gmail.com", displayName: "bigBeardShane", biography: "I have a big beard", profileImage: UIImage(named: "ProfileCelery")!)
         
         makeALotsOf(recipes: "chicken alfredo", "taco", "steak", "hot dog")
         

@@ -22,24 +22,15 @@ class RecipeDetailTableViewController: UITableViewController {
     var recipeSegmentIndex: Int = 1
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
-        guard let recipe = recipe,
-        let imageData = recipe.image,
-        let user = UserController.shared.users[recipe.userReference],
-        let profileImage = UserController.shared.users[recipe.userReference]?.profileImage  else {return}
-        userImage.image = UIImage(data: profileImage)
-        userNameLabel.setTitle(user.displayName, for: .normal)
-        recipeImage.image = UIImage(data: imageData)
-        nameLabel.text = recipe.name
-        servingsLabel.text = recipe.servings
-        prepTimeLabel.text = recipe.prepTime
-        
-        
+        updateDetails()
     }
+   
     
     @IBAction func segmentDetailControllerTapped(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -60,9 +51,25 @@ class RecipeDetailTableViewController: UITableViewController {
             break
         }
     }
-    
+    //cant call navigation controller without embedding it
     @IBAction func backButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+        
+    }
+    
+    func updateDetails() {
+        
+        guard let recipe = recipe,
+                let imageData = recipe.image,
+                let user = UserController.shared.users[recipe.userReference],
+                let profileImage = UserController.shared.users[recipe.userReference]?.profileImage else {return}
+        userImage.image = UIImage(data: profileImage)
+        userNameLabel.setTitle(user.displayName, for: .normal)
+        recipeImage.image = UIImage(data: imageData)
+        nameLabel.text = recipe.name
+        servingsLabel.text = recipe.servings
+        prepTimeLabel.text = recipe.prepTime
+        
     }
     
 
