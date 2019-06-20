@@ -51,12 +51,21 @@ class UserController {
     
     func blockUser(withID userID: String){
         
-        guard let currentUser = currentUser
-            else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
+        guard let currentUser = currentUser else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
         
         currentUser.blockedUserRefs.append(userID)
         
     }
+    
+    func unblockUser(withID blockedUserID: String){
+        
+        guard let currentUser = currentUser,
+            let refIndex = currentUser.blockedUserRefs.firstIndex(of: blockedUserID)
+            else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
+        
+        currentUser.blockedUserRefs.remove(at: refIndex)
+    }
+    
     
     //MARK: - CRUDs
     func createUser(withEmail email: String, displayName: String, biography: String, profileImage: UIImage?){
