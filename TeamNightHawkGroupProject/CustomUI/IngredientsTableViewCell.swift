@@ -14,10 +14,14 @@ class IngredientsTableViewCell: UITableViewCell {
         return self.safeAreaLayoutGuide
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: "ingredentCell")
         addAllSubViews()
         setUpStackView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func addAllSubViews(){
