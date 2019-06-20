@@ -10,6 +10,17 @@ import UIKit
 
 class UserViewedTableViewController: UITableViewController {
 
+    //MARK: - Properties
+    var user: User?
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var viewedUserProfileImage: UIImageView!
+    @IBOutlet weak var viewedUserDisplayName: UILabel!
+    @IBOutlet weak var viewedUserFollowersCount: UILabel!
+    @IBOutlet weak var viewedUserFollowingCount: UILabel!
+    @IBOutlet weak var viewedUserBiography: UILabel!
+    @IBOutlet weak var followButon: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
