@@ -55,6 +55,7 @@ class UserController {
         let userID = user.userID
         users[userID] = user
         currentUser = user
+        RecipeController.shared.currentUser = user
         saveUsersToPersistence()
     }
     
