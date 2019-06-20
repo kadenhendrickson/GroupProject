@@ -44,6 +44,7 @@
 		DC4BC2C322BBE95D001B20EE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4BC2C122BBE95D001B20EE /* Login.storyboard */; };
 		DC4BC2C722BBEA06001B20EE /* ProfileDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4BC2C522BBEA06001B20EE /* ProfileDetail.storyboard */; };
 		DC4BC2C922BBEA15001B20EE /* RecipeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC4BC2C822BBEA15001B20EE /* RecipeDetail.storyboard */; };
+		DC4BC2CD22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		DC4BC2C222BBE95D001B20EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TeamNightHawkGroupProject/Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		DC4BC2C622BBEA06001B20EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TeamNightHawkGroupProject/Storyboards/Base.lproj/ProfileDetail.storyboard; sourceTree = "<group>"; };
 		DC4BC2C822BBEA15001B20EE /* RecipeDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RecipeDetail.storyboard; sourceTree = "<group>"; };
+		DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewedUserRecipeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */,
 				02A7F9BC22BB52C4004DE917 /* AddTableViewCell.swift */,
 				DC2C1AEA22BA9CB00098F68D /* UserFeedTableViewCell.swift */,
+				DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				DC2C1B0122BAEA730098F68D /* MockData.swift in Sources */,
 				02A7F9AF22BB0839004DE917 /* TagsTableViewCell.swift in Sources */,
 				9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */,
+				DC4BC2CD22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift in Sources */,
 				0226F25B22BAD5F900856910 /* StepsTableViewCell.swift in Sources */,
 				9732277F22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift in Sources */,
 				DC2C1AE522B9480A0098F68D /* RecipeController.swift in Sources */,
