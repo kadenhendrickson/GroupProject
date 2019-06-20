@@ -145,18 +145,16 @@
                                         <constraint firstItem="U6f-w2-nem" firstAttribute="top" secondItem="6RS-kJ-Dpz" secondAttribute="topMargin" id="yVV-Pa-5DX"/>
                                         <constraint firstItem="VpH-8u-qUt" firstAttribute="width" secondItem="6RS-kJ-Dpz" secondAttribute="width" multiplier="0.8" id="zYM-ok-ete"/>
                                     </constraints>
-                                    <connections>
-                                        <outlet property="recipeImageView" destination="VpH-8u-qUt" id="Lbf-M6-eiR"/>
-                                        <outlet property="recipeNameTextLabel" destination="cry-Lg-72D" id="INm-6b-jPs"/>
-                                        <outlet property="recipePrepTimeTextLabel" destination="OEE-ae-Npn" id="lBg-aK-UwN"/>
-                                        <outlet property="recipeSaveCountTextLabel" destination="bJX-JB-D97" id="0xH-Qh-ntd"/>
-                                        <outlet property="recipeServingsTextLabel" destination="Emy-zL-SwN" id="HLp-Ia-zRi"/>
-                                        <outlet property="saveRecipeButton" destination="rge-Qi-bMu" id="D1E-bs-vxP"/>
-                                        <outlet property="userDisplayName" destination="HIT-if-Sct" id="Yeb-hg-XhA"/>
-                                        <outlet property="userProfileImageView" destination="t4v-7z-YSp" id="Fzk-Xc-xGU"/>
-                                    </connections>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="recipeImageView" destination="VpH-8u-qUt" id="rik-At-1Ve"/>
+                                    <outlet property="recipeNameTextLabel" destination="cry-Lg-72D" id="jJa-h6-ASx"/>
+                                    <outlet property="recipePrepTimeTextLabel" destination="OEE-ae-Npn" id="Cl4-zm-oTP"/>
+                                    <outlet property="recipeSaveCountTextLabel" destination="bJX-JB-D97" id="fAB-4D-lp1"/>
+                                    <outlet property="recipeServingsTextLabel" destination="Emy-zL-SwN" id="SHD-e4-PYb"/>
+                                    <outlet property="saveRecipeButton" destination="rge-Qi-bMu" id="hnL-av-7r0"/>
+                                    <outlet property="userDisplayName" destination="HIT-if-Sct" id="9uN-GF-kLT"/>
+                                    <outlet property="userProfileImageView" destination="t4v-7z-YSp" id="H3s-7b-fcd"/>
                                     <segue destination="WVq-0b-mrp" kind="show" identifier="fromFeedToRecipeDVC" id="V0v-1b-299"/>
                                 </connections>
                             </tableViewCell>
