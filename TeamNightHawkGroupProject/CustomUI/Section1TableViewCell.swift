@@ -31,15 +31,13 @@ class Section1TableViewCell: UITableViewCell {
         self.addSubview(stackView)
     }
     
-    
-    
     func setUpStackView(){
         stackView.addArrangedSubview(measurementQuantity)
         stackView.addArrangedSubview(measuremenType)
         stackView.addArrangedSubview(ingredient)
         stackView.addArrangedSubview(addSection)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0,width: 300, height: 32)
-        addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 1, paddingBottom: 8, paddingLeading: 1, paddingTrailing: 8, width: 300, height: 32)
+//        addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
 
     
@@ -71,6 +69,7 @@ class Section1TableViewCell: UITableViewCell {
     @objc func addButtonTapped(){
         AddRecipeTableViewController.ingredientRows += 1
         AddRecipeTableViewController.load()
+        print("🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️")
 
     }
     
