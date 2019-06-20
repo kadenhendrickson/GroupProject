@@ -49,6 +49,15 @@ class UserController {
         saveUsersToPersistence()
     }
     
+    func blockUser(withID userID: String){
+        
+        guard let currentUser = currentUser
+            else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
+        
+        currentUser.blockedUserRefs.append(userID)
+        
+    }
+    
     //MARK: - CRUDs
     func createUser(withEmail email: String, displayName: String, biography: String, profileImage: UIImage?){
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: profileImage)
