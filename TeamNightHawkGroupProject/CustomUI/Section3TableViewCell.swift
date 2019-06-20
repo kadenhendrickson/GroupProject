@@ -7,9 +7,13 @@
 //
 
 import UIKit
+protocol tagCellDelegate {
+    func reloadData()
+}
 
 class Section3TableViewCell: UITableViewCell {
     
+    var delegate: tagCellDelegate?
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
     }
@@ -51,6 +55,8 @@ class Section3TableViewCell: UITableViewCell {
     @objc func addButtonTapped(){
         AddRecipeTableViewController.tagRows += 1
         AddRecipeTableViewController().tableView.reloadData()
+        guard let tag = tags.text else {return}
+        AddRecipeTableViewController.tags.append(tag)
     }
     
     let addSection: UIButton = {
@@ -72,4 +78,10 @@ class Section3TableViewCell: UITableViewCell {
         stackView.spacing = 8
         return stackView
     }()
+}
+extension Section3TableViewCell: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        
+    }
 }

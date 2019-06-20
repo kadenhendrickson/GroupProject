@@ -61,14 +61,16 @@ class RecipeDetailTableViewController: UITableViewController {
         
         guard let recipe = recipe,
                 let imageData = recipe.image,
-                let user = UserController.shared.users[recipe.userReference] else {return}
-       
+
+            let user = UserController.shared.users[recipe.userReference] else {return}
+
         if let profileImage = UserController.shared.users[recipe.userReference]?.profileImage {
             userImage.image = UIImage(data: profileImage)
         } else {
             userImage.image = UIImage(named: "ProfileDefault")
         }
-        
+
+
         userNameLabel.setTitle(user.displayName, for: .normal)
         recipeImage.image = UIImage(data: imageData)
         nameLabel.text = recipe.name

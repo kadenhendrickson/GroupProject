@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--User Feed Table View Controller-->
         <scene sceneID="xuC-sv-UcK">
             <objects>
                 <tableViewController id="Hly-fP-3vJ" customClass="UserFeedTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -164,11 +164,11 @@
                             <outlet property="delegate" destination="Hly-fP-3vJ" id="VwB-qN-CLl"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Home" id="TYt-rA-XKm"/>
+                    <navigationItem key="navigationItem" id="z5c-UH-G41"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yip-qZ-9Xq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2281" y="1617"/>
+            <point key="canvasLocation" x="-1371.0144927536232" y="1616.5178571428571"/>
         </scene>
         <!--otherUserVC-->
         <scene sceneID="SpB-vz-0zR">
@@ -186,7 +186,7 @@
             </objects>
             <point key="canvasLocation" x="-154" y="2164"/>
         </scene>
-        <!--Explore-->
+        <!--Explore Collection View Controller-->
         <scene sceneID="xvP-bf-Hn1">
             <objects>
                 <viewController id="SbK-5E-zSV" customClass="ExploreCollectionViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -195,11 +195,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CRZ-nc-HHE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CRD-eD-xAJ">
-                                <rect key="frame" x="20" y="100" width="374" height="713"/>
+                                <rect key="frame" x="20" y="144" width="374" height="669"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xbk-8r-2Aa">
                                     <size key="itemSize" width="50" height="50"/>
@@ -247,11 +247,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7r2-c0-4fN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Explore" id="nKZ-R7-qfy"/>
+                    <navigationItem key="navigationItem" id="DDI-ze-hCs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tm5-Th-2tW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1301" y="1617"/>
+            <point key="canvasLocation" x="518.84057971014499" y="1616.5178571428571"/>
         </scene>
         <!--RecipeEditView-->
         <scene sceneID="ov6-oN-Izo">
@@ -269,7 +269,7 @@
             </objects>
             <point key="canvasLocation" x="748" y="2164"/>
         </scene>
-        <!--Add-->
+        <!--Item-->
         <scene sceneID="WsT-D9-1kk">
             <objects>
                 <tableViewController id="3P6-Ln-CnM" customClass="AddRecipeTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -339,6 +339,9 @@
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8P-AE-cgh">
                                     <rect key="frame" x="41.5" y="20" width="331" height="331"/>
+                                    <connections>
+                                        <action selector="imageSelectorTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="iQR-vE-pah"/>
+                                    </connections>
                                 </button>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hpL-Wr-zc9">
                                     <rect key="frame" x="83" y="431" width="248" height="29"/>
@@ -375,6 +378,7 @@
                             <state key="normal" title="Save"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="CaN-V7-tV1"/>
+                                <segue destination="eFU-N5-vJh" kind="show" id="8Ts-H2-ATs"/>
                             </connections>
                         </button>
                         <connections>
@@ -382,11 +386,19 @@
                             <outlet property="delegate" destination="3P6-Ln-CnM" id="dDK-Iq-X4x"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Add" id="GKa-Fk-zsw"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="Stg-3a-uQE"/>
+                    <navigationItem key="navigationItem" id="9Yq-3C-vJM"/>
+                    <connections>
+                        <outlet property="imageSelector" destination="e8P-AE-cgh" id="G88-dq-PWW"/>
+                        <outlet property="nameTextField" destination="zBz-4j-35O" id="WPj-jJ-LDC"/>
+                        <outlet property="prepTimeTextField" destination="9iw-aT-IkD" id="lOL-ar-vBG"/>
+                        <outlet property="recipeImage" destination="rhw-Rq-Ol3" id="77d-Qk-DCh"/>
+                        <outlet property="servingTextField" destination="ExB-fn-5pV" id="iu3-4N-GJC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se4-7I-hsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-194.20289855072465" y="1593.75"/>
+            <point key="canvasLocation" x="1793" y="1651"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Eak-eO-9PX">
@@ -398,18 +410,18 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Hly-fP-3vJ" kind="relationship" relationship="viewControllers" id="yfU-AF-WOt"/>
-                        <segue destination="SbK-5E-zSV" kind="relationship" relationship="viewControllers" id="nsI-jw-gKH"/>
-                        <segue destination="eph-dD-5CE" kind="relationship" relationship="viewControllers" id="0P0-3a-892"/>
-                        <segue destination="Byq-Hl-WiZ" kind="relationship" relationship="viewControllers" id="rlx-wL-iUV"/>
-                        <segue destination="3P6-Ln-CnM" kind="relationship" relationship="viewControllers" id="9rS-mo-aBF"/>
+                        <segue destination="T6R-Op-2qz" kind="relationship" relationship="viewControllers" id="yfU-AF-WOt"/>
+                        <segue destination="qeV-Bo-dkR" kind="relationship" relationship="viewControllers" id="nsI-jw-gKH"/>
+                        <segue destination="t6n-CS-vcd" kind="relationship" relationship="viewControllers" id="0P0-3a-892"/>
+                        <segue destination="neh-Dv-IMm" kind="relationship" relationship="viewControllers" id="rlx-wL-iUV"/>
+                        <segue destination="3P6-Ln-CnM" kind="relationship" relationship="viewControllers" id="OG8-i5-zFq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GH1-af-nB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-194" y="865"/>
         </scene>
-        <!--Saved-->
+        <!--Saved Recipes Table View Controller-->
         <scene sceneID="ioD-oz-KiQ">
             <objects>
                 <tableViewController id="Byq-Hl-WiZ" customClass="SavedRecipesTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -549,13 +561,13 @@
                             <outlet property="delegate" destination="Byq-Hl-WiZ" id="B0f-Yx-tx9"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Saved" id="ILr-TF-LQl"/>
+                    <navigationItem key="navigationItem" id="3Rx-a4-ds5"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0L-FW-Ulm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807" y="1617"/>
+            <point key="canvasLocation" x="6355.072463768116" y="1616.5178571428571"/>
         </scene>
-        <!--Profile-->
+        <!--Profile Table View Controller-->
         <scene sceneID="00L-zY-ikQ">
             <objects>
                 <tableViewController id="eph-dD-5CE" customClass="ProfileTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -791,7 +803,7 @@
                             <outlet property="delegate" destination="eph-dD-5CE" id="Aj5-d4-hGB"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Profile" id="xYz-uV-9ot"/>
+                    <navigationItem key="navigationItem" id="bbv-9O-pxB"/>
                     <connections>
                         <outlet property="bioTextLabel" destination="dyB-oe-NHe" id="mOO-vk-hub"/>
                         <outlet property="displayNameLabel" destination="HAk-de-Fvd" id="KJp-IU-Mjq"/>
@@ -802,11 +814,87 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCh-f6-0qB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879.71014492753625" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="4518.840579710145" y="1616.5178571428571"/>
+        </scene>
+        <!--Explore-->
+        <scene sceneID="54K-hO-gNb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qeV-Bo-dkR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Explore" id="nKZ-R7-qfy"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kiw-n6-cWF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SbK-5E-zSV" kind="relationship" relationship="rootViewController" id="nda-Yg-ZLD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="izB-ho-B9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-391.304347826087" y="1616.5178571428571"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="3Uk-JX-rl1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T6R-Op-2qz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="TYt-rA-XKm"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rtW-pS-LCQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Hly-fP-3vJ" kind="relationship" relationship="rootViewController" id="O08-QN-mv7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zJk-tW-ntH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2281.1594202898555" y="1616.5178571428571"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="dLh-UM-ZfE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t6n-CS-vcd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="xYz-uV-9ot"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k7n-Q2-8qg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eph-dD-5CE" kind="relationship" relationship="rootViewController" id="iVo-H7-qrJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5JH-f5-UNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3608.6956521739135" y="1616.5178571428571"/>
+        </scene>
+        <!--Saved-->
+        <scene sceneID="Ytl-0Y-0zL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="neh-Dv-IMm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Saved" id="ILr-TF-LQl"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ffx-1l-8PX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Byq-Hl-WiZ" kind="relationship" relationship="rootViewController" id="xB8-PN-Wyq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ewR-j7-Pjg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5444.9275362318849" y="1616.5178571428571"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="V0v-1b-299"/>
-        <segue reference="6Sx-iR-7Il"/>
+        <segue reference="5CQ-ys-tBo"/>
+        <segue reference="nsF-ro-oZn"/>
     </inferredMetricsTieBreakers>
 </document>

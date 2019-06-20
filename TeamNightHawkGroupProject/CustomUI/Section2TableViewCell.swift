@@ -7,9 +7,13 @@
 //
 
 import UIKit
+protocol stepCellDelegate {
+    func reloadData()
+}
 
 class Section2TableViewCell: UITableViewCell {
 
+    var delegate: stepCellDelegate?
     var stepsArray: [String]?
     
     var safeArea: UILayoutGuide {
@@ -54,7 +58,9 @@ class Section2TableViewCell: UITableViewCell {
     @objc func addButtonTapped(){
         AddRecipeTableViewController.stepRows += 1
         AddRecipeTableViewController().tableView.reloadData()
-
+        guard let steps = directionSteps.text else {return}
+        AddRecipeTableViewController.steps.append(steps)
+        
     }
     
     let addSection: UIButton = {
@@ -76,4 +82,11 @@ class Section2TableViewCell: UITableViewCell {
         stackView.spacing = 8
         return stackView
     }()
+}
+
+extension Section2TableViewCell: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        
+    }
 }
