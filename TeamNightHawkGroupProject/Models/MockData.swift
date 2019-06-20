@@ -29,11 +29,10 @@ class MockData {
     }
     
     func loadUser(){
-        guard UserController.shared.users.count < 1 else {
-            UserController.shared.users = UserController.shared.loadUsersFromPersistence()
-            RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
-            return
-        }
+        UserController.shared.users = UserController.shared.loadUsersFromPersistence()
+        RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
+        
+        guard UserController.shared.users.count < 1 else { return }
         
         createDummyData()
         
