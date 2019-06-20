@@ -18,9 +18,9 @@ class RecipeController {
 
     
     //CRUD
-    func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?) {
+    func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String?, prepTime: String?) {
         guard let currentUser = currentUser else {return}
-        let recipe = Recipe(userReference: currentUser.userID, name: name, image: image, ingredients: ingredients, steps: steps, tags: tags)
+        let recipe = Recipe(userReference: currentUser.userID, name: name, image: image, ingredients: ingredients, steps: steps, prepTime: prepTime ?? "--", servings: servingSize ?? "--", tags: tags)
         recipes[recipe.recipeID] = recipe
         saveRecipeToPersistentStore()
     }
