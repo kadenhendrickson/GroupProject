@@ -15,8 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        
         MockData.shared.loadUser()
-        MockData.shared.printDummyInfo()
+        //MockData.shared.printDummyInfo()
+        
+        let randomUserKey = UserController.shared.users.randomElement()?.key
+        let randomUser = UserController.shared.users[randomUserKey!]
+        UserController.shared.currentUser = randomUser
+        print(randomUser?.userID)
         
         return true
     }

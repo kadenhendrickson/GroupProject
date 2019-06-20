@@ -10,7 +10,7 @@ import UIKit
 
 class User: Codable {
     let userID: String
-    let recipesRef: [String]
+    var recipesRef: [String]
     var email: String
     var displayName: String
     var biography: String?

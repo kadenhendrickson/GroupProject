@@ -22,6 +22,7 @@ class RecipeController {
         guard let currentUser = currentUser else {return}
         let recipe = Recipe(userReference: currentUser.userID, name: name, image: image, ingredients: ingredients, steps: steps, prepTime: prepTime ?? "--", servings: servingSize ?? "--", tags: tags)
         recipes[recipe.recipeID] = recipe
+        currentUser.recipesRef.append(recipe.recipeID)
         saveRecipeToPersistentStore()
     }
     
