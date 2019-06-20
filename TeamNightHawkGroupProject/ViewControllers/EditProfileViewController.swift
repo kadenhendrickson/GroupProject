@@ -50,7 +50,7 @@ class EditProfileViewController: UIViewController {
         let image = profileImageView.image ?? nil
         
         
-        UserController.shared.updateUser(withID: <#T##String#>, email: <#T##String#>, displayName: <#T##String#>, biography: <#T##String#>, profileImage: <#T##UIImage?#>)
+//        UserController.shared.updateUser(withID: <#T##String#>, email: <#T##String#>, displayName: <#T##String#>, biography: <#T##String#>, profileImage: <#T##UIImage?#>)
     }
     
     // MARK: - Method
