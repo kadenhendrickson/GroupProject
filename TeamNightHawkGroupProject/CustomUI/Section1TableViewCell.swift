@@ -12,6 +12,7 @@ import UIKit
 
 class Section1TableViewCell: UITableViewCell {
 
+    var segmentIndex = 1
     
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
@@ -94,4 +95,10 @@ class Section1TableViewCell: UITableViewCell {
         stackView.spacing = 8
         return stackView
     }()
+}
+
+extension Section1TableViewCell{
+    func cellOneSetup(){
+        
+    }
 }
