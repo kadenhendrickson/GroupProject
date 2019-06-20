@@ -29,13 +29,24 @@ class MockData {
     }
     
     func loadUser(){
+        
+        // RESET: uncomment 1, 4
+        // DEFAULT: uncomment 2, 3, 4
+        
+        /* 1 */
+         UserController.shared.users = [:]
+        
+        /* 2 */
         UserController.shared.users = UserController.shared.loadUsersFromPersistence()
         RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
+
         
-        //guard UserController.shared.users.count < 1 else { return }
+        /* 3 */
+        guard UserController.shared.users.count < 1 else { return }
         
         
-        //createDummyData()
+        /* 4 */
+//        createDummyData()
         
     }
     
