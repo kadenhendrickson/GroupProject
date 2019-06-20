@@ -14,12 +14,15 @@ class Section3TableViewCell: UITableViewCell {
         return self.safeAreaLayoutGuide
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setUpStackView()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: "addRecipeCell3")
         addAllSubViews()
-        
-        
+        setUpStackView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     func addAllSubViews(){
         self.addSubview(tags)
@@ -31,7 +34,7 @@ class Section3TableViewCell: UITableViewCell {
     func setUpStackView(){
         stackView.addArrangedSubview(tags)
         stackView.addArrangedSubview(addSection)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0, height: (fontSize + 8))
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
 
         
@@ -47,7 +50,7 @@ class Section3TableViewCell: UITableViewCell {
     
     @objc func addButtonTapped(){
         AddRecipeTableViewController.tagRows += 1
-        AddRecipeTableViewController.load()
+        AddRecipeTableViewController().tableView.reloadData()
     }
     
     let addSection: UIButton = {

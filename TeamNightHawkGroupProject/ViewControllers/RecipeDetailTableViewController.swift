@@ -19,10 +19,14 @@ class RecipeDetailTableViewController: UITableViewController {
     
     
     var recipe: Recipe?
+    var recipeSegmentIndex: Int = 1
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
+        tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
+        tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
         guard let recipe = recipe,
         let imageData = recipe.image,
         let user = UserController.shared.users[recipe.userReference],
@@ -37,6 +41,26 @@ class RecipeDetailTableViewController: UITableViewController {
         
     }
     
+    @IBAction func segmentDetailControllerTapped(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            recipeSegmentIndex = 1
+            print("⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️")
+            tableView.reloadData()
+        case 1:
+            recipeSegmentIndex = 2
+            print("🌋🌋🌋🌋🌋🌋🌋🌋🌋🌋🌋")
+            tableView.reloadData()
+        case 2:
+            recipeSegmentIndex = 3
+            print("🗻🗻🗻🗻🗻🗻🗻🗻🗻🗻🗻🗻")
+            tableView.reloadData()
+            
+        default:
+            break
+        }
+    }
+    
     @IBAction func backButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -44,31 +68,18 @@ class RecipeDetailTableViewController: UITableViewController {
 
     
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 3
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Ingredients"
-        }else if section == 1 {
-        return "Directions"
-        } else {
-        return "Tags"
-        }
-    }
+
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let ingredients = recipe?.ingredients,
+        let steps = recipe?.steps,
+        let tags = recipe?.tags else {return 0}
         
-        guard let recipe = recipe else {return 0}
-        if section == 0{
-            return recipe.ingredients.count
-        }else if section == 1 {
-        guard let steps = recipe.steps else {return 0}
-        return steps.count
+        if recipeSegmentIndex == 1 {
+            return ingredients.count
+        } else if recipeSegmentIndex == 2 {
+            return steps.count
         } else {
-            guard let tags = recipe.tags else {return 0}
             return tags.count
         }
     }
@@ -78,8 +89,8 @@ class RecipeDetailTableViewController: UITableViewController {
         
         
         // Configure the cell...
-        if indexPath.section == 0{
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? IngredientsTableViewCell,
+        if recipeSegmentIndex == 1{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredentCell", for: indexPath) as? IngredientsTableViewCell,
                 let recipe = recipe else {return UITableViewCell()}
             
             cell.measurementQuantity.text = recipe.ingredients[indexPath.row].measurementQuantity
@@ -87,8 +98,8 @@ class RecipeDetailTableViewController: UITableViewController {
             cell.ingredient.text = recipe.ingredients[indexPath.row].name
             
             return cell
-        }else if indexPath.section == 1{
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? StepsTableViewCell,
+        }else if recipeSegmentIndex == 2{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepsCell", for: indexPath) as? StepsTableViewCell,
                 let recipe = recipe,
                 let steps = recipe.steps else {return UITableViewCell()}
             
@@ -96,7 +107,7 @@ class RecipeDetailTableViewController: UITableViewController {
             
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? TagsTableViewCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "tagsCell", for: indexPath) as? TagsTableViewCell,
             let hashTag = recipe?.tags
                 else {return UITableViewCell()}
             

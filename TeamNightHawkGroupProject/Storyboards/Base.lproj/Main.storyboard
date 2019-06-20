@@ -372,23 +372,13 @@
                             </constraints>
                         </view>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKY-Kk-3U2">
-                            <rect key="frame" x="0.0" y="561" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="489" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Save"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="CaN-V7-tV1"/>
                             </connections>
                         </button>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addRecipeCell" id="sDB-QQ-xep" customClass="Section1TableViewCell" customModule="TeamNightHawkGroupProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="517" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDB-QQ-xep" id="EBg-2G-qbH">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="3P6-Ln-CnM" id="nHH-r8-hgy"/>
                             <outlet property="delegate" destination="3P6-Ln-CnM" id="dDK-Iq-X4x"/>

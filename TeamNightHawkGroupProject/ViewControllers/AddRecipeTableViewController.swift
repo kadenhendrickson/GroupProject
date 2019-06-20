@@ -19,6 +19,9 @@ class AddRecipeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
+        tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
+        tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
 
     }
     
@@ -51,7 +54,13 @@ class AddRecipeTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if segmentIndex == 1{
         return AddRecipeTableViewController.ingredientRows
+        } else if segmentIndex == 2{
+            return AddRecipeTableViewController.stepRows
+        }else{
+            return AddRecipeTableViewController.tagRows
+        }
     }
 
     
@@ -61,11 +70,11 @@ class AddRecipeTableViewController: UITableViewController {
             
             return cell
         } else if segmentIndex == 2 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell2", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
 
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
 
             return cell
         }

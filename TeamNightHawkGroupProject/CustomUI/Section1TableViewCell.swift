@@ -12,24 +12,31 @@ import UIKit
 
 class Section1TableViewCell: UITableViewCell {
 
-    var segmentIndex = 1
+   
     
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: "addRecipeCell")
         addAllSubViews()
         setUpStackView()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func addAllSubViews(){
         self.addSubview(measuremenType)
+        
         self.addSubview(measurementQuantity)
         self.addSubview(ingredient)
         self.addSubview(addSection)
         self.addSubview(stackView)
+        contentView.addSubview(measuremenType)
+        measuremenType.frame = CGRect(x: self.contentView.frame.origin.x, y: self.contentView.frame.origin.y, width: 20, height: 20)
     }
     
     func setUpStackView(){
@@ -69,7 +76,7 @@ class Section1TableViewCell: UITableViewCell {
     
     @objc func addButtonTapped(){
         AddRecipeTableViewController.ingredientRows += 1
-        
+        AddRecipeTableViewController().tableView.reloadData()
         print("🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️")
         
 

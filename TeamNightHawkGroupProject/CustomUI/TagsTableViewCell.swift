@@ -14,13 +14,16 @@ class TagsTableViewCell: UITableViewCell {
         return self.safeAreaLayoutGuide
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setUpStackView()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: "tagsCell")
         addAllSubViews()
-        
-        
+        setUpStackView()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func addAllSubViews(){
         self.addSubview(hashTag)
         self.addSubview(stackView)
