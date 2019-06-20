@@ -23,11 +23,6 @@ class AddRecipeTableViewController: UITableViewController {
     }
     
     
-
-    
-    @IBAction func addImageButtonTapped(_ sender: Any) {
-        //image picker function made by anne
-    }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
     }
@@ -37,12 +32,12 @@ class AddRecipeTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return rows
+        return AddRecipeTableViewController.ingredientRows
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-             let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
             
             return cell
 

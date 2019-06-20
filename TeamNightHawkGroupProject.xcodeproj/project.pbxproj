@@ -14,7 +14,7 @@
 		0226F25B22BAD5F900856910 /* StepsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226F25A22BAD5F900856910 /* StepsTableViewCell.swift */; };
 		02A7F9AD22BB0815004DE917 /* Section3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7F9AC22BB0815004DE917 /* Section3TableViewCell.swift */; };
 		02A7F9AF22BB0839004DE917 /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7F9AE22BB0839004DE917 /* TagsTableViewCell.swift */; };
-		02A7F9B322BB4506004DE917 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7F9B222BB4506004DE917 /* AddRecipeView.swift */; };
+		02A7F9BD22BB52C4004DE917 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7F9BC22BB52C4004DE917 /* AddTableViewCell.swift */; };
 		02C1909B22BA820500B33086 /* Section1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C1909A22BA820500B33086 /* Section1TableViewCell.swift */; };
 		9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */; };
 		9732277F22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */; };
@@ -51,7 +51,7 @@
 		0226F25A22BAD5F900856910 /* StepsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsTableViewCell.swift; sourceTree = "<group>"; };
 		02A7F9AC22BB0815004DE917 /* Section3TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section3TableViewCell.swift; sourceTree = "<group>"; };
 		02A7F9AE22BB0839004DE917 /* TagsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
-		02A7F9B222BB4506004DE917 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
+		02A7F9BC22BB52C4004DE917 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		02C1909A22BA820500B33086 /* Section1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section1TableViewCell.swift; sourceTree = "<group>"; };
 		9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileRecipeTableViewCell.swift; path = TeamNightHawkGroupProject/Views/ProfileRecipeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -111,7 +111,6 @@
 		9732277A22BAA924006F0A15 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				02A7F9B222BB4506004DE917 /* AddRecipeView.swift */,
 				DC2C1AE822BA99410098F68D /* UserFeedTableViewController.swift */,
 				9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */,
 				DC2C1AEE22BAB3990098F68D /* ExploreCollectionViewController.swift */,
@@ -131,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */,
+				02A7F9BC22BB52C4004DE917 /* AddTableViewCell.swift */,
 				DC2C1AEA22BA9CB00098F68D /* UserFeedTableViewCell.swift */,
 			);
 			path = Views;
@@ -286,11 +286,11 @@
 				DC2C1AF922BAB48E0098F68D /* EditRecipeTableViewController.swift in Sources */,
 				DC2C1AF522BAB42D0098F68D /* SavedRecipesTableViewController.swift in Sources */,
 				DC2C1AE122B947FA0098F68D /* Ingredient.swift in Sources */,
+				02A7F9BD22BB52C4004DE917 /* AddTableViewCell.swift in Sources */,
 				DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */,
 				02A7F9AD22BB0815004DE917 /* Section3TableViewCell.swift in Sources */,
 				DC2C1AF722BAB47B0098F68D /* RecipeDetailTableViewController.swift in Sources */,
 				DC2C1AFF22BAB58F0098F68D /* EditProfileViewController.swift in Sources */,
-				02A7F9B322BB4506004DE917 /* AddRecipeView.swift in Sources */,
 				DC2C1ADF22B947F30098F68D /* Recipe.swift in Sources */,
 				DC2C1AE322B948040098F68D /* UserController.swift in Sources */,
 				0211C69922BAAED200D5F8C6 /* AnchorExtension.swift in Sources */,
