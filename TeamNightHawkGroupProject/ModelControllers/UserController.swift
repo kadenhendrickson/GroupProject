@@ -68,7 +68,15 @@ class UserController {
     
     
     //MARK: - CRUDs
-    func createUser(withEmail email: String, displayName: String, biography: String, profileImage: UIImage?){
+    func createUser(withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?){
+        
+        var profileImage = image
+        
+        if profileImage == nil {
+            // set default image
+            profileImage = UIImage(named: "duck")
+        }
+        
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: profileImage)
         let userID = user.userID
         users[userID] = user
@@ -78,13 +86,20 @@ class UserController {
     }
     
     func updateUser(withID userID: String, email: String, displayName: String, biography: String, profileImage: UIImage?){
+
         //replace original values with new values
         guard let user = users[userID]
             else { print("🍒 Can't find user to update. Printing from \(#function) in UserController 🍒"); return }
+        
         user.email = email
         user.displayName = displayName
         user.biography = biography
-        user.profileImage = profileImage?.pngData()
+        
+        // Update profile image only if user selected an image to update.
+        if let profileImage = profileImage {
+            // Set new image
+            user.profileImage = profileImage.pngData()
+        }
         
         saveUsersToPersistence()
     }
