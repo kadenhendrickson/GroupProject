@@ -42,8 +42,10 @@ class Section3TableViewCell: UITableViewCell {
         stackView.addArrangedSubview(addSection)
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0, height: (fontSize + 8))
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-
-        
+    }
+    
+    func clearText(){
+        tags.text = ""
     }
     
     let tags: UITextField = {

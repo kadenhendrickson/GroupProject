@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NotificationCenter
 
 class AddRecipeTableViewController: UITableViewController {
     
@@ -15,6 +16,7 @@ class AddRecipeTableViewController: UITableViewController {
     @IBOutlet weak var prepTimeTextField: UITextField!
     @IBOutlet weak var imageSelector: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
+    
     
     var imagePicker = ImagePickerHelper()
     
@@ -47,6 +49,26 @@ class AddRecipeTableViewController: UITableViewController {
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
         
     }
+    
+    @IBAction func clearButtonTapped(_ sender: Any) {
+    
+        ingredients = []
+        steps = []
+        tags = []
+        ingredientRows = 1
+        stepRows = 1
+        tagRows = 1
+        nameTextField.text = ""
+        servingTextField.text = ""
+        prepTimeTextField.text = ""
+        imageSelector.setTitle("Click to add image", for: .normal)
+        recipeImage.image = nil
+        
+        tableView.reloadData()
+        
+        
+    }
+    
     
     @IBAction func imageSelectorTapped(_ sender: Any) {
         imagePicker.presentImagePicker(for: self)
@@ -87,7 +109,7 @@ class AddRecipeTableViewController: UITableViewController {
         let prepTime = prepTimeTextField.text ?? "--"
         
         RecipeController.shared.createRecipe(name: name, image: image, ingredients: ingredients, steps: steps, tags: tags, servingSize: servingSize, prepTime: prepTime)
-        
+        performSegue(withIdentifier: "toTabBar", sender: nil)
         
     }
     
@@ -112,25 +134,39 @@ class AddRecipeTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
             if indexPath.row != ingredients.count{
                 cell.addSection.isHidden = true
+            } else {
+                cell.addSection.isHidden = false
             }
             cell.ingredientDelegate = self
-            
+            if tableView.numberOfRows(inSection: 0) == 1 {
+                cell.clearTextFields()
+            }
             
             return cell
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell2", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
             if indexPath.row != steps.count {
                 cell.addSection.isHidden = true
+            } else {
+                cell.addSection.isHidden = false
             }
             cell.stepDelegate = self
+            if tableView.numberOfRows(inSection: 0) == 1 {
+                cell.clearCell()
+            }
             
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
             if indexPath.row != tags.count {
                 cell.addSection.isHidden = true
+            } else {
+                cell.addSection.isHidden = false
             }
             cell.tagDelegate = self
+            if tableView.numberOfRows(inSection: 0) == 1 {
+                cell.clearText()
+            }
             return cell
         }
         

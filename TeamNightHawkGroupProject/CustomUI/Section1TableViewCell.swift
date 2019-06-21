@@ -61,6 +61,11 @@ class Section1TableViewCell: UITableViewCell {
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
 
+    func clearTextFields() {
+        measurementQuantityLabel.text = ""
+        measuremenTypeLabel.text = ""
+        ingredientLabel.text = ""
+    }
     
     
     let measurementQuantityLabel: UITextField = {

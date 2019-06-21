@@ -214,13 +214,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rhw-Rq-Ol3">
-                                    <rect key="frame" x="41.5" y="20" width="331" height="331"/>
+                                    <rect key="frame" x="41.5" y="50" width="331" height="331"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="rhw-Rq-Ol3" secondAttribute="height" multiplier="1:1" id="RFz-nZ-EvG"/>
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4eL-Yp-E6P">
-                                    <rect key="frame" x="20" y="359" width="374" height="64"/>
+                                    <rect key="frame" x="20" y="389" width="374" height="64"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zBz-4j-35O">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
@@ -270,13 +270,13 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8P-AE-cgh">
-                                    <rect key="frame" x="41.5" y="20" width="331" height="331"/>
+                                    <rect key="frame" x="41.5" y="50" width="331" height="331"/>
                                     <connections>
                                         <action selector="imageSelectorTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="iQR-vE-pah"/>
                                     </connections>
                                 </button>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hpL-Wr-zc9">
-                                    <rect key="frame" x="83" y="431" width="248" height="29"/>
+                                    <rect key="frame" x="83" y="461" width="248" height="29"/>
                                     <segments>
                                         <segment title="Ingredients"/>
                                         <segment title="Directions"/>
@@ -286,22 +286,32 @@
                                         <action selector="segmentControllerTapped:" destination="3P6-Ln-CnM" eventType="valueChanged" id="OZF-k6-IN5"/>
                                     </connections>
                                 </segmentedControl>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypd-I2-k35" customClass="ClearButton" customModule="TeamNightHawkGroupProject" customModuleProvider="target">
+                                    <rect key="frame" x="323" y="8" width="83" height="30"/>
+                                    <state key="normal" title="Clear"/>
+                                    <connections>
+                                        <action selector="clearButtonTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="lcU-BP-dce"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="rhw-Rq-Ol3" firstAttribute="centerX" secondItem="vI6-4J-71o" secondAttribute="centerX" id="Ipu-rT-wlg"/>
                                 <constraint firstItem="e8P-AE-cgh" firstAttribute="leading" secondItem="rhw-Rq-Ol3" secondAttribute="leading" id="LtY-94-FC4"/>
                                 <constraint firstAttribute="trailing" secondItem="4eL-Yp-E6P" secondAttribute="trailing" constant="20" id="LvP-qS-h1K"/>
+                                <constraint firstItem="Ypd-I2-k35" firstAttribute="top" secondItem="vI6-4J-71o" secondAttribute="top" constant="8" id="O11-jo-ohf"/>
                                 <constraint firstItem="hpL-Wr-zc9" firstAttribute="centerX" secondItem="vI6-4J-71o" secondAttribute="centerX" id="OP0-7J-fwe"/>
                                 <constraint firstItem="e8P-AE-cgh" firstAttribute="width" secondItem="rhw-Rq-Ol3" secondAttribute="width" id="P7C-DL-yre"/>
+                                <constraint firstItem="Ypd-I2-k35" firstAttribute="width" secondItem="vI6-4J-71o" secondAttribute="width" multiplier="0.2" id="UtC-4m-uiy"/>
                                 <constraint firstItem="e8P-AE-cgh" firstAttribute="height" secondItem="rhw-Rq-Ol3" secondAttribute="height" id="W1K-Ou-NfY"/>
                                 <constraint firstItem="hpL-Wr-zc9" firstAttribute="top" secondItem="4eL-Yp-E6P" secondAttribute="bottom" constant="8" id="XbF-D6-bt7"/>
                                 <constraint firstItem="e8P-AE-cgh" firstAttribute="trailing" secondItem="rhw-Rq-Ol3" secondAttribute="trailing" id="XyY-Wo-ruB"/>
                                 <constraint firstItem="4eL-Yp-E6P" firstAttribute="leading" secondItem="vI6-4J-71o" secondAttribute="leading" constant="20" id="g32-u4-ddt"/>
-                                <constraint firstItem="rhw-Rq-Ol3" firstAttribute="top" secondItem="vI6-4J-71o" secondAttribute="top" constant="20" id="jGS-Mc-Gsm"/>
+                                <constraint firstItem="rhw-Rq-Ol3" firstAttribute="top" secondItem="vI6-4J-71o" secondAttribute="top" constant="50" id="jGS-Mc-Gsm"/>
                                 <constraint firstItem="e8P-AE-cgh" firstAttribute="top" secondItem="rhw-Rq-Ol3" secondAttribute="top" id="mGv-XM-yk3"/>
                                 <constraint firstItem="4eL-Yp-E6P" firstAttribute="top" secondItem="rhw-Rq-Ol3" secondAttribute="bottom" constant="8" id="odn-Eo-eXx"/>
                                 <constraint firstItem="rhw-Rq-Ol3" firstAttribute="width" secondItem="vI6-4J-71o" secondAttribute="width" multiplier="0.8" id="qNJ-L4-6xc"/>
+                                <constraint firstAttribute="trailing" secondItem="Ypd-I2-k35" secondAttribute="trailing" constant="8" id="w9H-KK-pIa"/>
                             </constraints>
                         </view>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKY-Kk-3U2">
@@ -310,7 +320,6 @@
                             <state key="normal" title="Save"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="CaN-V7-tV1"/>
-                                <segue destination="eFU-N5-vJh" kind="show" id="8Ts-H2-ATs"/>
                             </connections>
                         </button>
                         <connections>
@@ -321,11 +330,12 @@
                     <tabBarItem key="tabBarItem" title="Item" id="Stg-3a-uQE"/>
                     <navigationItem key="navigationItem" id="9Yq-3C-vJM"/>
                     <connections>
-                        <outlet property="imageSelector" destination="e8P-AE-cgh" id="G88-dq-PWW"/>
+                        <outlet property="imageSelector" destination="e8P-AE-cgh" id="H3b-DD-Hnd"/>
                         <outlet property="nameTextField" destination="zBz-4j-35O" id="WPj-jJ-LDC"/>
                         <outlet property="prepTimeTextField" destination="9iw-aT-IkD" id="lOL-ar-vBG"/>
                         <outlet property="recipeImage" destination="rhw-Rq-Ol3" id="77d-Qk-DCh"/>
                         <outlet property="servingTextField" destination="ExB-fn-5pV" id="iu3-4N-GJC"/>
+                        <segue destination="eFU-N5-vJh" kind="show" identifier="toTabBar" id="Tjl-vf-46f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se4-7I-hsm" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -48,6 +48,9 @@ class Section2TableViewCell: UITableViewCell {
     }
     
     
+    func clearCell(){
+    directionSteps.text = ""
+    }
     
     let directionSteps: UITextField = {
         let text = UITextField()
