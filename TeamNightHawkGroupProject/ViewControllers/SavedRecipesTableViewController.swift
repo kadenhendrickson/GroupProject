@@ -11,7 +11,7 @@ import UIKit
 class SavedRecipesTableViewController: UITableViewController {
 
     //MARK: - Properties
-    let currentUser = UserController.shared.currentUser
+    var currentUser: User?
     var savedRecipesList: [Recipe] {
         guard let currentSavedRefs = currentUser?.savedRecipeRefs else {return []}
         var recipes: [Recipe] = []
@@ -27,7 +27,7 @@ class SavedRecipesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        currentUser = UserController.shared.currentUser
     }
 
     // MARK: - Table view data source

@@ -19,10 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MockData.shared.loadUser()
         MockData.shared.printDummyInfo()
         
-        let randomUserKey = UserController.shared.users.randomElement()?.key
-        let randomUser = UserController.shared.users[randomUserKey!]
-        UserController.shared.currentUser = randomUser
-        print("Random current user is \(randomUser?.userID)")
+        ///let randomUserKey = UserController.shared.users.randomElement()?.key
+        let kaden = UserController.shared.users["C0BC4AAE-6609-4F65-B32E-0C9EA182B43F"]
+        UserController.shared.currentUser = kaden
+        print("Random current user is \(kaden?.userID)")
+        kaden?.savedRecipeRefs = ["3AEE68B2-96A3-490E-87F5-553245252EE8", "B6D285AE-CF07-40EE-8C51-C874FA32E9D8", "76BF1105-3B0F-4045-98BB-D2A584904414" ]
         
         return true
     }
