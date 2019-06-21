@@ -16,6 +16,8 @@ class AddRecipeTableViewController: UITableViewController {
     @IBOutlet weak var imageSelector: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
     
+    var imagePicker = ImagePickerHelper()
+    
     var ingredients: [Ingredient] = []
     var steps: [String] = []
     var tags: [String] = []
@@ -25,11 +27,21 @@ class AddRecipeTableViewController: UITableViewController {
     var segmentIndex: Int = 1
     var rows: Int = 0
     
+    //MARK: - Methods
+    func alertUser(withMessage message: String){
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        imagePicker.delegate = self
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
@@ -37,6 +49,7 @@ class AddRecipeTableViewController: UITableViewController {
     }
     
     @IBAction func imageSelectorTapped(_ sender: Any) {
+        imagePicker.presentImagePicker(for: self)
     }
     
     @IBAction func segmentControllerTapped(_ sender: UISegmentedControl) {
@@ -61,14 +74,19 @@ class AddRecipeTableViewController: UITableViewController {
     
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let image = recipeImage.image else {
+                alertUser(withMessage: "Please select an image for your recipe.");
+                return
+        }
+
         guard let name = nameTextField.text,
-            name != "",
-//            let image = recipeImage.image,
-            let servingSize = servingTextField.text,
-            let prepTime = prepTimeTextField.text
-            else {return}
+            name != ""
+            else { alertUser(withMessage: "Please put in recipe name."); return}
         
-        RecipeController.shared.createRecipe(name: name, image: UIImage(named: "duck")!, ingredients: ingredients, steps: steps, tags: tags, servingSize: servingSize, prepTime: prepTime)
+        let servingSize = servingTextField.text ?? "--"
+        let prepTime = prepTimeTextField.text ?? "--"
+        
+        RecipeController.shared.createRecipe(name: name, image: image, ingredients: ingredients, steps: steps, tags: tags, servingSize: servingSize, prepTime: prepTime)
         
         
     }
@@ -148,4 +166,11 @@ extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate
     func refreshIngredientData() {
         tableView.reloadData()
     }
+}
+
+extension AddRecipeTableViewController: ImagePickerHelperDelegate {
+    func fireActionsForSelectedImage(_ image: UIImage) {
+        self.recipeImage.image = image
+    }
+    
 }
