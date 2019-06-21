@@ -19,6 +19,7 @@ class ProfileTableViewController: UITableViewController {
     }
     
     var recipeList: [Recipe] = []
+    var selectedRecipe: Recipe?
     
     // MARK: - IBOutlets
     @IBOutlet weak var profileImageView: UIImageView!
@@ -85,8 +86,40 @@ class ProfileTableViewController: UITableViewController {
         
         let recipe = recipeList[indexPath.row]
         cell.recipe = recipe
+        cell.delegate = self
         return cell
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        print(segue.identifier)
+        guard segue.identifier != "toEditProfileVC" else { return }
+        
+        if segue.identifier == "fromProfileToRecipeDVC"{
+            guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
+                let indexPath = tableView.indexPathForSelectedRow,
+                let cell = tableView.cellForRow(at: indexPath),
+                let recipeCell = cell as? ProfileRecipeTableViewCell,
+                let recipe = recipeCell.recipe else { return }
+            
+            destinationVC.recipe = recipe
+            
+        } else {
+            guard let destinationVC = segue.destination as? EditRecipeTableViewController else { return }
+            print(segue.destination)
+            destinationVC.recipe = self.selectedRecipe
+        }
+        
     }
     
 }
 
+extension ProfileTableViewController : ProfileRecipeCellEditButtonDelegate {
+    
+    func editButtonTapped(_ cell: ProfileRecipeTableViewCell) {
+        guard let recipe = cell.recipe else { return }
+        self.selectedRecipe = recipe
+    }
+    
+}
