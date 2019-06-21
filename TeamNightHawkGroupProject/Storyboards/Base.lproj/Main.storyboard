@@ -41,6 +41,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="284" height="24"/>
                                                             <state key="normal" title="(displayname)"/>
                                                             <connections>
+                                                                <action selector="otherUserProfileButtonTapped:" destination="zHJ-Cb-cHl" eventType="touchUpInside" id="B0h-lv-boX"/>
                                                                 <segue destination="SSP-mT-VYN" kind="show" identifier="fromFeedToOtherUserVC" id="6Sx-iR-7Il"/>
                                                             </connections>
                                                         </button>
