@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -86,7 +85,7 @@
                                                     <rect key="frame" x="340" y="0.0" width="34" height="50"/>
                                                     <state key="normal" title="Save"/>
                                                     <connections>
-                                                        <action selector="saveRecipeButtonTapped:" destination="6RS-kJ-Dpz" eventType="touchUpInside" id="Ts4-3w-GkB"/>
+                                                        <action selector="saveRecipeButtonTapped:" destination="zHJ-Cb-cHl" eventType="touchUpInside" id="0Ow-AB-Ivs"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -185,73 +184,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCx-bz-5Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-154" y="2164"/>
-        </scene>
-        <!--Explore Collection View Controller-->
-        <scene sceneID="xvP-bf-Hn1">
-            <objects>
-                <viewController id="SbK-5E-zSV" customClass="ExploreCollectionViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FSo-NE-tKE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CRZ-nc-HHE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CRD-eD-xAJ">
-                                <rect key="frame" x="20" y="144" width="374" height="669"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xbk-8r-2Aa">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="exploreRecipeCell" id="neV-4x-FnE">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4qe-Gw-Zwy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="4qe-Gw-Zwy" secondAttribute="height" multiplier="1:1" id="T0q-mD-c1R"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="4qe-Gw-Zwy" firstAttribute="width" secondItem="neV-4x-FnE" secondAttribute="width" id="JDc-B3-Ab3"/>
-                                            <constraint firstItem="4qe-Gw-Zwy" firstAttribute="centerY" secondItem="neV-4x-FnE" secondAttribute="centerY" id="V8K-mJ-OAG"/>
-                                            <constraint firstItem="4qe-Gw-Zwy" firstAttribute="centerX" secondItem="neV-4x-FnE" secondAttribute="centerX" id="u3z-OA-fR6"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="WVq-0b-mrp" kind="show" id="wJO-kb-whB"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="CRZ-nc-HHE" firstAttribute="top" secondItem="7r2-c0-4fN" secondAttribute="top" id="0Bp-q2-4cl"/>
-                            <constraint firstItem="CRZ-nc-HHE" firstAttribute="leading" secondItem="7r2-c0-4fN" secondAttribute="leading" id="1cv-3Z-1sX"/>
-                            <constraint firstItem="CRD-eD-xAJ" firstAttribute="leading" secondItem="7r2-c0-4fN" secondAttribute="leading" constant="20" id="BZw-4h-gQD"/>
-                            <constraint firstItem="CRD-eD-xAJ" firstAttribute="top" secondItem="CRZ-nc-HHE" secondAttribute="bottom" id="IUR-Ee-xB6"/>
-                            <constraint firstItem="CRD-eD-xAJ" firstAttribute="bottom" secondItem="7r2-c0-4fN" secondAttribute="bottom" id="ROJ-ec-H92"/>
-                            <constraint firstItem="CRZ-nc-HHE" firstAttribute="trailing" secondItem="7r2-c0-4fN" secondAttribute="trailing" id="XSt-fN-e0d"/>
-                            <constraint firstItem="7r2-c0-4fN" firstAttribute="trailing" secondItem="CRD-eD-xAJ" secondAttribute="trailing" constant="20" id="mX8-Qv-0rp"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="7r2-c0-4fN"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="DDI-ze-hCs"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tm5-Th-2tW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="518.84057971014499" y="1616.5178571428571"/>
         </scene>
         <!--RecipeEditView-->
         <scene sceneID="ov6-oN-Izo">
@@ -398,7 +330,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se4-7I-hsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1793" y="1651"/>
+            <point key="canvasLocation" x="2702.898550724638" y="1650.6696428571429"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Eak-eO-9PX">
@@ -579,7 +511,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0L-FW-Ulm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6355.072463768116" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="7265.217391304348" y="1616.5178571428571"/>
         </scene>
         <!--Profile Table View Controller-->
         <scene sceneID="00L-zY-ikQ">
@@ -606,7 +538,6 @@
                                     </constraints>
                                     <state key="normal" title="Edit"/>
                                     <connections>
-                                        <action selector="editProfileButtonTapped:" destination="eph-dD-5CE" eventType="touchUpInside" id="ohJ-Bu-tUc"/>
                                         <segue destination="uKG-4S-hGM" kind="show" identifier="toEditProfileVC" id="gee-m8-jNK"/>
                                     </connections>
                                 </button>
@@ -828,7 +759,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCh-f6-0qB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4518.840579710145" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="5428.985507246377" y="1616.5178571428571"/>
         </scene>
         <!--Explore-->
         <scene sceneID="54K-hO-gNb">
@@ -842,12 +773,61 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="SbK-5E-zSV" kind="relationship" relationship="rootViewController" id="nda-Yg-ZLD"/>
+                        <segue destination="i2l-Fw-3gF" kind="relationship" relationship="rootViewController" id="DEG-AD-bFR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izB-ho-B9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-391.304347826087" y="1616.5178571428571"/>
+        </scene>
+        <!--Explore Collection View Controller-->
+        <scene sceneID="r1Z-Bt-qTS">
+            <objects>
+                <collectionViewController id="i2l-Fw-3gF" customClass="ExploreCollectionViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="PZP-uQ-xDu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IBZ-aR-GHd">
+                            <size key="itemSize" width="200" height="200"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="exploreRecipeCell" id="ltz-iI-mhn" customClass="ExploreCollectionViewCell" customModule="TeamNightHawkGroupProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3fg-ni-tJX">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="3fg-ni-tJX" secondAttribute="trailing" id="Ldy-AA-3MX"/>
+                                    <constraint firstItem="3fg-ni-tJX" firstAttribute="leading" secondItem="ltz-iI-mhn" secondAttribute="leading" id="QV0-iy-Xq7"/>
+                                    <constraint firstAttribute="bottom" secondItem="3fg-ni-tJX" secondAttribute="bottom" id="lZ4-uN-Pm6"/>
+                                    <constraint firstItem="3fg-ni-tJX" firstAttribute="top" secondItem="ltz-iI-mhn" secondAttribute="top" id="nfY-VF-gQP"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="recipeImageView" destination="3fg-ni-tJX" id="RTz-ua-MuK"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="i2l-Fw-3gF" id="eja-dq-KZk"/>
+                            <outlet property="delegate" destination="i2l-Fw-3gF" id="ZMi-xp-2Dn"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="pit-AB-sUd"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDJ-kz-iSh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="464" y="1617"/>
         </scene>
         <!--Home-->
         <scene sceneID="3Uk-JX-rl1">
@@ -885,7 +865,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5JH-f5-UNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3608.6956521739135" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="4518.840579710145" y="1616.5178571428571"/>
         </scene>
         <!--Saved-->
         <scene sceneID="Ytl-0Y-0zL">
@@ -904,11 +884,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewR-j7-Pjg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5444.9275362318849" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="6355.072463768116" y="1616.5178571428571"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5CQ-ys-tBo"/>
+        <segue reference="vZv-MN-JCV"/>
         <segue reference="nsF-ro-oZn"/>
     </inferredMetricsTieBreakers>
 </document>
