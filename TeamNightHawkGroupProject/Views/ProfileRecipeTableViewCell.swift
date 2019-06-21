@@ -8,14 +8,21 @@
 
 import UIKit
 
+protocol ProfileRecipeCellEditButtonDelegate {
+    func editButtonTapped(_ cell: ProfileRecipeTableViewCell)
+}
+
 class ProfileRecipeTableViewCell: UITableViewCell {
     
-    // Landing pad
+    // MARK: - Properties
+    
     var recipe: Recipe? {
         didSet {
             updateViews()
         }
     }
+    
+    var delegate: ProfileRecipeCellEditButtonDelegate?
     
     // MARK: - IBOutlet
     @IBOutlet weak var userProfileImageView: UIImageView!
@@ -27,6 +34,7 @@ class ProfileRecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeSaveCountTextLabel: UILabel!
     
     @IBAction func editButtonTapped(_ sender: Any) {
+        delegate?.editButtonTapped(self)
     }
     
     // MARK: - Methods
@@ -49,3 +57,5 @@ class ProfileRecipeTableViewCell: UITableViewCell {
     }
     
 }
+
+
