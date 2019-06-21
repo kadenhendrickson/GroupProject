@@ -10,6 +10,8 @@ import UIKit
 
 class ExploreCollectionViewCell: UICollectionViewCell {
     
+    
+    
     var recipe: Recipe? {
         didSet {
             print("Success")
