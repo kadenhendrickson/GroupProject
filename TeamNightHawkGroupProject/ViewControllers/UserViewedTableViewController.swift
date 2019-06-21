@@ -36,13 +36,21 @@ class UserViewedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let user = user,
+        let imageData = user.profileImage else {return}
+        viewedUserBiography.text = user.biography
+        viewedUserDisplayName.text = user.displayName
+        viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
+        viewedUserFollowingCount.text = "\(user.followingRefs.count)"
+        viewedUserProfileImage.image = UIImage(data: imageData)
+        
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userRecipes.count 
+        guard let user = user else {return 0}
+        return user.recipesRef.count
     }
 
     

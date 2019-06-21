@@ -11,12 +11,12 @@ import UIKit
 class ViewedUserRecipeTableViewCell: UITableViewCell {
     
     //MARK: - properties
-    var user: User? {
+    var user: User?
+    var recipe: Recipe?{
         didSet {
             updateViews()
         }
     }
-    var recipe: Recipe?
     
     //MARK: - IBOutlets
     @IBOutlet weak var viewedUserProfileImage: UIImageView!
