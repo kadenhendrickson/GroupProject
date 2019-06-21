@@ -10,12 +10,14 @@ import UIKit
 
 //Need Function to tap button
 protocol ingredientCellDelegate {
-    func reloadData()
+    func addIngredient(ingredientName: String, measurementQuantity: String, measurementType: String)
+    func increaseRows(rowCount: Int)
+    func refreshIngredientData()
 }
 
 class Section1TableViewCell: UITableViewCell {
     
-    var delegate: ingredientCellDelegate?
+    var ingredientDelegate: ingredientCellDelegate?
     var ingredient: Ingredient?
     var measurmentName: String = ""
     var measurmentQuantity: String = ""
@@ -31,6 +33,8 @@ class Section1TableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: "addRecipeCell")
         addAllSubViews()
         setUpStackView()
+        
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -83,16 +87,15 @@ class Section1TableViewCell: UITableViewCell {
     }()
     
     @objc func addButtonTapped(){
-        AddRecipeTableViewController.ingredientRows += 1
-        AddRecipeTableViewController().tableView.reloadData()
+        
+        ingredientDelegate?.increaseRows(rowCount: 1)
+        ingredientDelegate?.refreshIngredientData()
         guard let name = ingredientLabel.text,
             let measurmentName = measuremenTypeLabel.text,
             let measurementQuantity = measurementQuantityLabel.text
             else {return}
-        let newIngredient = Ingredient(name: name, measurementName: measurmentName, measurementQuantity: measurmentQuantity)
+        ingredientDelegate?.addIngredient(ingredientName: name, measurementQuantity: measurementQuantity, measurementType: measurmentName)
         
-        AddRecipeTableViewController.ingredients.append(newIngredient)
-    delegate?.reloadData()
         print("🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️")
     }
     

@@ -8,12 +8,14 @@
 
 import UIKit
 protocol tagCellDelegate {
-    func reloadData()
+    func addTag(tag: String)
+    func increaseTagRows(rowCount: Int)
+    func refreshTagData()
 }
 
 class Section3TableViewCell: UITableViewCell {
     
-    var delegate: tagCellDelegate?
+    var tagDelegate: tagCellDelegate?
     var safeArea: UILayoutGuide {
         return self.safeAreaLayoutGuide
     }
@@ -53,10 +55,11 @@ class Section3TableViewCell: UITableViewCell {
     }()
     
     @objc func addButtonTapped(){
-        AddRecipeTableViewController.tagRows += 1
+        tagDelegate?.increaseTagRows(rowCount: 1)
+        tagDelegate?.refreshTagData()
         AddRecipeTableViewController().tableView.reloadData()
         guard let tag = tags.text else {return}
-        AddRecipeTableViewController.tags.append(tag)
+        tagDelegate?.addTag(tag: tag)
     }
     
     let addSection: UIButton = {

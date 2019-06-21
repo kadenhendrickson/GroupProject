@@ -16,19 +16,19 @@ class AddRecipeTableViewController: UITableViewController {
     @IBOutlet weak var imageSelector: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
     
-    
-    static var ingredients: [Ingredient] = []
-    static var steps: [String] = []
-    static var tags: [String] = []
-    static var ingredientRows: Int = 1
-    static var stepRows: Int = 3
-    static var tagRows: Int = 2
+    var ingredients: [Ingredient] = []
+    var steps: [String] = []
+    var tags: [String] = []
+    var ingredientRows: Int = 1
+    var stepRows: Int = 1
+    var tagRows: Int = 1
     var segmentIndex: Int = 1
     var rows: Int = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
@@ -63,12 +63,12 @@ class AddRecipeTableViewController: UITableViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = nameTextField.text,
             name != "",
-            let image = recipeImage.image,
+//            let image = recipeImage.image,
             let servingSize = servingTextField.text,
             let prepTime = prepTimeTextField.text
             else {return}
         
-       RecipeController.shared.createRecipe(name: name, image: image, ingredients: AddRecipeTableViewController.ingredients, steps: AddRecipeTableViewController.steps, tags: AddRecipeTableViewController.tags, servingSize: servingSize, prepTime: prepTime)
+        RecipeController.shared.createRecipe(name: name, image: UIImage(named: "duck")!, ingredients: ingredients, steps: steps, tags: tags, servingSize: servingSize, prepTime: prepTime)
         
         
     }
@@ -78,12 +78,12 @@ class AddRecipeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if segmentIndex == 1{
-            return AddRecipeTableViewController.ingredientRows
-        } else if segmentIndex == 2{
-            return AddRecipeTableViewController.stepRows
-        }else{
-            return AddRecipeTableViewController.tagRows
+        if segmentIndex == 1 {
+            return ingredientRows
+        } else if segmentIndex == 2 {
+            return stepRows
+        } else {
+            return tagRows
         }
     }
     
@@ -91,15 +91,15 @@ class AddRecipeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if segmentIndex == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
-            
+            cell.ingredientDelegate = self
             return cell
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell2", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
-            
+            cell.stepDelegate = self
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
-            
+            cell.tagDelegate = self
             return cell
         }
         
@@ -114,4 +114,38 @@ class AddRecipeTableViewController: UITableViewController {
     }
     
     
+}
+
+extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate, tagCellDelegate {
+
+    func addTag(tag: String) {
+        tags.append(tag)
+    }
+    func increaseTagRows(rowCount: Int) {
+        tagRows += 1
+    }
+    func refreshTagData() {
+        tableView.reloadData()
+    }
+    
+    func addSteps(step: String) {
+        steps.append(step)
+    }
+    func increaseStepRows(rowCount: Int) {
+        stepRows += rowCount
+    }
+    func refreshStepData() {
+        tableView.reloadData()
+    }
+    
+    func addIngredient(ingredientName: String, measurementQuantity: String, measurementType: String) {
+       let newIngredient = Ingredient(name: ingredientName, measurementName: measurementType, measurementQuantity: measurementQuantity)
+        ingredients.append(newIngredient)
+    }
+    func increaseRows(rowCount: Int) {
+        ingredientRows += rowCount
+    }
+    func refreshIngredientData() {
+        tableView.reloadData()
+    }
 }

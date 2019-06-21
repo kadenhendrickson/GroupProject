@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         MockData.shared.loadUser()
-        //MockData.shared.printDummyInfo()
+        MockData.shared.printDummyInfo()
         
         let randomUserKey = UserController.shared.users.randomElement()?.key
         let randomUser = UserController.shared.users[randomUserKey!]
