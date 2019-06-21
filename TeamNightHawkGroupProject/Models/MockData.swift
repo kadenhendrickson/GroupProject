@@ -21,6 +21,52 @@ class MockData {
     let meat = Ingredient(name: "meat", measurementName: "lbs", measurementQuantity: "5")
     
     
+    //MARK: - Methods
+    
+    func chooseDummyUser(withName name: String) {
+        
+        guard let userID = getUserID(fromName: name) else { print("🍒 Can't find a user with name \(name). Printing from \(#function) \n In \(String(describing: MockData.self)) 🍒"); return}
+        
+        UserController.shared.currentUser = UserController.shared.users[userID]
+        
+        print("Current user ID is \(userID)")
+        
+    }
+    
+    private func getUserID(fromName name: String) -> String? {
+        
+        var dummyUser: User?
+        
+        for (_, user) in UserController.shared.users {
+            if user.displayName == name {
+                dummyUser = user
+            }
+        }
+        
+        guard let user = dummyUser else { print("🍒 Can't find a user with name \(name). Printing from \(#function) \n In \(String(describing: MockData.self)) 🍒"); return nil}
+        
+        return user.userID
+    }
+    
+    func saveRamdomRecipesForUser(name: String, atQuantify qty: Int){
+        let ID = getUserID(fromName: name)
+        
+        guard let userID = ID else { print("🍒 Can't find user ID for \(name). Printing from \(#function) \n In \(String(describing: MockData.self)) 🍒"); return }
+        
+        saveRamdomRecipesForUser(userID: userID, atQuantity: qty)
+    }
+    
+    private func saveRamdomRecipesForUser(userID: String, atQuantity qty: Int){
+        let recipeCount = RecipeController.shared.recipes.count
+        let difference = recipeCount - qty
+        
+        guard difference > 0 else { print("🍒 Number of recipe to save for userID: \(userID) is larger than recipes exist in source of truth. Printing from \(#function) \n In \(String(describing: MockData.self)) 🍒"); return }
+        let recipes = RecipeController.shared.recipes.shuffled().dropLast(difference)
+        
+        UserController.shared.users[userID]?.savedRecipeRefs = recipes.compactMap{ $0.value.recipeID }
+    }
+    
+    
     func printDummyInfo() {
         
         printAllUsers()
@@ -30,23 +76,20 @@ class MockData {
     
     func loadUser(){
         
-        // RESET: uncomment 1, 4
-        // DEFAULT: uncomment 2, 3, 4
+        /* 1 Reset everything first */
+        UserController.shared.users = [:]
+        RecipeController.shared.recipes = [:]
         
-        /* 1 */
-         UserController.shared.users = [:]
-        
+        // try loading from persistent, if after loading there are no dummy users, create them
         /* 2 */
         UserController.shared.users = UserController.shared.loadUsersFromPersistence()
         RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
-
         
         /* 3 */
         guard UserController.shared.users.count < 1 else { return }
         
-        
         /* 4 */
-//        createDummyData()
+        createDummyData()
         
     }
     
@@ -115,6 +158,9 @@ class MockData {
     // Create Users
     private func summonUser(withEmail email: String = "defaultmail@mail.com", displayName: String, biography: String = "") {
         UserController.shared.createUser(withEmail: email, displayName: displayName, biography: biography, profileImage: nil)
+        
+        let currentUser = UserController.shared.currentUser!
+        saveRamdomRecipesForUser(userID: currentUser.userID, atQuantity: 3)
     }
     
     private func summonLotsOfUsers(fromName names: String...){
@@ -142,13 +188,15 @@ class MockData {
     }
     
     private func makeFood() -> String {
-        let foodPrefix = ["chicken", "meat", "chocolate", "strawberry", "celery", "sirloin", "salt", "cinnamon", "jalapeno", "carrot"]
+        let cookingMethod = ["braised", "fermented", "fried", "baked", "grilled", "boiled", "stir-fried", "space-freezed"]
+        let foodPrefix = ["chicken", "meat", "chocolate", "strawberry", "celery", "sirloin", "salt", "cinnamon", "jalapeno", "carrot", "cheese", "pepper"]
         let foodSuffix = ["pizza", "sandwiches", "cake", "smoothie", "hotdog", "wings", "burger", "pie"]
         
         let randomPrefix = foodPrefix.randomElement()!
+        let randomCookingMethod = cookingMethod.randomElement()!
         let randomSuffix = foodSuffix.randomElement()!
         
-        return "\(randomPrefix) \(randomSuffix)"
+        return "\((randomCookingMethod).capitalized) \(randomPrefix) \(randomSuffix)"
 
     }
     
