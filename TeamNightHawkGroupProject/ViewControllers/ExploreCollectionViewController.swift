@@ -8,23 +8,27 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "exploreRecipeCell"
+
+private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+
+private let itemsPerRow: CGFloat = 3
 
 class ExploreCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     //MARK: - Properties
     var recipesList: [Recipe] {
-        return []
+        var recipes: [Recipe] = []
+        for (_, recipe) in RecipeController.shared.recipes {
+            recipes.append(recipe)
+        }
+        return recipes
     }
-    
-    //MARK: - IBOutlets
-    @IBOutlet weak var exploreRecipeImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(ExploreCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
 
         // Do any additional setup after loading the view.
     }
@@ -37,19 +41,19 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     
 
     // MARK: UICollectionViewDataSource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recipesList.count
     }
+    
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "exploreRecipeCell", for: indexPath) as? ExploreCollectionViewCell else {print("This problem is the big dumb");return UICollectionViewCell()}
+        
         let recipe = recipesList[indexPath.row]
-        guard let recipeImage = recipe.image else {return cell}
-        exploreRecipeImage.image = UIImage(data: recipeImage)
+        cell.backgroundColor = .white
+        cell.recipe = recipe
+         
         return cell
     }
 
@@ -84,4 +88,38 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     }
     */
 
+}
+
+// MARK: - Collection View Flow Layout Delegate
+extension ExploreCollectionViewController {
+    //1
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //2
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+    
+    //3
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    // 4
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
+
+//    func photo(for indexPath: IndexPath) -> UIImage {
+//        guard let imageData = recipesList[indexPath.row].image else {return UIImage()}
+//        return UIImage(data: imageData)!
+//    }
 }
