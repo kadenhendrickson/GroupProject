@@ -8,7 +8,11 @@
 
 import UIKit
 
-class UserFeedTableViewController: UITableViewController {
+
+
+
+
+class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate {
     //MARK: - Properties
     var recipesList: [Recipe]  {
         var recipeArray: [Recipe] = []
@@ -17,6 +21,10 @@ class UserFeedTableViewController: UITableViewController {
         }
         return recipeArray
     }
+    
+    var selectedUser: User?
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
@@ -24,6 +32,7 @@ class UserFeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     // MARK: - Table view data source
@@ -33,10 +42,13 @@ class UserFeedTableViewController: UITableViewController {
     //dont forget to change reuseIdentifier
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userFeedRecipeCell", for: indexPath) as? UserFeedTableViewCell
+        cell?.delegate = self
         let recipe = recipesList[indexPath.row]
         cell?.recipe = recipe
         return cell ?? UITableViewCell()
     }
+    
+    
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,14 +58,14 @@ class UserFeedTableViewController: UITableViewController {
             let recipe = recipesList[indexPath.row]
             destinationVC.recipe = recipe
         }
-//        if segue.identifier == "fromFeedToOtherUserVC" {
-//            guard let destinationVC = segue.destination as? UserViewedTableViewController,
-//                //aint an index path
-//                let indexPath = tableView.indexPathForSelectedRow
-//                else {return}
-//            let recipe = recipesList[indexPath.row]
-//            let user = UserController.shared.users[recipe.userReference]
-//            destinationVC.user = user
-//        }
+        if segue.identifier == "fromFeedToOtherUserVC" {
+            guard let destinationVC = segue.destination as? UserViewedTableViewController else {return}
+            destinationVC.user = selectedUser
+        }
+}
+    
+    func userRefSent(userRef: String) {
+        guard let user = UserController.shared.users[userRef] else {return}
+        self.selectedUser = user
     }
 }

@@ -27,15 +27,19 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Register cell classes
-        self.collectionView!.register(ExploreCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-
         // Do any additional setup after loading the view.
     }
 
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fromExploreToRecipeDVC" {
+            guard let indexPath = collectionView.indexPathsForSelectedItems,
+                let destinationVC = segue.destination as? RecipeDetailTableViewController else {return}
+            let recipe = recipesList[indexPath[0].row]
+            destinationVC.recipe = recipe
+        }
       
     }
     
@@ -59,34 +63,20 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
 
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
-    /*
+
+    
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
 
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        
     
     }
-    */
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        self.performSegue(withIdentifier: "<#T##String#>", sender: <#T##Any?#>)
+//    }
+    
 
 }
 
@@ -118,8 +108,5 @@ extension ExploreCollectionViewController {
         return sectionInsets.left
     }
 
-//    func photo(for indexPath: IndexPath) -> UIImage {
-//        guard let imageData = recipesList[indexPath.row].image else {return UIImage()}
-//        return UIImage(data: imageData)!
-//    }
+    
 }

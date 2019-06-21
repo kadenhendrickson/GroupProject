@@ -8,13 +8,27 @@
 
 import UIKit
 
+protocol UserFeedTableViewCellDelegate: class {
+    func userRefSent(userRef: String)
+}
+
+
 class UserFeedTableViewCell: UITableViewCell {
+    
+    weak var delegate: UserFeedTableViewCellDelegate?
+
+    
+    func userRefSent() {
+        
+    }
+    
     
     var recipe: Recipe? {
         didSet {
             updateViews()
         }
     }
+    
 
     //MARK: - IBOutlets
     @IBOutlet weak var userProfileImageView: UIImageView!
@@ -34,6 +48,8 @@ class UserFeedTableViewCell: UITableViewCell {
     }
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
     }
+    
+    
     //update the view
     func updateViews() {
         guard let userRef = recipe?.userReference,
@@ -51,6 +67,9 @@ class UserFeedTableViewCell: UITableViewCell {
         recipeSaveCountTextLabel.text = "\(recipe?.saveCount ?? 0)"
     }
     
+    @IBAction func otherUserProfileButtonTapped(_ sender: UIButton) {
+        guard let userRef = recipe?.userReference else {return}
+        delegate?.userRefSent(userRef: userRef)
+    }
     
-
 }
