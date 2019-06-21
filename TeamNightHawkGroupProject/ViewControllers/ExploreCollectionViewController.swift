@@ -34,6 +34,7 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("clicked")
         if segue.identifier == "fromExploreToRecipeDVC" {
             guard let indexPath = collectionView.indexPathsForSelectedItems,
                 let destinationVC = segue.destination as? RecipeDetailTableViewController else {return}
