@@ -890,7 +890,7 @@
         <!--Saved-->
         <scene sceneID="Ytl-0Y-0zL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="neh-Dv-IMm" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="neh-Dv-IMm" customClass="save" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Saved" id="ILr-TF-LQl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ffx-1l-8PX">

@@ -69,6 +69,7 @@ class MockData {
         print("-----RECIPES-----\n")
         for (_, recipe) in RecipeController.shared.recipes {
             print("\t\(recipe.name)\n")
+            print("\t\(recipe.recipeID)\n")
             for ingredient in recipe.ingredients {
                 print("\t\t- \(ingredient.name) \t\t\t\(ingredient.measurementQuantity) \(ingredient.measurementName)\n")
             }
