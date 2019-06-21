@@ -48,7 +48,9 @@ class UserFeedTableViewController: UITableViewController {
         }
         if segue.identifier == "fromFeedToOtherUserVC" {
             guard let destinationVC = segue.destination as? UserViewedTableViewController,
-                let indexPath = tableView.indexPathForSelectedRow else {return}
+                //aint an index path
+                let indexPath = tableView.indexPathForSelectedRow
+                else {return}
             let recipe = recipesList[indexPath.row]
             let user = UserController.shared.users[recipe.userReference]
             destinationVC.user = user
