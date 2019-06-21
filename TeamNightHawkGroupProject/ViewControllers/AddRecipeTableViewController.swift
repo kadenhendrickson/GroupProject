@@ -25,7 +25,7 @@ class AddRecipeTableViewController: UITableViewController {
     var stepRows: Int = 1
     var tagRows: Int = 1
     var segmentIndex: Int = 1
-    var rows: Int = 0
+    
     
     //MARK: - Methods
     func alertUser(withMessage message: String){
@@ -108,15 +108,28 @@ class AddRecipeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if segmentIndex == 1 {
+            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
+            if indexPath.row != ingredients.count{
+                cell.addSection.isHidden = true
+            }
             cell.ingredientDelegate = self
+            
+            
             return cell
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell2", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
+            if indexPath.row != steps.count {
+                cell.addSection.isHidden = true
+            }
             cell.stepDelegate = self
+            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
+            if indexPath.row != tags.count {
+                cell.addSection.isHidden = true
+            }
             cell.tagDelegate = self
             return cell
         }
@@ -130,8 +143,6 @@ class AddRecipeTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    
-    
 }
 
 extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate, tagCellDelegate {

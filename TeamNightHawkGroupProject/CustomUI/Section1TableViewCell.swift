@@ -42,6 +42,7 @@ class Section1TableViewCell: UITableViewCell {
     }
     
     func addAllSubViews(){
+        
         self.addSubview(measuremenTypeLabel)
         self.addSubview(measurementQuantityLabel)
         self.addSubview(ingredientLabel)

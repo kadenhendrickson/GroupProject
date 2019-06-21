@@ -94,6 +94,7 @@
                                     </segments>
                                     <connections>
                                         <action selector="editRecipeSegmentTapped:" destination="hvQ-lp-SG6" eventType="valueChanged" id="ZE2-9F-jfj"/>
+                                        <action selector="segmentControllerTapped:" destination="hvQ-lp-SG6" eventType="valueChanged" id="NK3-FC-efO"/>
                                         <action selector="segmentDetailControllerTapped:" destination="q52-xY-s8f" eventType="valueChanged" id="qEO-PY-VqA"/>
                                     </connections>
                                 </segmentedControl>
