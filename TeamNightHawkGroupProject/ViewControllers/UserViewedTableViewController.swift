@@ -11,7 +11,11 @@ import UIKit
 class UserViewedTableViewController: UITableViewController {
 
     //MARK: - Properties
-    var user: User?
+    var user: User? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var userRecipes: [Recipe] {
         var recipes: [Recipe] = []
         for (_, recipe) in RecipeController.shared.recipes {

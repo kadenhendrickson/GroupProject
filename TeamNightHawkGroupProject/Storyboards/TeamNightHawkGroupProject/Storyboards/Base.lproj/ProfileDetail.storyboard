@@ -234,7 +234,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userProfileCell" rowHeight="499" id="4aT-Xr-2Zm">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userProfileCell" rowHeight="499" id="4aT-Xr-2Zm" customClass="ViewedUserRecipeTableViewCell" customModule="TeamNightHawkGroupProject" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="309" width="414" height="499"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4aT-Xr-2Zm" id="3d0-t5-Dqf">
@@ -352,6 +352,16 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="vug-Ft-cuc" secondAttribute="bottom" constant="4" id="x1Z-pm-TAa"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="viewedUserDisplayName" destination="u7E-jZ-YpB" id="k1J-uA-QPS"/>
+                                    <outlet property="viewedUserPrepTimeLabel" destination="xk6-D5-jbk" id="a5V-4f-xZ8"/>
+                                    <outlet property="viewedUserProfileImage" destination="wIV-3p-ETL" id="vyg-wT-DFx"/>
+                                    <outlet property="viewedUserRecipeImage" destination="ell-19-Hkp" id="a4V-Ta-hqF"/>
+                                    <outlet property="viewedUserRecipeNameLabel" destination="oma-Dw-JPQ" id="t7p-vD-m5d"/>
+                                    <outlet property="viewedUserSaveButton" destination="q9t-Az-rF4" id="puh-X1-YXN"/>
+                                    <outlet property="viewedUserSaveCountLabel" destination="b3e-xk-hPl" id="XbW-HN-7gR"/>
+                                    <outlet property="viewedUserServingsLabel" destination="ca2-xf-u6E" id="ATt-tU-fFK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -360,6 +370,14 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Profile" id="Lwr-MO-TY1"/>
+                    <connections>
+                        <outlet property="followButon" destination="QgM-oW-xm3" id="Ik5-QS-Vo6"/>
+                        <outlet property="viewedUserBiography" destination="c1k-Ef-iY3" id="5oy-nT-tCA"/>
+                        <outlet property="viewedUserDisplayName" destination="IOr-Dl-RZA" id="zvV-Uv-2HQ"/>
+                        <outlet property="viewedUserFollowersCount" destination="o9E-pd-Vb2" id="0Mp-wI-DIY"/>
+                        <outlet property="viewedUserFollowingCount" destination="0um-Oa-1f7" id="kUc-9P-l17"/>
+                        <outlet property="viewedUserProfileImage" destination="MKn-Pz-dt9" id="OAl-Tl-M3l"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJ1-gB-1XJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
