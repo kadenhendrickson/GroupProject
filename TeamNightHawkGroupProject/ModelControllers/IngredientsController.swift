@@ -18,7 +18,7 @@ class IngredientsController {
         let ingredient = Ingredient(name: name, measurementName: measurementName, measurementQuantity: measurementQuantity)
         recipe.ingredients.append(ingredient)
     }
-    func deleteIngredients(ingredient: Ingredient) {
+    func 🏘(ingredient: Ingredient) {
         guard let indexOfIngredient = recipe?.ingredients.firstIndex(of: ingredient) else {return}
         recipe?.ingredients.remove(at: indexOfIngredient)
     }
