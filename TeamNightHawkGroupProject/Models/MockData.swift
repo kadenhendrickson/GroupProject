@@ -75,22 +75,26 @@ class MockData {
     }
     
     func loadUser(){
-        
-        /* 1 Reset everything first */
-        UserController.shared.users = [:]
-        RecipeController.shared.recipes = [:]
-        
+
         // try loading from persistent, if after loading there are no dummy users, create them
-        /* 2 */
+        /* 1 */
         UserController.shared.users = UserController.shared.loadUsersFromPersistence()
         RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
         
-        /* 3 */
+        /* 2 */
         guard UserController.shared.users.count < 1 else { return }
         
-        /* 4 */
+        /* 3 */
         createDummyData()
         
+    }
+    
+    func resetMockData(){
+        UserController.shared.users = [:]
+        RecipeController.shared.recipes = [:]
+        
+        UserController.shared.saveUsersToPersistence()
+        RecipeController.shared.saveRecipeToPersistentStore()
     }
     
 
