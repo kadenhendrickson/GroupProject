@@ -52,6 +52,7 @@ class EditProfileViewController: UIViewController {
         
         UserController.shared.updateUser(withID: currentUser.userID, email: currentUser.email, displayName: displayName, biography: bioTextView.text, profileImage: image)
         
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Method

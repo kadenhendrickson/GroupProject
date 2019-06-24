@@ -15,13 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        
+        //MockData.shared.resetMockData()
         MockData.shared.loadUser()
         MockData.shared.printDummyInfo()
-        MockData.shared.chooseDummyUser(withName: "kadenHendrickson")
-        MockData.shared.saveRamdomRecipesForUser(name: "kadenHendrickson", atQuantify: 2)
-        MockData.shared.saveRamdomRecipesForUser(name: "bigBeardShane", atQuantify: 4)
-        MockData.shared.saveRamdomRecipesForUser(name: "annedog", atQuantify: 3)
+        
+        let randomUser = UserController.shared.users.randomElement()?.value
+        UserController.shared.currentUser = randomUser
+        
+        //MockData.shared.chooseDummyUser(withName: "bigBeardShane")
         
         return true
     }

@@ -75,22 +75,26 @@ class MockData {
     }
     
     func loadUser(){
-        
-        /* 1 Reset everything first */
-        UserController.shared.users = [:]
-        RecipeController.shared.recipes = [:]
-        
+
         // try loading from persistent, if after loading there are no dummy users, create them
-        /* 2 */
+        /* 1 */
         UserController.shared.users = UserController.shared.loadUsersFromPersistence()
         RecipeController.shared.recipes = RecipeController.shared.loadRecipeFromPersistentStore()
         
-        /* 3 */
+        /* 2 */
         guard UserController.shared.users.count < 1 else { return }
         
-        /* 4 */
+        /* 3 */
         createDummyData()
         
+    }
+    
+    func resetMockData(){
+        UserController.shared.users = [:]
+        RecipeController.shared.recipes = [:]
+        
+        UserController.shared.saveUsersToPersistence()
+        RecipeController.shared.saveRecipeToPersistentStore()
     }
     
 
@@ -113,8 +117,27 @@ class MockData {
         for (_, recipe) in RecipeController.shared.recipes {
             print("\t\(recipe.name)\n")
             print("\t\(recipe.recipeID)\n")
+            
+            print("\n\t\tIngredients:\n")
+
             for ingredient in recipe.ingredients {
                 print("\t\t- \(ingredient.name) \t\t\t\(ingredient.measurementQuantity) \(ingredient.measurementName)\n")
+            }
+            
+            print("\n\t\tSteps:\n")
+
+            if let steps = recipe.steps {
+                for step in steps {
+                    print("\t\t- \(step)\n")
+                }
+            }
+            
+            print("\n\t\tTags:\n")
+            
+            if let tags = recipe.tags {
+                for tag in tags {
+                    print("\t\t- \(tag)\n")
+                }
             }
             let creator = UserController.shared.users[recipe.userReference]
             print("\n\tCreated by 🎖 \(creator!.displayName) 🎖\n")
@@ -155,9 +178,9 @@ class MockData {
     }
     
    
-    // Create Users
-    private func summonUser(withEmail email: String = "defaultmail@mail.com", displayName: String, biography: String = "") {
-        UserController.shared.createUser(withEmail: email, displayName: displayName, biography: biography, profileImage: nil)
+    // MARK: - Create User methods
+    private func summonUser(withEmail email: String = "defaultmail@mail.com", displayName: String, biography: String = "I have bio graphy") {
+        UserController.shared.createUser(withEmail: email, displayName: displayName, biography: biography, profileImage: UIImage(named: "duck")!)
         
         let currentUser = UserController.shared.currentUser!
         saveRamdomRecipesForUser(userID: currentUser.userID, atQuantity: 3)
@@ -173,7 +196,7 @@ class MockData {
         }
     }
     
-    // Create recipes
+    // MARK: - Create recipe methods
     private func makeALotsOf(recipes: String...){
         for recipe in recipes {
             createRecipe(name: recipe)
@@ -184,6 +207,7 @@ class MockData {
         print("Making recipe for \(String(UserController.shared.currentUser!.displayName)), now we have \(RecipeController.shared.recipes.count) recipes.")
         let ingredients = getRamdonIngredients()
         let tags = getRamdomTags()
+        let steps = getRandomSteps()
         RecipeController.shared.createRecipe(name: name, image: UIImage(named: "AnneCelery")!, ingredients: ingredients, steps: steps, tags: tags, servingSize: "2", prepTime: "10 minutes")
     }
     
@@ -200,6 +224,8 @@ class MockData {
 
     }
     
+    
+    // MARK: - Get Random Stuff
     private func getRamdonIngredients() -> [Ingredient]{
         let ingredients: [Ingredient] = [greenStuff, hardStuff, strawberry, whey, meat, milk, chicken, meat]
         return ingredients.shuffled().dropLast(5)
@@ -208,6 +234,11 @@ class MockData {
     private func getRamdomTags() -> [String] {
         let tags = ["healthy", "comfortfood", "smoothie", "alienfood", "humanfood", "dessert"]
         return tags.shuffled().dropLast(4)
+    }
+    
+    private func getRandomSteps() -> [String] {
+        let steps = ["chop them", "bake", "fry", "ferment them", "toss them", "freez them"]
+        return steps.shuffled().dropLast(4)
     }
     
 }

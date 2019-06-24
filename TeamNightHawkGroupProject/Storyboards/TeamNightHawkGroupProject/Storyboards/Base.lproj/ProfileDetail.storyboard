@@ -99,7 +99,6 @@
                                 <rect key="frame" x="158" y="732" width="98" height="30"/>
                                 <state key="normal" title="Update Profile"/>
                                 <connections>
-                                    <action selector="deleteProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="IG4-Se-nuw"/>
                                     <action selector="updateProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="lfu-pn-rzb"/>
                                 </connections>
                             </button>

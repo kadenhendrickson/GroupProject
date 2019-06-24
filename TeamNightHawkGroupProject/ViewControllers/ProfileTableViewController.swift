@@ -28,10 +28,11 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var followingsCountLabel: UILabel!
     @IBOutlet weak var bioTextLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateViews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         currentUser = UserController.shared.currentUser
+        tableView.reloadData()
+        updateViews()
     }
     
     
