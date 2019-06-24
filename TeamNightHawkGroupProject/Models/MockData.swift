@@ -70,7 +70,7 @@ class MockData {
     func printDummyInfo() {
         
         printAllUsers()
-        printAllRecipes()
+//        printAllRecipes()
 
     }
     

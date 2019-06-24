@@ -43,9 +43,26 @@ class UserViewedTableViewController: UITableViewController {
         viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
         viewedUserFollowingCount.text = "\(user.followingRefs.count)"
         viewedUserProfileImage.image = UIImage(data: imageData)
+        if UserController.shared.currentUser!.followingRefs.contains(user.userID){
+            followButon.setTitle("Unfollow", for: .normal)
+        } else {
+            followButon.setTitle("Follow", for: .normal)
+        }
         
     }
-
+    @IBAction func followButtonTapped(_ sender: Any) {
+        guard let user = user else {return}
+        if UserController.shared.currentUser!.followingRefs.contains(user.userID){
+            UserController.shared.unfollowUser(withID: user.userID)
+            viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
+            followButon.setTitle("Follow", for: .normal)
+        } else {
+        UserController.shared.followUser(withID: user.userID)
+            viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
+            followButon.setTitle("Unfollow", for: .normal)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
