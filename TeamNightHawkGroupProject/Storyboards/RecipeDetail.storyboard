@@ -230,17 +230,10 @@
                                             <rect key="frame" x="40" y="1" width="334" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0x-rB-q53">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="30"/>
                                                     <state key="normal" title="(displayname)"/>
                                                     <connections>
                                                         <segue destination="bIp-hU-vxZ" kind="show" identifier="fromRecipeDVCtoOtherUserVC" id="ee9-hj-4sp"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAR-es-5L6">
-                                                    <rect key="frame" x="300" y="0.0" width="34" height="30"/>
-                                                    <state key="normal" title="Back"/>
-                                                    <connections>
-                                                        <action selector="backButtonTapped:" destination="q52-xY-s8f" eventType="touchUpInside" id="CKT-uG-Mkm"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

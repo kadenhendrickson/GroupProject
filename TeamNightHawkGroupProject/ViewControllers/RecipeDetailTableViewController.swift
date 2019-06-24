@@ -52,10 +52,7 @@ class RecipeDetailTableViewController: UITableViewController {
         }
     }
     //cant call navigation controller without embedding it
-    @IBAction func backButtonTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-        
-    }
+
     
     func updateDetails() {
         
