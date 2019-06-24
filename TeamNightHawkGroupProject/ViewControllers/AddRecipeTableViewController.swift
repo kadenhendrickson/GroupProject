@@ -47,7 +47,7 @@ class AddRecipeTableViewController: UITableViewController {
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
-        
+        imageSelector.setTitle("Click to add image", for: .normal)
     }
     
     @IBAction func clearButtonTapped(_ sender: Any) {
@@ -218,6 +218,7 @@ extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate
 extension AddRecipeTableViewController: ImagePickerHelperDelegate {
     func fireActionsForSelectedImage(_ image: UIImage) {
         self.recipeImage.image = image
+        imageSelector.setTitle("", for: .normal)
     }
     
 }
