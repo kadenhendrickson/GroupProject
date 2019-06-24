@@ -32,7 +32,22 @@ class User: Codable {
         self.recipesRef = recipesRef
         self.profileImage = profileImage?.pngData()
     }
+    
+    var dictionaryRepresentation: [String : Any] {
+        return ["userID" : userID,
+                "recipeRef" : recipesRef,
+                "email" : email,
+                "displayName" : displayName,
+                "biography" : biography,
+                "profileImage" : profileImage,
+                "savedRecipeRefs" : savedRecipeRefs,
+                "followedByRefs" : followedByRefs,
+                "followingRefs" : followingRefs,
+                "blockedUserRefs" : blockedUserRefs ]
+    }
 }
+
+
 
 
 extension User: Equatable {

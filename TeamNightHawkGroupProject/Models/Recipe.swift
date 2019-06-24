@@ -38,10 +38,20 @@ class Recipe: Codable {
     
     var dictionaryRepresentation: [String:Any] {
         return ["userReference": userReference,
-                
+                "recipeID" : recipeID,
+                "image" : image,
+                "name" : name,
+                "ingredients" : ingredients,
+                "steps" : steps,
+                "prepTime" : prepTime,
+                "servings" : servings,
+                "tags" : tags,
+                "savedByUsers" : savedByUsers,
+                "saveCount" : saveCount
         ]
     }
 }
+
 
 extension Recipe: Equatable {
     static func == (lhs: Recipe, rhs: Recipe) -> Bool {

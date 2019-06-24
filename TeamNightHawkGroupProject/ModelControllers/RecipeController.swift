@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RecipeController {
     //SharedInstance
@@ -14,41 +15,75 @@ class RecipeController {
     //current user
     var currentUser = UserController.shared.currentUser
     //sourceoftruth
-    var recipes: [String : Recipe] = [:]
+    //var recipes: [String : Recipe] = [:]
+    //var recipes: [Recipe] = []
+    //database
+    let db = Firestore.firestore()
+    //listener
+    var recipeListener: ListenerRegistration!
 
     
     //CRUD
+    
     func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String?, prepTime: String?) {
         guard let currentUser = currentUser else {return}
         let recipe = Recipe(userReference: currentUser.userID, name: name, image: image, ingredients: ingredients, steps: steps, prepTime: prepTime ?? "--", servings: servingSize ?? "--", tags: tags)
-        recipes[recipe.recipeID] = recipe
+        let recipeRef = db.collection("Recipes")
+        let recipeDictionary = recipe.dictionaryRepresentation
+        recipeRef.document(recipe.recipeID).setData(recipeDictionary)
         currentUser.recipesRef.append(recipe.recipeID)
-        saveRecipeToPersistentStore()
     }
     
-    func deleteRecipeWith(id: String) {
-        recipes.removeValue(forKey: id)
-        saveRecipeToPersistentStore()
+    func fetchRecipes(completion: @escaping ([Recipe]) -> Void) {
+        let recipeReference = db.collection("Recipes")
+        var recipesArray: [Recipe] = []
+        recipeListener = recipeReference.order(by: "userReference").addSnapshotListener({ (snapshot, error) in
+            if let error = error {
+                print("There was an error fetching recipes: \(error.localizedDescription)")
+            }
+            guard let documents = snapshot?.documents else {return; completion([])}
+            for document in documents {
+                let data = document.data()
+                let userReference = data["userReference"] as? String ?? ""
+                let name = data["name"] as? String ?? ""
+                let image = data["image"] as? Data?
+                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+                let steps = data["steps"] as? [String] ?? [""]
+                let prepTime = data["prepTime"] as? String ?? ""
+                let servings = data["servings"] as? String ?? ""
+                let tags = data["tags"] as? [String] ?? []
+                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                recipesArray.append(recipe)
+            }
+            completion(recipesArray)
+        })
     }
     
-    func updateRecipeWith(id:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?) {
-        guard let recipe = recipes[id] else {return}
-        recipe.name = name
-        recipe.image = image.pngData() // This needs to be a UIImage but idk how to convert that bitch so its data now
-        recipe.ingredients = ingredients
-        recipe.steps = steps
-        recipe.tags = tags
-        saveRecipeToPersistentStore()
+    
+    func deleteRecipeWith(recipeID: String) {
+        db.collection("Recipes").document(recipeID).delete()
+    }
+    
+    func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?) {
+        let recipeRef = db.collection("Recipes").document(recipeID)
+        recipeRef.setData([
+            "name" : name,
+            "image" : image,
+            "ingredients" : ingredients,
+            "steps" : steps,
+            "tags" : tags ])
     }
     
     func addRecipeToUsersSavedList(WithRecipeID id: String) {
-        guard let currentUser = currentUser,
-                let recipe = recipes[id] else {return}
+        guard let currentUser = currentUser else {return}
+        
+        #warning("access current users spot on firebase and remove remotely")
         currentUser.savedRecipeRefs.append(id)
-        recipe.savedByUsers.append(currentUser.userID)
+        db.collection("Recipes").document(id).updateData(["savedByUsers" : FieldValue.arrayUnion([id])])
     }
-    
+    #warning("fix after you build users top level")
     func deleteRecipeFromUsersSavedList(WithRecipeID id: String) {
+        let recipeRef = db.collection("Recipes").document(id)
         guard let recipeIndexOnUser = currentUser?.savedRecipeRefs.firstIndex(of: id),
                 let currentUser = currentUser,
                 let recipe = recipes[id],
@@ -58,36 +93,3 @@ class RecipeController {
     }
 }
 
-extension RecipeController {
-    //Add local Persistence
-    private func fileURL() -> URL {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let filename = "TeamNightHawkGroupProject.json"
-        let documentaryDirectoryUrl = urls[0].appendingPathComponent(filename)
-        return documentaryDirectoryUrl
-    }
-    
-    func saveRecipeToPersistentStore() {
-        let jsonEncoder = JSONEncoder()
-        do {
-            let data = try jsonEncoder.encode(recipes)
-            let url = fileURL()
-            try data.write(to: url)
-        } catch {
-            print("There was an error saving recipes \(error.localizedDescription)")
-        }
-    }
-    
-    func loadRecipeFromPersistentStore() -> [String : Recipe] {
-        let jsonDecoder = JSONDecoder()
-        do {
-            let url = fileURL()
-            let data = try Data(contentsOf: url)
-            let recipes = try jsonDecoder.decode([String : Recipe].self, from: data)
-            return recipes
-        } catch {
-            print("There was an error loading data \(error.localizedDescription)")
-            return [:]
-        }
-    }
-}
