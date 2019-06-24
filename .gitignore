@@ -76,4 +76,4 @@ fastlane/test_output
 
 #GlobalStuff
 *.framework
-GoogleService-Info.plist
+#GoogleService-Info.plist
