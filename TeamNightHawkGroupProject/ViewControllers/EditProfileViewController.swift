@@ -86,3 +86,10 @@ extension EditProfileViewController: ImagePickerHelperDelegate {
     }
     
 }
+
+extension EditProfileViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+    }
+}
