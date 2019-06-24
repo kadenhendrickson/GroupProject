@@ -17,13 +17,21 @@ class EditRecipeTableViewController: UITableViewController {
     @IBOutlet weak var servingTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     
-    var recipe: Recipe?
+    var recipe: Recipe? {
+        didSet {
+            ingredientRows = self.recipe?.ingredients.count ?? 0
+        }
+    }
+    
+    
     var ingredientsArray: [Ingredient] = []
     var stepsArray: [String] = []
     var tagsArray: [String] = []
-    var ingredientRows: Int = 1
-    var stepRows: Int = 1
-    var tagRows: Int = 1
+    
+    // Number of rows to be display programmaticly
+    var ingredientRows: Int = 0
+    var stepRows: Int = 0
+    var tagRows: Int = 0
 
     var segmentIndex: Int = 1
     
