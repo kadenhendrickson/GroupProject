@@ -25,7 +25,9 @@ class SavedRecipesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let currentUser = currentUser else { print("🍒 There is no current user. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return UITableViewCell() }
+        guard let currentUser = currentUser,
+            currentUser.savedRecipeRefs.count > 0
+            else { print("🍒 There is no current user or user doesn't has any saved recipe. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return UITableViewCell() }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell
         let recipeKey = currentUser.savedRecipeRefs[indexPath.row]
