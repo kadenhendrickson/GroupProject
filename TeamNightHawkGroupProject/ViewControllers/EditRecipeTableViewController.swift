@@ -17,21 +17,19 @@ class EditRecipeTableViewController: UITableViewController {
     @IBOutlet weak var servingTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     
-    var recipe: Recipe? {
-        didSet {
-            ingredientRows = self.recipe?.ingredients.count ?? 0
-        }
-    }
-    
+    var recipe: Recipe?
+//    {
+//        didSet {
+//            ingredientRows = self.recipe?.ingredients.count ?? 0
+//        }
+//    }
     
     var ingredientsArray: [Ingredient] = []
     var stepsArray: [String] = []
     var tagsArray: [String] = []
-    
-    // Number of rows to be display programmaticly
-    var ingredientRows: Int = 0
-    var stepRows: Int = 0
-    var tagRows: Int = 0
+    var ingredientRows: Int = 1
+    var stepRows: Int = 1
+    var tagRows: Int = 1
 
     var segmentIndex: Int = 1
     
@@ -53,8 +51,6 @@ class EditRecipeTableViewController: UITableViewController {
     @IBAction func editImageTapped(_ sender: Any) {
     }
     @IBAction func deleteRecipeTapped(_ sender: Any) {
-    }
-    @IBAction func editRecipeSegmentTapped(_ sender: Any) {
     }
     
     //MARK: - Segment Controller
@@ -86,14 +82,11 @@ class EditRecipeTableViewController: UITableViewController {
         let steps = recipe.steps,
         let tags = recipe.tags else {return 0}
         if segmentIndex == 1 {
-            return (recipe.ingredients.count)
-//            return (recipe.ingredients.count + ingredientRows)
+            return (recipe.ingredients.count + ingredientRows)
         } else if segmentIndex == 2 {
             return (steps.count)
-//            return (steps.count + stepRows)
         } else {
             return (tags.count)
-//            return (tags.count + tagRows)
         }
     }
     
@@ -105,10 +98,29 @@ class EditRecipeTableViewController: UITableViewController {
         if segmentIndex == 1{
             
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientEditCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
+            if indexPath.row < (recipe.ingredients.count - 1){
+                print(indexPath.row)
             cell.measurementQuantityLabel.text = recipe.ingredients[indexPath.row].measurementQuantity
             cell.measuremenTypeLabel.text = recipe.ingredients[indexPath.row].measurementName
             cell.ingredientLabel.text = recipe.ingredients[indexPath.row].name
-        return cell
+                cell.addSection.isHidden = true
+                cell.ingredientDelegate = self
+                return cell
+            } else {
+                if indexPath.row == recipe.ingredients.count + ingredientsArray.count {
+                cell.addSection.isHidden = false
+                cell.ingredientDelegate = self
+                    return cell
+                } else {
+                    cell.addSection.isHidden = true
+                    cell.ingredientDelegate = self
+                    return cell
+                }
+                
+                
+            }
+            
+        
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepEditCell", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
             cell.directionSteps.text = steps[indexPath.row]
@@ -157,6 +169,8 @@ class EditRecipeTableViewController: UITableViewController {
      }
      */
     
+
+    
 }
 extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegate, tagCellDelegate {
     
@@ -182,7 +196,15 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
     
     func addIngredient(ingredientName: String, measurementQuantity: String, measurementType: String) {
         let newIngredient = Ingredient(name: ingredientName, measurementName: measurementType, measurementQuantity: measurementQuantity)
+        if ingredientName == "" {
+            alertUser(withMessage: "Please provide an Ingredient")
+        }else if measurementQuantity == "" {
+            alertUser(withMessage: "Please provide a quantity")
+        } else if measurementType == "" {
+            alertUser(withMessage: "Please provide a measurement type")
+        } else {
         ingredientsArray.append(newIngredient)
+        }
     }
     func increaseRows(rowCount: Int) {
         ingredientRows += rowCount
@@ -190,4 +212,16 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
     func refreshIngredientData() {
         tableView.reloadData()
     }
+    
+    func alertUser(withMessage message: String){
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true)
+    }
 }
+
+

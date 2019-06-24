@@ -93,14 +93,18 @@ class Section1TableViewCell: UITableViewCell {
     }()
     
     @objc func addButtonTapped(){
-        
-        ingredientDelegate?.increaseRows(rowCount: 1)
-        ingredientDelegate?.refreshIngredientData()
+       
         guard let name = ingredientLabel.text,
+            
             let measurmentName = measuremenTypeLabel.text,
             let measurementQuantity = measurementQuantityLabel.text
             else {return}
+        ingredientDelegate?.increaseRows(rowCount: 1)
+        ingredientDelegate?.refreshIngredientData()
+        
         ingredientDelegate?.addIngredient(ingredientName: name, measurementQuantity: measurementQuantity, measurementType: measurmentName)
+        
+        print("🏚🏚🏚🏚🏚🏚🏚🏚🏚🏚")
     }
     
     lazy var addSection: UIButton = {
