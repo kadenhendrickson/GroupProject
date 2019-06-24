@@ -12,18 +12,6 @@ class SavedRecipesTableViewController: UITableViewController {
 
     //MARK: - Properties
     var currentUser: User?
-    var savedRecipesList: [Recipe] {
-        guard let currentSavedRefs = currentUser?.savedRecipeRefs else {return []}
-        var recipes: [Recipe] = []
-        for (id, recipe) in RecipeController.shared.recipes {
-            for ref in currentSavedRefs {
-                if id == ref {
-                    recipes.append(recipe)
-                }
-            }
-        }
-        return recipes
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,23 +20,29 @@ class SavedRecipesTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedRecipesList.count
+        return currentUser?.recipesRef.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let currentUser = currentUser else { print("🍒 There is no current user. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return UITableViewCell() }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell
-        let recipe = savedRecipesList[indexPath.row]
-        cell?.recipe = recipe
+        let recipeKey = currentUser.savedRecipeRefs[indexPath.row]
+        cell?.recipe = RecipeController.shared.recipes[recipeKey]
         return cell ?? UITableViewCell()
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let currentUser = currentUser else { print("🍒 There is no current user. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
+        
         if segue.identifier == "fromSavedToRecipeDVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                 let destinationVC = segue.destination as? RecipeDetailTableViewController else {return}
-            let recipe = savedRecipesList[indexPath.row]
-            destinationVC.recipe = recipe
+            let recipeKey = currentUser.savedRecipeRefs[indexPath.row]
+            destinationVC.recipe = RecipeController.shared.recipes[recipeKey]
         }
     }
 
