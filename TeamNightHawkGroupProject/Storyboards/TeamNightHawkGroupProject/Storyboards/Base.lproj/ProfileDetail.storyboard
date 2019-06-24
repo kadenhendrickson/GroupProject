@@ -215,6 +215,9 @@
                                         <constraint firstAttribute="height" constant="40" id="vIj-FF-vWv"/>
                                     </constraints>
                                     <state key="normal" title="Follow"/>
+                                    <connections>
+                                        <action selector="followButtonTapped:" destination="tUb-q2-AJo" eventType="touchUpInside" id="Zh4-Jl-4EM"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
