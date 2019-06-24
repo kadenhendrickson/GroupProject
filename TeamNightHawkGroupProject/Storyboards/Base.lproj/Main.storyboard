@@ -826,6 +826,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="recipeImageView" destination="3fg-ni-tJX" id="RTz-ua-MuK"/>
+                                    <segue destination="WVq-0b-mrp" kind="show" id="2Or-z8-wcZ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -899,7 +900,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vZv-MN-JCV"/>
+        <segue reference="2Or-z8-wcZ"/>
         <segue reference="nsF-ro-oZn"/>
     </inferredMetricsTieBreakers>
 </document>
