@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class UserController {
     
     //MARK: - Singleton
     static let shared = UserController()
     
-    var users: [String:User] = [:]
+    //var users: [String:User] = [:]
+    //database
+    let db = Firestore.firestore()
+    var userListener: ListenerRegistration!
     
     /**
      This get assigned when a new user is created.
@@ -23,137 +27,73 @@ class UserController {
             RecipeController.shared.currentUser = self.currentUser
         }
     }
+    //MARK: - CRUDs
+    func createUser(withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?){
+        let user = User(email: email, displayName: displayName, biography: biography, profileImage: image)
+        
+        let userRef = db.collection("Users")
+        let userDictionary = user.dictionaryRepresentation
+        userRef.document(user.userID).setData(userDictionary)
+    }
     
+    func updateUser(withID userID: String, email: String, displayName: String, biography: String, profileImage: UIImage?){
+        let userRef = db.collection("Users").document(userID)
+        userRef.updateData([
+            "email" : email,
+            "displayName" : displayName,
+            "biography" : biography,
+            "profileImage" : profileImage])
+    }
+    
+    func deleteUser(withID userID: String){
+        db.collection("Recipes").whereField("userReference", isEqualTo: userID).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("there was an error fetching documents: \(error)")
+            }
+            guard let documents = snapshot?.documents else {return}
+            for document in documents {
+                let documentID = document.documentID
+                self.db.collection("Recipes").document(documentID).delete()
+            }
+        }
+        db.collection("Users").document(userID).delete()
+}
     //MARK: - Methods
     func followUser(withID userID: String){
-        guard let currentUser = currentUser,
-            let userToFollow = users[userID]
-        else { print("🍒 There's no current user or user to follow is not found. Printing from \(#function) in UserController 🍒"); return }
+        guard let currentUser = currentUser else { print("🍒 There's no current user or user to follow is not found. Printing from \(#function) in UserController 🍒"); return }
         
-        // Make that user has current user as a follower, and add that user to current user's following
-        userToFollow.followedByRefs.append(currentUser.userID)
-        currentUser.followingRefs.append(userToFollow.userID)
-        
-        saveUsersToPersistence()
+        let currentUserRef = db.collection("Users").document(currentUser.userID)
+        currentUserRef.updateData(["followingRefs" : FieldValue.arrayUnion([userID])])
+
+        let followedUserRef = db.collection("Users").document(userID)
+        followedUserRef.updateData(["followedByRefs" : FieldValue.arrayUnion([currentUser.userID])])
     }
 
     func unfollowUser(withID userID: String){
-        guard let currentUser = currentUser,
-            let userToUnfollow = users[userID]
-            else { print("🍒 There's no current user or user to unfollow is not found. Printing from \(#function) in UserController 🍒"); return }
+        guard let currentUser = currentUser else { print("🍒 There's no current user or user to unfollow is not found. Printing from \(#function) in UserController 🍒"); return }
         
-        guard let indexInFollowedByRef = userToUnfollow.followedByRefs.firstIndex(of: currentUser.userID),
-            let indexInFollowingRef = currentUser.followingRefs.firstIndex(of: userToUnfollow.userID)
-        else { return }
+        let currentUserRef = db.collection("Users").document(currentUser.userID)
+        currentUserRef.updateData(["followingRefs" : FieldValue.arrayRemove([userID])])
         
-        // Remove current user from that user's follower, and from current user's following
-        userToUnfollow.followedByRefs.remove(at: indexInFollowedByRef)
-        currentUser.followingRefs.remove(at: indexInFollowingRef)
-        
-        saveUsersToPersistence()
+        let followedUserRef = db.collection("Users").document(userID)
+        followedUserRef.updateData(["followedByRefs" : FieldValue.arrayRemove([currentUser.userID])])
     }
     
     func blockUser(withID userID: String){
         
         guard let currentUser = currentUser else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
         
-        currentUser.blockedUserRefs.append(userID)
-        
+        let currentUserRef = db.collection("Users").document(currentUser.userID)
+        currentUserRef.updateData(["blockedUserRefs" : FieldValue.arrayUnion([userID])])
     }
     
     func unblockUser(withID blockedUserID: String){
         
-        guard let currentUser = currentUser,
-            let refIndex = currentUser.blockedUserRefs.firstIndex(of: blockedUserID)
+        guard let currentUser = currentUser
             else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
         
-        currentUser.blockedUserRefs.remove(at: refIndex)
-    }
-    
-    
-    //MARK: - CRUDs
-    func createUser(withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?){
-        
-        var profileImage = image
-        
-        if profileImage == nil {
-            // set default image
-            profileImage = UIImage(named: "duck")
-        }
-        
-        let user = User(email: email, displayName: displayName, biography: biography, profileImage: profileImage)
-        let userID = user.userID
-        users[userID] = user
-        currentUser = user
-        RecipeController.shared.currentUser = user
-        saveUsersToPersistence()
-    }
-    
-    func updateUser(withID userID: String, email: String, displayName: String, biography: String, profileImage: UIImage?){
-
-        //replace original values with new values
-        guard let user = users[userID]
-            else { print("🍒 Can't find user to update. Printing from \(#function) in UserController 🍒"); return }
-        
-        user.email = email
-        user.displayName = displayName
-        user.biography = biography
-        
-        // Update profile image only if user selected an image to update.
-        if let profileImage = profileImage {
-            // Set new image
-            user.profileImage = profileImage.pngData()
-        }
-        
-        saveUsersToPersistence()
-    }
-    
-    func deleteUser(withID userID: String){
-        guard let userToDelete = users[userID] else { print("🍒 Can't find user to delete. Printing from \(#function) in UserController 🍒"); return }
-        
-        //also remove user's recipes
-        for recipeRef in userToDelete.recipesRef {
-            RecipeController.shared.deleteRecipeWith(id: recipeRef)
-        }
-        
-        users.removeValue(forKey: userID)
-        
-        saveUsersToPersistence()
+        let currentUserRef = db.collection("Users").document(currentUser.userID)
+        currentUserRef.updateData(["blockedUserRefs" : FieldValue.arrayRemove([blockedUserID])])
     }
 }
 
-extension UserController {
-    
-    //MARK: - Local Persistence
-    
-    private func fileURL() -> URL {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let filename = "user.json"
-        let documentaryDirectoryUrl = urls[0].appendingPathComponent(filename)
-        return documentaryDirectoryUrl
-    }
-    
-    func saveUsersToPersistence(){
-        let jsonEncoder = JSONEncoder()
-        do {
-            let data = try jsonEncoder.encode(users)
-            let url = fileURL()
-            try data.write(to: url)
-        } catch {
-            print("There was an error saving users \(error.localizedDescription)")
-        }
-    }
-    
-    func loadUsersFromPersistence() -> [String: User]{
-        let jsonDecoder = JSONDecoder()
-        do {
-            let url = fileURL()
-            let data = try Data(contentsOf: url)
-            let users = try jsonDecoder.decode([String : User].self, from: data)
-            return users
-        } catch {
-            print("There was an error loading user data \(error.localizedDescription)")
-            return [:]
-        }
-    }
-}
