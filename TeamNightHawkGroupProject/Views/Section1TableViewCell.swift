@@ -101,8 +101,6 @@ class Section1TableViewCell: UITableViewCell {
             let measurementQuantity = measurementQuantityLabel.text
             else {return}
         ingredientDelegate?.addIngredient(ingredientName: name, measurementQuantity: measurementQuantity, measurementType: measurmentName)
-        
-        print("🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️🅱️")
     }
     
     lazy var addSection: UIButton = {
