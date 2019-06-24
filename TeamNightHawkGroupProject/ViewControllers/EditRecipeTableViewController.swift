@@ -30,9 +30,9 @@ class EditRecipeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
-        tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
-        tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
+        tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "ingredientEditCell")
+        tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "stepEditCell")
+        tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "tagEditCell")
         guard let recipe = recipe,
         let imageData = recipe.image else {return}
         recipeImage.image = UIImage(data: imageData)
@@ -78,11 +78,14 @@ class EditRecipeTableViewController: UITableViewController {
         let steps = recipe.steps,
         let tags = recipe.tags else {return 0}
         if segmentIndex == 1 {
-            return (recipe.ingredients.count + ingredientRows)
+            return (recipe.ingredients.count)
+//            return (recipe.ingredients.count + ingredientRows)
         } else if segmentIndex == 2 {
-            return (steps.count + stepRows)
+            return (steps.count)
+//            return (steps.count + stepRows)
         } else {
-            return (tags.count + tagRows)
+            return (tags.count)
+//            return (tags.count + tagRows)
         }
     }
     
