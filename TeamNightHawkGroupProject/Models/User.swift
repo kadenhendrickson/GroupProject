@@ -30,7 +30,7 @@ class User: Codable {
         self.followingRefs = following
         self.blockedUserRefs = blockedUserRefs
         self.recipesRef = recipesRef
-        self.profileImage = profileImage?.jpegData(compressionQuality: 0.5)
+        self.profileImage = profileImage?.jpegData(compressionQuality: 0.1 )
     }
     
     var dictionaryRepresentation: [String : Any] {

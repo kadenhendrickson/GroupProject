@@ -22,7 +22,11 @@ class UserController {
     /**
      This get assigned when a new user is created.
      */
-    var currentUser: User?
+    var currentUser: User? {
+        didSet {
+            RecipeController.shared.currentUser = self.currentUser
+        }
+    }
     //MARK: - CRUDs
     func createUser(withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?){
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: image)
@@ -35,19 +39,35 @@ class UserController {
     
     func fetchUser(withUserRef ref: String, completion: @escaping (User) -> Void) {
         let userReference = db.collection("Users").document(ref)
-        userListener = userReference.addSnapshotListener({ (snapshot, error) in
+        userReference.getDocument { (snapshot, error) in
             if let error = error {
-                print("There was an error fetching user: \(error.localizedDescription)")
-            }
-            guard let data = snapshot?.data() else {return;}
-            let email = data["email"] as? String ?? ""
-            let displayName = data["displayName"] as? String ?? ""
-            let biography = data["biography"] as? String ?? ""
-            let profileImage = data["profileImage"] as? Data?
-            let user = User(email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
-            completion(user)
-        })
+            print("There was an error fetching user: \(error.localizedDescription)")
+        }
+        guard let data = snapshot?.data() else {return;}
+        let userID = data["userID"] as? String ?? ""
+        let email = data["email"] as? String ?? ""
+        let displayName = data["displayName"] as? String ?? ""
+        let biography = data["biography"] as? String ?? ""
+        let profileImage = data["profileImage"] as? Data?
+            let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
         
+        completion(user)
+        return
+        }
+//        userReference.addSnapshotListener({ (snapshot, error) in
+//            if let error = error {
+//                print("There was an error fetching user: \(error.localizedDescription)")
+//            }
+//            guard let data = snapshot?.data() else {return;}
+//            let email = data["email"] as? String ?? ""
+//            let displayName = data["displayName"] as? String ?? ""
+//            let biography = data["biography"] as? String ?? ""
+//            let profileImage = data["profileImage"] as? Data?
+//            let user = User(email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
+//
+//            completion(user)
+//            return
+//        })
     }
     
     func updateUser(withID userID: String, email: String, displayName: String, biography: String, profileImage: UIImage?){
@@ -74,10 +94,11 @@ class UserController {
 }
     //MARK: - Methods
     func followUser(withID userID: String){
-        guard let currentUser = currentUser else { print("🍒 There's no current user or user to follow is not found. Printing from \(#function) in UserController 🍒"); return }
+        guard let currentUser = UserController.shared.currentUser else { print("🍒 There's no current user or user to follow is not found. Printing from \(#function) in UserController 🍒"); return }
         
         let currentUserRef = db.collection("Users").document(currentUser.userID)
         currentUserRef.updateData(["followingRefs" : FieldValue.arrayUnion([userID])])
+        currentUser.followingRefs.append(userID)
 
         let followedUserRef = db.collection("Users").document(userID)
         followedUserRef.updateData(["followedByRefs" : FieldValue.arrayUnion([currentUser.userID])])

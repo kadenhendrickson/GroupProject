@@ -14,11 +14,8 @@ class RecipeController {
     static let shared = RecipeController()
     //current user
     var currentUser = UserController.shared.currentUser
-    //sourceoftruth
-    //var recipes: [String : Recipe] = [:]
-    //var recipes: [Recipe] = []
     //database
-    let db = Firestore.firestore()
+    lazy var db = Firestore.firestore()
     //listener
     var recipeListener: ListenerRegistration!
 
@@ -28,10 +25,9 @@ class RecipeController {
     func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String?, prepTime: String?) {
         guard let currentUser = currentUser else {return}
         let recipe = Recipe(userReference: currentUser.userID, name: name, image: image, ingredients: ingredients, steps: steps, prepTime: prepTime ?? "--", servings: servingSize ?? "--", tags: tags)
-        let recipeRef = db.collection("Recipes")
         let recipeDictionary = recipe.dictionaryRepresentation
-        recipeRef.document(recipe.recipeID).setData(recipeDictionary)
-        db.collection("Users").document(currentUser.userID).updateData(["recipesRef" : FieldValue.arrayUnion([recipe.recipeID])])
+        db.collection("Recipes").document(recipe.recipeID).setData(recipeDictionary)
+        db.collection("Users").document(currentUser.userID).updateData(["recipeRef" : FieldValue.arrayUnion([recipe.recipeID])])
         currentUser.recipesRef.append(recipe.recipeID) 
     }
     
@@ -42,7 +38,7 @@ class RecipeController {
             if let error = error {
                 print("There was an error fetching recipes: \(error.localizedDescription)")
             }
-            guard let documents = snapshot?.documents else {return; completion([])}
+            guard let documents = snapshot?.documents else {completion([]); return}
             for document in documents {
                 let data = document.data()
                 let userReference = data["userReference"] as? String ?? ""
