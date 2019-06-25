@@ -43,6 +43,7 @@ class UserController {
             if let error = error {
             print("There was an error fetching user: \(error.localizedDescription)")
         }
+            //still creates a new user object
         guard let data = snapshot?.data() else {return;}
         let userID = data["userID"] as? String ?? ""
         let email = data["email"] as? String ?? ""
