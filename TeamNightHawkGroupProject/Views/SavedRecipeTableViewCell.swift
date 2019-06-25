@@ -17,6 +17,8 @@ class SavedRecipeTableViewCell: UITableViewCell {
         }
     }
     
+    var user: User?
+    
     //MARK: - IBOutlets
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var userDisplayName: UIButton!
@@ -37,10 +39,9 @@ class SavedRecipeTableViewCell: UITableViewCell {
     }
     //update the view
     func updateViews() {
-        guard let userRef = recipe?.userReference,
-            let user = UserController.shared.users[userRef],
+        guard let user = user,
             let recipeImage = recipe?.image else {return}
-        
+    
         if let userImage = user.profileImage{userProfileImageView.image = UIImage(data: userImage)}
         else {userProfileImageView.image = UIImage(named: "ProfileDefault")}
         

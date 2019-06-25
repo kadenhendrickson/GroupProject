@@ -16,12 +16,6 @@ protocol UserFeedTableViewCellDelegate: class {
 class UserFeedTableViewCell: UITableViewCell {
     
     weak var delegate: UserFeedTableViewCellDelegate?
-
-    
-    func userRefSent() {
-        
-    }
-    
     
     var recipe: Recipe? {
         didSet {
@@ -29,6 +23,7 @@ class UserFeedTableViewCell: UITableViewCell {
         }
     }
     
+    var user: User?
 
     //MARK: - IBOutlets
     @IBOutlet weak var userProfileImageView: UIImageView!
@@ -53,8 +48,7 @@ class UserFeedTableViewCell: UITableViewCell {
     
     //update the view
     func updateViews() {
-        guard let userRef = recipe?.userReference,
-            let user = UserController.shared.users[userRef],
+        guard let user = user,
             let recipeImage = recipe?.image else {return}
         
         if let userImage = user.profileImage{userProfileImageView.image = UIImage(data: userImage)}

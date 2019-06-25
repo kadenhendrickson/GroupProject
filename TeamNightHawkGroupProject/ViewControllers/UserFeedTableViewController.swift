@@ -8,47 +8,57 @@
 
 import UIKit
 
-
-
-
-
 class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate {
     //MARK: - Properties
-    var recipesList: [Recipe]  {
-        var recipeArray: [Recipe] = []
-        for (_, recipe) in RecipeController.shared.recipes {
-            recipeArray.append(recipe)
+    var recipesList: [Recipe] {
+        guard let currentUser = UserController.shared.currentUser else {return []}
+        var internalRecipes: [Recipe] = []
+        UserController.shared.db.collection("Users").document(currentUser.userID).getDocument { (snapshot, error) in
+            if let error = error {
+                print("there is an error fetching users: \(error.localizedDescription)")
+            }
+            guard let data = snapshot?.data(),
+                    let friendsArray = data["followingRefs"] as? [String] else {return}
+            
+            for friend in friendsArray {
+                RecipeController.shared.fetchSpecificRecipesWith(userReference: friend, completion: { (recipes) in
+                    internalRecipes.append(contentsOf: recipes)
+                })
+            }
         }
-        return recipeArray
+        return internalRecipes
+    }
+    
+    var usersList: [User] {
+        var users: [User] = []
+        guard let currentUserFollowingRefs = UserController.shared.currentUser?.followingRefs else {return []}
+        for userRef in currentUserFollowingRefs {
+            UserController.shared.fetchUser(withUserRef: userRef) { (user) in
+                users.append(user)
+            }
+        }
+        return users
     }
     
     var selectedUser: User?
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipesList.count
     }
+    
     //dont forget to change reuseIdentifier
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userFeedRecipeCell", for: indexPath) as? UserFeedTableViewCell
         cell?.delegate = self
-        let recipe = recipesList[indexPath.row]
-        cell?.recipe = recipe
+        cell?.recipe = recipesList[indexPath.row]
+        cell?.user = usersList[indexPath.row]
         return cell ?? UITableViewCell()
     }
-    
-    
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,7 +75,8 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
 }
     
     func userRefSent(userRef: String) {
-        guard let user = UserController.shared.users[userRef] else {return}
-        self.selectedUser = user
+        UserController.shared.fetchUser(withUserRef: userRef) { (user) in
+            self.selectedUser = user
+        }
     }
 }
