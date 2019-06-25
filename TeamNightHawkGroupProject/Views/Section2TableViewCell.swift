@@ -9,7 +9,6 @@
 import UIKit
 protocol stepCellDelegate {
     func addSteps(step: String)
-    func increaseStepRows(rowCount: Int)
     func refreshStepData()
 }
 
@@ -61,9 +60,8 @@ class Section2TableViewCell: UITableViewCell {
     }()
     
     @objc func addButtonTapped(){
-        stepDelegate?.increaseStepRows(rowCount: 1)
+        
         stepDelegate?.refreshStepData()
-        AddRecipeTableViewController().tableView.reloadData()
         guard let steps = directionSteps.text else {return}
         stepDelegate?.addSteps(step: steps)
         
