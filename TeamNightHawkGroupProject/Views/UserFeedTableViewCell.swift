@@ -46,6 +46,7 @@ class UserFeedTableViewCell: UITableViewCell {
         guard let recipeID = recipe?.recipeID else {return}
         RecipeController.shared.addRecipeToUsersSavedList(WithRecipeID: recipeID)
     }
+    
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
     }
     
