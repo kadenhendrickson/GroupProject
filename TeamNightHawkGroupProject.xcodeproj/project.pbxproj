@@ -68,6 +68,7 @@
 		DC4BC2CD22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */; };
 		DC4BC2CF22BD2435001B20EE /* SavedRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */; };
 		DC4BC2D122BD4BD1001B20EE /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */; };
+		DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +136,7 @@
 		DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewedUserRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				DC1A861522C14E3100740F5D /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				DC1A861722C14E3100740F5D /* gRPC-Core.framework in Frameworks */,
 				DC1A862222C14E3100740F5D /* FirebaseInstanceID.framework in Frameworks */,
+				DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */,
 				DC1A861922C14E3100740F5D /* gRPC-C++.framework in Frameworks */,
 				DC1A861C22C14E3100740F5D /* Protobuf.framework in Frameworks */,
 			);
@@ -270,6 +273,7 @@
 		DC1A860322C14E1400740F5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */,
 				DC1A860522C14E3000740F5D /* BoringSSL-GRPC.framework */,
 				DC1A860D22C14E3100740F5D /* FIRAnalyticsConnector.framework */,
 				DC1A860A22C14E3100740F5D /* Firebase.framework */,
