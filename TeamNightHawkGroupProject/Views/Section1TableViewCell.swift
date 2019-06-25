@@ -72,6 +72,7 @@ class Section1TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "0"
+        text.backgroundColor = backGround
         
         return text
     }()
@@ -80,6 +81,8 @@ class Section1TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Teaspoon"
+        text.backgroundColor = backGround
+
         
         return text
     }()
@@ -88,6 +91,8 @@ class Section1TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Ingredient"
+        text.backgroundColor = backGround
+
 
         return text
     }()

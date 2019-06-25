@@ -55,6 +55,8 @@ class Section2TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Step-by-step directions"
+        text.backgroundColor = backGround
+
         
         return text
     }()

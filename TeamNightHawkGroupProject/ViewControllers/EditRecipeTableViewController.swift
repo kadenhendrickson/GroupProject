@@ -17,6 +17,7 @@ class EditRecipeTableViewController: UITableViewController {
     @IBOutlet weak var servingTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var rearrangeButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var recipe: Recipe?
     //    {
@@ -47,6 +48,9 @@ class EditRecipeTableViewController: UITableViewController {
         servingTextField.text = recipe.servings
         prepTimeTextField.text = recipe.prepTime
         rearrangeButton.isHidden = true
+        deleteButton.backgroundColor = buttonBackground
+        
+        
     }
     
     

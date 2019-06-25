@@ -336,6 +336,7 @@
                         <outlet property="nameTextField" destination="zBz-4j-35O" id="WPj-jJ-LDC"/>
                         <outlet property="prepTimeTextField" destination="9iw-aT-IkD" id="lOL-ar-vBG"/>
                         <outlet property="recipeImage" destination="rhw-Rq-Ol3" id="77d-Qk-DCh"/>
+                        <outlet property="saveButton" destination="WKY-Kk-3U2" id="WIt-oY-GJY"/>
                         <outlet property="servingTextField" destination="ExB-fn-5pV" id="iu3-4N-GJC"/>
                         <segue destination="eFU-N5-vJh" kind="show" identifier="toTabBar" id="Tjl-vf-46f"/>
                     </connections>
