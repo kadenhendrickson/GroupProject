@@ -16,6 +16,7 @@ class AddRecipeTableViewController: UITableViewController {
     @IBOutlet weak var prepTimeTextField: UITextField!
     @IBOutlet weak var imageSelector: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var saveButton: UIButton!
     
     
     var imagePicker = ImagePickerHelper()
@@ -48,6 +49,8 @@ class AddRecipeTableViewController: UITableViewController {
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
         imageSelector.setTitle("Click to add image", for: .normal)
+        saveButton.backgroundColor = buttonBackground
+        
     }
     
     @IBAction func clearButtonTapped(_ sender: Any) {

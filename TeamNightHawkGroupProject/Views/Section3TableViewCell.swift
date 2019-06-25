@@ -51,6 +51,8 @@ class Section3TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "tags"
+        text.backgroundColor = backGround
+
         
         return text
     }()
