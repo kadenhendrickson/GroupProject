@@ -17,13 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        UserController.shared.createUser(withEmail: "kadenhendrickson4@gmail.com", displayName: "kadenHendrickson", biography: "I am a person", profileImage: UIImage(named: "AnneCelery"))
+        
+        
 //        MockData.shared.resetMockData()
-        MockData.shared.loadUser()
-        MockData.shared.printDummyInfo()
-        
-        let randomUser = UserController.shared.users.randomElement()?.value
-        UserController.shared.currentUser = randomUser
-        
+//        MockData.shared.loadUser()
+//        MockData.shared.printDummyInfo()
+//        
+//        let randomUser = UserController.shared.users.randomElement()?.value
+//        UserController.shared.currentUser = randomUser
+//        
         //MockData.shared.chooseDummyUser(withName: "bigBeardShane")
         
         return true

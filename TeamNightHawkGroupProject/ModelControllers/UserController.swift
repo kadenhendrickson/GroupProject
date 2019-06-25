@@ -16,17 +16,13 @@ class UserController {
     
     //var users: [String:User] = [:]
     //database
-    let db = Firestore.firestore()
+    lazy var db = Firestore.firestore()
     var userListener: ListenerRegistration!
     
     /**
      This get assigned when a new user is created.
      */
-    var currentUser: User? {
-        didSet {
-            RecipeController.shared.currentUser = self.currentUser
-        }
-    }
+    var currentUser: User?
     //MARK: - CRUDs
     func createUser(withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?){
         let user = User(email: email, displayName: displayName, biography: biography, profileImage: image)
@@ -34,6 +30,24 @@ class UserController {
         let userRef = db.collection("Users")
         let userDictionary = user.dictionaryRepresentation
         userRef.document(user.userID).setData(userDictionary)
+        currentUser = user
+    }
+    
+    func fetchUser(withUserRef ref: String, completion: @escaping (User) -> Void) {
+        let userReference = db.collection("Users").document(ref)
+        userListener = userReference.addSnapshotListener({ (snapshot, error) in
+            if let error = error {
+                print("There was an error fetching user: \(error.localizedDescription)")
+            }
+            guard let data = snapshot?.data() else {return;}
+            let email = data["email"] as? String ?? ""
+            let displayName = data["displayName"] as? String ?? ""
+            let biography = data["biography"] as? String ?? ""
+            let profileImage = data["profileImage"] as? Data?
+            let user = User(email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
+            completion(user)
+        })
+        
     }
     
     func updateUser(withID userID: String, email: String, displayName: String, biography: String, profileImage: UIImage?){

@@ -31,13 +31,14 @@ class RecipeController {
         let recipeRef = db.collection("Recipes")
         let recipeDictionary = recipe.dictionaryRepresentation
         recipeRef.document(recipe.recipeID).setData(recipeDictionary)
-        currentUser.recipesRef.append(recipe.recipeID)
+        db.collection("Users").document(currentUser.userID).updateData(["recipesRef" : FieldValue.arrayUnion([recipe.recipeID])])
+        currentUser.recipesRef.append(recipe.recipeID) 
     }
     
-    func fetchRecipes(completion: @escaping ([Recipe]) -> Void) {
+    func fetchSpecificRecipesWith(userReference: String, completion: @escaping ([Recipe]) -> Void) {
         let recipeReference = db.collection("Recipes")
         var recipesArray: [Recipe] = []
-        recipeListener = recipeReference.order(by: "userReference").addSnapshotListener({ (snapshot, error) in
+        recipeListener = recipeReference.whereField("userReference", isEqualTo: userReference).order(by: "userReference").addSnapshotListener({ (snapshot, error) in
             if let error = error {
                 print("There was an error fetching recipes: \(error.localizedDescription)")
             }
@@ -59,6 +60,56 @@ class RecipeController {
         })
     }
     
+    func fetchExploreRecipes(completion: @escaping ([Recipe]) -> Void) {
+        let recipeReference = db.collection("Recipes")
+        var recipesArray: [Recipe] = []
+        recipeListener = recipeReference.order(by: "saveCount").limit(to: 20).addSnapshotListener({ (snapshot, error) in
+            if let error = error {
+                print("There was an error fetching recipes: \(error.localizedDescription)")
+            }
+            guard let documents = snapshot?.documents else {return; completion([])}
+            for document in documents {
+                let data = document.data()
+                let userReference = data["userReference"] as? String ?? ""
+                let name = data["name"] as? String ?? ""
+                let image = data["image"] as? Data?
+                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+                let steps = data["steps"] as? [String] ?? [""]
+                let prepTime = data["prepTime"] as? String ?? ""
+                let servings = data["servings"] as? String ?? ""
+                let tags = data["tags"] as? [String] ?? []
+                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                recipesArray.append(recipe)
+            }
+            completion(recipesArray)
+        })
+    }
+    
+    func fetchRecipesWith(recipeReferences: [String], completion: @escaping ([Recipe]) -> Void) {
+        var recipesArray: [Recipe] = []
+        for recipeRef in recipeReferences {
+            let recipeReference = db.collection("Recipes").document(recipeRef)
+            recipeListener = recipeReference.addSnapshotListener({ (snapshot, error) in
+                if let error = error {
+                    print("There was an error fetching recipes: \(error.localizedDescription)")
+                }
+                guard let data = snapshot?.data() else {return; completion([])}
+                    let userReference = data["userReference"] as? String ?? ""
+                    let name = data["name"] as? String ?? ""
+                    let image = data["image"] as? Data?
+                    let ingredients = data["ingredients"] as? [Ingredient] ?? []
+                    let steps = data["steps"] as? [String] ?? [""]
+                    let prepTime = data["prepTime"] as? String ?? ""
+                    let servings = data["servings"] as? String ?? ""
+                    let tags = data["tags"] as? [String] ?? []
+                    let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                
+                recipesArray.append(recipe)
+            })
+        }
+        completion(recipesArray)
+    }
+    
     
     func deleteRecipeWith(recipeID: String) {
         db.collection("Recipes").document(recipeID).delete()
@@ -70,26 +121,28 @@ class RecipeController {
             "name" : name,
             "image" : image,
             "ingredients" : ingredients,
-            "steps" : steps,
-            "tags" : tags ])
+            "steps" : steps ?? "",
+            "tags" : tags ?? "" ])
     }
     
     func addRecipeToUsersSavedList(WithRecipeID id: String) {
         guard let currentUser = currentUser else {return}
         
-        #warning("access current users spot on firebase and remove remotely")
         currentUser.savedRecipeRefs.append(id)
-        db.collection("Recipes").document(id).updateData(["savedByUsers" : FieldValue.arrayUnion([id])])
+        db.collection("Users").document(currentUser.userID).updateData(["savedRecipeRefs" : FieldValue.arrayUnion([id])])
+        db.collection("Recipes").document(id).updateData(["savedByUsers" : FieldValue.arrayUnion([currentUser.userID])])
     }
-    #warning("fix after you build users top level")
+    
+    
     func deleteRecipeFromUsersSavedList(WithRecipeID id: String) {
-        let recipeRef = db.collection("Recipes").document(id)
-        guard let recipeIndexOnUser = currentUser?.savedRecipeRefs.firstIndex(of: id),
-                let currentUser = currentUser,
-                let recipe = recipes[id],
-                let userIndexOnRecipe = recipe.savedByUsers.firstIndex(of: currentUser.userID) else {return}
+        guard let currentUser = currentUser else {return}
+        
+        db.collection("Users").document(currentUser.userID).updateData(["savedRecipeRefs" : FieldValue.arrayRemove([id])])
+        db.collection("Recipes").document(id).updateData(["savedByUsers" : FieldValue.arrayRemove([currentUser.userID])])
+        
+        guard let recipeIndexOnUser = currentUser.savedRecipeRefs.firstIndex(of: id) else {return}
+        
         currentUser.savedRecipeRefs.remove(at: recipeIndexOnUser)
-        recipe.savedByUsers.remove(at: userIndexOnRecipe)
     }
 }
 

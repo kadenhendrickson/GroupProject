@@ -33,7 +33,7 @@ class Recipe: Codable {
         self.servings = servings
         self.tags = tags
         self.savedByUsers = savedByUsers
-        self.image = image?.pngData()
+        self.image = image?.jpegData(compressionQuality: 0.5)
     }
     
     var dictionaryRepresentation: [String:Any] {

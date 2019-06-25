@@ -18,10 +18,9 @@ class UserViewedTableViewController: UITableViewController {
     }
     var userRecipes: [Recipe] {
         var recipes: [Recipe] = []
-        for (_, recipe) in RecipeController.shared.recipes {
-            if recipe.userReference == user?.userID {
-                recipes.append(recipe)
-            }
+        guard let userReference = user?.userID else {return []}
+        RecipeController.shared.fetchSpecificRecipesWith(userReference: userReference) { (userRecipes) in
+            recipes = userRecipes
         }
         return recipes
     }

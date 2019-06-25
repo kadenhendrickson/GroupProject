@@ -56,20 +56,19 @@ class RecipeDetailTableViewController: UITableViewController {
     
     func updateDetails() {
         
-        guard let recipe = recipe,
-                let imageData = recipe.image,
+        guard let recipe = recipe else {return}
+        
+        let userDoc = UserController.shared.db.collection("Users").document(recipe.userReference)
+        guard let displayName = userDoc.value(forKey: "displayName") as? String else {return}
 
-            let user = UserController.shared.users[recipe.userReference] else {return}
+//        if let profileImage = UserController.shared.users[recipe.userReference]?.profileImage {
+//            userImage.image = UIImage(data: profileImage)
+//        } else {
+//            userImage.image = UIImage(named: "ProfileDefault")
+//        }
 
-        if let profileImage = UserController.shared.users[recipe.userReference]?.profileImage {
-            userImage.image = UIImage(data: profileImage)
-        } else {
-            userImage.image = UIImage(named: "ProfileDefault")
-        }
-
-
-        userNameLabel.setTitle(user.displayName, for: .normal)
-        recipeImage.image = UIImage(data: imageData)
+        userNameLabel.setTitle(displayName, for: .normal)
+        //recipeImage.image = UIImage(data: imageData)
         nameLabel.text = recipe.name
         servingsLabel.text = recipe.servings
         prepTimeLabel.text = recipe.prepTime

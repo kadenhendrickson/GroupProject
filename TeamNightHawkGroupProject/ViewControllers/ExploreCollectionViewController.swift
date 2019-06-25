@@ -18,8 +18,8 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     //MARK: - Properties
     var recipesList: [Recipe] {
         var recipes: [Recipe] = []
-        for (_, recipe) in RecipeController.shared.recipes {
-            recipes.append(recipe)
+        RecipeController.shared.fetchExploreRecipes { (exploreRecipes) in
+            recipes = exploreRecipes
         }
         return recipes
     }
