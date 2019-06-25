@@ -94,7 +94,6 @@ class ProfileTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        print(segue.identifier)
         guard segue.identifier != "toEditProfileVC" else { return }
         
         if segue.identifier == "fromProfileToRecipeDVC"{

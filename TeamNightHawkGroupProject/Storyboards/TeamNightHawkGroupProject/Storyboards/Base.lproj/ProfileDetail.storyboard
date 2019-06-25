@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="109.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="BkY-NM-l6h">
                                         <rect key="frame" x="0.0" y="38" width="190.5" height="41"/>
@@ -79,7 +79,7 @@
                                 <rect key="frame" x="41.5" y="265.5" width="331" height="358.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-3Y-aep">
                                 <rect key="frame" x="158" y="674" width="98" height="30"/>
@@ -104,6 +104,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dYo-4L-Dts" firstAttribute="top" secondItem="GEx-sA-Kwc" secondAttribute="bottom" constant="8" id="4VC-lr-bcR"/>
                             <constraint firstItem="dYo-4L-Dts" firstAttribute="leading" secondItem="jsT-Tn-Kbg" secondAttribute="leading" constant="20" id="FbC-QX-0Jz"/>
@@ -122,6 +123,9 @@
                             <constraint firstItem="JaB-fa-2BS" firstAttribute="centerX" secondItem="3w5-gY-i7b" secondAttribute="centerX" id="zac-vh-GbW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jsT-Tn-Kbg"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WMK-cx-26q" appends="YES" id="p0s-z2-vYs"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="bioTextView" destination="fhe-ap-JKy" id="TO1-od-NU1"/>
@@ -132,6 +136,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Sh-bm-BF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WMK-cx-26q">
+                    <connections>
+                        <action selector="userTappedView:" destination="SLi-Kc-BxM" id="ywN-We-leo"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2641" y="2646"/>
         </scene>

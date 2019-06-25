@@ -16,11 +16,13 @@ class SavedRecipesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currentUser = UserController.shared.currentUser
+        tableView.reloadData()
+        tabBarController?.delegate = self
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentUser?.recipesRef.count ?? 0
+        return currentUser?.savedRecipeRefs.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,4 +50,11 @@ class SavedRecipesTableViewController: UITableViewController {
         }
     }
 
+}
+
+extension SavedRecipesTableViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        currentUser = UserController.shared.currentUser
+        tableView.reloadData()
+    }
 }
