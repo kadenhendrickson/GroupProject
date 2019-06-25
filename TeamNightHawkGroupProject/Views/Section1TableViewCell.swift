@@ -11,7 +11,7 @@ import UIKit
 //Need Function to tap button
 protocol ingredientCellDelegate {
     func addIngredient(ingredientName: String, measurementQuantity: String, measurementType: String)
-    func increaseRows(rowCount: Int)
+    
     func refreshIngredientData()
 }
 
@@ -93,15 +93,19 @@ class Section1TableViewCell: UITableViewCell {
     }()
     
     @objc func addButtonTapped(){
-        
-        ingredientDelegate?.increaseRows(rowCount: 1)
-        ingredientDelegate?.refreshIngredientData()
+       
         guard let name = ingredientLabel.text,
             let measurmentName = measuremenTypeLabel.text,
             let measurementQuantity = measurementQuantityLabel.text
             else {return}
+        
+        ingredientDelegate?.refreshIngredientData()
+        
         ingredientDelegate?.addIngredient(ingredientName: name, measurementQuantity: measurementQuantity, measurementType: measurmentName)
+        
+        print("🏚🏚🏚🏚🏚🏚🏚🏚🏚🏚")
     }
+    
     
     lazy var addSection: UIButton = {
         let button = UIButton()
@@ -123,6 +127,15 @@ class Section1TableViewCell: UITableViewCell {
         stackView.spacing = 8
         return stackView
     }()
+//    func alertUser(withMessage message: String){
+//        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//
+//        alertController.addAction(cancelAction)
+//
+//        self.present(alertController, animated: true)
+//    }
 }
 
 extension Section1TableViewCell: UITextFieldDelegate{

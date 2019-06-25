@@ -184,32 +184,48 @@ class AddRecipeTableViewController: UITableViewController {
 extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate, tagCellDelegate {
 
     func addTag(tag: String) {
-        tags.append(tag)
-    }
-    func increaseTagRows(rowCount: Int) {
+        if tag == "" {
+            alertUser(withMessage: "Please add a tag")
+        } else {
         tagRows += 1
+        tags.append(tag)
+            refreshTagData()
+        }
     }
+
     func refreshTagData() {
         tableView.reloadData()
     }
     
     func addSteps(step: String) {
-        steps.append(step)
+        if step == "" {
+            alertUser(withMessage: "Please provide a step")
+        } else {
+            stepRows += 1
+            steps.append(step)
+            refreshStepData()
+        }
     }
-    func increaseStepRows(rowCount: Int) {
-        stepRows += rowCount
-    }
+    
     func refreshStepData() {
         tableView.reloadData()
     }
     
     func addIngredient(ingredientName: String, measurementQuantity: String, measurementType: String) {
-       let newIngredient = Ingredient(name: ingredientName, measurementName: measurementType, measurementQuantity: measurementQuantity)
-        ingredients.append(newIngredient)
+        let newIngredient = Ingredient(name: ingredientName, measurementName: measurementType, measurementQuantity: measurementQuantity)
+        if ingredientName == "" {
+            alertUser(withMessage: "Please provide an Ingredient")
+        }else if measurementQuantity == "" {
+            alertUser(withMessage: "Please provide a quantity")
+        } else if measurementType == "" {
+            alertUser(withMessage: "Please provide a measurement type")
+        } else {
+            ingredients.append(newIngredient)
+            ingredientRows += 1
+            refreshIngredientData()
+        }
     }
-    func increaseRows(rowCount: Int) {
-        ingredientRows += rowCount
-    }
+    
     func refreshIngredientData() {
         tableView.reloadData()
     }

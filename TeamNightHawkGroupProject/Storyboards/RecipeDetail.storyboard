@@ -93,7 +93,6 @@
                                         <segment title="Tags"/>
                                     </segments>
                                     <connections>
-                                        <action selector="editRecipeSegmentTapped:" destination="hvQ-lp-SG6" eventType="valueChanged" id="ZE2-9F-jfj"/>
                                         <action selector="segmentControllerTapped:" destination="hvQ-lp-SG6" eventType="valueChanged" id="NK3-FC-efO"/>
                                         <action selector="segmentDetailControllerTapped:" destination="q52-xY-s8f" eventType="valueChanged" id="qEO-PY-VqA"/>
                                     </connections>
@@ -105,6 +104,13 @@
                                         <action selector="editImageTapped:" destination="hvQ-lp-SG6" eventType="touchUpInside" id="zgS-lP-JT2"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmv-Ui-W3S">
+                                    <rect key="frame" x="150" y="505" width="114" height="30"/>
+                                    <state key="normal" title="Rearrange Steps"/>
+                                    <connections>
+                                        <action selector="rearrangeStepsButtonTapped:" destination="hvQ-lp-SG6" eventType="touchUpInside" id="7SE-tN-6dE"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -112,9 +118,11 @@
                                 <constraint firstItem="XwG-Q2-ImY" firstAttribute="top" secondItem="6vM-La-e5q" secondAttribute="bottom" constant="8" id="3Sz-W0-UNB"/>
                                 <constraint firstItem="6vM-La-e5q" firstAttribute="centerX" secondItem="2d8-c6-Jbm" secondAttribute="centerX" id="8Qw-DU-ila"/>
                                 <constraint firstItem="XwG-Q2-ImY" firstAttribute="centerX" secondItem="2d8-c6-Jbm" secondAttribute="centerX" id="ONU-Q4-zzL"/>
+                                <constraint firstItem="Fmv-Ui-W3S" firstAttribute="centerX" secondItem="2d8-c6-Jbm" secondAttribute="centerX" id="SSw-Gn-cbH"/>
                                 <constraint firstItem="ApZ-AJ-SlE" firstAttribute="centerX" secondItem="2d8-c6-Jbm" secondAttribute="centerX" id="eKe-VP-dHb"/>
                                 <constraint firstItem="ApZ-AJ-SlE" firstAttribute="top" secondItem="2d8-c6-Jbm" secondAttribute="top" constant="20" id="f5I-gw-uxh"/>
                                 <constraint firstItem="ApZ-AJ-SlE" firstAttribute="width" secondItem="2d8-c6-Jbm" secondAttribute="width" multiplier="0.8" id="mGY-mC-btW"/>
+                                <constraint firstItem="Fmv-Ui-W3S" firstAttribute="top" secondItem="XwG-Q2-ImY" secondAttribute="bottom" constant="8" id="oh1-8j-Kao"/>
                                 <constraint firstItem="6vM-La-e5q" firstAttribute="top" secondItem="YLy-GK-05W" secondAttribute="bottom" constant="8" id="qrX-RJ-iTA"/>
                                 <constraint firstItem="YLy-GK-05W" firstAttribute="centerX" secondItem="2d8-c6-Jbm" secondAttribute="centerX" id="rhy-Ch-o7g"/>
                                 <constraint firstItem="YLy-GK-05W" firstAttribute="width" secondItem="2d8-c6-Jbm" secondAttribute="width" multiplier="0.25" id="z1S-H1-dHO"/>
@@ -138,6 +146,7 @@
                         <outlet property="editImageButton" destination="YLy-GK-05W" id="QIn-Uk-Rzn"/>
                         <outlet property="nameTextField" destination="sOA-92-rPn" id="9LK-zg-UIM"/>
                         <outlet property="prepTimeTextField" destination="Dd4-Kl-rua" id="6Mp-cd-ooR"/>
+                        <outlet property="rearrangeButton" destination="Fmv-Ui-W3S" id="2Ea-B4-gIY"/>
                         <outlet property="recipeImage" destination="ApZ-AJ-SlE" id="Ohq-ap-LAd"/>
                         <outlet property="servingTextField" destination="Z7q-kL-HOC" id="fjH-S6-3jO"/>
                     </connections>
