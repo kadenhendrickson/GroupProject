@@ -7,6 +7,21 @@
 //
 
 import UIKit
+import Firebase
+
+struct RecipeKeys {
+    static let userReferenceKey = "userReference"
+    static let recipeIDKey = "recipeID"
+    static let nameKey = "name"
+    static let imageKey = "image"
+    static let ingredientsKey = "ingredients"
+    static let stepsKey = "steps"
+    static let prepTimeKey = "prepTime"
+    static let servingsKey = "servings"
+    static let tagsKey = "tags"
+    static let savedByUsersKey = "savedByUsers"
+    static let saveCountKey = "saveCount"
+}
 
 class Recipe: Codable {
     let userReference: String
@@ -35,6 +50,27 @@ class Recipe: Codable {
         self.savedByUsers = savedByUsers
         self.image = image?.jpegData(compressionQuality: 0.1)
     }
+    
+    // Init from firestore's document
+    convenience init?(document: QueryDocumentSnapshot) {
+         guard let userReference = document[RecipeKeys.userReferenceKey] as? String,
+            let recipeId = document[RecipeKeys.recipeIDKey] as? String,
+            let name = document[RecipeKeys.nameKey] as? String,
+            let image = document[RecipeKeys.imageKey] as? Data?,
+            let ingredients = document[RecipeKeys.ingredientsKey] as? [Ingredient],
+            let steps = document[RecipeKeys.stepsKey] as? [String],
+            let prepTime = document[RecipeKeys.prepTimeKey] as? String,
+            let servings = document[RecipeKeys.servingsKey] as? String,
+            let tags = document[RecipeKeys.tagsKey] as? [String],
+            let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String],
+            let savecount = document[RecipeKeys.saveCountKey] as? Int else {
+                print("🍒 Failed to create a recipe from snapshot. Printing from \(#function) \n In \(String(describing: Recipe.self)) 🍒")
+                return nil
+        }
+        
+        self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image!) ?? UIImage(named: "AnneCelery"), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers)
+    }
+    
     
     var dictionaryRepresentation: [String:Any] {
         return ["userReference": userReference,

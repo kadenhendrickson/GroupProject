@@ -21,6 +21,7 @@ struct UserKeys {
     static let followedByRefsKey = "followedByRefs"
     static let followingRefsKey = "followingRefs"
     static let blockedUserRefsKey = "blockedUserRefs"
+    static let dictionaryRepresentationKey = "dictionaryRepresentation"
 }
 
 class User: Codable {
@@ -63,6 +64,7 @@ class User: Codable {
                 "blockedUserRefs" : blockedUserRefs ]
     }
     
+    // take in document (dictionary of string to any) and then create a user
     convenience init?(document: QueryDocumentSnapshot) {
         guard let userID = document[UserKeys.userIDKey] as? String,
             let recipeRef = document[UserKeys.recipesRefKey] as? [String],
@@ -87,12 +89,4 @@ extension User: Equatable {
     }
     
 }
-
-// take in dictionary of string to any and then create a user
-//extension NSURLQueryItem {
-//    convenience init(user: User) {
-//        self.init(
-//        userRef.document(user.userID).setData(userDictionary)
-//    }
-//}
 
