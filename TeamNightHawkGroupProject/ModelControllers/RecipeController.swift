@@ -34,10 +34,12 @@ class RecipeController {
     func fetchSpecificRecipesWith(userReference: String, completion: @escaping ([Recipe]) -> Void) {
         let recipeReference = db.collection("Recipes")
         var recipesArray: [Recipe] = []
-        recipeListener = recipeReference.whereField("userReference", isEqualTo: userReference).order(by: "userReference").addSnapshotListener({ (snapshot, error) in
+        
+        recipeReference.whereField("userReference", isEqualTo: userReference).getDocuments { (snapshot, error) in
             if let error = error {
                 print("There was an error fetching recipes: \(error.localizedDescription)")
             }
+            
             guard let documents = snapshot?.documents else {completion([]); return}
             for document in documents {
                 let data = document.data()
@@ -53,13 +55,36 @@ class RecipeController {
                 recipesArray.append(recipe)
             }
             completion(recipesArray)
-        })
+        }
     }
+//        recipeListener = recipeReference.whereField("userReference", isEqualTo: userReference).order(by: "userReference").addSnapshotListener({ (snapshot, error) in
+//            if let error = error {
+//                print("There was an error fetching recipes: \(error.localizedDescription)")
+//            }
+//
+//
+//            guard let documents = snapshot?.documents else {completion([]); return}
+//            for document in documents {
+//                let data = document.data()
+//                let userReference = data["userReference"] as? String ?? ""
+//                let name = data["name"] as? String ?? ""
+//                let image = data["image"] as? Data?
+//                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+//                let steps = data["steps"] as? [String] ?? [""]
+//                let prepTime = data["prepTime"] as? String ?? ""
+//                let servings = data["servings"] as? String ?? ""
+//                let tags = data["tags"] as? [String] ?? []
+//                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+//                recipesArray.append(recipe)
+//            }
+//            completion(recipesArray)
+//        })
+    
     
     func fetchExploreRecipes(completion: @escaping ([Recipe]) -> Void) {
         let recipeReference = db.collection("Recipes")
         var recipesArray: [Recipe] = []
-        recipeListener = recipeReference.order(by: "saveCount").limit(to: 20).addSnapshotListener({ (snapshot, error) in
+        recipeReference.limit(to: 20).getDocuments { (snapshot, error) in
             if let error = error {
                 print("There was an error fetching recipes: \(error.localizedDescription)")
             }
@@ -78,8 +103,30 @@ class RecipeController {
                 recipesArray.append(recipe)
             }
             completion(recipesArray)
-        })
+        }
     }
+        
+//        recipeListener = recipeReference.order(by: "saveCount").limit(to: 20).addSnapshotListener({ (snapshot, error) in
+//            if let error = error {
+//                print("There was an error fetching recipes: \(error.localizedDescription)")
+//            }
+//            guard let documents = snapshot?.documents else {completion([]); return}
+//            for document in documents {
+//                let data = document.data()
+//                let userReference = data["userReference"] as? String ?? ""
+//                let name = data["name"] as? String ?? ""
+//                let image = data["image"] as? Data?
+//                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+//                let steps = data["steps"] as? [String] ?? [""]
+//                let prepTime = data["prepTime"] as? String ?? ""
+//                let servings = data["servings"] as? String ?? ""
+//                let tags = data["tags"] as? [String] ?? []
+//                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+//                recipesArray.append(recipe)
+//            }
+//            completion(recipesArray)
+//        })
+//    }
     
     func fetchRecipesWith(recipeReferences: [String], completion: @escaping ([Recipe]) -> Void) {
         var recipesArray: [Recipe] = []

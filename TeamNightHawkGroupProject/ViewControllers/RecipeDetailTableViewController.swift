@@ -19,6 +19,7 @@ class RecipeDetailTableViewController: UITableViewController {
     
     
     var recipe: Recipe?
+    var user: User?
     var recipeSegmentIndex: Int = 1
     
     
@@ -31,6 +32,9 @@ class RecipeDetailTableViewController: UITableViewController {
         updateDetails()
     }
    
+    @IBAction func userNameLabelButtonTapped(_ sender: UIButton) {
+      
+    }
     
     @IBAction func segmentDetailControllerTapped(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -59,19 +63,22 @@ class RecipeDetailTableViewController: UITableViewController {
         guard let recipe = recipe else {return}
         
         let userDoc = UserController.shared.db.collection("Users").document(recipe.userReference)
-        guard let displayName = userDoc.value(forKey: "displayName") as? String else {return}
-
-//        if let profileImage = UserController.shared.users[recipe.userReference]?.profileImage {
-//            userImage.image = UIImage(data: profileImage)
-//        } else {
-//            userImage.image = UIImage(named: "ProfileDefault")
-//        }
-
-        userNameLabel.setTitle(displayName, for: .normal)
-        //recipeImage.image = UIImage(data: imageData)
-        nameLabel.text = recipe.name
-        servingsLabel.text = recipe.servings
-        prepTimeLabel.text = recipe.prepTime
+        
+        userDoc.getDocument { (snapshot, error) in
+            if let error = error {
+                print("There was an error fetching your user document: \(error.localizedDescription)")
+            }
+            guard let data = snapshot?.data(),
+            let imageData = recipe.image else {return}
+            
+            let displayName = data["displayName"] as? String ?? ""
+            self.userNameLabel.setTitle(displayName, for: .normal)
+            self.recipeImage.image = UIImage(data: imageData)
+            self.nameLabel.text = recipe.name
+            self.servingsLabel.text = recipe.servings
+            self.prepTimeLabel.text = recipe.prepTime
+        }
+       
     }
     
 
