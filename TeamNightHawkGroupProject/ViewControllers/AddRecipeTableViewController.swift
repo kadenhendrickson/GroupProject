@@ -45,6 +45,11 @@ class AddRecipeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        nameTextField.delegate = self
+        servingTextField.delegate = self
+        servingTextField.delegate = self
+        prepTimeTextField.delegate = self
+        
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
@@ -117,6 +122,10 @@ class AddRecipeTableViewController: UITableViewController {
     }
     
     @IBAction func userTappedView(_ sender: Any) {
+        nameTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        prepTimeTextField.resignFirstResponder()
     }
     //MARK: - Table view data source
     
@@ -242,4 +251,16 @@ extension AddRecipeTableViewController: ImagePickerHelperDelegate {
         imageSelector.setTitle("", for: .normal)
     }
     
+}
+
+extension AddRecipeTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
