@@ -45,13 +45,16 @@ class UserController {
             print("There was an error fetching user: \(error.localizedDescription)")
         }
             //still creates a new user object
-        guard let data = snapshot?.data() else {return;}
-        let userID = data["userID"] as? String ?? ""
-        let email = data["email"] as? String ?? ""
-        let displayName = data["displayName"] as? String ?? ""
-        let biography = data["biography"] as? String ?? ""
-        let profileImage = data["profileImage"] as? Data?
-        let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
+        guard let data = snapshot?.data(),
+            let user = User(document: data)
+            else {return}
+            
+//        let userID = data["userID"] as? String ?? ""
+//        let email = data["email"] as? String ?? ""
+//        let displayName = data["displayName"] as? String ?? ""
+//        let biography = data["biography"] as? String ?? ""
+//        let profileImage = data["profileImage"] as? Data?
+//        let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
         
         completion(user)
         return

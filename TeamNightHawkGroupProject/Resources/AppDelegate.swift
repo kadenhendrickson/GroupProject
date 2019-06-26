@@ -12,9 +12,9 @@ import FirebaseAuth
 
 
 struct MockUserKey {
-    static let kaden = "4B734484-DC96-4C5D-A6C3-90ABA6697750"
-    static let anne = "EADE9A7A-2443-4B8E-A557-58BFCD1EEA02"
-    static let shane = "4F67515D-C1E9-40AA-A522-771A1688C1A5"
+    static let kaden = "pnXJGm7J6fh9vUXmLAfPhUBgc4o2"
+    static let anne = "Tki8M3Tj6ZPZ9iMf4WHcr0TeBVf1"
+    static let shane = "mX7fv1uwlyNAU6eHpdvL7ahf4Bi1"
 }
 
 

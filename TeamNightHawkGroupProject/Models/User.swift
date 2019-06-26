@@ -65,7 +65,7 @@ class User: Codable {
     }
     
     // take in document (dictionary of string to any) and then create a user
-    convenience init?(document: QueryDocumentSnapshot) {
+    convenience init?(document: [String : Any]) {
         guard let userID = document[UserKeys.userIDKey] as? String,
             let recipeRef = document[UserKeys.recipesRefKey] as? [String],
             let savedRecipeRefs = document[UserKeys.savedRecipeRefsKey] as? [String],
