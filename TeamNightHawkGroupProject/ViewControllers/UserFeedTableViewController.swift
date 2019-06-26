@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate {
     //MARK: - Properties
@@ -29,6 +30,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         return internalRecipes
     }
     
+    private var handle: AuthStateDidChangeListenerHandle?
     var usersList: [User] {
         var users: [User] = []
         guard let currentUserFollowingRefs = UserController.shared.currentUser?.followingRefs else {return []}
@@ -44,6 +46,17 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
+            if user == nil {
+                let storybord = UIStoryboard(name: "Login", bundle: nil)
+                let loginVC = storybord.instantiateViewController(withIdentifier: "SignIn")
+                self.present(loginVC, animated: true, completion: nil)
+            } 
+        })
     }
     
     // MARK: - Table view data source
