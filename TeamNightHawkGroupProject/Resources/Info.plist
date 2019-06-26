@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow camera to take picture of your food.</string>
+	<key>NSPhotoLibraryUsageDescription </key>
+	<string>Allow selecting food image from library.</string>
 </dict>
 </plist>
