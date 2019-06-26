@@ -64,7 +64,7 @@ class CreateUserViewController: UIViewController {
             UserController.shared.createUser(userID: userID, withEmail: email, displayName: displayName, biography: biography, profileImage: profileImage, completion: { (success) in
                 if success {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let signUpViewController = storyboard.instantiateViewController(withIdentifier: "feedController")
+                    let signUpViewController = storyboard.instantiateViewController(withIdentifier: "tabController")
                     UIApplication.shared.windows.first?.rootViewController = signUpViewController
                 }
             })
