@@ -34,6 +34,8 @@ class EditProfileViewController: UIViewController {
         //clear data
     }
     @IBAction func userTappedView(_ sender: Any) {
+        bioTextView.resignFirstResponder()
+        displayNameTextField.resignFirstResponder()
     }
     
     @IBAction func changeImageButtonTapped(_ sender: Any) {
@@ -94,4 +96,23 @@ extension EditProfileViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+
+extension EditProfileViewController: UITextViewDelegate {
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.resignFirstResponder()
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        return true
+    }
+
 }
