@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate {
     //MARK: - Properties
-    var recipesList: [Recipe] {
+    var recipesList: [Recipe] = {
         guard let currentUser = UserController.shared.currentUser else {return []}
         var internalRecipes: [Recipe] = []
         UserController.shared.db.collection("Users").document(currentUser.userID).getDocument { (snapshot, error) in
@@ -28,12 +28,12 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
             }
         }
         return internalRecipes
-    }
+    }()
     
     private var handle: AuthStateDidChangeListenerHandle?
     
     //properties
-    var usersList: [User] {
+    var usersList: [User] = {
         var users: [User] = []
         guard let currentUserFollowingRefs = UserController.shared.currentUser?.followingRefs else {return []}
         for userRef in currentUserFollowingRefs {
@@ -42,28 +42,18 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
             }
         }
         return users
-    }
+    }()
     
     var selectedUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
-            if user == nil {
-                let storybord = UIStoryboard(name: "Login", bundle: nil)
-                let loginVC = storybord.instantiateViewController(withIdentifier: "SignIn")
-                self.present(loginVC, animated: true, completion: nil)
-            } else {
-                guard let userRef = user?.uid else {return}
-                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
-                    UserController.shared.currentUser = user
-                })
-            }
-        })
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source

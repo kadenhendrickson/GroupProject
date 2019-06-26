@@ -70,6 +70,7 @@
 		DC4BC2CF22BD2435001B20EE /* SavedRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */; };
 		DC4BC2D122BD4BD1001B20EE /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */; };
 		DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */; };
+		DC924DE622C4096000D0AB5A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC924DE522C4096000D0AB5A /* FetchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,7 @@
 		DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = SOURCE_ROOT; };
+		DC924DE522C4096000D0AB5A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				DC2C1AE822BA99410098F68D /* UserFeedTableViewController.swift */,
+				DC924DE522C4096000D0AB5A /* FetchViewController.swift */,
 				9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */,
 				DC2C1AEE22BAB3990098F68D /* ExploreCollectionViewController.swift */,
 				DC2C1AF022BAB3B40098F68D /* SignInViewController.swift */,
@@ -426,6 +429,7 @@
 				DC2C1AF522BAB42D0098F68D /* SavedRecipesTableViewController.swift in Sources */,
 				DC2C1AE122B947FA0098F68D /* Ingredient.swift in Sources */,
 				02A7F9BD22BB52C4004DE917 /* AddTableViewCell.swift in Sources */,
+				DC924DE622C4096000D0AB5A /* FetchViewController.swift in Sources */,
 				DC2C1AE722B98A970098F68D /* IngredientsController.swift in Sources */,
 				02A7F9AD22BB0815004DE917 /* Section3TableViewCell.swift in Sources */,
 				DC2C1AF722BAB47B0098F68D /* RecipeDetailTableViewController.swift in Sources */,

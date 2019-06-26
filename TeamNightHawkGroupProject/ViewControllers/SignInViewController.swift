@@ -28,10 +28,13 @@ class SignInViewController: UIViewController {
                 print("Error signing in \(error.localizedDescription)")
                 return
             } else {
-                self.dismiss(animated: true, completion: nil)
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let signUpViewController = storyboard.instantiateViewController(withIdentifier: "feedController")
-                UIApplication.shared.windows.first?.rootViewController = signUpViewController
+                let feedViewController = storyboard.instantiateViewController(withIdentifier: "tabController")
+                UIApplication.shared.windows.first?.rootViewController = feedViewController
+                guard let userRef = result?.user.uid else {return}
+                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
+                    UserController.shared.currentUser = user
+                })
             }
         }
     }

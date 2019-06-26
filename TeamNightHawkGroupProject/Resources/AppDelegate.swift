@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 
 struct MockUserKey {
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+
+    
 
 //            UserController.shared.createUser(withEmail: "kadenhendrickson4@gmail.com", displayName: "kaden", biography: "I am a person", profileImage: UIImage(named: "AnneCelery"))
 //            RecipeController.shared.createRecipe(name: "pizza", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "1", prepTime: "1")
