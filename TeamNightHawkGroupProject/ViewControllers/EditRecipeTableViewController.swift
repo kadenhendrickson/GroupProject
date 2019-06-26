@@ -50,7 +50,8 @@ class EditRecipeTableViewController: UITableViewController {
         servingTextField.text = recipe.servings
         prepTimeTextField.text = recipe.prepTime
         rearrangeButton.isHidden = true
-        deleteButton.backgroundColor = buttonBackground
+        deleteButton.backgroundColor = yellow
+        deleteButton.layer.cornerRadius = buttonRounding
         
         
     }

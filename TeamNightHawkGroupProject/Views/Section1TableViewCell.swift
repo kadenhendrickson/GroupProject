@@ -33,6 +33,7 @@ class Section1TableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: "addRecipeCell")
         addAllSubViews()
         setUpStackView()
+        backgroundColor = green
         
         
     }
@@ -49,7 +50,7 @@ class Section1TableViewCell: UITableViewCell {
         self.addSubview(addSection)
         self.addSubview(stackView)
         contentView.addSubview(measuremenTypeLabel)
-        measuremenTypeLabel.frame = CGRect(x: self.contentView.frame.origin.x, y: self.contentView.frame.origin.y, width: 20, height: 20)
+//        measuremenTypeLabel.frame = CGRect(x: self.contentView.frame.origin.x, y: self.contentView.frame.origin.y, width: 20, height: 20)
     }
     
     func setUpStackView(){
@@ -62,7 +63,7 @@ class Section1TableViewCell: UITableViewCell {
         measuremenTypeLabel.delegate = self
         ingredientLabel.delegate = self
         
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 1, paddingBottom: 8, paddingLeading: 1, paddingTrailing: 8, width: 300, height: 32)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 10, paddingLeading: 20, paddingTrailing: 20)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
 
@@ -76,8 +77,9 @@ class Section1TableViewCell: UITableViewCell {
     let measurementQuantityLabel: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
+        text.backgroundColor = .white
         text.placeholder = "0"
-        text.backgroundColor = backGround
+        text.layer.cornerRadius = textFieldRounding
         
         return text
     }()
@@ -86,9 +88,9 @@ class Section1TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Teaspoon"
-        text.backgroundColor = backGround
+        text.backgroundColor = .white
+        text.layer.cornerRadius = textFieldRounding
 
-        
         return text
     }()
     
@@ -96,8 +98,8 @@ class Section1TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Ingredient"
-        text.backgroundColor = backGround
-
+        text.backgroundColor = .white
+        text.layer.cornerRadius = textFieldRounding
 
         return text
     }()

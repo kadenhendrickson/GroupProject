@@ -53,7 +53,7 @@ class Section3TableViewCell: UITableViewCell {
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "tags"
         text.backgroundColor = backGround
-
+        text.layer.cornerRadius = textFieldRounding
         
         return text
     }()
