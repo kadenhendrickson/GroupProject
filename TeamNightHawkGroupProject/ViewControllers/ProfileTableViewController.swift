@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileTableViewController: UITableViewController {
     
@@ -35,6 +36,17 @@ class ProfileTableViewController: UITableViewController {
         updateViews()
     }
     
+    @IBAction func signOutButtonTapped(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do{
+            try firebaseAuth.signOut()
+            let storybord = UIStoryboard(name: "Login", bundle: nil)
+            let loginVC = storybord.instantiateViewController(withIdentifier: "SignIn")
+            self.present(loginVC, animated: true, completion: nil)
+        }catch let signoutError as NSError {
+            print("Error signing out: \(signoutError.localizedDescription)")
+        }
+    }
     
     // MARK: - Methods
     func updateUserRecipes(){

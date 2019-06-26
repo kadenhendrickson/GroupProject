@@ -352,12 +352,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2702.898550724638" y="1650.6696428571429"/>
+            <point key="canvasLocation" x="1700" y="1617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Eak-eO-9PX">
             <objects>
-                <tabBarController id="eFU-N5-vJh" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabController" id="eFU-N5-vJh" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Djl-wF-S7F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -533,7 +533,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0L-FW-Ulm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7265.217391304348" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="5584" y="1617"/>
         </scene>
         <!--Profile Table View Controller-->
         <scene sceneID="00L-zY-ikQ">
@@ -770,7 +770,18 @@
                             <outlet property="delegate" destination="eph-dD-5CE" id="Aj5-d4-hGB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bbv-9O-pxB"/>
+                    <navigationItem key="navigationItem" id="bbv-9O-pxB">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="h0c-Vp-mbF">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kGY-u8-LVT">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="signOutButtonTapped:" destination="eph-dD-5CE" eventType="touchUpInside" id="jSC-NL-U3i"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bioTextLabel" destination="dyB-oe-NHe" id="mOO-vk-hub"/>
                         <outlet property="displayNameLabel" destination="HAk-de-Fvd" id="KJp-IU-Mjq"/>
@@ -781,7 +792,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCh-f6-0qB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5428.985507246377" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="3643" y="1617"/>
         </scene>
         <!--Explore-->
         <scene sceneID="54K-hO-gNb">
@@ -888,7 +899,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5JH-f5-UNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4518.840579710145" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="2781" y="1617"/>
         </scene>
         <!--Saved-->
         <scene sceneID="Ytl-0Y-0zL">
@@ -907,11 +918,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewR-j7-Pjg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6355.072463768116" y="1616.5178571428571"/>
+            <point key="canvasLocation" x="4755" y="1617"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="V0v-1b-299"/>
-        <segue reference="6Sx-iR-7Il"/>
+        <segue reference="vZv-MN-JCV"/>
+        <segue reference="nsF-ro-oZn"/>
     </inferredMetricsTieBreakers>
 </document>
