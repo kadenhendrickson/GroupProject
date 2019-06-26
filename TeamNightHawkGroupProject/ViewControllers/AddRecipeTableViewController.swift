@@ -9,6 +9,11 @@
 import UIKit
 import NotificationCenter
 
+protocol AddRecipeTableViewDelegate {
+    func userTappedView()
+}
+
+
 class AddRecipeTableViewController: UITableViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -29,6 +34,7 @@ class AddRecipeTableViewController: UITableViewController {
     var tagRows: Int = 1
     var segmentIndex: Int = 1
     
+    var delegate: AddRecipeTableViewDelegate?
     
     //MARK: - Methods
     func alertUser(withMessage message: String){
@@ -45,6 +51,11 @@ class AddRecipeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        nameTextField.delegate = self
+        servingTextField.delegate = self
+        servingTextField.delegate = self
+        prepTimeTextField.delegate = self
+        
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
@@ -117,7 +128,13 @@ class AddRecipeTableViewController: UITableViewController {
     }
     
     @IBAction func userTappedView(_ sender: Any) {
+        nameTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        prepTimeTextField.resignFirstResponder()
+        delegate?.userTappedView()
     }
+    
     //MARK: - Table view data source
     
     
@@ -147,6 +164,8 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearTextFields()
             }
             
+            self.delegate = cell
+            
             return cell
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell2", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
@@ -160,6 +179,8 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearCell()
             }
             
+            self.delegate = cell
+
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
@@ -172,6 +193,9 @@ class AddRecipeTableViewController: UITableViewController {
             if tableView.numberOfRows(inSection: 0) == 1 {
                 cell.clearText()
             }
+            
+            self.delegate = cell
+
             return cell
         }
         
@@ -242,4 +266,16 @@ extension AddRecipeTableViewController: ImagePickerHelperDelegate {
         imageSelector.setTitle("", for: .normal)
     }
     
+}
+
+extension AddRecipeTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
