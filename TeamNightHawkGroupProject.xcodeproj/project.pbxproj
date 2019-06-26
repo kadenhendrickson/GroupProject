@@ -10,6 +10,7 @@
 		0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */; };
 		0211C69722BAAE3E00D5F8C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69622BAAE3E00D5F8C6 /* Constants.swift */; };
 		0211C69922BAAED200D5F8C6 /* AnchorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */; };
+		0220528D22C2DD89000F85EE /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0220528C22C2DD89000F85EE /* FirebaseAuth.framework */; };
 		0226F25922BAD5EC00856910 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226F25822BAD5EB00856910 /* IngredientsTableViewCell.swift */; };
 		0226F25B22BAD5F900856910 /* StepsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226F25A22BAD5F900856910 /* StepsTableViewCell.swift */; };
 		02A7F9AD22BB0815004DE917 /* Section3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7F9AC22BB0815004DE917 /* Section3TableViewCell.swift */; };
@@ -75,6 +76,7 @@
 		0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section2TableViewCell.swift; sourceTree = "<group>"; };
 		0211C69622BAAE3E00D5F8C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorExtension.swift; sourceTree = "<group>"; };
+		0220528C22C2DD89000F85EE /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = SOURCE_ROOT; };
 		0226F25822BAD5EB00856910 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTableViewCell.swift; sourceTree = "<group>"; };
 		0226F25A22BAD5F900856910 /* StepsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsTableViewCell.swift; sourceTree = "<group>"; };
 		02A7F9AC22BB0815004DE917 /* Section3TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section3TableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				DC1A861A22C14E3100740F5D /* FirebaseAnalytics.framework in Frameworks */,
 				DC1A862322C14E3100740F5D /* FirebaseStorage.framework in Frameworks */,
 				DC1A861522C14E3100740F5D /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				0220528D22C2DD89000F85EE /* FirebaseAuth.framework in Frameworks */,
 				DC1A861722C14E3100740F5D /* gRPC-Core.framework in Frameworks */,
 				DC1A862222C14E3100740F5D /* FirebaseInstanceID.framework in Frameworks */,
 				DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */,
@@ -274,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */,
+				0220528C22C2DD89000F85EE /* FirebaseAuth.framework */,
 				DC1A860522C14E3000740F5D /* BoringSSL-GRPC.framework */,
 				DC1A860D22C14E3100740F5D /* FIRAnalyticsConnector.framework */,
 				DC1A860A22C14E3100740F5D /* Firebase.framework */,
