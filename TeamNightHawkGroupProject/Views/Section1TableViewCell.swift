@@ -163,7 +163,7 @@ extension Section1TableViewCell: UITextFieldDelegate {
 }
 
 
-extension Section1TableViewCell: AddRecipeTableViewDelegate {
+extension Section1TableViewCell: AddRecipeTableViewDelegate, EditRecipeTableViewDelegate {
     func userTappedView() {
         measurementQuantityLabel.resignFirstResponder()
         measuremenTypeLabel.resignFirstResponder()

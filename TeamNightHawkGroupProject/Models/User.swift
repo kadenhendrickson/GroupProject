@@ -7,6 +7,21 @@
 //
 
 import UIKit
+import Firebase
+
+struct UserKeys {
+    static let userCollectionKey = "Users" /* key in FireStore is plural */
+    static let userIDKey = "userID"
+    static let recipesRefKey = "recipeRef"
+    static let emailKey = "email"
+    static let displayNameKey = "displayName"
+    static let biographyKey = "biography"
+    static let profileImageKey = "profileImage"
+    static let savedRecipeRefsKey = "savedRecipeRefs"
+    static let followedByRefsKey = "followedByRefs"
+    static let followingRefsKey = "followingRefs"
+    static let blockedUserRefsKey = "blockedUserRefs"
+}
 
 class User: Codable {
     let userID: String
@@ -33,21 +48,37 @@ class User: Codable {
         self.profileImage = profileImage?.jpegData(compressionQuality: 0.1 )
     }
     
+    
+    
     var dictionaryRepresentation: [String : Any] {
         return ["userID" : userID,
                 "recipeRef" : recipesRef,
                 "email" : email,
                 "displayName" : displayName,
-                "biography" : biography,
-                "profileImage" : profileImage,
+                "biography" : biography ?? "",
+                "profileImage" : profileImage ?? "",
                 "savedRecipeRefs" : savedRecipeRefs,
                 "followedByRefs" : followedByRefs,
                 "followingRefs" : followingRefs,
                 "blockedUserRefs" : blockedUserRefs ]
     }
+    
+    convenience init?(document: QueryDocumentSnapshot) {
+        guard let userID = document[UserKeys.userIDKey] as? String,
+            let recipeRef = document[UserKeys.recipesRefKey] as? [String],
+            let savedRecipeRefs = document[UserKeys.savedRecipeRefsKey] as? [String],
+            let email = document[UserKeys.emailKey] as? String,
+            let displayName = document[UserKeys.displayNameKey] as? String,
+            let biography = document[UserKeys.biographyKey] as? String?,
+            let profileImage = document[UserKeys.profileImageKey] as? Data,
+            let followedByRefs = document[UserKeys.followedByRefsKey] as? [String],
+            let followingRefs = document[UserKeys.followingRefsKey] as? [String],
+            let blockedUserRefs = document[UserKeys.blockedUserRefsKey] as? [String]
+            else { print("🍒 Failed to cast all of user's property from document snapshot. Printing from \(#function) \n In \(String(describing: User.self)) 🍒"); return nil}
+        
+        self.init(userID: userID, recipesRef: recipeRef, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage), savedRecipeRefs: savedRecipeRefs, followedBy: followedByRefs, following: followingRefs, blockedUserRefs: blockedUserRefs)
+    }
 }
-
-
 
 
 extension User: Equatable {
@@ -56,3 +87,12 @@ extension User: Equatable {
     }
     
 }
+
+// take in dictionary of string to any and then create a user
+//extension NSURLQueryItem {
+//    convenience init(user: User) {
+//        self.init(
+//        userRef.document(user.userID).setData(userDictionary)
+//    }
+//}
+

@@ -16,6 +16,8 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userEmail.delegate = self
+        userPassword.delegate = self
     }
     
     @IBAction func loginUserButtonTapped(_ sender: UIButton) {
@@ -34,5 +36,21 @@ class SignInViewController: UIViewController {
     @IBAction func createUserButtonTapped(_ sender: UIButton){
         self.performSegue(withIdentifier: "toCreateUserVC", sender: nil)
         
+    }
+    
+    @IBAction func userTappedView(_ sender: Any) {
+    }
+    
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

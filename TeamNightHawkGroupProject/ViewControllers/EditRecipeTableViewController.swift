@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditRecipeTableViewDelegate {
+    func userTappedView()
+}
+
 class EditRecipeTableViewController: UITableViewController {
     
     @IBOutlet weak var recipeImage: UIImageView!
@@ -20,11 +24,7 @@ class EditRecipeTableViewController: UITableViewController {
     @IBOutlet weak var deleteButton: UIButton!
     
     var recipe: Recipe?
-    //    {
-    //        didSet {
-    //            ingredientRows = self.recipe?.ingredients.count ?? 0
-    //        }
-    //    }
+    
     
     var ingredientsArray: [Ingredient] = []
     var stepsArray: [String] = []
@@ -34,6 +34,8 @@ class EditRecipeTableViewController: UITableViewController {
     var tagRows: Int = 1
     
     var segmentIndex: Int = 1
+    
+    var delegate: EditRecipeTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,7 @@ class EditRecipeTableViewController: UITableViewController {
     }
     
     @IBAction func userTappedView(_ sender: Any) {
+        
     }
     
     @IBAction func rearrangeStepsButtonTapped(_ sender: Any) {
@@ -122,12 +125,15 @@ class EditRecipeTableViewController: UITableViewController {
                 cell.measurementQuantityLabel.isEnabled = false
                 cell.ingredientLabel.isEnabled = false
                 cell.ingredientDelegate = self
+                
+                self.delegate = cell
                 return cell
             } else {
                 if indexPath.row == recipe.ingredients.count + ingredientsArray.count {
                     cell.addSection.isHidden = false
                     cell.ingredientDelegate = self
                     cell.ingredientLabel.isEnabled = true
+                    self.delegate = cell
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -145,12 +151,16 @@ class EditRecipeTableViewController: UITableViewController {
                 cell.addSection.isHidden = true
                 cell.directionSteps.isEnabled = false
                 cell.stepDelegate = self
+                self.delegate = cell
+
                 return cell
             } else {
                 if indexPath.row == steps.count + stepsArray.count {
                     cell.addSection.isHidden = false
                     cell.stepDelegate = self
                     cell.directionSteps.isEnabled = true
+                    self.delegate = cell
+
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -167,12 +177,16 @@ class EditRecipeTableViewController: UITableViewController {
                 cell.addSection.isHidden = true
                 cell.tagDelegate = self
                 cell.tags.isEnabled = false
+                self.delegate = cell
+
                 return cell
             } else {
                 if indexPath.row == tags.count + tagsArray.count{
                     cell.addSection.isHidden = false
                     cell.tagDelegate = self
                     cell.tags.isEnabled = true
+                    self.delegate = cell
+
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -311,4 +325,15 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
     }
 }
 
+extension EditRecipeTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
 
