@@ -866,7 +866,7 @@
         <!--Home-->
         <scene sceneID="3Uk-JX-rl1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T6R-Op-2qz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="feedController" automaticallyAdjustsScrollViewInsets="NO" id="T6R-Op-2qz" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="TYt-rA-XKm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rtW-pS-LCQ">
