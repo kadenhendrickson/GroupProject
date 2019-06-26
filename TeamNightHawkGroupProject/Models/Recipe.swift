@@ -65,10 +65,10 @@ class Recipe: Codable {
             let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String],
             let savecount = document[RecipeKeys.saveCountKey] as? Int else {
                 print("🍒 Failed to create a recipe from snapshot. Printing from \(#function) \n In \(String(describing: Recipe.self)) 🍒")
-                return
+                return nil
         }
         
-        self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image ?? UIImage(named: "AnneCelery")), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers)
+        self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image!) ?? UIImage(named: "AnneCelery"), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers)
     }
     
     
