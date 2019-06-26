@@ -297,6 +297,7 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="rhw-Rq-Ol3" firstAttribute="centerX" secondItem="vI6-4J-71o" secondAttribute="centerX" id="Ipu-rT-wlg"/>
                                 <constraint firstItem="e8P-AE-cgh" firstAttribute="leading" secondItem="rhw-Rq-Ol3" secondAttribute="leading" id="LtY-94-FC4"/>
@@ -315,6 +316,9 @@
                                 <constraint firstItem="rhw-Rq-Ol3" firstAttribute="width" secondItem="vI6-4J-71o" secondAttribute="width" multiplier="0.8" id="qNJ-L4-6xc"/>
                                 <constraint firstAttribute="trailing" secondItem="Ypd-I2-k35" secondAttribute="trailing" constant="8" id="w9H-KK-pIa"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="sDp-xh-0JE" appends="YES" id="xx6-pe-VHj"/>
+                            </connections>
                         </view>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKY-Kk-3U2">
                             <rect key="frame" x="0.0" y="489" width="414" height="44"/>
@@ -342,6 +346,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se4-7I-hsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="sDp-xh-0JE">
+                    <connections>
+                        <action selector="userTappedView:" destination="3P6-Ln-CnM" id="Hr0-jN-HLm"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2702.898550724638" y="1650.6696428571429"/>
         </scene>

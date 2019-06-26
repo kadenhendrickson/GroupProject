@@ -116,6 +116,8 @@ class AddRecipeTableViewController: UITableViewController {
         
     }
     
+    @IBAction func userTappedView(_ sender: Any) {
+    }
     //MARK: - Table view data source
     
     
