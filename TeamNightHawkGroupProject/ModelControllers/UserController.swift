@@ -50,7 +50,7 @@ class UserController {
         let displayName = data["displayName"] as? String ?? ""
         let biography = data["biography"] as? String ?? ""
         let profileImage = data["profileImage"] as? Data?
-            let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
+        let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage as! Data))
         
         completion(user)
         return
