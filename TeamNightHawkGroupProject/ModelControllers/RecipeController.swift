@@ -63,7 +63,7 @@ class RecipeController {
             if let error = error {
                 print("There was an error fetching recipes: \(error.localizedDescription)")
             }
-            guard let documents = snapshot?.documents else {return; completion([])}
+            guard let documents = snapshot?.documents else {completion([]); return}
             for document in documents {
                 let data = document.data()
                 let userReference = data["userReference"] as? String ?? ""
@@ -89,7 +89,7 @@ class RecipeController {
                 if let error = error {
                     print("There was an error fetching recipes: \(error.localizedDescription)")
                 }
-                guard let data = snapshot?.data() else {return; completion([])}
+                guard let data = snapshot?.data() else {completion([]); return}
                     let userReference = data["userReference"] as? String ?? ""
                     let name = data["name"] as? String ?? ""
                     let image = data["image"] as? Data?

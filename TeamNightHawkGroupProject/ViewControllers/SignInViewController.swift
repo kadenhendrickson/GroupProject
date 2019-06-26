@@ -29,6 +29,9 @@ class SignInViewController: UIViewController {
                 return
             } else {
                 self.dismiss(animated: true, completion: nil)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let signUpViewController = storyboard.instantiateViewController(withIdentifier: "feedController")
+                UIApplication.shared.windows.first?.rootViewController = signUpViewController
             }
         }
     }

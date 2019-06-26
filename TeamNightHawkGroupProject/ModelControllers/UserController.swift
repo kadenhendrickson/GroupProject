@@ -28,13 +28,14 @@ class UserController {
         }
     }
     //MARK: - CRUDs
-    func createUser(withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?){
-        let user = User(email: email, displayName: displayName, biography: biography, profileImage: image)
+    func createUser(userID: String, withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?, completion: @escaping (Bool) -> Void){
+        let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: image)
         
         let userRef = db.collection("Users")
         let userDictionary = user.dictionaryRepresentation
         userRef.document(user.userID).setData(userDictionary)
         currentUser = user
+        completion(true)
     }
     
     func fetchUser(withUserRef ref: String, completion: @escaping (User) -> Void) {

@@ -61,20 +61,27 @@ class CreateUserViewController: UIViewController {
                 }
             })
             guard let userID = result?.user.uid else {return}
-            Firestore.firestore().collection("User").document(userID).setData([
-                "biography" : biography,
-                "displayName" : displayName,
-                "profileImage" : profileImage.jpegData(compressionQuality: 0.1)!
-                ], completion: { (error) in
-                if let error = error {
-                    print("\(error.localizedDescription)")
-                    return
-                }else{
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let signUpViewController = storyboard.instantiateViewController(withIdentifier: "tabController")
-                            UIApplication.shared.windows.first?.rootViewController = signUpViewController
-                    }
+            UserController.shared.createUser(userID: userID, withEmail: email, displayName: displayName, biography: biography, profileImage: profileImage, completion: { (success) in
+                if success {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let signUpViewController = storyboard.instantiateViewController(withIdentifier: "feedController")
+                    UIApplication.shared.windows.first?.rootViewController = signUpViewController
+                }
             })
+//
+            
+            //Firestore.firestore().collection("User").document(userID).setData([
+//                "biography" : biography,
+//                "displayName" : displayName,
+//                "profileImage" : profileImage.jpegData(compressionQuality: 0.1)!
+//                ], completion: { (error) in
+//                if let error = error {
+//                    print("\(error.localizedDescription)")
+//                    return
+//                }else{
+//
+//                    }
+            //})
         }
 //        UserController.shared.createUser(withEmail: email, displayName: displayName, biography: biography, profileImage: nil)
 //
