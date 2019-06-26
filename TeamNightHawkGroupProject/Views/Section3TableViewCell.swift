@@ -98,3 +98,8 @@ extension Section3TableViewCell: UITextFieldDelegate {
     }
 }
 
+extension Section3TableViewCell: AddRecipeTableViewDelegate {
+    func userTappedView() {
+        tags.resignFirstResponder()
+    }
+}

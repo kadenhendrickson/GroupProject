@@ -104,3 +104,9 @@ extension Section2TableViewCell: UITextFieldDelegate {
         return true
     }
 }
+
+extension Section2TableViewCell: AddRecipeTableViewDelegate {
+    func userTappedView() {
+        directionSteps.resignFirstResponder()
+    }
+}

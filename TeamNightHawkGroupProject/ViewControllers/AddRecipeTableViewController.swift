@@ -9,6 +9,11 @@
 import UIKit
 import NotificationCenter
 
+protocol AddRecipeTableViewDelegate {
+    func userTappedView()
+}
+
+
 class AddRecipeTableViewController: UITableViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -29,6 +34,7 @@ class AddRecipeTableViewController: UITableViewController {
     var tagRows: Int = 1
     var segmentIndex: Int = 1
     
+    var delegate: AddRecipeTableViewDelegate?
     
     //MARK: - Methods
     func alertUser(withMessage message: String){
@@ -126,7 +132,9 @@ class AddRecipeTableViewController: UITableViewController {
         servingTextField.resignFirstResponder()
         servingTextField.resignFirstResponder()
         prepTimeTextField.resignFirstResponder()
+        delegate?.userTappedView()
     }
+    
     //MARK: - Table view data source
     
     
@@ -156,6 +164,8 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearTextFields()
             }
             
+            self.delegate = cell
+            
             return cell
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell2", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
@@ -169,6 +179,8 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearCell()
             }
             
+            self.delegate = cell
+
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
@@ -181,6 +193,9 @@ class AddRecipeTableViewController: UITableViewController {
             if tableView.numberOfRows(inSection: 0) == 1 {
                 cell.clearText()
             }
+            
+            self.delegate = cell
+
             return cell
         }
         
