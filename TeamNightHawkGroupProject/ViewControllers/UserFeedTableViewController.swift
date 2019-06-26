@@ -31,6 +31,8 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     }
     
     private var handle: AuthStateDidChangeListenerHandle?
+    
+    //properties
     var usersList: [User] {
         var users: [User] = []
         guard let currentUserFollowingRefs = UserController.shared.currentUser?.followingRefs else {return []}
@@ -55,7 +57,12 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
                 let storybord = UIStoryboard(name: "Login", bundle: nil)
                 let loginVC = storybord.instantiateViewController(withIdentifier: "SignIn")
                 self.present(loginVC, animated: true, completion: nil)
-            } 
+            } else {
+                guard let userRef = user?.uid else {return}
+                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
+                    UserController.shared.currentUser = user
+                })
+            }
         })
     }
     
