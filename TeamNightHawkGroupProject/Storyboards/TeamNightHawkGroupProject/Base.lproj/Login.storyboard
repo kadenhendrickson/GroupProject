@@ -13,7 +13,7 @@
         <!--SignIn-->
         <scene sceneID="cqC-Nl-mQG">
             <objects>
-                <viewController id="302-AR-mn8" userLabel="SignIn" customClass="SignInViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignIn" id="302-AR-mn8" userLabel="SignIn" customClass="SignInViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abd-og-RHa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,11 +41,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8D2-33-9l0">
                                         <rect key="frame" x="22" y="0.0" width="38" height="30"/>
                                         <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="loginUserButtonTapped:" destination="302-AR-mn8" eventType="touchUpInside" id="jmq-wx-9Wc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMf-8k-lGj">
                                         <rect key="frame" x="0.0" y="52" width="82" height="30"/>
                                         <state key="normal" title="Create User"/>
                                         <connections>
+                                            <action selector="createUserButtonTapped:" destination="302-AR-mn8" eventType="touchUpInside" id="Pd7-BS-fnk"/>
                                             <segue destination="bh7-Ra-5CO" kind="show" identifier="toCreateUserVC" id="yAe-I3-1KN"/>
                                         </connections>
                                     </button>
@@ -62,6 +66,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="394-F7-cdQ"/>
                     </view>
+                    <connections>
+                        <outlet property="userEmail" destination="KOM-RV-Gdr" id="PLy-Lx-yKY"/>
+                        <outlet property="userPassword" destination="WPQ-0O-nrM" id="Irt-eR-slq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZQ-0s-yEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -185,6 +193,7 @@
                         <outlet property="displayNameTextField" destination="Kzj-TN-P43" id="M5b-mj-auB"/>
                         <outlet property="emailTextField" destination="vkn-qI-Am1" id="Cht-dg-6si"/>
                         <outlet property="passwordTextField" destination="bL0-ek-V5G" id="1RD-Iz-Aax"/>
+                        <outlet property="profileImage" destination="wXc-rI-R2E" id="Usj-ov-OQS"/>
                         <outlet property="profileImagePickerButton" destination="kfy-zO-QcT" id="dRv-72-XHd"/>
                     </connections>
                 </viewController>
