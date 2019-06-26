@@ -25,7 +25,9 @@ class AddRecipeTableViewController: UITableViewController {
     
     
     var imagePicker = ImagePickerHelper()
-    
+    var safeArea: UILayoutGuide {
+        return self.view.safeAreaLayoutGuide
+    }
     var ingredients: [Ingredient] = []
     var steps: [String] = []
     var tags: [String] = []
@@ -60,7 +62,11 @@ class AddRecipeTableViewController: UITableViewController {
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
         imageSelector.setTitle("Click to add image", for: .normal)
-        saveButton.backgroundColor = buttonBackground
+        saveButton.backgroundColor = yellow
+        saveButton.layer.cornerRadius = buttonRounding
+        tableView.backgroundColor = green
+//        saveButton.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 10, paddingLeading: 20, paddingTrailing: 20,width: 300,height: 34)
+        
         
     }
     

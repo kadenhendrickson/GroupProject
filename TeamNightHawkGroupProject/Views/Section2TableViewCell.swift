@@ -57,7 +57,7 @@ class Section2TableViewCell: UITableViewCell {
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Step-by-step directions"
         text.backgroundColor = backGround
-
+        text.layer.cornerRadius = textFieldRounding
         
         return text
     }()

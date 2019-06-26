@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020D572C22C4189600A74632 /* displayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D572B22C4189600A74632 /* displayView.swift */; };
 		0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */; };
 		0211C69722BAAE3E00D5F8C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69622BAAE3E00D5F8C6 /* Constants.swift */; };
 		0211C69922BAAED200D5F8C6 /* AnchorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */; };
@@ -74,6 +75,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		020D572B22C4189600A74632 /* displayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = displayView.swift; sourceTree = "<group>"; };
 		0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section2TableViewCell.swift; sourceTree = "<group>"; };
 		0211C69622BAAE3E00D5F8C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorExtension.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				02C1909A22BA820500B33086 /* Section1TableViewCell.swift */,
 				0211C69422BAAE3400D5F8C6 /* Section2TableViewCell.swift */,
 				02A7F9AC22BB0815004DE917 /* Section3TableViewCell.swift */,
+				020D572B22C4189600A74632 /* displayView.swift */,
 				0226F25822BAD5EB00856910 /* IngredientsTableViewCell.swift */,
 				0226F25A22BAD5F900856910 /* StepsTableViewCell.swift */,
 				02A7F9AE22BB0839004DE917 /* TagsTableViewCell.swift */,
@@ -445,6 +448,7 @@
 				9732278322BB48F8006F0A15 /* ImagePickerHelper.swift in Sources */,
 				0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */,
 				DC2C1AF122BAB3B40098F68D /* SignInViewController.swift in Sources */,
+				020D572C22C4189600A74632 /* displayView.swift in Sources */,
 				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
 				DC2C1B0122BAEA730098F68D /* MockData.swift in Sources */,
 				02A7F9AF22BB0839004DE917 /* TagsTableViewCell.swift in Sources */,
