@@ -16,6 +16,7 @@ class SavedRecipesTableViewController: UITableViewController {
             guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return []}
             RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs, completion: { (fetchedRecipes) in
                 recipes = fetchedRecipes
+                print("Fetched \(fetchedRecipes.count) recipes")
             })
             return recipes
     }()
