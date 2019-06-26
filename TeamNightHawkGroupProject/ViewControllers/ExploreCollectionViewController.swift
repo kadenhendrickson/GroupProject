@@ -16,19 +16,33 @@ private let itemsPerRow: CGFloat = 3
 
 class ExploreCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     //MARK: - Properties
-    var recipesList: [Recipe] {
-        var recipes: [Recipe] = []
-        RecipeController.shared.fetchExploreRecipes { (exploreRecipes) in
-            recipes = exploreRecipes
-        }
-        return recipes
-    }
+    var recipesList: [Recipe] = []
+//
+//        {
+//        var recipes: [Recipe] = []
+//        RecipeController.shared.fetchExploreRecipes { (exploreRecipes) in
+//            DispatchQueue.main.async {
+//
+//            }
+//        }
+//        return recipes
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateViews()
         // Register cell classes
         
         // Do any additional setup after loading the view.
+    }
+    
+    func updateViews() {
+        RecipeController.shared.fetchExploreRecipes { (recipes) in
+            DispatchQueue.main.async {
+                self.recipesList = recipes
+                self.collectionView.reloadData()
+            }
+        }
     }
 
     

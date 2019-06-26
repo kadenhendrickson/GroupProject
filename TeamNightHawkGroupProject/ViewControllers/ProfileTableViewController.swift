@@ -13,11 +13,7 @@ class ProfileTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var currentUser: User? {
-        didSet {
-            updateUserRecipes()
-        }
-    }
+    var currentUser: User?
     
     var recipeList: [Recipe] = []
     var selectedRecipe: Recipe?
@@ -34,7 +30,10 @@ class ProfileTableViewController: UITableViewController {
         currentUser = UserController.shared.currentUser
         tableView.reloadData()
         updateViews()
+        updateUserRecipes()
     }
+    
+    
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
         let firebaseAuth = Auth.auth()
@@ -54,9 +53,12 @@ class ProfileTableViewController: UITableViewController {
         guard let currentUser = UserController.shared.currentUser else { print("🍒 Tried to get all recipes from current user but can't find current user. Printing from \(#function) \n In \(String(describing: ProfileTableViewController.self)) 🍒"); return}
         
         RecipeController.shared.fetchSpecificRecipesWith(userReference: currentUser.userID) { (recipeList) in
-            recipes = recipeList
+            DispatchQueue.main.async {
+                recipes = recipeList
+                self.recipeList = recipes
+                self.tableView.reloadData()
+            }
         }
-        self.recipeList = recipes
     }
     
     
