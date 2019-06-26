@@ -36,6 +36,7 @@ class Section2TableViewCell: UITableViewCell {
         self.addSubview(addSection)
         self.addSubview(stackView)
         
+        directionSteps.delegate = self
     }
     
     func setUpStackView(){
@@ -90,9 +91,16 @@ class Section2TableViewCell: UITableViewCell {
     }()
 }
 
-extension Section2TableViewCell: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
+
+
+extension Section2TableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

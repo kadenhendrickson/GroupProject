@@ -34,6 +34,7 @@ class Section3TableViewCell: UITableViewCell {
         self.addSubview(addSection)
         self.addSubview(stackView)
         
+        tags.delegate = self
     }
     
     func setUpStackView(){
@@ -83,9 +84,17 @@ class Section3TableViewCell: UITableViewCell {
         return stackView
     }()
 }
-extension Section3TableViewCell: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
+
+
+extension Section3TableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
+
