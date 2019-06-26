@@ -57,6 +57,11 @@ class Section1TableViewCell: UITableViewCell {
         stackView.addArrangedSubview(measuremenTypeLabel)
         stackView.addArrangedSubview(ingredientLabel)
         stackView.addArrangedSubview(addSection)
+        
+        measurementQuantityLabel.delegate = self
+        measuremenTypeLabel.delegate = self
+        ingredientLabel.delegate = self
+        
         stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 1, paddingBottom: 8, paddingLeading: 1, paddingTrailing: 8, width: 300, height: 32)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
@@ -143,9 +148,16 @@ class Section1TableViewCell: UITableViewCell {
 //    }
 }
 
-extension Section1TableViewCell: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
+
+
+extension Section1TableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
