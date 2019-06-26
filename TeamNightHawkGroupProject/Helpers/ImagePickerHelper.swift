@@ -91,6 +91,8 @@ class ImagePickerHelper: UIViewController {
         /* Image Picker */
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
         self.controller = controller
         
         /* Alert Controller */
@@ -137,10 +139,20 @@ extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-
-        guard let selectedImage = info[.originalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        var image: UIImage? = nil
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            image = editedImage
+            
+        } else if let libraryImage = info[.originalImage] as? UIImage {
+            image = libraryImage
         }
+        
+        guard let selectedImage = image else {
+            print("🍒 Cannot find an image selected or edited by user. Printing from \(#function) \n In \(String(describing: ImagePickerHelper.self)) 🍒")
+            return
+        }
+        
         
         guard let delegate = delegate else {
             print("🍒 Please extend your viewcontroller with ImagePickerHelper and conform to ImagePickerHelperDelegate. Printing from \(#function) \n In \(String(describing: ImagePickerHelperDelegate.self)) 🍒"); return
