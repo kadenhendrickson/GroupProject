@@ -13,6 +13,8 @@ import FirebaseFirestore
 
 class CreateUserViewController: UIViewController {
 
+    //MARK: - Properties
+    var imagePicker = ImagePickerHelper()
 
     //MARK: - IBOutlets
     @IBOutlet weak var profileImagePickerButton: UIButton!
@@ -25,14 +27,18 @@ class CreateUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // Do any additional setup after loading the view.
+        profileImagePickerButton.setTitle("Select an image", for: .normal)
+        emailTextField.delegate = self
+        displayNameTextField.delegate = self
+        passwordTextField.delegate = self
+        biographyTextView.delegate = self
+        imagePicker.delegate = self
     }
     
     
     //MARK: - IBActions
     @IBAction func setProfileImageButtonTapped(_ sender: UIButton) {
+        imagePicker.presentImagePicker(for: self)
     }
     
     @IBAction func createUserButtonTapped(_ sender: UIButton) {
@@ -75,10 +81,48 @@ class CreateUserViewController: UIViewController {
         
     }
     
+    @IBAction func userTappedView(_ sender: Any) {
+        biographyTextView.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        displayNameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
     @IBAction func cancelUserCreationButtonTapped(_ sender: UIButton) {
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "signUpController")
 //        UIApplication.shared.windows.first?.rootViewController = signUpViewController
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension  CreateUserViewController: ImagePickerHelperDelegate {
+    func fireActionsForSelectedImage(_ image: UIImage) {
+        profileImage.image = image
+        profileImagePickerButton.setTitle("", for: .normal)
+        
+    }
+}
+
+extension CreateUserViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension CreateUserViewController: UITextViewDelegate {
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.resignFirstResponder()
     }
 }
