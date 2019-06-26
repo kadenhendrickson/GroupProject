@@ -53,6 +53,8 @@ class EditRecipeTableViewController: UITableViewController {
         
     }
     
+    @IBAction func userTappedView(_ sender: Any) {
+    }
     
     @IBAction func rearrangeStepsButtonTapped(_ sender: Any) {
         self.isEditing = !isEditing

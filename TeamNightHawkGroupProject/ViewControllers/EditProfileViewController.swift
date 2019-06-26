@@ -33,6 +33,8 @@ class EditProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         //clear data
     }
+    @IBAction func userTappedView(_ sender: Any) {
+    }
     
     @IBAction func changeImageButtonTapped(_ sender: Any) {
         imagePicker.presentImagePicker(for: self)

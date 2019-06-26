@@ -138,7 +138,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Sh-bm-BF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="WMK-cx-26q">
                     <connections>
-                        <action selector="userTappedView:" destination="SLi-Kc-BxM" id="ywN-We-leo"/>
+                        <action selector="userTappedView:" destination="SLi-Kc-BxM" id="qEv-Cx-xSE"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
