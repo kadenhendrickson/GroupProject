@@ -172,11 +172,13 @@ class RecipeController {
         db.collection("Recipes").document(recipeID).delete()
     }
     
-    func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?) {
+    func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String, prepTime: String) {
         let recipeRef = db.collection("Recipes").document(recipeID)
         recipeRef.updateData([
             "name" : name,
             "image" : image.jpegData(compressionQuality: 0.1),
+            "servings" : servingSize,
+            "prepTime" : prepTime,
             "ingredients" : ingredients,
             "steps" : steps,
             "tags" : tags])
