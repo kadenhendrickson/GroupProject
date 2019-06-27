@@ -52,6 +52,16 @@ class SignInViewController: UIViewController {
         userPassword.resignFirstResponder()
     }
     
+    func alertUser(withMessage message: String){
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
     
     func triggerSignIn(){
         guard let email = userEmail.text,
@@ -59,6 +69,7 @@ class SignInViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Error signing in \(error.localizedDescription)")
+                self.alertUser(withMessage: "Incorrect email / password.")
                 return
             } else {
                 // resign all textfields before changing view.
