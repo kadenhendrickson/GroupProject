@@ -50,6 +50,17 @@ class EditRecipeTableViewController: UITableViewController {
         deleteButton.layer.cornerRadius = buttonRounding
     }
     //MARK: -Actions
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let name = nameTextField.text,
+            let recipe = recipe,
+            let image = recipeImage.image else {return}
+        recipe.ingredients.append(contentsOf: ingredientsArray)
+        recipe.steps?.append(contentsOf: stepsArray)
+        recipe.tags?.append(contentsOf: tagsArray)
+        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: recipe.ingredients, steps: recipe.steps, tags: recipe.tags)
+        tableView.reloadData()
+        navigationController?.popViewController(animated: true)
+    }
     @IBAction func userTappedView(_ sender: Any) {
     }
     @IBAction func rearrangeStepsButtonTapped(_ sender: Any) {
