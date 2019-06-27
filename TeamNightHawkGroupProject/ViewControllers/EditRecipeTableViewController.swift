@@ -68,27 +68,14 @@ class EditRecipeTableViewController: UITableViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = nameTextField.text,
             let recipe = recipe,
-            let image = recipeImageView.image else { alertUser(withMessage: "Please make sure your recipe has a name and an image."); return}
-        
+            let image = recipeImage.image,
+            let servingSize = servingTextField.text,
+            let prepTime = prepTimeTextField.text else {return}
         recipe.ingredients.append(contentsOf: ingredientsArray)
         recipe.steps?.append(contentsOf: stepsArray)
         recipe.tags?.append(contentsOf: tagsArray)
-        
-        // "servingSizeTextLabel.text = servingSize" and the same for prep time. then pass those vars in as parameters
-        var servingSize = "--"
-        var preptime = "--"
+        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: recipe.ingredients, steps: recipe.steps, tags: recipe.tags, servingSize: servingSize, prepTime: prepTime)
 
-        if let unwrappedServingSize = servingTextField.text {
-            servingSize = unwrappedServingSize
-        }
-        
-        if let unwrappedPrepTime = prepTimeTextField.text {
-            preptime = unwrappedPrepTime
-        }
-        
-        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: servingSize, prepTime: preptime)
-        
-        tableView.reloadData()
         navigationController?.popViewController(animated: true)
     }
     
