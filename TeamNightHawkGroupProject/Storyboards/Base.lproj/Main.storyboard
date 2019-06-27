@@ -319,6 +319,7 @@
                             </constraints>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="sDp-xh-0JE" appends="YES" id="xx6-pe-VHj"/>
+                                <outletCollection property="gestureRecognizers" destination="oLy-O3-NA5" appends="YES" id="gYk-c2-IOH"/>
                             </connections>
                         </view>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKY-Kk-3U2">
@@ -339,6 +340,7 @@
                     <connections>
                         <outlet property="imageSelector" destination="e8P-AE-cgh" id="H3b-DD-Hnd"/>
                         <outlet property="nameTextField" destination="zBz-4j-35O" id="WPj-jJ-LDC"/>
+                        <outlet property="panGestureRecognizer" destination="oLy-O3-NA5" id="K8d-Zr-bIi"/>
                         <outlet property="prepTimeTextField" destination="9iw-aT-IkD" id="lOL-ar-vBG"/>
                         <outlet property="recipeImage" destination="rhw-Rq-Ol3" id="77d-Qk-DCh"/>
                         <outlet property="saveButton" destination="WKY-Kk-3U2" id="WIt-oY-GJY"/>
@@ -352,6 +354,7 @@
                         <action selector="userTappedView:" destination="3P6-Ln-CnM" id="Hr0-jN-HLm"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="oLy-O3-NA5"/>
             </objects>
             <point key="canvasLocation" x="1700" y="1617"/>
         </scene>
@@ -924,7 +927,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
+
         <segue reference="V0v-1b-299"/>
         <segue reference="LBb-cA-Aqf"/>
+
     </inferredMetricsTieBreakers>
 </document>

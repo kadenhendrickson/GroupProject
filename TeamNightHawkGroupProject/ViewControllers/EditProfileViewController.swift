@@ -23,12 +23,15 @@ class EditProfileViewController: UIViewController {
     
     let defaultPlaceholderText: String = "Something about yourself ..."
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setCurrentUserLandingPad()
+        
+        //delegate for disabling textfields
         imagePicker.delegate = self
+        displayNameTextField.delegate = self
+        bioTextView.delegate = self
         
         displayNameTextField.tag = 0
         bioTextView.tag = 1
@@ -141,15 +144,8 @@ extension EditProfileViewController: ImagePickerHelperDelegate {
 
 extension EditProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if let nextTextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
-            nextTextField.becomeFirstResponder()
-        } else {
-            //go to textview
-            let bioTextView = self.view.viewWithTag(textField.tag + 1) as? UITextView
-            bioTextView?.becomeFirstResponder()
-        }
-        
+        textField.resignFirstResponder()
+        self.bioTextView.becomeFirstResponder()
         return true
     }
     

@@ -10,19 +10,23 @@ import UIKit
 
 protocol EditRecipeTableViewDelegate {
     func userTappedView()
+    func userSwipedDown()
 }
 
 class EditRecipeTableViewController: UITableViewController {
+    
     //MARK: -Outlets
-    @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
     @IBOutlet weak var prepTimeTextField: UITextField!
     @IBOutlet weak var servingTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var rearrangeButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
     var recipe: Recipe?
+    let imagePicker: ImagePickerHelper = ImagePickerHelper()
     
     var ingredientsArray: [Ingredient] = []
     var stepsArray: [String] = []
@@ -32,7 +36,7 @@ class EditRecipeTableViewController: UITableViewController {
     var tagRows: Int = 1
     var segmentIndex: Int = 1
     
-    var delegate: EditRecipeTableViewDelegate?
+    var delegateForKeyboardDissmiss: EditRecipeTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,33 +45,54 @@ class EditRecipeTableViewController: UITableViewController {
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "tagEditCell")
         guard let recipe = recipe,
             let imageData = recipe.image else {return}
-        recipeImage.image = UIImage(data: imageData)
+        recipeImageView.image = UIImage(data: imageData)
         nameTextField.text = recipe.name
         servingTextField.text = recipe.servings
         prepTimeTextField.text = recipe.prepTime
         rearrangeButton.isHidden = true
         deleteButton.backgroundColor = yellow
         deleteButton.layer.cornerRadius = buttonRounding
+        
+        // Delegates for dismissing keyboard
+        nameTextField.delegate = self
+        servingTextField.delegate = self
+        prepTimeTextField.delegate = self
+        panGestureRecognizer.delegate = self
+        
+        // Delegate for image picker
+        imagePicker.delegate = self
+        
     }
+    
     //MARK: -Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = nameTextField.text,
             let recipe = recipe,
-            let image = recipeImage.image else {return}
+            let servingSize = servingTextField.text,
+            let prepTime = prepTimeTextField.text else {return}
+        guard let image = recipeImageView.image else {alertUser(withMessage: "Make sure you have an image before you save your recipe!"); return }
         recipe.ingredients.append(contentsOf: ingredientsArray)
         recipe.steps?.append(contentsOf: stepsArray)
         recipe.tags?.append(contentsOf: tagsArray)
-        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: recipe.ingredients, steps: recipe.steps, tags: recipe.tags)
-        tableView.reloadData()
+        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: recipe.ingredients, steps: recipe.steps, tags: recipe.tags, servingSize: servingSize, prepTime: prepTime)
+
         navigationController?.popViewController(animated: true)
     }
+    
+    
+    
     @IBAction func userTappedView(_ sender: Any) {
+        resignAllResponders()
     }
+    
     @IBAction func rearrangeStepsButtonTapped(_ sender: Any) {
         self.isEditing = !isEditing
     }
+    
     @IBAction func editImageTapped(_ sender: Any) {
+        imagePicker.presentImagePicker(for: self)
     }
+    
     @IBAction func deleteRecipeTapped(_ sender: Any) {
         guard let recipe = recipe else {return}
         RecipeController.shared.deleteRecipeWith(recipeID: recipe.recipeID)
@@ -99,6 +124,17 @@ class EditRecipeTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - Controller's Methods
+    
+    func resignAllResponders(){
+        nameTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        prepTimeTextField.resignFirstResponder()
+        
+        delegateForKeyboardDissmiss?.userSwipedDown()
+        delegateForKeyboardDissmiss?.userTappedView()
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let recipe = recipe,
@@ -127,14 +163,14 @@ class EditRecipeTableViewController: UITableViewController {
                 cell.measurementQuantityLabel.isEnabled = false
                 cell.ingredientLabel.isEnabled = false
                 cell.ingredientDelegate = self
-                self.delegate = cell
+                self.delegateForKeyboardDissmiss = cell
                 return cell
             } else {
                 if indexPath.row == recipe.ingredients.count + ingredientsArray.count {
                     cell.addSection.isHidden = false
                     cell.ingredientDelegate = self
                     cell.ingredientLabel.isEnabled = true
-                    self.delegate = cell
+                    self.delegateForKeyboardDissmiss = cell
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -152,14 +188,14 @@ class EditRecipeTableViewController: UITableViewController {
                 cell.addSection.isHidden = true
                 cell.directionSteps.isEnabled = false
                 cell.stepDelegate = self
-                self.delegate = cell
+                self.delegateForKeyboardDissmiss = cell
                 return cell
             } else {
                 if indexPath.row == steps.count + stepsArray.count {
                     cell.addSection.isHidden = false
                     cell.stepDelegate = self
                     cell.directionSteps.isEnabled = true
-                    self.delegate = cell
+                    self.delegateForKeyboardDissmiss = cell
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -175,7 +211,7 @@ class EditRecipeTableViewController: UITableViewController {
                 cell.addSection.isHidden = true
                 cell.tagDelegate = self
                 cell.tags.isEnabled = false
-                self.delegate = cell
+                self.delegateForKeyboardDissmiss = cell
 
                 return cell
             } else {
@@ -183,7 +219,7 @@ class EditRecipeTableViewController: UITableViewController {
                     cell.addSection.isHidden = false
                     cell.tagDelegate = self
                     cell.tags.isEnabled = true
-                    self.delegate = cell
+                    self.delegateForKeyboardDissmiss = cell
 
                     return cell
                 } else {
@@ -306,6 +342,7 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
         
         self.present(alertController, animated: true)
     }
+    
 }
 
 extension EditRecipeTableViewController: UITextFieldDelegate {
@@ -319,4 +356,21 @@ extension EditRecipeTableViewController: UITextFieldDelegate {
         return true
     }
 }
+
+
+extension EditRecipeTableViewController: ImagePickerHelperDelegate {
+    func fireActionsForSelectedImage(_ image: UIImage) {
+        recipeImageView.image = image
+        self.resignAllResponders()
+    }
+}
+
+
+extension EditRecipeTableViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        self.resignAllResponders()
+        return true
+    }
+}
+
 

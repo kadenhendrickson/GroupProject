@@ -74,6 +74,13 @@ class Section1TableViewCell: UITableViewCell {
     }
     
     
+    func resignAllResponders(){
+        measurementQuantityLabel.resignFirstResponder()
+        measuremenTypeLabel.resignFirstResponder()
+        ingredientLabel.resignFirstResponder()
+    }
+    
+    
     let measurementQuantityLabel: UITextField = {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
@@ -139,15 +146,7 @@ class Section1TableViewCell: UITableViewCell {
         stackView.spacing = 8
         return stackView
     }()
-//    func alertUser(withMessage message: String){
-//        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        alertController.addAction(cancelAction)
-//
-//        self.present(alertController, animated: true)
-//    }
+
 }
 
 
@@ -167,8 +166,10 @@ extension Section1TableViewCell: UITextFieldDelegate {
 
 extension Section1TableViewCell: AddRecipeTableViewDelegate, EditRecipeTableViewDelegate {
     func userTappedView() {
-        measurementQuantityLabel.resignFirstResponder()
-        measuremenTypeLabel.resignFirstResponder()
-        ingredientLabel.resignFirstResponder()
+        self.resignAllResponders()
+    }
+    
+    func userSwipedDown() {
+        self.resignAllResponders()
     }
 }

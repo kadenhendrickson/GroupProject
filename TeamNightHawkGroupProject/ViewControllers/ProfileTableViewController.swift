@@ -28,9 +28,9 @@ class ProfileTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         currentUser = UserController.shared.currentUser
-        tableView.reloadData()
         updateViews()
         updateUserRecipes()
+        tableView.reloadData()
     }
     
     
