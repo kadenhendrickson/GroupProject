@@ -68,9 +68,9 @@ class EditRecipeTableViewController: UITableViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = nameTextField.text,
             let recipe = recipe,
-            let image = recipeImage.image,
             let servingSize = servingTextField.text,
             let prepTime = prepTimeTextField.text else {return}
+        guard let image = recipeImageView.image else {alertUser(withMessage: "Make sure you have an image before you save your recipe!"); return }
         recipe.ingredients.append(contentsOf: ingredientsArray)
         recipe.steps?.append(contentsOf: stepsArray)
         recipe.tags?.append(contentsOf: tagsArray)
