@@ -86,11 +86,25 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         }
     }
     
+    func popAlert() {
+        alertUser(withMessage: "Would you like to report this post and block this user?")
+    }
+    
     func userRefSent(userRef: String) {
         UserController.shared.fetchUser(withUserRef: userRef) { (user) in
             self.selectedUser = user
         }
     }
-    
-    
+    func alertUser(withMessage message: String){
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let reportPost = UIAlertAction(title: "Report/Block", style: .default) { (_) in
+            guard let userID = self.selectedUser?.userID else {return}
+            UserController.shared.currentUser?.blockedUserRefs.append(userID)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(reportPost)
+        self.present(alertController, animated: true)
+    }
 }

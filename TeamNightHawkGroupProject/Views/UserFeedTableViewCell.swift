@@ -10,6 +10,7 @@ import UIKit
 
 protocol UserFeedTableViewCellDelegate: class {
     func userRefSent(userRef: String)
+    func popAlert()
 }
 
 
@@ -43,7 +44,10 @@ class UserFeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
+        print("🕍🕍🕍🕍🕍🕍🕍")
+        delegate?.popAlert()
     }
+    
     
     
     //update the view
