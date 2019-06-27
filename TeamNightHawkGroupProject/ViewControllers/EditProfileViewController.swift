@@ -23,7 +23,6 @@ class EditProfileViewController: UIViewController {
     
     let defaultPlaceholderText: String = "Something about yourself ..."
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
