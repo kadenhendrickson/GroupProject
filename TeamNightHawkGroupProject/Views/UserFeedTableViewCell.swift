@@ -17,13 +17,13 @@ class UserFeedTableViewCell: UITableViewCell {
     
     weak var delegate: UserFeedTableViewCellDelegate?
     
-    var recipe: Recipe? {
-        didSet {
+    var recipe: Recipe?
+    
+    var user: User?{
+        didSet{
             updateViews()
         }
     }
-    
-    var user: User?
 
     //MARK: - IBOutlets
     @IBOutlet weak var userProfileImageView: UIImageView!
@@ -63,8 +63,8 @@ class UserFeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func otherUserProfileButtonTapped(_ sender: UIButton) {
-        guard let userRef = recipe?.userReference else {return}
-        delegate?.userRefSent(userRef: userRef)
+        guard let user = user else {return}
+        
     }
     
 }
