@@ -22,8 +22,9 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var displayNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var biographyTextView: UITextView!
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     
+    let defaultPlaceholderText: String = "Something about yourself ..."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,12 @@ class CreateUserViewController: UIViewController {
         passwordTextField.delegate = self
         biographyTextView.delegate = self
         imagePicker.delegate = self
+        
+        biographyTextView.text = defaultPlaceholderText
+        emailTextField.tag = 0
+        displayNameTextField.tag = 1
+        passwordTextField.tag = 2
+        biographyTextView.tag = 3
     }
     
     
@@ -42,21 +49,81 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func createUserButtonTapped(_ sender: UIButton) {
+        triggerCreatUser()
+    }
+    
+    
+    @IBAction func userTappedView(_ sender: Any) {
+        resignAllTextFields()
+    }
+    
+    @IBAction func userSwipedDown(_ sender: Any) {
+        resignAllTextFields()
+    }
+    
+    @IBAction func cancelUserCreationButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Functions
+    
+    func alertUser(withMessage message: String){
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
+   func resignAllTextFields() {
+        biographyTextView.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        displayNameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+    func triggerCreatUser(){
+        
+        // Assign default in case user didn't provide data
+        var biography = ""
+        var profileImage = UIImage(named: "duck")
+        
+        guard let displayName = displayNameTextField.text,
+            displayName.count < 20 else {
+                alertUser(withMessage: "Please limit your displayname to less than 20.")
+                return
+        }
         
         guard let email = emailTextField.text,
-            let displayName = displayNameTextField.text,
-            let biography = biographyTextView.text,
-            let profileImage = profileImage.image,
-        let password = passwordTextField.text else {return}
+            let password = passwordTextField.text else {
+                alertUser(withMessage: "Please fill our email and password.")
+                return
+        }
+        
+        if let bioTextViewText = biographyTextView.text, bioTextViewText != defaultPlaceholderText {
+            biography = bioTextViewText
+        }
+        
+        if let image = profileImageView.image {
+            profileImage = image
+        }
+        
+        resignAllTextFields()
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
+                self.alertUser(withMessage: "\(error.localizedDescription)")
                 print("There was an error creating a user: \(error.localizedDescription)")
                 return
             }
+            
             let changeRequest = result?.user.createProfileChangeRequest()
             changeRequest?.displayName = displayName
             changeRequest?.commitChanges(completion: { (error) in
                 if let error = error {
+                    self.alertUser(withMessage: "\(error.localizedDescription)")
                     print("There was a problem adding the displayName: \(error.localizedDescription)")
                 }
             })
@@ -70,30 +137,27 @@ class CreateUserViewController: UIViewController {
             })
         }
     }
-    
-    @IBAction func userTappedView(_ sender: Any) {
-        biographyTextView.resignFirstResponder()
-        emailTextField.resignFirstResponder()
-        displayNameTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-    }
-    
-    @IBAction func cancelUserCreationButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 extension  CreateUserViewController: ImagePickerHelperDelegate {
     func fireActionsForSelectedImage(_ image: UIImage) {
-        profileImage.image = image
+        resignAllTextFields()
+        profileImageView.image = image
         profileImagePickerButton.setTitle("", for: .normal)
-        
     }
 }
 
 extension CreateUserViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if let nextTextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
+            nextTextField.becomeFirstResponder()
+        } else {
+            //go to textview
+            let bioTextView = self.view.viewWithTag(textField.tag + 1) as? UITextView
+            bioTextView?.becomeFirstResponder()
+        }
+        
         return true
     }
     
@@ -111,5 +175,9 @@ extension CreateUserViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.resignFirstResponder()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
     }
 }
