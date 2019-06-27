@@ -15,27 +15,33 @@ class EditProfileViewController: UIViewController {
     var imagePicker = ImagePickerHelper()
     
     // MARK: IBOutlets
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var bioTextView: UITextView!
     @IBOutlet weak var displayNameTextField: UITextField!
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followingCountTextLabel: UILabel!
+    
+    let defaultPlaceholderText: String = "Something about yourself ..."
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setCurrentUserLandingPad()
         imagePicker.delegate = self
+        
+        displayNameTextField.tag = 0
+        bioTextView.tag = 1
+        
         updateViews()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //clear data
+    @IBAction func userSwipedView(_ sender: Any) {
+        resignAllTextFields()
     }
+    
     @IBAction func userTappedView(_ sender: Any) {
-        bioTextView.resignFirstResponder()
-        displayNameTextField.resignFirstResponder()
+        resignAllTextFields()
     }
     
     @IBAction func changeImageButtonTapped(_ sender: Any) {
@@ -43,8 +49,7 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func deleteProfileButtonTapped(_ sender: Any) {
-        guard let currentUser = currentUser else { return }
-        UserController.shared.deleteUser(withID: currentUser.userID)
+        deleteUser()
     }
     
     @IBAction func updateProfileButtonTapped(_ sender: Any) {
@@ -52,9 +57,16 @@ class EditProfileViewController: UIViewController {
         
         guard let displayName = displayNameTextField.text else { return }
 
-        let image = profileImageView.image ?? nil
+        let image = profileImageView.image ?? UIImage(named: "duck")
         
-        UserController.shared.updateUser(withID: currentUser.userID, email: currentUser.email, displayName: displayName, biography: bioTextView.text, profileImage: image)
+        var bioText = bioTextView.text ?? ""
+        
+        // Provide blank defualt text if user left placeholder text in there
+        if bioText == defaultPlaceholderText {
+            bioText = ""
+        }
+        
+        UserController.shared.updateUser(withID: currentUser.userID, email: currentUser.email, displayName: displayName, biography: bioText, profileImage: image)
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -62,7 +74,13 @@ class EditProfileViewController: UIViewController {
     // MARK: - Method
     func updateViews(){
         guard let currentUser = currentUser else { return }
-        bioTextView.text = currentUser.biography
+        
+        if let usersBioText = currentUser.biography {
+            bioTextView.text = usersBioText
+        } else {
+            bioTextView.text = defaultPlaceholderText
+        }
+        
         displayNameTextField.text = currentUser.displayName
         
         if let imageData = currentUser.profileImage {
@@ -80,39 +98,75 @@ class EditProfileViewController: UIViewController {
         }
         self.currentUser = currentUser
     }
-
+    
+    func resignAllTextFields(){
+        bioTextView.resignFirstResponder()
+        displayNameTextField.resignFirstResponder()
+    }
+    
+    
+    func deleteUser(){
+        guard let currentUser = currentUser else { return }
+        alertAndHandleProfileDeletion(forUserID: currentUser.userID)
+    }
+    
+    
+    func alertAndHandleProfileDeletion(forUserID userID: String) {
+        let alertController = UIAlertController(title: "Confirm deletion.", message: "Are you sure you want to delete your profile?\nAll your created and saved recipes will be deleted.\nThis cannot be undone.", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let addItemAction = UIAlertAction(title: "Yes, delete me and all these tasty recipes.", style: .default) { (_) in
+            UserController.shared.deleteUser(withID: userID)
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(addItemAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
+
+// MARK: - Extensions
 
 extension EditProfileViewController: ImagePickerHelperDelegate {
     
     func fireActionsForSelectedImage(_ image: UIImage) {
+        resignAllTextFields()
         profileImageView.image = image
     }
     
 }
 
+
 extension EditProfileViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if let nextTextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
+            nextTextField.becomeFirstResponder()
+        } else {
+            //go to textview
+            let bioTextView = self.view.viewWithTag(textField.tag + 1) as? UITextView
+            bioTextView?.becomeFirstResponder()
+        }
+        
+        return true
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
 
-
 extension EditProfileViewController: UITextViewDelegate {
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        return true
+    }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.resignFirstResponder()
     }
     
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        textView.resignFirstResponder()
-        return true
-    }
-
 }

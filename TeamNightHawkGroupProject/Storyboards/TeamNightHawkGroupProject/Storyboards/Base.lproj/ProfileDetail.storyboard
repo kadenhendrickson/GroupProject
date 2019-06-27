@@ -76,13 +76,13 @@
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fhe-ap-JKy">
-                                <rect key="frame" x="41.5" y="265.5" width="331" height="358.5"/>
+                                <rect key="frame" x="41.5" y="265.5" width="331" height="268.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdy-3Y-aep">
-                                <rect key="frame" x="158" y="674" width="98" height="30"/>
+                                <rect key="frame" x="158" y="584" width="98" height="30"/>
                                 <state key="normal" title="Delete Profile"/>
                                 <connections>
                                     <action selector="deleteProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="PGR-Bw-ASZ"/>
@@ -96,7 +96,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaB-fa-2BS">
-                                <rect key="frame" x="158" y="732" width="98" height="30"/>
+                                <rect key="frame" x="158" y="642" width="98" height="30"/>
                                 <state key="normal" title="Update Profile"/>
                                 <connections>
                                     <action selector="updateProfileButtonTapped:" destination="SLi-Kc-BxM" eventType="touchUpInside" id="lfu-pn-rzb"/>
@@ -115,7 +115,7 @@
                             <constraint firstItem="Qdy-3Y-aep" firstAttribute="top" secondItem="fhe-ap-JKy" secondAttribute="bottom" constant="50" id="SaC-XN-jWf"/>
                             <constraint firstItem="dYo-4L-Dts" firstAttribute="width" secondItem="GEx-sA-Kwc" secondAttribute="width" id="WED-f7-v6E"/>
                             <constraint firstItem="fhe-ap-JKy" firstAttribute="centerX" secondItem="3w5-gY-i7b" secondAttribute="centerX" id="XNb-NL-737"/>
-                            <constraint firstItem="fhe-ap-JKy" firstAttribute="height" secondItem="3w5-gY-i7b" secondAttribute="height" multiplier="0.4" id="Xcy-XV-KnD"/>
+                            <constraint firstItem="fhe-ap-JKy" firstAttribute="height" secondItem="3w5-gY-i7b" secondAttribute="height" multiplier="0.3" id="Xcy-XV-KnD"/>
                             <constraint firstItem="GEx-sA-Kwc" firstAttribute="top" secondItem="jsT-Tn-Kbg" secondAttribute="top" constant="20" id="oRf-vk-5vO"/>
                             <constraint firstItem="GEx-sA-Kwc" firstAttribute="leading" secondItem="jsT-Tn-Kbg" secondAttribute="leading" constant="20" id="rGI-WY-RhS"/>
                             <constraint firstItem="fhe-ap-JKy" firstAttribute="top" secondItem="dYo-4L-Dts" secondAttribute="bottom" constant="20" id="rKm-Zy-4Nq"/>
@@ -125,6 +125,7 @@
                         <viewLayoutGuide key="safeArea" id="jsT-Tn-Kbg"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="WMK-cx-26q" appends="YES" id="p0s-z2-vYs"/>
+                            <outletCollection property="gestureRecognizers" destination="iSd-BQ-WRR" appends="YES" id="MFm-W3-P39"/>
                         </connections>
                     </view>
                     <connections>
@@ -141,6 +142,11 @@
                         <action selector="userTappedView:" destination="SLi-Kc-BxM" id="qEv-Cx-xSE"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="iSd-BQ-WRR">
+                    <connections>
+                        <action selector="userSwipedView:" destination="SLi-Kc-BxM" id="xir-aK-HSU"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2641" y="2646"/>
         </scene>
