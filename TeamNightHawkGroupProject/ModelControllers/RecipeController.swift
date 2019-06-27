@@ -28,7 +28,8 @@ class RecipeController {
         let recipeDictionary = recipe.dictionaryRepresentation
         db.collection("Recipes").document(recipe.recipeID).setData(recipeDictionary)
         db.collection("Users").document(currentUser.userID).updateData(["recipeRef" : FieldValue.arrayUnion([recipe.recipeID])])
-        currentUser.recipesRef.append(recipe.recipeID) 
+        currentUser.recipesRef.append(recipe.recipeID)
+        print("🤪🤪🤪🤪🤪🤪🤪\(recipe.recipeID)")
     }
     
     func fetchSpecificRecipesWith(userReference: String, completion: @escaping ([Recipe]) -> Void) {
@@ -160,12 +161,12 @@ class RecipeController {
     
     func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?) {
         let recipeRef = db.collection("Recipes").document(recipeID)
-        recipeRef.setData([
+        recipeRef.updateData([
             "name" : name,
-            "image" : image,
+            "image" : image.jpegData(compressionQuality: 0.1),
             "ingredients" : ingredients,
-            "steps" : steps ?? "",
-            "tags" : tags ?? "" ])
+            "steps" : steps,
+            "tags" : tags])
     }
     
     func addRecipeToUsersSavedList(WithRecipeID id: String) {

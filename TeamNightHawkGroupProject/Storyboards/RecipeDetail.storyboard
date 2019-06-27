@@ -145,7 +145,13 @@
                             <outlet property="delegate" destination="hvQ-lp-SG6" id="XcW-EY-pug"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="HlU-CX-Le2"/>
+                    <navigationItem key="navigationItem" id="HKb-ca-K1k">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="Ide-Ab-RJx">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="hvQ-lp-SG6" id="30f-US-aAA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="deleteButton" destination="icK-8D-RqS" id="nc3-aw-OGw"/>
                         <outlet property="editImageButton" destination="YLy-GK-05W" id="QIn-Uk-Rzn"/>
@@ -163,7 +169,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1286.9565217391305" y="2645.7589285714284"/>
+            <point key="canvasLocation" x="2197.1014492753625" y="2645.7589285714284"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="azp-tg-QMy">
@@ -312,6 +318,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7E-rA-4y0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="491" y="2646"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="e3T-kJ-ZNG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xeo-ad-Rcq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="HlU-CX-Le2"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="75y-AS-sKp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hvQ-lp-SG6" kind="relationship" relationship="rootViewController" id="pOj-X7-Txz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSN-PH-rDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286.9565217391305" y="2645.7589285714284"/>
         </scene>
     </scenes>
 </document>
