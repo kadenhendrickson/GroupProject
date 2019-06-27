@@ -13,7 +13,7 @@ protocol EditRecipeTableViewDelegate {
 }
 
 class EditRecipeTableViewController: UITableViewController {
-    
+    //MARK: -Outlets
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
     @IBOutlet weak var prepTimeTextField: UITextField!
@@ -36,7 +36,6 @@ class EditRecipeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "ingredientEditCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "stepEditCell")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "tagEditCell")
@@ -49,24 +48,17 @@ class EditRecipeTableViewController: UITableViewController {
         rearrangeButton.isHidden = true
         deleteButton.backgroundColor = yellow
         deleteButton.layer.cornerRadius = buttonRounding
-        
-        
     }
-    
+    //MARK: -Actions
     @IBAction func userTappedView(_ sender: Any) {
-        
     }
-    
     @IBAction func rearrangeStepsButtonTapped(_ sender: Any) {
-        
         self.isEditing = !isEditing
     }
     @IBAction func editImageTapped(_ sender: Any) {
     }
     @IBAction func deleteRecipeTapped(_ sender: Any) {
     }
-    
-    //MARK: - Segment Controller
     @IBAction func segmentControllerTapped(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -189,7 +181,7 @@ class EditRecipeTableViewController: UITableViewController {
             }
         }
     }
-
+    //MARK: -Delete cell
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let recipe = recipe,
@@ -221,7 +213,14 @@ class EditRecipeTableViewController: UITableViewController {
             }
         }
     }
-   
+    //Mark: -RearrangeCells
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        guard let steps = recipe?.steps else {return false}
+        if indexPath.row < (stepRows + steps.count - 1) {
+            return true
+        }
+        return false
+    }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         guard let recipe = recipe,
             let steps = recipe.steps,
@@ -233,14 +232,6 @@ class EditRecipeTableViewController: UITableViewController {
             recipe.steps?.insert(step, at: destinationIndexPath.row)
         }
     }
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        guard let steps = recipe?.steps else {return false}
-        if indexPath.row < (stepRows + steps.count - 1) {
-            return true
-        }
-        return false
-    }
-    
 }
 extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegate, tagCellDelegate {
     
