@@ -68,24 +68,7 @@ class CreateUserViewController: UIViewController {
                     UIApplication.shared.windows.first?.rootViewController = signUpViewController
                 }
             })
-//
-            
-            //Firestore.firestore().collection("User").document(userID).setData([
-//                "biography" : biography,
-//                "displayName" : displayName,
-//                "profileImage" : profileImage.jpegData(compressionQuality: 0.1)!
-//                ], completion: { (error) in
-//                if let error = error {
-//                    print("\(error.localizedDescription)")
-//                    return
-//                }else{
-//
-//                    }
-            //})
         }
-//        UserController.shared.createUser(withEmail: email, displayName: displayName, biography: biography, profileImage: nil)
-//
-        
     }
     
     @IBAction func userTappedView(_ sender: Any) {
@@ -96,9 +79,6 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func cancelUserCreationButtonTapped(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "signUpController")
-//        UIApplication.shared.windows.first?.rootViewController = signUpViewController
         dismiss(animated: true, completion: nil)
     }
 }

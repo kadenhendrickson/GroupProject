@@ -241,7 +241,7 @@
                         <action selector="userTappedView:" destination="bh7-Ra-5CO" id="0d1-t1-67H"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="uLJ-I7-N1b"/>
+                <swipeGestureRecognizer direction="down" id="uLJ-I7-N1b"/>
             </objects>
             <point key="canvasLocation" x="147.82608695652175" y="107.8125"/>
         </scene>
