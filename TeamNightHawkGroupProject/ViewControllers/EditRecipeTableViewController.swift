@@ -69,6 +69,9 @@ class EditRecipeTableViewController: UITableViewController {
     @IBAction func editImageTapped(_ sender: Any) {
     }
     @IBAction func deleteRecipeTapped(_ sender: Any) {
+        guard let recipe = recipe else {return}
+        RecipeController.shared.deleteRecipeWith(recipeID: recipe.recipeID)
+        navigationController?.popViewController(animated: true)
     }
     @IBAction func segmentControllerTapped(_ sender: UISegmentedControl) {
         
