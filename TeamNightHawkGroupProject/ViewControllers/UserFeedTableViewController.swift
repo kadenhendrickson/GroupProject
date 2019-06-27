@@ -82,6 +82,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         }
         if segue.identifier == "fromFeedToOtherUserVC" {
             guard let destinationVC = segue.destination as? UserViewedTableViewController else {return}
+            
             destinationVC.user = selectedUser
         }
     }
@@ -93,6 +94,8 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     func userRefSent(userRef: String) {
         UserController.shared.fetchUser(withUserRef: userRef) { (user) in
             self.selectedUser = user
+            self.performSegue(withIdentifier: "fromFeedToOtherUserVC", sender: nil)
+            
         }
     }
     func alertUser(withMessage message: String){

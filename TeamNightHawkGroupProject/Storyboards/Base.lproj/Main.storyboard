@@ -42,7 +42,6 @@
                                                             <state key="normal" title="(displayname)"/>
                                                             <connections>
                                                                 <action selector="otherUserProfileButtonTapped:" destination="zHJ-Cb-cHl" eventType="touchUpInside" id="B0h-lv-boX"/>
-                                                                <segue destination="SSP-mT-VYN" kind="show" identifier="fromFeedToOtherUserVC" id="6Sx-iR-7Il"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYV-WA-w92">
@@ -165,6 +164,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="z5c-UH-G41"/>
+                    <connections>
+                        <segue destination="SSP-mT-VYN" kind="show" identifier="fromFeedToOtherUserVC" id="LBb-cA-Aqf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yip-qZ-9Xq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -925,7 +927,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
-        <segue reference="2Or-z8-wcZ"/>
-        <segue reference="6Sx-iR-7Il"/>
+
+        <segue reference="V0v-1b-299"/>
+        <segue reference="LBb-cA-Aqf"/>
+
     </inferredMetricsTieBreakers>
 </document>
