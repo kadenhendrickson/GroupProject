@@ -44,15 +44,17 @@ class RecipeController {
             guard let documents = snapshot?.documents else {completion([]); return}
             for document in documents {
                 let data = document.data()
-                let userReference = data["userReference"] as? String ?? ""
-                let name = data["name"] as? String ?? ""
-                let image = data["image"] as? Data?
-                let ingredients = data["ingredients"] as? [Ingredient] ?? []
-                let steps = data["steps"] as? [String] ?? [""]
-                let prepTime = data["prepTime"] as? String ?? ""
-                let servings = data["servings"] as? String ?? ""
-                let tags = data["tags"] as? [String] ?? []
-                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                let theRecipe = Recipe(document: data)
+//                let userReference = data["userReference"] as? String ?? ""
+//                let name = data["name"] as? String ?? ""
+//                let image = data["image"] as? Data?
+//                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+//                let steps = data["steps"] as? [String] ?? [""]
+//                let prepTime = data["prepTime"] as? String ?? ""
+//                let servings = data["servings"] as? String ?? ""
+//                let tags = data["tags"] as? [String] ?? []
+//                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                guard let recipe = theRecipe else {return}
                 recipesArray.append(recipe)
             }
             completion(recipesArray)
@@ -92,15 +94,17 @@ class RecipeController {
             guard let documents = snapshot?.documents else {completion([]); return}
             for document in documents {
                 let data = document.data()
-                let userReference = data["userReference"] as? String ?? ""
-                let name = data["name"] as? String ?? ""
-                let image = data["image"] as? Data?
-                let ingredients = data["ingredients"] as? [Ingredient] ?? []
-                let steps = data["steps"] as? [String] ?? [""]
-                let prepTime = data["prepTime"] as? String ?? ""
-                let servings = data["servings"] as? String ?? ""
-                let tags = data["tags"] as? [String] ?? []
-                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                let theRecipe = Recipe(document: data)
+//                let userReference = data["userReference"] as? String ?? ""
+//                let name = data["name"] as? String ?? ""
+//                let image = data["image"] as? Data?
+//                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+//                let steps = data["steps"] as? [String] ?? [""]
+//                let prepTime = data["prepTime"] as? String ?? ""
+//                let servings = data["servings"] as? String ?? ""
+//                let tags = data["tags"] as? [String] ?? []
+//                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
+                guard let recipe = theRecipe else {return}
                 recipesArray.append(recipe)
             }
             completion(recipesArray)
@@ -131,27 +135,36 @@ class RecipeController {
     
     func fetchRecipesWith(recipeReferences: [String], completion: @escaping ([Recipe]) -> Void) {
         var recipesArray: [Recipe] = []
+        let dispatchGroup = DispatchGroup()
         for recipeRef in recipeReferences {
             let recipeReference = db.collection("Recipes").document(recipeRef)
-            recipeListener = recipeReference.addSnapshotListener({ (snapshot, error) in
+            dispatchGroup.enter()
+            recipeReference.getDocument { (snapshot, error) in
                 if let error = error {
                     print("There was an error fetching recipes: \(error.localizedDescription)")
+                    dispatchGroup.leave()
                 }
                 guard let data = snapshot?.data() else {completion([]); return}
-                    let userReference = data["userReference"] as? String ?? ""
-                    let name = data["name"] as? String ?? ""
-                    let image = data["image"] as? Data?
-                    let ingredients = data["ingredients"] as? [Ingredient] ?? []
-                    let steps = data["steps"] as? [String] ?? [""]
-                    let prepTime = data["prepTime"] as? String ?? ""
-                    let servings = data["servings"] as? String ?? ""
-                    let tags = data["tags"] as? [String] ?? []
-                    let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
-                
+                let theRecipe = Recipe(document: data)
+//                let recipeID = data["recipeID"] as? String ?? ""
+//                let userReference = data["userReference"] as? String ?? ""
+//                let name = data["name"] as? String ?? ""
+//                let image = data["image"] as? Data?
+//                let ingredients = data["ingredients"] as? [Ingredient] ?? []
+//                let steps = data["steps"] as? [String] ?? [""]
+//                let prepTime = data["prepTime"] as? String ?? ""
+//                let servings = data["servings"] as? String ?? ""
+//                let tags = data["tags"] as? [String] ?? []
+//                let savedByUsers = data["savedByUsers"] as? [String] ?? []
+//                let recipe = Recipe(userReference: userReference, recipeID: recipeID, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers )
+                guard let recipe = theRecipe else {return}
                 recipesArray.append(recipe)
-            })
+                dispatchGroup.leave()
+            }
         }
-        completion(recipesArray)
+        dispatchGroup.notify(queue: .main) {
+            completion(recipesArray)
+        }
     }
     
     

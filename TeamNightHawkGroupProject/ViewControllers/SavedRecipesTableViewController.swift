@@ -11,45 +11,59 @@ import UIKit
 class SavedRecipesTableViewController: UITableViewController {
 
     //MARK: - Properties
-    var recipesList: [Recipe] = {
-            var recipes: [Recipe] = []
-            guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return []}
-            RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs, completion: { (fetchedRecipes) in
-                recipes = fetchedRecipes
-                print("Fetched \(fetchedRecipes.count) recipes")
-            })
-            return recipes
-    }()
+    var recipesList: [Recipe]? {
+        didSet{
+            print("😝😝😝Recipes set!😝😝😝")
+            print(self.recipesList?.count)
+        }
+    }
+        
     
-    var usersList: [User] {
-        var users: [User] = []
-        for recipe in recipesList {
-            let userRef = recipe.userReference
-            UserController.shared.fetchUser(withUserRef: userRef) { (user) in
-                users.append(user)
+    var usersList: [User]? {
+        didSet {
+            print("😝😝😝User was set😝😝😝")
+            print(self.usersList?.count)
+            tableView.reloadData()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadUsersAndRecipes()
+        tabBarController?.delegate = self
+    }
+    
+    func loadUsersAndRecipes() {
+        recipesList = []
+        usersList = []
+        guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
+        RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs) { (recipes) in
+            self.recipesList?.append(contentsOf: recipes)
+            for recipe in recipes {
+                let userRef = recipe.userReference
+                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
+                    self.usersList?.append(user)
+                })
             }
         }
         
-        return users
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.reloadData()
-        tabBarController?.delegate = self
+        //        RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs, completion: { (fetchedRecipes) in
+//            recipes = fetchedRecipes
+//            print("Fetched \(fetchedRecipes.count) recipes")
+//        })
     }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipesList.count
+        return recipesList?.count ?? 0
+        
 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell
-        cell?.recipe = recipesList[indexPath.row]
-        cell?.user = usersList[indexPath.row]
+        cell?.user = usersList?[indexPath.row]
+        cell?.recipe = recipesList?[indexPath.row]
         return cell ?? UITableViewCell()
     }
 
@@ -58,7 +72,7 @@ class SavedRecipesTableViewController: UITableViewController {
         if segue.identifier == "fromSavedToRecipeDVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                 let destinationVC = segue.destination as? RecipeDetailTableViewController else {return}
-            let recipe = recipesList[indexPath.row]
+            let recipe = recipesList?[indexPath.row]
             destinationVC.recipe = recipe
         }
     }
