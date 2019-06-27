@@ -130,6 +130,7 @@
                             </constraints>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="UW7-Gm-l6B" appends="YES" id="pbf-LU-RW8"/>
+                                <outletCollection property="gestureRecognizers" destination="qZ3-Vh-vQ0" appends="YES" id="Yuo-Xf-fgQ"/>
                             </connections>
                         </view>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="icK-8D-RqS">
@@ -156,9 +157,10 @@
                         <outlet property="deleteButton" destination="icK-8D-RqS" id="nc3-aw-OGw"/>
                         <outlet property="editImageButton" destination="YLy-GK-05W" id="QIn-Uk-Rzn"/>
                         <outlet property="nameTextField" destination="sOA-92-rPn" id="9LK-zg-UIM"/>
+                        <outlet property="panGestureRecognizer" destination="qZ3-Vh-vQ0" id="xu2-5N-IeE"/>
                         <outlet property="prepTimeTextField" destination="Dd4-Kl-rua" id="6Mp-cd-ooR"/>
                         <outlet property="rearrangeButton" destination="Fmv-Ui-W3S" id="2Ea-B4-gIY"/>
-                        <outlet property="recipeImage" destination="ApZ-AJ-SlE" id="Ohq-ap-LAd"/>
+                        <outlet property="recipeImageView" destination="ApZ-AJ-SlE" id="Ohq-ap-LAd"/>
                         <outlet property="servingTextField" destination="Z7q-kL-HOC" id="fjH-S6-3jO"/>
                     </connections>
                 </tableViewController>
@@ -168,6 +170,7 @@
                         <action selector="userTappedView:" destination="hvQ-lp-SG6" id="FRd-9v-8if"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer cancelsTouchesInView="NO" delaysTouchesEnded="NO" minimumNumberOfTouches="1" id="qZ3-Vh-vQ0"/>
             </objects>
             <point key="canvasLocation" x="2197.1014492753625" y="2645.7589285714284"/>
         </scene>

@@ -109,4 +109,8 @@ extension Section2TableViewCell: AddRecipeTableViewDelegate, EditRecipeTableView
     func userTappedView() {
         directionSteps.resignFirstResponder()
     }
+    
+    func userSwipedDown() {
+        directionSteps.resignFirstResponder()
+    }
 }
