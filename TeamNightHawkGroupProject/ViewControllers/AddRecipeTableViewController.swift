@@ -23,6 +23,7 @@ class AddRecipeTableViewController: UITableViewController {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
     var imagePicker = ImagePickerHelper()
     var safeArea: UILayoutGuide {
@@ -49,6 +50,14 @@ class AddRecipeTableViewController: UITableViewController {
         self.present(alertController, animated: true)
     }
     
+    func resignAllResponders(){
+        nameTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        servingTextField.resignFirstResponder()
+        prepTimeTextField.resignFirstResponder()
+        delegate?.userTappedView()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +66,7 @@ class AddRecipeTableViewController: UITableViewController {
         servingTextField.delegate = self
         servingTextField.delegate = self
         prepTimeTextField.delegate = self
+        panGestureRecognizer.delegate = self
         
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
@@ -86,6 +96,7 @@ class AddRecipeTableViewController: UITableViewController {
     
     @IBAction func imageSelectorTapped(_ sender: Any) {
         imagePicker.presentImagePicker(for: self)
+        resignAllResponders()
     }
     
     @IBAction func segmentControllerTapped(_ sender: UISegmentedControl) {
@@ -128,11 +139,7 @@ class AddRecipeTableViewController: UITableViewController {
     }
     
     @IBAction func userTappedView(_ sender: Any) {
-        nameTextField.resignFirstResponder()
-        servingTextField.resignFirstResponder()
-        servingTextField.resignFirstResponder()
-        prepTimeTextField.resignFirstResponder()
-        delegate?.userTappedView()
+        resignAllResponders()
     }
     
     //MARK: - Table view data source
@@ -269,6 +276,14 @@ extension AddRecipeTableViewController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+}
+
+
+extension AddRecipeTableViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        self.resignAllResponders()
         return true
     }
 }
