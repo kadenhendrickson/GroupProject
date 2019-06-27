@@ -85,7 +85,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="394-F7-cdQ"/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="ujH-Kv-tib" appends="YES" id="p9c-oi-zWf"/>
+                            <outletCollection property="gestureRecognizers" destination="yQX-ff-Bod" appends="YES" id="La0-V5-M83"/>
+                            <outletCollection property="gestureRecognizers" destination="ji7-MJ-ePh" appends="YES" id="b1W-D0-ksd"/>
                         </connections>
                     </view>
                     <connections>
@@ -94,9 +95,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZQ-0s-yEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ujH-Kv-tib">
+                <swipeGestureRecognizer direction="down" id="yQX-ff-Bod">
                     <connections>
-                        <action selector="userTappedView:" destination="302-AR-mn8" id="b0b-f6-yaN"/>
+                        <action selector="userSwipedDown:" destination="302-AR-mn8" id="je7-2e-7bE"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="ji7-MJ-ePh">
+                    <connections>
+                        <action selector="userTappedView:" destination="302-AR-mn8" id="faE-Rx-bhb"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -217,6 +223,7 @@
                         <viewLayoutGuide key="safeArea" id="eoc-13-NhD"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="kX9-tb-fQH" appends="YES" id="iw9-Dq-gsp"/>
+                            <outletCollection property="gestureRecognizers" destination="uLJ-I7-N1b" appends="YES" id="mZt-Vf-Fpb"/>
                         </connections>
                     </view>
                     <connections>
@@ -234,6 +241,7 @@
                         <action selector="userTappedView:" destination="bh7-Ra-5CO" id="0d1-t1-67H"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="uLJ-I7-N1b"/>
             </objects>
             <point key="canvasLocation" x="147.82608695652175" y="107.8125"/>
         </scene>

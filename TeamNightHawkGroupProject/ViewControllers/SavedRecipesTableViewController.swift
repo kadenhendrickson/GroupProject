@@ -67,6 +67,6 @@ class SavedRecipesTableViewController: UITableViewController {
 
 extension SavedRecipesTableViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        tableView.reloadData()
+//        tableView.reloadData()
     }
 }

@@ -52,7 +52,7 @@ class Recipe: Codable {
     }
     
     // Init from firestore's document
-    convenience init?(document: QueryDocumentSnapshot) {
+    convenience init?(document: [String: Any]) {
          guard let userReference = document[RecipeKeys.userReferenceKey] as? String,
             let recipeId = document[RecipeKeys.recipeIDKey] as? String,
             let name = document[RecipeKeys.nameKey] as? String,
@@ -62,8 +62,7 @@ class Recipe: Codable {
             let prepTime = document[RecipeKeys.prepTimeKey] as? String,
             let servings = document[RecipeKeys.servingsKey] as? String,
             let tags = document[RecipeKeys.tagsKey] as? [String],
-            let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String],
-            let savecount = document[RecipeKeys.saveCountKey] as? Int else {
+            let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String] else {
                 print("🍒 Failed to create a recipe from snapshot. Printing from \(#function) \n In \(String(describing: Recipe.self)) 🍒")
                 return nil
         }
