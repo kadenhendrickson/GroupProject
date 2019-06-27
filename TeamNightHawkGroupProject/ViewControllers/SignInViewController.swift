@@ -19,28 +19,13 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         userEmail.delegate = self
         userPassword.delegate = self
+        
+        userEmail.tag = 0
+        userPassword.tag = 1
     }
     
     @IBAction func loginUserButtonTapped(_ sender: UIButton) {
-        guard let email = userEmail.text,
-            let password = userPassword.text else {return}
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                print("Error signing in \(error.localizedDescription)")
-                return
-            } else {
-                // resign all textfields before changing view.
-                self.resignAllTextFields()
-
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let feedViewController = storyboard.instantiateViewController(withIdentifier: "tabController")
-                UIApplication.shared.windows.first?.rootViewController = feedViewController
-                guard let userRef = result?.user.uid else {return}
-                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
-                    UserController.shared.currentUser = user
-                })
-            }
-        }
+        triggerSignIn()
     }
     
     @IBAction func createUserButtonTapped(_ sender: UIButton){
@@ -66,11 +51,54 @@ class SignInViewController: UIViewController {
         userEmail.resignFirstResponder()
         userPassword.resignFirstResponder()
     }
+    
+    func alertUser(withMessage message: String){
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
+    
+    func triggerSignIn(){
+        guard let email = userEmail.text,
+            let password = userPassword.text else {return}
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("Error signing in \(error.localizedDescription)")
+                self.alertUser(withMessage: "Incorrect email / password.")
+                return
+            } else {
+                // resign all textfields before changing view.
+                self.resignAllTextFields()
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let feedViewController = storyboard.instantiateViewController(withIdentifier: "tabController")
+                UIApplication.shared.windows.first?.rootViewController = feedViewController
+                guard let userRef = result?.user.uid else {return}
+                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
+                    UserController.shared.currentUser = user
+                })
+            }
+        }
+    }
 }
 
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if let passwordField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            passwordField.becomeFirstResponder()
+        } else {
+            //we are now in password field
+            //resign first responder and trigger sign in
+            textField.resignFirstResponder()
+            triggerSignIn()
+        }
+        
         return true
     }
     

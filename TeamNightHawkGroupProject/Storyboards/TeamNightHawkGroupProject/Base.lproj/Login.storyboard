@@ -49,7 +49,7 @@
                                         <rect key="frame" x="0.0" y="38" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -165,27 +165,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-sP-Bp8">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Display Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kzj-TN-P43">
                                         <rect key="frame" x="0.0" y="38" width="229.5" height="30"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Display Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kzj-TN-P43">
-                                                <rect key="frame" x="0.0" y="0.0" width="229.5" height="30"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="Kzj-TN-P43" firstAttribute="top" secondItem="gtP-sP-Bp8" secondAttribute="top" id="MkF-DG-bD9"/>
-                                            <constraint firstAttribute="trailing" secondItem="Kzj-TN-P43" secondAttribute="trailing" id="Uzz-ao-DQU"/>
-                                            <constraint firstItem="Kzj-TN-P43" firstAttribute="leading" secondItem="gtP-sP-Bp8" secondAttribute="leading" id="t2x-91-rxk"/>
-                                        </constraints>
-                                    </stackView>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bL0-ek-V5G">
                                         <rect key="frame" x="0.0" y="76" width="229.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -206,6 +196,7 @@
                             <constraint firstItem="kfy-zO-QcT" firstAttribute="height" secondItem="wXc-rI-R2E" secondAttribute="height" id="Eel-ES-iOu"/>
                             <constraint firstItem="eoc-13-NhD" firstAttribute="trailing" secondItem="pA7-No-W15" secondAttribute="trailing" constant="365" id="HK6-9K-4zQ"/>
                             <constraint firstItem="kfy-zO-QcT" firstAttribute="top" secondItem="wXc-rI-R2E" secondAttribute="top" id="K8s-o7-Rh3"/>
+                            <constraint firstItem="pA7-No-W15" firstAttribute="top" secondItem="kfy-zO-QcT" secondAttribute="bottom" constant="8" id="LRv-Ks-pMB"/>
                             <constraint firstItem="kfy-zO-QcT" firstAttribute="width" secondItem="wXc-rI-R2E" secondAttribute="width" id="OGt-Tn-0Py"/>
                             <constraint firstItem="pA7-No-W15" firstAttribute="leading" secondItem="eoc-13-NhD" secondAttribute="leading" constant="20" id="ShT-1N-KZ4"/>
                             <constraint firstItem="3X9-ms-dpJ" firstAttribute="top" secondItem="DB0-Mb-fw4" secondAttribute="bottom" constant="50" id="T1Z-2v-Orz"/>
@@ -231,8 +222,8 @@
                         <outlet property="displayNameTextField" destination="Kzj-TN-P43" id="M5b-mj-auB"/>
                         <outlet property="emailTextField" destination="vkn-qI-Am1" id="Cht-dg-6si"/>
                         <outlet property="passwordTextField" destination="bL0-ek-V5G" id="1RD-Iz-Aax"/>
-                        <outlet property="profileImage" destination="wXc-rI-R2E" id="Usj-ov-OQS"/>
                         <outlet property="profileImagePickerButton" destination="kfy-zO-QcT" id="dRv-72-XHd"/>
+                        <outlet property="profileImageView" destination="wXc-rI-R2E" id="Usj-ov-OQS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dj-w1-YaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -241,7 +232,11 @@
                         <action selector="userTappedView:" destination="bh7-Ra-5CO" id="0d1-t1-67H"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="uLJ-I7-N1b"/>
+                <swipeGestureRecognizer direction="down" id="uLJ-I7-N1b">
+                    <connections>
+                        <action selector="userSwipedDown:" destination="bh7-Ra-5CO" id="aRk-qr-UIk"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="147.82608695652175" y="107.8125"/>
         </scene>
