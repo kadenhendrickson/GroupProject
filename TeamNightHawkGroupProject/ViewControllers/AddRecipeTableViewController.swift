@@ -65,9 +65,6 @@ class AddRecipeTableViewController: UITableViewController {
         saveButton.backgroundColor = yellow
         saveButton.layer.cornerRadius = buttonRounding
         tableView.backgroundColor = green
-//        saveButton.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 10, paddingLeading: 20, paddingTrailing: 20,width: 300,height: 34)
-        
-        
     }
     
     @IBAction func clearButtonTapped(_ sender: Any) {
@@ -83,10 +80,7 @@ class AddRecipeTableViewController: UITableViewController {
         prepTimeTextField.text = ""
         imageSelector.setTitle("Click to add image", for: .normal)
         recipeImage.image = nil
-        
         tableView.reloadData()
-        
-        
     }
     
     
@@ -207,13 +201,6 @@ class AddRecipeTableViewController: UITableViewController {
         
     }
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
 }
 
 extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate, tagCellDelegate {

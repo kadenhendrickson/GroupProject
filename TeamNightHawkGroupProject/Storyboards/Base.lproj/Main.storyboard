@@ -49,8 +49,7 @@
                                                             <rect key="frame" x="304" y="0.0" width="30" height="24"/>
                                                             <state key="normal" title="..."/>
                                                             <connections>
-                                                                <action selector="moreOptionsButtonTapped:" destination="6RS-kJ-Dpz" eventType="touchUpInside" id="3ri-2U-mUc"/>
-                                                                <action selector="moreOptionsButtonTapped:" destination="zHJ-Cb-cHl" eventType="touchUpInside" id="UfI-gg-jfl"/>
+                                                                <action selector="moreOptionsButtonTapped:" destination="zHJ-Cb-cHl" eventType="touchUpInside" id="8an-oU-ctx"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -923,7 +922,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
-        <segue reference="vZv-MN-JCV"/>
-        <segue reference="nsF-ro-oZn"/>
+        <segue reference="V0v-1b-299"/>
+        <segue reference="6Sx-iR-7Il"/>
     </inferredMetricsTieBreakers>
 </document>
