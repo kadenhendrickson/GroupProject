@@ -58,6 +58,10 @@ class EditRecipeTableViewController: UITableViewController {
         servingTextField.delegate = self
         prepTimeTextField.delegate = self
         panGestureRecognizer.delegate = self
+        
+        // Delegate for image picker
+        imagePicker.delegate = self
+        
     }
     
     //MARK: -Actions
@@ -99,6 +103,7 @@ class EditRecipeTableViewController: UITableViewController {
     }
     
     @IBAction func editImageTapped(_ sender: Any) {
+        imagePicker.presentImagePicker(for: self)
     }
     
     @IBAction func deleteRecipeTapped(_ sender: Any) {
@@ -380,3 +385,5 @@ extension EditRecipeTableViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+
