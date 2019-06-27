@@ -67,8 +67,8 @@ class UserFeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func otherUserProfileButtonTapped(_ sender: UIButton) {
-        guard let user = user else {return}
-        
+        guard let userRef = user?.userID else {return}
+        delegate?.userRefSent(userRef: userRef)
     }
     
 }

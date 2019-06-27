@@ -82,6 +82,11 @@ class UserController {
             "displayName" : displayName,
             "biography" : biography,
             "profileImage" : profileImage?.jpegData(compressionQuality: 0.1)])
+        
+        currentUser?.email = email
+        currentUser?.displayName = displayName
+        currentUser?.biography = biography
+        currentUser?.profileImage = profileImage?.jpegData(compressionQuality: 0.1)
     }
     
     func deleteUser(withID userID: String){
