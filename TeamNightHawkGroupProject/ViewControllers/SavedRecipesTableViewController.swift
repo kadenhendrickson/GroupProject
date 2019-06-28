@@ -95,6 +95,18 @@ class SavedRecipesTableViewController: UITableViewController {
         
         return cell
     }
+    
+    // Swipe to delete
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let cell = tableView.cellForRow(at: indexPath) as? SavedRecipeTableViewCell,
+                 let recipe = cell.recipe
+                else { print("🍒 Can't cast cell as saved recipe cell. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒") ; return }
+           
+            RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipe.recipeID)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
