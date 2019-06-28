@@ -29,6 +29,7 @@ class RecipeDetailTableViewController: UITableViewController {
     var user: User? {
         didSet {
             guard user != nil else { return }
+            updateDetails()
         }
     }
     var recipeSegmentIndex: Int = 1
@@ -38,8 +39,6 @@ class RecipeDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = navigationTitle
-        updateDetails()
-
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
@@ -81,7 +80,7 @@ class RecipeDetailTableViewController: UITableViewController {
     }
     
     func updateDetails() {
-        
+        loadViewIfNeeded()
         guard let recipe = recipe,
             let recipeImageData = recipe.image,
             let recipeImage = UIImage(data: recipeImageData),
