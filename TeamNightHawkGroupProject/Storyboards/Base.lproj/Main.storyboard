@@ -446,18 +446,11 @@
                                             <rect key="frame" x="20" y="382" width="374" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g5-wh-MaT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDL-9B-amJ">
-                                                    <rect key="frame" x="340" y="0.0" width="34" height="50"/>
-                                                    <state key="normal" title="Save"/>
-                                                    <connections>
-                                                        <action selector="saveRecipeButtonTapped:" destination="FlR-w7-uTZ" eventType="touchUpInside" id="y9K-al-vlE"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="Kz5-ZR-yuD"/>
@@ -521,7 +514,6 @@
                                     <outlet property="recipePrepTimeTextLabel" destination="YxY-EP-nNs" id="FDK-eD-Fgg"/>
                                     <outlet property="recipeSaveCountTextLabel" destination="0Xe-AK-pX2" id="gF6-i5-AjB"/>
                                     <outlet property="recipeServingsTextLabel" destination="C6V-d0-uxe" id="tUU-tF-7xV"/>
-                                    <outlet property="saveRecipeButton" destination="SDL-9B-amJ" id="JtA-lM-mBT"/>
                                     <outlet property="userDisplayName" destination="dmh-uM-6Ag" id="jfS-t2-V8i"/>
                                     <outlet property="userProfileImageView" destination="1y1-Mi-lwD" id="gWf-XQ-R4c"/>
                                     <segue destination="WVq-0b-mrp" kind="show" identifier="fromSavedToRecipeDVC" id="5CQ-ys-tBo"/>
