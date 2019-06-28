@@ -39,6 +39,8 @@ class RecipeController {
         recipeReference.whereField("userReference", isEqualTo: userReference).getDocuments { (snapshot, error) in
             if let error = error {
                 print("There was an error fetching recipes: \(error.localizedDescription)")
+                completion([])
+                return
             }
             
             guard let documents = snapshot?.documents else {completion([]); return}
@@ -58,6 +60,7 @@ class RecipeController {
                 recipesArray.append(recipe)
             }
             completion(recipesArray)
+            return
         }
     }
 //        recipeListener = recipeReference.whereField("userReference", isEqualTo: userReference).order(by: "userReference").addSnapshotListener({ (snapshot, error) in

@@ -378,6 +378,7 @@
                                     <outlet property="viewedUserSaveButton" destination="q9t-Az-rF4" id="puh-X1-YXN"/>
                                     <outlet property="viewedUserSaveCountLabel" destination="b3e-xk-hPl" id="XbW-HN-7gR"/>
                                     <outlet property="viewedUserServingsLabel" destination="ca2-xf-u6E" id="ATt-tU-fFK"/>
+                                    <segue destination="GnN-5P-n0I" kind="show" identifier="toRecipeDetail" id="HaN-IE-9uk"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -399,6 +400,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJ1-gB-1XJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1767" y="2646"/>
+        </scene>
+        <!--RecipeDetailView-->
+        <scene sceneID="ant-FL-0fC">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RecipeDetailView" storyboardName="RecipeDetail" referencedIdentifier="RecipeDetailView" id="GnN-5P-n0I" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ljM-Fy-qEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1033" y="2807"/>
         </scene>
     </scenes>
 </document>

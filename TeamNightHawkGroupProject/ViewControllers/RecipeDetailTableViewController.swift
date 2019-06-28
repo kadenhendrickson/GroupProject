@@ -9,32 +9,41 @@
 import UIKit
 
 class RecipeDetailTableViewController: UITableViewController {
-    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UIButton!
     
-    @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var servingsLabel: UILabel!
     @IBOutlet weak var prepTimeLabel: UILabel!
     
+    // this get set to somthing else from vc that segues to this vc
+    var navigationTitle = "Recipe"
     
-    var recipe: Recipe?
-    var user: User?
+    var recipe: Recipe? {
+        didSet {
+            fetchUser()
+        }
+    }
+    
+    var user: User? {
+        didSet {
+            guard user != nil else { return }
+            updateDetails()
+        }
+    }
     var recipeSegmentIndex: Int = 1
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = navigationTitle
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
-        updateDetails()
     }
    
-    @IBAction func userNameLabelButtonTapped(_ sender: UIButton) {
-      
-    }
     
     @IBAction func segmentDetailControllerTapped(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -58,27 +67,42 @@ class RecipeDetailTableViewController: UITableViewController {
     //cant call navigation controller without embedding it
 
     
-    func updateDetails() {
+    func fetchUser(){
+        guard let recipe = recipe else { print("🍒 There's no recipeto fetch. Printing from \(#function) \n In \(String(describing: RecipeDetailTableViewController.self)) 🍒"); return}
         
-        guard let recipe = recipe else {return}
         
-        let userDoc = UserController.shared.db.collection("Users").document(recipe.userReference)
-        
-        userDoc.getDocument { (snapshot, error) in
-            if let error = error {
-                print("There was an error fetching your user document: \(error.localizedDescription)")
+        UserController.shared.fetchUser(withUserRef: recipe.userReference) { (user) in
+            self.user = user
+            if self.user == nil {
+                print("🍒 Failed to assign fetched user to self.user. Printing from \(#function) \n In \(String(describing: RecipeDetailTableViewController.self)) 🍒")
             }
-            guard let data = snapshot?.data(),
-            let imageData = recipe.image else {return}
-            
-            let displayName = data["displayName"] as? String ?? ""
-            self.userNameLabel.setTitle(displayName, for: .normal)
-            self.recipeImage.image = UIImage(data: imageData)
-            self.nameLabel.text = recipe.name
-            self.servingsLabel.text = recipe.servings
-            self.prepTimeLabel.text = recipe.prepTime
         }
-       
+    }
+    
+    func updateDetails() {
+        loadViewIfNeeded()
+        guard let recipe = recipe,
+            let recipeImageData = recipe.image,
+            let recipeImage = UIImage(data: recipeImageData),
+            let user = user else { print("🍒 Something is wrong with this recipe, come here and check. Printing from \(#function) \n In \(String(describing: RecipeDetailTableViewController.self)) 🍒"); return }
+        
+        self.recipeImageView.image = recipeImage
+
+        let displayName = user.displayName
+        let imageData = user.profileImage
+        
+        if let imageData = imageData,
+            let userImageData = UIImage(data: imageData) {
+            userImageView.image = userImageData
+        } else {
+            userImageView.image = UIImage(named: "duck")
+
+        }
+        
+        self.userNameLabel.setTitle(displayName, for: .normal)
+        self.nameLabel.text = recipe.name
+        self.servingsLabel.text = recipe.servings
+        self.prepTimeLabel.text = recipe.prepTime
     }
     
 
@@ -132,4 +156,17 @@ class RecipeDetailTableViewController: UITableViewController {
             return cell
         }
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfileTableViewController" {
+            guard let destinationVC = segue.destination as? UserViewedTableViewController,
+                let user = self.user
+            else { print("🍒 Failed to meet all the conditions for segueing. Printing from \(#function) \n In \(String(describing: RecipeDetailTableViewController.self)) 🍒"); return }
+            
+            destinationVC.user = user
+            destinationVC.title = user.displayName
+        }
+    }
+    
 }
