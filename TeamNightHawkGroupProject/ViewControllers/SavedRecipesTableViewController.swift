@@ -11,48 +11,41 @@ import UIKit
 class SavedRecipesTableViewController: UITableViewController {
 
     //MARK: - Properties
+    var recipesIDs: [String] = []
     
-    // 2. Fetch users, this becomes true when the user count match recipes count
-    var usersFetchCompleted = false {
-        didSet {
-            allFetchCompleted = usersFetchCompleted && recipesFetchCompleted
-        }
-    }
+    // somehow fetching here makes user and recipe swaps, for now store them as dictionary to make it work
     
-    // 1. Fetch recipes first, this becomes true after recipes fetch completion
-    var recipesFetchCompleted = false {
-        didSet {
-            allFetchCompleted = usersFetchCompleted && recipesFetchCompleted
-        }
-    }
+    // dictionaries of recipekey : recipe
+    var recipesList: [String: Recipe] = [:]
     
-    // 3. When all fetch complete reload table view
-    var allFetchCompleted: Bool = false {
+    // dictionaries of recipekey : user
+    var usersList: [String: User] = [:] {
         didSet {
-            guard self.allFetchCompleted else { return }
+            print("😝😝😝Users was set😝😝😝")
+            print(self.usersList.count)
+            
+            guard usersList.count > 0,
+                usersList.count == recipesIDs.count else {return}
             tableView.reloadData()
         }
     }
     
-    var recipesList: [Recipe]? {
-        didSet{
-            print("🌎🌎🌎Recipes set!😝😝😝")
-            print(self.recipesList?.count)
-        }
-    }
-        
+
     
-    var usersList: [User]? {
-        didSet {
-            print("😝😝😝Users was set😝😝😝")
-            print(self.usersList?.count)
-            
-            // Since the user fetch occur in a for loop and back thread, it's hard to capture when the load is finished, so I'm counting them instead
-            guard recipesFetchCompleted,
-                self.usersList?.count == self.recipesList?.count else { return }
-            usersFetchCompleted = true
-        }
-    }
+//    var recipesList: [Recipe]? {
+//        didSet{
+//            print("🌎🌎🌎Recipes set!😝😝😝")
+//            print(self.recipesList?.count)
+//        }
+//    }
+//
+//    var usersList: [User]? {
+//        didSet {
+//            print("😝😝😝Users was set😝😝😝")
+//            print(self.usersList?.count)
+//            tableView.reloadData()
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,30 +54,23 @@ class SavedRecipesTableViewController: UITableViewController {
         loadUsersAndRecipes()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        // reset load listener back
-        usersFetchCompleted = false
-        recipesFetchCompleted = false
-        allFetchCompleted = false
-    }
-    
+
     func loadUsersAndRecipes() {
         
-        recipesList = []
-        usersList = []
-        
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
+        
+        self.recipesIDs = recipeRefs
+
         RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs) { (recipes) in
             
             guard recipes.count > 0 else {return}
             
-            self.recipesList?.append(contentsOf: recipes)
-            self.recipesFetchCompleted = true
-            
             for recipe in recipes {
+                self.recipesList[recipe.recipeID] = recipe
+                
                 let userRef = recipe.userReference
                 UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
-                    self.usersList?.append(user)
+                    self.usersList[recipe.recipeID] = user
                 })
             }
         }
@@ -92,21 +78,18 @@ class SavedRecipesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipesList?.count ?? 0
+        return recipesIDs.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard self.recipesList?.count == self.usersList?.count else {
-            print("🍒 Tableview tried to deque cells before all data are loaded, it's a good thing you invested in this guard statement. I actually doubt if this statement will actually be triggered. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒")
-            return UITableViewCell()
-        }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell,
-            let recipe = self.recipesList?[indexPath.row],
-            let user = self.usersList?[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell
             else { print("🍒 I'm failing your cell deque because I'm a guard statement. I might deque other cells just fine but I'm failing this one. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return UITableViewCell() }
-
+        
+        let dicKey = self.recipesIDs[indexPath.row]
+        let recipe = self.recipesList[dicKey]
+        let user = self.usersList[dicKey]
+        
         // User must get assign into cell before recipe. Or you will experience traumatic debugging event.
         cell.user = user
         cell.recipe = recipe
