@@ -103,6 +103,16 @@ class UserController {
         db.collection("Users").document(userID).delete()
 }
     //MARK: - Methods
+    
+    func blockUser(withID userID: String){
+        guard let currentUser = UserController.shared.currentUser else {return}
+        let currentUserRef = db.collection("Users").document(currentUser.userID)
+        currentUserRef.updateData(["blockedUserRefs" : FieldValue.arrayUnion([userID])])
+        unfollowUser(withID: userID)
+        currentUser.blockedUserRefs.append(userID)
+        
+    }
+    
     func followUser(withID userID: String){
         guard let currentUser = UserController.shared.currentUser else { print("🍒 There's no current user or user to follow is not found. Printing from \(#function) in UserController 🍒"); return }
         
@@ -127,14 +137,6 @@ class UserController {
         
         let followedUserRef = db.collection("Users").document(userID)
         followedUserRef.updateData(["followedByRefs" : FieldValue.arrayRemove([currentUser.userID])])
-    }
-    
-    func blockUser(withID userID: String){
-        
-        guard let currentUser = currentUser else { print("🍒 There's no current user. Printing from \(#function) \n In \(String(describing: UserController.self)) 🍒"); return }
-        
-        let currentUserRef = db.collection("Users").document(currentUser.userID)
-        currentUserRef.updateData(["blockedUserRefs" : FieldValue.arrayUnion([userID])])
     }
     
     func unblockUser(withID blockedUserID: String){

@@ -8,8 +8,9 @@
 
 import UIKit
 import FirebaseAuth
+import MessageUI
 
-class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate {
+class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate{
     //MARK: - Properties
     var recipesList: [Recipe]? {
         didSet{
@@ -113,10 +114,32 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let reportPost = UIAlertAction(title: "Report/Block", style: .default) { (_) in
             guard let userID = self.selectedUser?.userID else {return}
-            UserController.shared.currentUser?.blockedUserRefs.append(userID)
+            UserController.shared.blockUser(withID: userID)
+            self.loadUsers()
+            self.sendEmail(userID: userID)
         }
+        
         alertController.addAction(cancelAction)
         alertController.addAction(reportPost)
         self.present(alertController, animated: true)
+    }
+}
+
+extension UserFeedTableViewController: MFMailComposeViewControllerDelegate {
+    func sendEmail(userID: String){
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["rectagram@gmail.com"])
+            mail.setSubject("Reporting email")
+            mail.setMessageBody("The following user has posted an inappropriate item. Please look into removing the account for \(userID). Regards \(UserController.shared.currentUser!.displayName)", isHTML: true)
+            present(mail, animated: true)
+        } else {
+            print("this device can't send email")
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

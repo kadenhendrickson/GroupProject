@@ -44,7 +44,8 @@ class UserFeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
-        print("🕍🕍🕍🕍🕍🕍🕍")
+        guard let userRef = user?.userID else {return}
+        delegate?.userRefSent(userRef: userRef)
         delegate?.popAlert()
     }
     
