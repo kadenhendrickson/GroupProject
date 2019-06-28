@@ -52,15 +52,22 @@ class UserViewedTableViewController: UITableViewController {
     }
     
     @IBAction func followButtonTapped(_ sender: Any) {
-        guard let user = user else {return}
+        guard let user = user,
+        let currentUser = UserController.shared.currentUser else {return}
         if UserController.shared.currentUser!.followingRefs.contains(user.userID){
             UserController.shared.unfollowUser(withID: user.userID)
             viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
             followButon.setTitle("Follow", for: .normal)
+            let indexPath = user.followedByRefs.firstIndex(where: {$0 == currentUser.userID})
+            user.followedByRefs.remove(at: indexPath!)
+            setUpViews()
+            
         } else {
         UserController.shared.followUser(withID: user.userID)
             viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
             followButon.setTitle("Unfollow", for: .normal)
+            user.followedByRefs.append(currentUser.userID)
+            setUpViews()
         }
     }
     

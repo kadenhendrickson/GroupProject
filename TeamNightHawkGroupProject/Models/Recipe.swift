@@ -37,6 +37,7 @@ class Recipe {
         }
         return array
     }
+
     var steps: [String]?
     var prepTime: String
     var servings: String
@@ -47,6 +48,7 @@ class Recipe {
     }
     //changed image to 'Data?' from 'UIImage?' to test local Persistence. also changed self.image = image to self.image = image.png?Data()
     init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient] = [], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
+
         self.userReference = userReference
         self.recipeID = recipeID
         self.name = name
@@ -65,6 +67,7 @@ class Recipe {
             let recipeId = document[RecipeKeys.recipeIDKey] as? String,
             let name = document[RecipeKeys.nameKey] as? String,
             let image = document[RecipeKeys.imageKey] as? Data?,
+
             let steps = document[RecipeKeys.stepsKey] as? [String],
             let prepTime = document[RecipeKeys.prepTimeKey] as? String,
             let servings = document[RecipeKeys.servingsKey] as? String,

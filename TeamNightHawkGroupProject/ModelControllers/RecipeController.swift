@@ -22,7 +22,7 @@ class RecipeController {
     
     //CRUD
     
-    func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String?, prepTime: String?) {
+    func createRecipe(name: String, image: UIImage, ingredients: [[String:Any]], steps: [String]?, tags: [String]?, servingSize: String?, prepTime: String?) {
         guard let currentUser = currentUser else {return}
         var ingredientsDict: [[String:Any]] = []
         for ingredient in ingredients {
@@ -179,7 +179,7 @@ class RecipeController {
         db.collection("Recipes").document(recipeID).delete()
     }
     
-    func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String, prepTime: String) {
+    func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [[String:Any]], steps: [String]?, tags: [String]?, servingSize: String, prepTime: String) {
         let recipeRef = db.collection("Recipes").document(recipeID)
         recipeRef.updateData([
             "name" : name,

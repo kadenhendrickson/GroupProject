@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol SavedRecipeTableViewCellDelegate {
+    func performSegue(forUser user: User)
+}
+
+
 class SavedRecipeTableViewCell: UITableViewCell {
     
     //MARK: - Properties
@@ -18,6 +23,7 @@ class SavedRecipeTableViewCell: UITableViewCell {
     }
     
     var user: User?
+    var delegate: SavedRecipeTableViewCellDelegate?
     
     //MARK: - IBOutlets
     @IBOutlet weak var userProfileImageView: UIImageView!
@@ -35,8 +41,16 @@ class SavedRecipeTableViewCell: UITableViewCell {
         guard let recipeID = recipe?.recipeID else {return}
         RecipeController.shared.addRecipeToUsersSavedList(WithRecipeID: recipeID)
     }
+    
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
     }
+    
+    @IBAction func displayNameButtonTapped(_ sender: Any) {
+        guard let user = user else { print("🍒 This cell has no user, come check. Printing from \(#function) \n In \(String(describing: SavedRecipeTableViewCell.self)) 🍒") ; return }
+        delegate?.performSegue(forUser: user)
+    }
+    
+    
     //update the view
     func updateViews() {
         guard let user = user,

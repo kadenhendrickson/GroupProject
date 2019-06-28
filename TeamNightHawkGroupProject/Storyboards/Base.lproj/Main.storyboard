@@ -81,7 +81,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rge-Qi-bMu">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rge-Qi-bMu">
                                                     <rect key="frame" x="340" y="0.0" width="34" height="50"/>
                                                     <state key="normal" title="Save"/>
                                                     <connections>
@@ -411,7 +411,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="284" height="24"/>
                                                             <state key="normal" title="(displayname)"/>
                                                             <connections>
-                                                                <segue destination="SSP-mT-VYN" kind="show" identifier="fromSaveToOtherUserVC" id="nsF-ro-oZn"/>
+                                                                <action selector="displayNameButtonTapped:" destination="FlR-w7-uTZ" eventType="touchUpInside" id="SRc-YA-J7F"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QV-9T-Fco">
@@ -534,6 +534,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3Rx-a4-ds5"/>
+                    <connections>
+                        <segue destination="SSP-mT-VYN" kind="show" identifier="fromSaveToOtherUserVC" id="Eef-vH-7i3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0L-FW-Ulm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -927,9 +930,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
-
         <segue reference="V0v-1b-299"/>
         <segue reference="LBb-cA-Aqf"/>
-
     </inferredMetricsTieBreakers>
 </document>
