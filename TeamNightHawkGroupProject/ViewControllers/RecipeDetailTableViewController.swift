@@ -132,10 +132,9 @@ class RecipeDetailTableViewController: UITableViewController {
         if recipeSegmentIndex == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredentCell", for: indexPath) as? IngredientsTableViewCell,
                 let recipe = recipe else {return UITableViewCell()}
-                let ingredientDict = recipe.ingredients[indexPath.row]
-            cell.measurementQuantity.text = ingredientDict["measurementQuantity"] as? String
-            cell.measuremenType.text = ingredientDict["measurementName"] as? String
-            cell.ingredient.text = ingredientDict["name"] as? String
+            cell.measurementQuantity.text = recipe.ingredients[indexPath.row].measurementQuantity
+            cell.measuremenType.text = recipe.ingredients[indexPath.row].measurementName
+            cell.ingredient.text = recipe.ingredients[indexPath.row].name
             
             return cell
         }else if recipeSegmentIndex == 2{

@@ -28,7 +28,7 @@ class EditRecipeTableViewController: UITableViewController {
     var recipe: Recipe?
     let imagePicker: ImagePickerHelper = ImagePickerHelper()
     
-    var ingredientsArray: [[String:Any]] = []
+    var ingredientsArray: [Ingredient] = []
     var stepsArray: [String] = []
     var tagsArray: [String] = []
     var ingredientRows: Int = 1
@@ -155,10 +155,9 @@ class EditRecipeTableViewController: UITableViewController {
         if segmentIndex == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientEditCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
             if indexPath.row < (recipe.ingredients.count ){
-                let ingredientDict = recipe.ingredients[indexPath.row]
-                cell.measurementQuantityLabel.text = ingredientDict["measurementQuantity"] as? String
-                cell.measuremenTypeLabel.text = ingredientDict["measurementName"] as? String
-                cell.ingredientLabel.text = ingredientDict["name"] as? String
+                cell.measurementQuantityLabel.text = recipe.ingredients[indexPath.row].measurementQuantity
+                cell.measuremenTypeLabel.text = recipe.ingredients[indexPath.row].measurementName
+                cell.ingredientLabel.text = recipe.ingredients[indexPath.row].name
                 cell.addSection.isHidden = true
                 cell.measuremenTypeLabel.isEnabled = false
                 cell.measurementQuantityLabel.isEnabled = false
@@ -240,7 +239,7 @@ class EditRecipeTableViewController: UITableViewController {
                 var tags = recipe.tags else {print("♞♞♞♞♞♞♞♞"); return}
             if segmentIndex == 1 {
                 let ingredient = recipe.ingredients[indexPath.row]
-                guard let ingredientIndex = recipe.ingredients.firstIndex
+                guard let ingredientIndex = recipe.ingredients.firstIndex(of: ingredient) else {return}
                 if ingredientIndex != (ingredientRows + recipe.ingredients.count){
                 recipe.ingredients.remove(at: ingredientIndex )
                 tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -324,7 +323,7 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
         } else if measurementType == "" {
             alertUser(withMessage: "Please provide a measurement type")
         } else {
-            ingredientsArray.append(newIngredient.ingredientDictionary)
+            ingredientsArray.append(newIngredient)
             ingredientRows += 1
             refreshIngredientData()
         }
