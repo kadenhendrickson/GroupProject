@@ -21,14 +21,22 @@ struct RecipeKeys {
     static let tagsKey = "tags"
     static let savedByUsersKey = "savedByUsers"
     static let saveCountKey = "saveCount"
+    static let ingredientsDictKey = "ingredientsDict"
 }
 
-class Recipe: Codable {
+class Recipe {
     let userReference: String
     let recipeID: String
     var name: String
     var image: Data?
     var ingredients: [Ingredient]
+    var ingredientsDict: [[String:Any]] {
+        var array: [[String:Any]] = []
+        for ingredient in ingredients {
+            array.append(ingredient.ingredientDict)
+        }
+        return array
+    }
     var steps: [String]?
     var prepTime: String
     var servings: String
@@ -38,13 +46,13 @@ class Recipe: Codable {
         return savedByUsers.count
     }
     //changed image to 'Data?' from 'UIImage?' to test local Persistence. also changed self.image = image to self.image = image.png?Data()
-    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
+    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient] = [], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
         self.userReference = userReference
         self.recipeID = recipeID
         self.name = name
-        self.ingredients = ingredients
         self.steps = steps
         self.prepTime = prepTime
+        self.ingredients = ingredients
         self.servings = servings
         self.tags = tags
         self.savedByUsers = savedByUsers
@@ -57,7 +65,6 @@ class Recipe: Codable {
             let recipeId = document[RecipeKeys.recipeIDKey] as? String,
             let name = document[RecipeKeys.nameKey] as? String,
             let image = document[RecipeKeys.imageKey] as? Data?,
-            let ingredients = document[RecipeKeys.ingredientsKey] as? [Ingredient],
             let steps = document[RecipeKeys.stepsKey] as? [String],
             let prepTime = document[RecipeKeys.prepTimeKey] as? String,
             let servings = document[RecipeKeys.servingsKey] as? String,
@@ -65,6 +72,16 @@ class Recipe: Codable {
             let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String] else {
                 print("🍒 Failed to create a recipe from snapshot. Printing from \(#function) \n In \(String(describing: Recipe.self)) 🍒")
                 return nil
+        }
+        
+        var ingredients: [Ingredient] = []
+        if let ingredientsDict = document[RecipeKeys.ingredientsDictKey] as? [[String:Any]] {
+            for ingredient in ingredientsDict {
+                if let ingredient = Ingredient(dictionary: ingredient) {
+                    ingredients.append(ingredient)
+                }
+            }
+            
         }
         
         self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image!) ?? UIImage(named: "AnneCelery"), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers)
@@ -76,7 +93,7 @@ class Recipe: Codable {
                 "recipeID" : recipeID,
                 "image" : image,
                 "name" : name,
-                "ingredients" : ingredients,
+                "ingredientsDict" : ingredientsDict,
                 "steps" : steps,
                 "prepTime" : prepTime,
                 "servings" : servings,

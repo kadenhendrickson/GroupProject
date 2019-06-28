@@ -18,7 +18,21 @@ class Ingredient: Codable {
         self.measurementName = measurementName
         self.measurementQuantity = measurementQuantity
     }
+    var ingredientDict: [String:Any] {
+        return [ "name" : name,
+                 "measurementName" : measurementName,
+                 "measurementQuantity" : measurementQuantity ]
+    }
+    
+    convenience init?(dictionary: [String:Any]) {
+        guard let name = dictionary["name"] as? String,
+        let measurementName = dictionary["measurementName"] as? String,
+            let measurementQuantity = dictionary["measurementQuantity"] as? String else {return nil}
+        self.init(name: name, measurementName: measurementName, measurementQuantity: measurementQuantity)
+    }
+    
 }
+
 
 extension Ingredient: Equatable {
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
