@@ -29,7 +29,7 @@ class AddRecipeTableViewController: UITableViewController {
     var safeArea: UILayoutGuide {
         return self.view.safeAreaLayoutGuide
     }
-    var ingredients: [Ingredient] = []
+    var ingredients: [[String:Any]] = []
     var steps: [String] = []
     var tags: [String] = []
     var ingredientRows: Int = 1
@@ -249,7 +249,7 @@ extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate
         } else if measurementType == "" {
             alertUser(withMessage: "Please provide a measurement type")
         } else {
-            ingredients.append(newIngredient)
+            ingredients.append(newIngredient.ingredientDictionary)
             ingredientRows += 1
             refreshIngredientData()
         }
