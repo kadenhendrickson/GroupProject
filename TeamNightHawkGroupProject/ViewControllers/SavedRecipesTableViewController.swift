@@ -9,8 +9,11 @@
 import UIKit
 
 class SavedRecipesTableViewController: UITableViewController {
-
+    
     //MARK: - Properties
+    // This will be passed through delegate
+    var selectedUser: User?
+    
     var recipesIDs: [String] = []
     
     // somehow fetching here makes user and recipe swaps, for now store them as dictionary to make it work
@@ -35,12 +38,10 @@ class SavedRecipesTableViewController: UITableViewController {
         }
     }
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,13 +80,16 @@ class SavedRecipesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell
-            else { print("🍒 I'm failing your cell deque because I'm a guard statement. I might deque other cells just fine but I'm failing this one. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return UITableViewCell() }
+            else { print("🍒 I'm failing your cell deque because I'm a guard statement. I might deque other cells just fine but I'm failing this one. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒")
+                return UITableViewCell()
+        }
         
         let dicKey = self.recipesIDs[indexPath.row]
         let recipe = self.recipesList[dicKey]
         let user = self.usersList[dicKey]
         
         // User must get assign into cell before recipe. Or you will experience traumatic debugging event.
+        cell.delegate = self
         cell.user = user
         cell.recipe = recipe
         
@@ -107,8 +111,23 @@ class SavedRecipesTableViewController: UITableViewController {
             destinationVC.recipe = recipe
             destinationVC.navigationTitle = recipe.name
             destinationVC.user = user
+        } else if segue.identifier == "fromSaveToOtherUserVC" {
+            guard let destinationVC = segue.destination as? UserViewedTableViewController,
+                let user = self.selectedUser
+                else { print("🍒 Failed to meet all the conditions for segueing to Profile's detail view. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
+            
+            destinationVC.user = user
+            destinationVC.navigationTitle = user.displayName
+
         }
     }
 
+}
+
+extension SavedRecipesTableViewController: SavedRecipeTableViewCellDelegate {
+    func performSegue(forUser user: User) {
+        self.selectedUser = user
+        self.performSegue(withIdentifier: "fromSaveToOtherUserVC", sender: self)
+    }
 }
 
