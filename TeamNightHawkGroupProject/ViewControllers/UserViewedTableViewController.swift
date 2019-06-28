@@ -21,7 +21,6 @@ class UserViewedTableViewController: UITableViewController {
         didSet {
             guard self.userRecipes != nil else { print("🍒 Fetched user recipes and got nil. Printing from \(#function) \n In \(String(describing: UserViewedTableViewController.self)) 🍒"); return}
             tableView.reloadData()
-//            setUpViews()
         }
     }
     
@@ -101,8 +100,6 @@ class UserViewedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("🌟 Now in indexPath: \(indexPath.row) from total \(user?.recipesRef.count) refs and from fetched \(self.userRecipes)")
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "userProfileCell", for: indexPath) as? ViewedUserRecipeTableViewCell,
             let recipe = userRecipes?[indexPath.row]
             else { print("🍒 Failed to meet all the conditions for dequeing cell for index path at: \(indexPath.row). Printing from \(#function) \n In \(String(describing: UserViewedTableViewController.self)) 🍒"); return UITableViewCell()}
@@ -113,14 +110,21 @@ class UserViewedTableViewController: UITableViewController {
         return cell
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toRecipeDetail" {
+            guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
+                let indexPath = tableView.indexPathForSelectedRow,
+                let cell = tableView.cellForRow(at: indexPath),
+                let recipeCell = cell as? ViewedUserRecipeTableViewCell,
+                let recipe = recipeCell.recipe else { print("🍒 Failed to meet all the conditions for segueing. Printing from \(#function) \n In \(String(describing: UserViewedTableViewController.self)) 🍒"); return }
+                
+                destinationVC.recipe = recipe
+        }
     }
-    */
+    
 
 }
