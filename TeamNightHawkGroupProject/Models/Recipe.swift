@@ -46,8 +46,9 @@ class Recipe {
     var saveCount: Int {
         return savedByUsers.count
     }
+    var timestamp: Date
     //changed image to 'Data?' from 'UIImage?' to test local Persistence. also changed self.image = image to self.image = image.png?Data()
-    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient] = [], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
+    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient] = [], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = [], timestamp: Date = Date()) {
 
         self.userReference = userReference
         self.recipeID = recipeID
@@ -59,6 +60,7 @@ class Recipe {
         self.tags = tags
         self.savedByUsers = savedByUsers
         self.image = image?.jpegData(compressionQuality: 0.1)
+        self.timestamp = timestamp
     }
     
     // Init from firestore's document
@@ -102,7 +104,8 @@ class Recipe {
                 "servings" : servings,
                 "tags" : tags,
                 "savedByUsers" : savedByUsers,
-                "saveCount" : saveCount
+                "saveCount" : saveCount,
+                "timestamp" : timestamp
         ]
     }
 }
