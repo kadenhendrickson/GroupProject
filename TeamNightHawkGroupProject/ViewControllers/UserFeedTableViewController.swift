@@ -23,6 +23,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Home"
         loadUsers()
     }
     
@@ -76,14 +77,21 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fromFeedToRecipeDVC" {
             guard let destinationVC = segue.destination as? RecipeDetailTableViewController,
-                let indexPath = tableView.indexPathForSelectedRow else {return}
-            let recipe = recipesList?[indexPath.row]
+                let indexPath = tableView.indexPathForSelectedRow,
+                let recipe = recipesList?[indexPath.row] else {return}
+            
             destinationVC.recipe = recipe
+            destinationVC.user = selectedUser
+            destinationVC.navigationTitle = recipe.name
         }
+        
         if segue.identifier == "fromFeedToOtherUserVC" {
             guard let destinationVC = segue.destination as? UserViewedTableViewController else {return}
             
             destinationVC.user = selectedUser
+            
+            guard let displayName = selectedUser?.displayName else { return }
+            destinationVC.navigationTitle = displayName
         }
     }
     

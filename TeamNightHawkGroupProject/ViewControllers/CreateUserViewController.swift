@@ -28,6 +28,9 @@ class CreateUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "Sign Up"
+
         profileImagePickerButton.setTitle("Select an image", for: .normal)
         emailTextField.delegate = self
         displayNameTextField.delegate = self

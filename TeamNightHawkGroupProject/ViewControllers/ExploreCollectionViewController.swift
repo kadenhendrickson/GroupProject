@@ -31,6 +31,8 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
+        self.navigationItem.title = "Explore"
+
         // Register cell classes
         
         // Do any additional setup after loading the view.

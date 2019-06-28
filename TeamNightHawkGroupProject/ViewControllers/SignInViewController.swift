@@ -17,6 +17,9 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "Sign In"
+
         userEmail.delegate = self
         userPassword.delegate = self
         

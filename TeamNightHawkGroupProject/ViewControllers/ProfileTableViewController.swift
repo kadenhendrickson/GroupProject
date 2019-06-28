@@ -28,6 +28,9 @@ class ProfileTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         currentUser = UserController.shared.currentUser
+        
+        self.navigationItem.title = currentUser?.displayName
+
         updateViews()
         updateUserRecipes()
         tableView.reloadData()
@@ -113,7 +116,9 @@ class ProfileTableViewController: UITableViewController {
                 let recipeCell = cell as? ProfileRecipeTableViewCell,
                 let recipe = recipeCell.recipe else { return }
             
+            destinationVC.user = currentUser
             destinationVC.recipe = recipe
+            destinationVC.navigationTitle = recipe.name
             
         } else {
             guard let destinationVC = segue.destination as? EditRecipeTableViewController else { return }

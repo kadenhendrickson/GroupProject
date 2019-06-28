@@ -56,6 +56,8 @@ class SavedRecipesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Saved Recipes"
+
         loadUsersAndRecipes()
     }
     
@@ -125,6 +127,7 @@ class SavedRecipesTableViewController: UITableViewController {
                 else { print("🍒 Failed to meet all the conditions for segueing to Recipe's detail view. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
             
             destinationVC.recipe = recipe
+            destinationVC.navigationTitle = recipe.name
             destinationVC.user = user
         }
     }

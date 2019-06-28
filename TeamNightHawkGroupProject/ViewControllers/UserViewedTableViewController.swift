@@ -24,6 +24,9 @@ class UserViewedTableViewController: UITableViewController {
         }
     }
     
+    // this get set to something else through segue from other vcs
+    var navigationTitle = "Profile"
+    
 //    {
 //        var recipes: [Recipe] = []
 //        guard let userReference = user?.userID else {return []}
@@ -44,6 +47,7 @@ class UserViewedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.title = navigationTitle
         setUpViews()
     }
     
@@ -121,8 +125,10 @@ class UserViewedTableViewController: UITableViewController {
                 let cell = tableView.cellForRow(at: indexPath),
                 let recipeCell = cell as? ViewedUserRecipeTableViewCell,
                 let recipe = recipeCell.recipe else { print("🍒 Failed to meet all the conditions for segueing. Printing from \(#function) \n In \(String(describing: UserViewedTableViewController.self)) 🍒"); return }
-                
+            
+                destinationVC.user = user
                 destinationVC.recipe = recipe
+                destinationVC.navigationTitle = recipe.name
         }
     }
     

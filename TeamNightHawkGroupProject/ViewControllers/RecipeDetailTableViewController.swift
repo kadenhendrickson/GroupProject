@@ -17,6 +17,8 @@ class RecipeDetailTableViewController: UITableViewController {
     @IBOutlet weak var servingsLabel: UILabel!
     @IBOutlet weak var prepTimeLabel: UILabel!
     
+    // this get set to somthing else from vc that segues to this vc
+    var navigationTitle = "Recipe"
     
     var recipe: Recipe? {
         didSet {
@@ -26,7 +28,7 @@ class RecipeDetailTableViewController: UITableViewController {
     
     var user: User? {
         didSet {
-            updateDetails()
+            guard user != nil else { return }
         }
     }
     var recipeSegmentIndex: Int = 1
@@ -34,6 +36,10 @@ class RecipeDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = navigationTitle
+        updateDetails()
+
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
@@ -159,8 +165,8 @@ class RecipeDetailTableViewController: UITableViewController {
                 let user = self.user
             else { print("🍒 Failed to meet all the conditions for segueing. Printing from \(#function) \n In \(String(describing: RecipeDetailTableViewController.self)) 🍒"); return }
             
-            print("Passing user: \(user.displayName)")
             destinationVC.user = user
+            destinationVC.title = user.displayName
         }
     }
     
