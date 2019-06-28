@@ -16,7 +16,12 @@ class SavedRecipesTableViewController: UITableViewController {
     // somehow fetching here makes user and recipe swaps, for now store them as dictionary to make it work
     
     // dictionaries of recipekey : recipe
-    var recipesList: [String: Recipe] = [:]
+    var recipesList: [String: Recipe] = [:] {
+        didSet{
+            print("🌎🌎🌎Recipes set!😝😝😝")
+            print(self.recipesList.count)
+        }
+    }
     
     // dictionaries of recipekey : user
     var usersList: [String: User] = [:] {
@@ -32,25 +37,15 @@ class SavedRecipesTableViewController: UITableViewController {
     
 
     
-//    var recipesList: [Recipe]? {
-//        didSet{
-//            print("🌎🌎🌎Recipes set!😝😝😝")
-//            print(self.recipesList?.count)
-//        }
-//    }
-//
-//    var usersList: [User]? {
-//        didSet {
-//            print("😝😝😝Users was set😝😝😝")
-//            print(self.usersList?.count)
-//            tableView.reloadData()
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadUsersAndRecipes()
     }
     
