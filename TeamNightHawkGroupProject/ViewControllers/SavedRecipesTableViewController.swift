@@ -59,6 +59,13 @@ class SavedRecipesTableViewController: UITableViewController {
         loadUsersAndRecipes()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // reset load listener back
+        usersFetchCompleted = false
+        recipesFetchCompleted = false
+        allFetchCompleted = false
+    }
+    
     func loadUsersAndRecipes() {
         
         recipesList = []
