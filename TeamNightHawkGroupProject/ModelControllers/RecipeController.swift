@@ -180,13 +180,17 @@ class RecipeController {
     }
     
     func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String, prepTime: String) {
+        var ingredientsDictArray: [[String:Any]] = []
+        for ingredient in ingredients {
+            ingredientsDictArray.append(ingredient.ingredientDict)
+        }
         let recipeRef = db.collection("Recipes").document(recipeID)
         recipeRef.updateData([
             "name" : name,
             "image" : image.jpegData(compressionQuality: 0.1),
             "servings" : servingSize,
             "prepTime" : prepTime,
-            "ingredients" : ingredients,
+            "ingredientsDict" : ingredientsDictArray,
             "steps" : steps,
             "tags" : tags])
     }
