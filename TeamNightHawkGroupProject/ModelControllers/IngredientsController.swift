@@ -16,7 +16,7 @@ class IngredientsController {
     func addIngredient(name: String, measurementName: String, measurementQuantity: String) {
         guard let recipe = recipe else {return}
         let ingredient = Ingredient(name: name, measurementName: measurementName, measurementQuantity: measurementQuantity)
-        recipe.ingredients.append(ingredient)
+        recipe.ingredients.append(ingredient.ingredientDictionary)
     }
     func 🏘(ingredient: Ingredient) {
         guard let indexOfIngredient = recipe?.ingredients.firstIndex(of: ingredient) else {return}

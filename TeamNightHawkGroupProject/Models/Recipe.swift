@@ -23,12 +23,12 @@ struct RecipeKeys {
     static let saveCountKey = "saveCount"
 }
 
-class Recipe: Codable {
+class Recipe {
     let userReference: String
     let recipeID: String
     var name: String
     var image: Data?
-    var ingredients: [Ingredient]
+    var ingredients: [[String:Any]]
     var steps: [String]?
     var prepTime: String
     var servings: String
@@ -38,7 +38,7 @@ class Recipe: Codable {
         return savedByUsers.count
     }
     //changed image to 'Data?' from 'UIImage?' to test local Persistence. also changed self.image = image to self.image = image.png?Data()
-    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
+    init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [[String:Any]], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = []) {
         self.userReference = userReference
         self.recipeID = recipeID
         self.name = name
@@ -57,7 +57,7 @@ class Recipe: Codable {
             let recipeId = document[RecipeKeys.recipeIDKey] as? String,
             let name = document[RecipeKeys.nameKey] as? String,
             let image = document[RecipeKeys.imageKey] as? Data?,
-            let ingredients = document[RecipeKeys.ingredientsKey] as? [Ingredient],
+            let ingredients = document[RecipeKeys.ingredientsKey] as? [[String:Any]],
             let steps = document[RecipeKeys.stepsKey] as? [String],
             let prepTime = document[RecipeKeys.prepTimeKey] as? String,
             let servings = document[RecipeKeys.servingsKey] as? String,
