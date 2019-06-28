@@ -33,16 +33,10 @@ class SavedRecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeServingsTextLabel: UILabel!
     @IBOutlet weak var recipePrepTimeTextLabel: UILabel!
     @IBOutlet weak var recipeSaveCountTextLabel: UILabel!
-    @IBOutlet weak var saveRecipeButton: UIButton!
     
-    
-    //MARK: - IBActions
-    @IBAction func saveRecipeButtonTapped(_ sender: UIButton) {
-        guard let recipeID = recipe?.recipeID else {return}
-        RecipeController.shared.addRecipeToUsersSavedList(WithRecipeID: recipeID)
-    }
     
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
+        
     }
     
     @IBAction func displayNameButtonTapped(_ sender: Any) {
@@ -66,7 +60,5 @@ class SavedRecipeTableViewCell: UITableViewCell {
         recipePrepTimeTextLabel.text = recipe?.prepTime
         recipeSaveCountTextLabel.text = "\(recipe?.saveCount ?? 0)"
     }
-    
-    
 
 }
