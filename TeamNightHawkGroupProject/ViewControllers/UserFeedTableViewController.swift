@@ -29,6 +29,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadUsers()
     }
     
     //helper functions
