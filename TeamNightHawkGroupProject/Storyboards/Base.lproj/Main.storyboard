@@ -81,7 +81,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rge-Qi-bMu">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rge-Qi-bMu">
                                                     <rect key="frame" x="340" y="0.0" width="34" height="50"/>
                                                     <state key="normal" title="Save"/>
                                                     <connections>
@@ -922,7 +922,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
-        <segue reference="5CQ-ys-tBo"/>
-        <segue reference="Eef-vH-7i3"/>
+        <segue reference="V0v-1b-299"/>
+        <segue reference="LBb-cA-Aqf"/>
     </inferredMetricsTieBreakers>
 </document>

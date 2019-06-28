@@ -24,6 +24,10 @@ class RecipeController {
     
     func createRecipe(name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String?, prepTime: String?) {
         guard let currentUser = currentUser else {return}
+        var ingredientsDict: [Ingredient] = []
+        for ingredient in ingredients {
+            ingredientsDict.append(ingredient)
+        }
         let recipe = Recipe(userReference: currentUser.userID, name: name, image: image, ingredients: ingredients, steps: steps, prepTime: prepTime ?? "--", servings: servingSize ?? "--", tags: tags)
         let recipeDictionary = recipe.dictionaryRepresentation
         db.collection("Recipes").document(recipe.recipeID).setData(recipeDictionary)
