@@ -109,6 +109,9 @@ class UserController {
         let currentUserRef = db.collection("Users").document(currentUser.userID)
         currentUserRef.updateData(["followingRefs" : FieldValue.arrayUnion([userID])])
         currentUser.followingRefs.append(userID)
+        fetchUser(withUserRef: userID) { (user) in
+            user.followedByRefs.append(currentUser.userID)
+        }
 
         let followedUserRef = db.collection("Users").document(userID)
         followedUserRef.updateData(["followedByRefs" : FieldValue.arrayUnion([currentUser.userID])])
@@ -119,6 +122,8 @@ class UserController {
         
         let currentUserRef = db.collection("Users").document(currentUser.userID)
         currentUserRef.updateData(["followingRefs" : FieldValue.arrayRemove([userID])])
+        let indexOfUser = currentUser.followingRefs.firstIndex(where: {$0 == userID})
+        currentUser.followingRefs.remove(at: indexOfUser!)
         
         let followedUserRef = db.collection("Users").document(userID)
         followedUserRef.updateData(["followedByRefs" : FieldValue.arrayRemove([currentUser.userID])])
