@@ -104,6 +104,7 @@ class SavedRecipesTableViewController: UITableViewController {
                 else { print("🍒 Can't cast cell as saved recipe cell. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒") ; return }
            
             RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipe.recipeID)
+            loadUsersAndRecipes()
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
