@@ -36,10 +36,14 @@ class SavedRecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var saveRecipeButton: UIButton!
     
     
+    override func awakeFromNib() {
+        saveRecipeButton.setTitle("Remove from saved", for: .normal)
+    }
+    
     //MARK: - IBActions
     @IBAction func saveRecipeButtonTapped(_ sender: UIButton) {
         guard let recipeID = recipe?.recipeID else {return}
-        RecipeController.shared.addRecipeToUsersSavedList(WithRecipeID: recipeID)
+        RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipeID)
     }
     
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
@@ -66,7 +70,5 @@ class SavedRecipeTableViewCell: UITableViewCell {
         recipePrepTimeTextLabel.text = recipe?.prepTime
         recipeSaveCountTextLabel.text = "\(recipe?.saveCount ?? 0)"
     }
-    
-    
 
 }
