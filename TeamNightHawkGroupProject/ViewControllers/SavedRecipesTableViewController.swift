@@ -61,10 +61,15 @@ class SavedRecipesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell
-        cell?.user = usersList?[indexPath.row]
-        cell?.recipe = recipesList?[indexPath.row]
-        return cell ?? UITableViewCell()
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedRecipeCell", for: indexPath) as? SavedRecipeTableViewCell,
+            let usersList = self.usersList,
+            let recipesList = self.recipesList else { return UITableViewCell() }
+
+        cell.user = usersList[indexPath.row]
+        cell.recipe = recipesList[indexPath.row]
+        
+        return cell
     }
 
     // MARK: - Navigation
