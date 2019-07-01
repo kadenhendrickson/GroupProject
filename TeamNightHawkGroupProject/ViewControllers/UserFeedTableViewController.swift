@@ -26,11 +26,15 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         super.viewDidLoad()
         self.navigationItem.title = "Home"
 //        loadUsers()
+        
+        self.tableView.separatorStyle = .none
+        tableView.tableHeaderView?.tintColor = softBlue
+        loadUsers()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadUsers()
+        
     }
     
     //helper functions
@@ -43,6 +47,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
                 self.usersList?.append(user)
                 RecipeController.shared.fetchSpecificRecipesWith(userReference: userRef, completion: { (recipes) in
                     self.recipesList?.append(contentsOf: recipes)
+                    self.recipesList?.sort{$1.timestamp < $0.timestamp}
                 })
             }
         }

@@ -33,9 +33,6 @@ class Section1TableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: "addRecipeCell")
         addAllSubViews()
         setUpStackView()
-        backgroundColor = green
-        
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -63,9 +60,9 @@ class Section1TableViewCell: UITableViewCell {
         measuremenTypeLabel.delegate = self
         ingredientLabel.delegate = self
         
-        measuremenTypeLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantityLabel.trailingAnchor, trailing: ingredientLabel.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8,width: 125)
-        measurementQuantityLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenTypeLabel.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8, width: 50)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 10, paddingBottom: 10, paddingLeading: 20, paddingTrailing: 20)
+        measuremenTypeLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantityLabel.trailingAnchor, trailing: ingredientLabel.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8,width: 125)
+        measurementQuantityLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenTypeLabel.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8, width: 60)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 10, paddingLeading: 20, paddingTrailing: 20)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
 
