@@ -22,6 +22,7 @@ struct RecipeKeys {
     static let savedByUsersKey = "savedByUsers"
     static let saveCountKey = "saveCount"
     static let ingredientsDictKey = "ingredientsDict"
+    static let timestampKey = "timestamp"
 }
 
 class Recipe {
@@ -74,10 +75,12 @@ class Recipe {
             let prepTime = document[RecipeKeys.prepTimeKey] as? String,
             let servings = document[RecipeKeys.servingsKey] as? String,
             let tags = document[RecipeKeys.tagsKey] as? [String],
-            let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String] else {
+            let savedByUsers = document[RecipeKeys.savedByUsersKey] as? [String],
+            let timestampAsTimeStamp = document[RecipeKeys.timestampKey] as? Timestamp else  {
                 print("🍒 Failed to create a recipe from snapshot. Printing from \(#function) \n In \(String(describing: Recipe.self)) 🍒")
                 return nil
         }
+        let timestamp = timestampAsTimeStamp.dateValue()
         
         var ingredients: [Ingredient] = []
         if let ingredientsDict = document[RecipeKeys.ingredientsDictKey] as? [[String:Any]] {
@@ -88,8 +91,9 @@ class Recipe {
             }
             
         }
+    
+        self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image!) ?? UIImage(named: "AnneCelery"), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers, timestamp: timestamp )
         
-        self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image!) ?? UIImage(named: "AnneCelery"), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers)
     }
     
     

@@ -21,6 +21,7 @@
 		9732277922BAA8EA006F0A15 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */; };
 		9732277F22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */; };
 		9732278322BB48F8006F0A15 /* ImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9732278222BB48F8006F0A15 /* ImagePickerHelper.swift */; };
+
 		97C417BE22CABD9800823933 /* ProfileHeaderCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C417BD22CABD9800823933 /* ProfileHeaderCustomView.swift */; };
 		97C417C022CABDB400823933 /* EditProfileCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C417BF22CABDB400823933 /* EditProfileCustomView.swift */; };
 		DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C1A6422B4516500B219CB /* AppDelegate.swift */; };
@@ -72,7 +73,6 @@
 		DC4BC2CD22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */; };
 		DC4BC2CF22BD2435001B20EE /* SavedRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */; };
 		DC4BC2D122BD4BD1001B20EE /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */; };
-		DC5A57E922CA626A00FC2859 /* DisplayNameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A57E822CA626A00FC2859 /* DisplayNameButton.swift */; };
 		DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */; };
 		DC924DE622C4096000D0AB5A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC924DE522C4096000D0AB5A /* FetchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -92,6 +92,7 @@
 		9732277822BAA8EA006F0A15 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		9732277E22BACD5A006F0A15 /* ProfileRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileRecipeTableViewCell.swift; path = TeamNightHawkGroupProject/Views/ProfileRecipeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		9732278222BB48F8006F0A15 /* ImagePickerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
+
 		97C417BB22CAB9C800823933 /* ProfileHeaderCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileHeaderCustomView.swift; path = ../../../../../../../../Working/ProfileHeaderCustomView.swift; sourceTree = "<group>"; };
 		97C417BD22CABD9800823933 /* ProfileHeaderCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCustomView.swift; sourceTree = "<group>"; };
 		97C417BF22CABDB400823933 /* EditProfileCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCustomView.swift; sourceTree = "<group>"; };
@@ -147,7 +148,6 @@
 		DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewedUserRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
-		DC5A57E822CA626A00FC2859 /* DisplayNameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNameButton.swift; sourceTree = "<group>"; };
 		DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = SOURCE_ROOT; };
 		DC924DE522C4096000D0AB5A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -365,7 +365,6 @@
 		DC5A57EA22CA630100FC2859 /* RecipeCell */ = {
 			isa = PBXGroup;
 			children = (
-				DC5A57E822CA626A00FC2859 /* DisplayNameButton.swift */,
 			);
 			path = RecipeCell;
 			sourceTree = "<group>";
@@ -373,6 +372,7 @@
 		DC5A57EB22CA637100FC2859 /* ProfileController */ = {
 			isa = PBXGroup;
 			children = (
+
 				97C417BD22CABD9800823933 /* ProfileHeaderCustomView.swift */,
 				97C417BF22CABDB400823933 /* EditProfileCustomView.swift */,
 			);
@@ -510,12 +510,12 @@
 				DC2C1ADD22B947E90098F68D /* User.swift in Sources */,
 				0226F25922BAD5EC00856910 /* IngredientsTableViewCell.swift in Sources */,
 				0211C69722BAAE3E00D5F8C6 /* Constants.swift in Sources */,
+
 				97C417BE22CABD9800823933 /* ProfileHeaderCustomView.swift in Sources */,
 				DC2C1AF322BAB3C10098F68D /* CreateUserViewController.swift in Sources */,
 				DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */,
 				9732278322BB48F8006F0A15 /* ImagePickerHelper.swift in Sources */,
 				0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */,
-				DC5A57E922CA626A00FC2859 /* DisplayNameButton.swift in Sources */,
 				DC2C1AF122BAB3B40098F68D /* SignInViewController.swift in Sources */,
 				020D572C22C4189600A74632 /* displayView.swift in Sources */,
 				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
