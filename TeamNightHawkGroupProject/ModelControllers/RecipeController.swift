@@ -176,7 +176,21 @@ class RecipeController {
     
     
     func deleteRecipeWith(recipeID: String) {
+        guard let currentUser = currentUser else {return}
         db.collection("Recipes").document(recipeID).delete()
+        db.collection("Users").document(currentUser.userID).updateData(["recipeRef" : FieldValue.arrayRemove([recipeID])])
+        db.collection("Recipes").document(recipeID).getDocument { (snapshot, error) in
+            if let error = error {
+                print("there was an error fetching the recipe document : \(error.localizedDescription)")
+            }
+            guard let data = snapshot?.data(),
+                    let usersWhoSavedRecipe = data["savedByUsers"] as? [String] else {return}
+            for userRef in usersWhoSavedRecipe {
+                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
+                    self.db.collection("Users").document(user.userID).updateData(["savedRecipeRefs" : FieldValue.arrayRemove([recipeID])])
+                })
+            }
+        }
     }
     
     func updateRecipeWith(recipeID:String, name: String, image: UIImage, ingredients: [Ingredient], steps: [String]?, tags: [String]?, servingSize: String, prepTime: String) {
