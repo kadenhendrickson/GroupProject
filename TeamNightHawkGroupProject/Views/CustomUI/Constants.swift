@@ -13,6 +13,7 @@ let fontSize: CGFloat = 18
 let fontName: String = "Helvetica"
 let backGround: UIColor = .gray
 let textFieldRounding: CGFloat = 4
+let measurementQuantityWidth: CGFloat = 5
 
 
 //MARK: -SaveButton
@@ -30,3 +31,7 @@ let buttonRounding: CGFloat = 20
 //MARK: - Colors
 let green: UIColor = UIColor(hue: 0.4667, saturation: 1, brightness: 0.83, alpha: 1.0)
 let yellow: UIColor = UIColor(hue: 0.15, saturation: 0.57, brightness: 0.93, alpha: 1.0)
+let white: UIColor = UIColor(hue: 0.6667, saturation: 0, brightness: 0.96, alpha: 1.0)
+let softBlue: UIColor = UIColor(hue: 0.5028, saturation: 0.4, brightness: 0.71, alpha: 1.0)
+let grey: UIColor = UIColor(hue: 0.6194, saturation: 0.15, brightness: 0.54, alpha: 1.0)
+let black: UIColor = UIColor(hue: 0.6444, saturation: 0.38, brightness: 0.17, alpha: 1.0)

@@ -37,7 +37,9 @@ class IngredientsTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(measurementQuantity)
         stackView.addArrangedSubview(measuremenType)
         stackView.addArrangedSubview(ingredient)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
+        measuremenType.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantity.trailingAnchor, trailing: ingredient.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8,width: 125)
+        measurementQuantity.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenType.leadingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8, width: 50)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 20, paddingTrailing: 20)
     }
     
     
@@ -45,14 +47,12 @@ class IngredientsTableViewCell: UITableViewCell {
     let measurementQuantity: UILabel = {
         let text = UILabel()
         text.font = UIFont(name: fontName, size: fontSize)
-        
         return text
     }()
     
     let measuremenType: UILabel = {
         let text = UILabel()
         text.font = UIFont(name: fontName, size: fontSize)
-        
         return text
     }()
     
@@ -71,8 +71,8 @@ class IngredientsTableViewCell: UITableViewCell {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.alignment = .leading
+//        stackView.distribution = .equalSpacing
         stackView.spacing = 8
         return stackView
     }()

@@ -17,7 +17,6 @@ class StepsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "stepsCell")
         addAllSubViews()
-        setUpStackView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,30 +25,16 @@ class StepsTableViewCell: UITableViewCell {
     
     func addAllSubViews(){
         self.addSubview(directionSteps)
-        self.addSubview(stackView)
-        
-    }
-    
-    func setUpStackView(){
-        stackView.addArrangedSubview(directionSteps)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, height: (fontSize + 8))
+        directionSteps.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0)
         
     }
     
     let directionSteps: UILabel = {
         let text = UILabel()
         text.font = UIFont(name: fontName, size: fontSize)
-        
+        text.numberOfLines = 0
         return text
     }()
-    
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 8
-        return stackView
-    }()
+
 
 }
