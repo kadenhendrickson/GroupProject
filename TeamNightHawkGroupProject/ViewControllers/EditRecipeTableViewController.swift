@@ -152,6 +152,8 @@ class EditRecipeTableViewController: UITableViewController {
         guard let recipe = recipe,
             let steps = recipe.steps,
             let tags = recipe.tags else {return UITableViewCell()}
+        tableView.separatorStyle = .none
+
         if segmentIndex == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientEditCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
             if indexPath.row < (recipe.ingredients.count ){
@@ -183,6 +185,7 @@ class EditRecipeTableViewController: UITableViewController {
             }
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepEditCell", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
+            
             if indexPath.row < (steps.count){
                 cell.directionSteps.text = steps[indexPath.row]
                 cell.addSection.isHidden = true

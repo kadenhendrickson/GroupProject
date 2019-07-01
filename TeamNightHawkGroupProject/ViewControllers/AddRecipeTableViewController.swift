@@ -161,6 +161,8 @@ class AddRecipeTableViewController: UITableViewController {
         if segmentIndex == 1 {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
+            tableView.separatorStyle = .none
+
             if indexPath.row != ingredients.count{
                 cell.addSection.isHidden = true
             } else {

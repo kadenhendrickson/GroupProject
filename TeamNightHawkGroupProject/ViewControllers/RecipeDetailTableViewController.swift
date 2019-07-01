@@ -39,7 +39,7 @@ class RecipeDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableHeaderView?.tintColor = softBlue
         self.navigationItem.title = navigationTitle
-        UINavigationBar.appearance().backgroundColor = green
+        
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
@@ -128,7 +128,8 @@ class RecipeDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
+        tableView.separatorStyle = .none
+
         // Configure the cell...
         if recipeSegmentIndex == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredentCell", for: indexPath) as? IngredientsTableViewCell,
@@ -143,7 +144,7 @@ class RecipeDetailTableViewController: UITableViewController {
                 let recipe = recipe,
                 let steps = recipe.steps else {return UITableViewCell()}
             
-            cell.directionSteps.text = steps[indexPath.row]
+            cell.directionSteps.text = "Step \(indexPath.row + 1): \(steps[indexPath.row])"
             
             return cell
         } else {

@@ -42,6 +42,8 @@ class SavedRecipesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
+        tableView.separatorStyle = .none
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

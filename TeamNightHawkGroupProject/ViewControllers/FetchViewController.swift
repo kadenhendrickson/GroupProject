@@ -14,6 +14,8 @@ class FetchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UINavigationBar.appearance().backgroundColor = green
+
         
         var handle: AuthStateDidChangeListenerHandle?
         

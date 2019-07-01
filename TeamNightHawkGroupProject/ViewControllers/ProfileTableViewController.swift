@@ -34,6 +34,8 @@ class ProfileTableViewController: UITableViewController {
         updateViews()
         updateUserRecipes()
         tableView.reloadData()
+        tableView.separatorStyle = .none
+
     }
     
     
