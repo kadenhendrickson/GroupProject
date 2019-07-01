@@ -55,7 +55,6 @@ class CreateUserViewController: UIViewController {
         triggerCreatUser()
     }
     
-    
     @IBAction func userTappedView(_ sender: Any) {
         resignAllTextFields()
     }

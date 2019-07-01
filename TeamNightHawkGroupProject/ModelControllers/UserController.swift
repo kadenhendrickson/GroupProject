@@ -28,6 +28,15 @@ class UserController {
         }
     }
     //MARK: - CRUDs
+    /// Creates new user
+    ///
+    /// - Parameters:
+    ///   - userID: Users userID
+    ///   - email: Users Email
+    ///   - displayName: Users displayname
+    ///   - biography: Users bio
+    ///   - image: Users display image
+    ///   - completion: completes with true if creating user is successful
     func createUser(userID: String, withEmail email: String, displayName: String, biography: String, profileImage image: UIImage?, completion: @escaping (Bool) -> Void){
         let user = User(userID: userID, email: email, displayName: displayName, biography: biography, profileImage: image)
         
