@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -204,7 +203,7 @@
             </objects>
             <point key="canvasLocation" x="748" y="2164"/>
         </scene>
-        <!--Item-->
+        <!--Add-->
         <scene sceneID="WsT-D9-1kk">
             <objects>
                 <tableViewController id="3P6-Ln-CnM" customClass="AddRecipeTableViewController" customModule="TeamNightHawkGroupProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -335,7 +334,7 @@
                             <outlet property="delegate" destination="3P6-Ln-CnM" id="dDK-Iq-X4x"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Stg-3a-uQE"/>
+                    <tabBarItem key="tabBarItem" title="Add" id="Stg-3a-uQE"/>
                     <navigationItem key="navigationItem" id="9Yq-3C-vJM"/>
                     <connections>
                         <outlet property="imageSelector" destination="e8P-AE-cgh" id="H3b-DD-Hnd"/>
