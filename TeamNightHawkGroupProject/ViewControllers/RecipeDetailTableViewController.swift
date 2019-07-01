@@ -37,8 +37,9 @@ class RecipeDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.tableHeaderView?.tintColor = softBlue
         self.navigationItem.title = navigationTitle
+        UINavigationBar.appearance().backgroundColor = green
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
