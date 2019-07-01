@@ -70,6 +70,7 @@
 		DC4BC2CD22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */; };
 		DC4BC2CF22BD2435001B20EE /* SavedRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */; };
 		DC4BC2D122BD4BD1001B20EE /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */; };
+		DC5A57E922CA626A00FC2859 /* DisplayNameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A57E822CA626A00FC2859 /* DisplayNameButton.swift */; };
 		DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */; };
 		DC924DE622C4096000D0AB5A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC924DE522C4096000D0AB5A /* FetchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -141,6 +142,7 @@
 		DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewedUserRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC5A57E822CA626A00FC2859 /* DisplayNameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNameButton.swift; sourceTree = "<group>"; };
 		DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = SOURCE_ROOT; };
 		DC924DE522C4096000D0AB5A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +182,13 @@
 		0211C69A22BAAF8D00D5F8C6 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				DC5A57F122CA640C00FC2859 /* ExploreCollectionView */,
+				DC5A57EF22CA63B500FC2859 /* CreateUser */,
+				DC5A57EE22CA63B000FC2859 /* Login */,
+				DC5A57ED22CA638A00FC2859 /* EditProfile */,
+				DC5A57EC22CA638300FC2859 /* AddRecipe */,
+				DC5A57EB22CA637100FC2859 /* ProfileController */,
+				DC5A57EA22CA630100FC2859 /* RecipeCell */,
 				0211C69622BAAE3E00D5F8C6 /* Constants.swift */,
 				0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */,
 			);
@@ -347,6 +356,56 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		DC5A57EA22CA630100FC2859 /* RecipeCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC5A57E822CA626A00FC2859 /* DisplayNameButton.swift */,
+			);
+			path = RecipeCell;
+			sourceTree = "<group>";
+		};
+		DC5A57EB22CA637100FC2859 /* ProfileController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProfileController;
+			sourceTree = "<group>";
+		};
+		DC5A57EC22CA638300FC2859 /* AddRecipe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddRecipe;
+			sourceTree = "<group>";
+		};
+		DC5A57ED22CA638A00FC2859 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		DC5A57EE22CA63B000FC2859 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DC5A57EF22CA63B500FC2859 /* CreateUser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateUser;
+			sourceTree = "<group>";
+		};
+		DC5A57F122CA640C00FC2859 /* ExploreCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ExploreCollectionView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -447,6 +506,7 @@
 				DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */,
 				9732278322BB48F8006F0A15 /* ImagePickerHelper.swift in Sources */,
 				0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */,
+				DC5A57E922CA626A00FC2859 /* DisplayNameButton.swift in Sources */,
 				DC2C1AF122BAB3B40098F68D /* SignInViewController.swift in Sources */,
 				020D572C22C4189600A74632 /* displayView.swift in Sources */,
 				DC2C1AEB22BA9CB00098F68D /* UserFeedTableViewCell.swift in Sources */,
@@ -621,7 +681,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H8Y4FR84B6;
+
+				DEVELOPMENT_TEAM = DT6NQCY8FM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,7 +710,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H8Y4FR84B6;
+
+				DEVELOPMENT_TEAM = DT6NQCY8FM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
