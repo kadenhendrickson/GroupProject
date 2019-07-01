@@ -127,6 +127,7 @@ class ImagePickerHelper: UIViewController {
     func dismissPicker(){
         self.controller?.dismiss(animated: true, completion: nil)
     }
+    
 
 }
 
@@ -134,8 +135,9 @@ class ImagePickerHelper: UIViewController {
 extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
+        dismissPicker()
     }
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
