@@ -30,7 +30,6 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateViews()
         self.navigationItem.title = "Explore"
 
         // Register cell classes
@@ -38,8 +37,14 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateViews()
+    }
+    
     func updateViews() {
-        RecipeController.shared.fetchExploreRecipes { (recipes) in
+        guard let currentUser = UserController.shared.currentUser else {return}
+        RecipeController.shared.fetchExploreRecipes(blockedUsers: currentUser.blockedUserRefs ) { (recipes) in
             DispatchQueue.main.async {
                 self.recipesList = recipes
                 self.collectionView.reloadData()

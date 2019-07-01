@@ -91,7 +91,7 @@ class RecipeController {
 //        })
     
     
-    func fetchExploreRecipes(completion: @escaping ([Recipe]) -> Void) {
+    func fetchExploreRecipes(blockedUsers: [String], completion: @escaping ([Recipe]) -> Void) {
         let recipeReference = db.collection("Recipes")
         var recipesArray: [Recipe] = []
         recipeReference.limit(to: 20).getDocuments { (snapshot, error) in
@@ -112,7 +112,9 @@ class RecipeController {
 //                let tags = data["tags"] as? [String] ?? []
 //                let recipe = Recipe(userReference: userReference, name: name, image: UIImage(data: image!!), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags)
                 guard let recipe = theRecipe else {return}
-                recipesArray.append(recipe)
+                if !blockedUsers.contains(recipe.userReference) {
+                    recipesArray.append(recipe)
+                }
             }
             completion(recipesArray)
         }
