@@ -46,7 +46,6 @@ class SavedRecipesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         loadUsersAndRecipes()
     }
     
@@ -102,7 +101,7 @@ class SavedRecipesTableViewController: UITableViewController {
             guard let cell = tableView.cellForRow(at: indexPath) as? SavedRecipeTableViewCell,
                  let recipe = cell.recipe
                 else { print("🍒 Can't cast cell as saved recipe cell. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒") ; return }
-           
+            UserController.shared.currentUser?.savedRecipeRefs.remove(at: indexPath.row)
             RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipe.recipeID)
             loadUsersAndRecipes()
             tableView.deleteRows(at: [indexPath], with: .fade)

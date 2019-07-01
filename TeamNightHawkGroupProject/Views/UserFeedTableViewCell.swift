@@ -20,6 +20,7 @@ class UserFeedTableViewCell: UITableViewCell {
     
     var recipe: Recipe?
     
+    
     var user: User?{
         didSet{
             updateViews()
@@ -39,8 +40,11 @@ class UserFeedTableViewCell: UITableViewCell {
     
     //MARK: - IBActions
     @IBAction func saveRecipeButtonTapped(_ sender: UIButton) {
-        guard let recipeID = recipe?.recipeID else {return}
-        RecipeController.shared.addRecipeToUsersSavedList(WithRecipeID: recipeID)
+        guard let recipeID = recipe?.recipeID,
+                let currentUser = UserController.shared.currentUser else {return}
+        saveAndRemoveRecipe(recipeRef: recipeID, currentUser: currentUser)
+       toggleSavedStatus()
+        
     }
     
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {
@@ -52,7 +56,23 @@ class UserFeedTableViewCell: UITableViewCell {
         delegate?.popAlert()
     }
     
+    func toggleSavedStatus() {
+        guard let currentUser = UserController.shared.currentUser,
+                let recipeID = recipe?.recipeID else {return}
+        if currentUser.savedRecipeRefs.contains(recipeID) {
+            saveRecipeButton.setTitle("Saved", for: .normal)
+        } else {
+            saveRecipeButton.setTitle("Save", for: .normal)
+        }
+    }
     
+    func saveAndRemoveRecipe(recipeRef: String, currentUser: User) {
+        if currentUser.savedRecipeRefs.contains(recipeRef) {
+            RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipeRef)
+        } else {
+            RecipeController.shared.addRecipeToUsersSavedList(WithRecipeID: recipeRef)
+        }
+    }
     
     //update the view
     func updateViews() {

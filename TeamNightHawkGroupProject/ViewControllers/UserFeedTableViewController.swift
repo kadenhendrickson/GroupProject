@@ -68,10 +68,19 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     //dont forget to change reuseIdentifier
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userFeedRecipeCell", for: indexPath) as? UserFeedTableViewCell
-        guard let recipe = recipesList?[indexPath.row] else {return UITableViewCell()}
+        guard let recipe = recipesList?[indexPath.row],
+            let currentUserRecipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return UITableViewCell()}
+        
         cell?.delegate = self
         cell?.recipe = recipe
         cell?.user = findUserForRecipe(with: recipe)
+        if currentUserRecipeRefs.contains(recipe.recipeID) {
+            cell?.saveRecipeButton.setTitle("Saved", for: .normal)
+        } else {
+            cell?.saveRecipeButton.setTitle("Save", for: .normal)
+        }
+        
+        //cell?.toggleSavedStatus()
         return cell ?? UITableViewCell()
     }
     
