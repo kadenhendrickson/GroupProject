@@ -27,11 +27,11 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         self.navigationItem.title = "Home"
         loadUsers()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadUsers()
-    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        loadUsers()
+//    }
     
     //helper functions
     func loadUsers() {
