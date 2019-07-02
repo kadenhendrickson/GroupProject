@@ -36,7 +36,8 @@ class User: Codable {
     var followingRefs: [String]
     var blockedUserRefs: [String]
     
-    init(userID: String, recipesRef: [String] = [], email: String, displayName: String, biography: String?, profileImage: UIImage?, savedRecipeRefs: [String] = [], followedBy: [String] = [], following: [String] = [], blockedUserRefs: [String] = []) {
+    init(userID: String, recipesRef: [String] = [], email: String, displayName: String, biography: String?, profileImage: UIImage?, savedRecipeRefs: [String] = [], followedBy: [String] = [], following: [String] = ["dmpOu5seMSRkgJe6N9EXWrINmAz2", "mX7fv1uwlyNAU6eHpdvL7ahf4Bi1", "zHuT1Pqj2ieqpeuuJ6jfcmx7tz73"], blockedUserRefs: [String] = []) {
+
         self.userID = userID
         self.email = email
         self.displayName = displayName
