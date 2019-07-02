@@ -548,7 +548,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="281"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ghk-F9-2Ek">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ghk-F9-2Ek" customClass="ProfilePicture" customModule="TeamNightHawkGroupProject" customModuleProvider="target">
                                     <rect key="frame" x="20" y="20" width="136.5" height="136.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ghk-F9-2Ek" secondAttribute="height" multiplier="1:1" id="a7F-dv-K4T"/>
@@ -933,7 +933,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
-        <segue reference="V0v-1b-299"/>
+        <segue reference="vZv-MN-JCV"/>
         <segue reference="LBb-cA-Aqf"/>
     </inferredMetricsTieBreakers>
 </document>
