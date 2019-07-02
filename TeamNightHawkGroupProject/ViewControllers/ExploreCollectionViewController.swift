@@ -44,7 +44,9 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     
     func updateViews() {
         guard let currentUser = UserController.shared.currentUser else {return}
-        RecipeController.shared.fetchExploreRecipes(blockedUsers: currentUser.blockedUserRefs ) { (recipes) in
+        var unseenPosts = currentUser.blockedUserRefs
+        unseenPosts.append(currentUser.userID)
+        RecipeController.shared.fetchExploreRecipes(blockedUsers: unseenPosts ) { (recipes) in
             DispatchQueue.main.async {
                 self.recipesList = recipes
                 self.collectionView.reloadData()
