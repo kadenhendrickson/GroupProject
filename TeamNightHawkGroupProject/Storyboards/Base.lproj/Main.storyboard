@@ -289,11 +289,11 @@
                                         <action selector="segmentControllerTapped:" destination="3P6-Ln-CnM" eventType="valueChanged" id="OZF-k6-IN5"/>
                                     </connections>
                                 </segmentedControl>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypd-I2-k35" customClass="ClearButton" customModule="TeamNightHawkGroupProject" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypd-I2-k35">
                                     <rect key="frame" x="323" y="8" width="83" height="30"/>
                                     <state key="normal" title="Clear"/>
                                     <connections>
-                                        <action selector="clearButtonTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="lcU-BP-dce"/>
+                                        <action selector="clearButtonTapped:" destination="3P6-Ln-CnM" eventType="touchUpInside" id="7mc-nd-4SY"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -338,12 +338,14 @@
                     <tabBarItem key="tabBarItem" title="Add" id="Stg-3a-uQE"/>
                     <navigationItem key="navigationItem" id="9Yq-3C-vJM"/>
                     <connections>
+                        <outlet property="clearButton" destination="Ypd-I2-k35" id="8Gg-OF-pQT"/>
                         <outlet property="imageSelector" destination="e8P-AE-cgh" id="H3b-DD-Hnd"/>
                         <outlet property="nameTextField" destination="zBz-4j-35O" id="WPj-jJ-LDC"/>
                         <outlet property="panGestureRecognizer" destination="oLy-O3-NA5" id="K8d-Zr-bIi"/>
                         <outlet property="prepTimeTextField" destination="9iw-aT-IkD" id="lOL-ar-vBG"/>
                         <outlet property="recipeImage" destination="rhw-Rq-Ol3" id="77d-Qk-DCh"/>
                         <outlet property="saveButton" destination="WKY-Kk-3U2" id="WIt-oY-GJY"/>
+                        <outlet property="segmenter" destination="hpL-Wr-zc9" id="rNZ-sW-L9F"/>
                         <outlet property="servingTextField" destination="ExB-fn-5pV" id="iu3-4N-GJC"/>
                         <segue destination="eFU-N5-vJh" kind="show" identifier="toTabBar" id="Tjl-vf-46f"/>
                     </connections>
@@ -930,7 +932,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OG8-i5-zFq"/>
+        <segue reference="Tjl-vf-46f"/>
         <segue reference="V0v-1b-299"/>
         <segue reference="LBb-cA-Aqf"/>
     </inferredMetricsTieBreakers>
