@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+
+
 class UserController {
     
     //MARK: - Singleton
@@ -115,6 +117,12 @@ class UserController {
             }
         }
         db.collection("Users").document(userID).delete()
+        let user = Auth.auth().currentUser
+        user?.delete(completion: { (error) in
+            if let error = error {
+                print("Can not delete; \(error.localizedDescription)")
+            }
+        })
 }
     //MARK: - Methods
     
