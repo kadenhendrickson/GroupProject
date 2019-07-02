@@ -36,12 +36,19 @@ class ViewedUserRecipeTableViewCell: UITableViewCell {
                 let recipeImageData = recipe.image else {return}
         
         viewedUserProfileImage.image = UIImage(data: userImageData)
+        viewedUserProfileImage.layer.cornerRadius = viewedUserProfileImage.frame.height/2
         viewedUserDisplayName.setTitle(user.displayName, for: .normal)
+        viewedUserDisplayName.titleLabel?.font = UIFont(name: fontName, size: userNameFontSize)
+        viewedUserDisplayName.setTitleColor(softBlue, for: .normal)
         viewedUserRecipeImage.image = UIImage(data: recipeImageData)
         viewedUserRecipeNameLabel.text = recipe.name
+        viewedUserRecipeNameLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)
         viewedUserServingsLabel.text = recipe.servings
+        viewedUserServingsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         viewedUserPrepTimeLabel.text = recipe.prepTime
-        viewedUserSaveCountLabel.text = "\(recipe.saveCount)"
+        viewedUserPrepTimeLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        viewedUserSaveCountLabel.text = "♕ \(recipe.saveCount)"
+        viewedUserSaveCountLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
     }
     
    

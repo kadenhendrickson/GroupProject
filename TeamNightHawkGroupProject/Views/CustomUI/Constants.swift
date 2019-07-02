@@ -9,12 +9,13 @@
 import UIKit
 
 //MARK: -TextFields
-let fontSize: CGFloat = 18
+let titleFontSize: CGFloat = 18
+let fontSize: CGFloat = 16
 let fontName: String = "Helvetica"
 let backGround: UIColor = .gray
 let textFieldRounding: CGFloat = 4
 let measurementQuantityWidth: CGFloat = 5
-
+let userNameFontSize: CGFloat = 20
 
 //MARK: -SaveButton
 let saveButtonSize: CGFloat = 24

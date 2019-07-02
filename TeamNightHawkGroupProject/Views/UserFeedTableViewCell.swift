@@ -36,6 +36,7 @@ class UserFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var recipePrepTimeTextLabel: UILabel!
     @IBOutlet weak var recipeSaveCountTextLabel: UILabel!
     @IBOutlet weak var saveRecipeButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     
     
     //MARK: - IBActions
@@ -82,15 +83,27 @@ class UserFeedTableViewCell: UITableViewCell {
         guard let user = user,
             let recipeImage = recipe?.image else {return}
         
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.height/2
         if let userImage = user.profileImage{userProfileImageView.image = UIImage(data: userImage)}
         else {userProfileImageView.image = UIImage(named: "ProfileDefault")}
         
         userDisplayName.setTitle(user.displayName, for: .normal)
+        userDisplayName.setTitleColor(softBlue, for: .normal)
+        userDisplayName.titleLabel?.font = UIFont(name: fontName, size: userNameFontSize)
+        moreButton.setTitleColor(softBlue, for: .normal)
+        saveRecipeButton.setTitleColor(softBlue, for: .normal)
+        
+
+    
         recipeImageView.image = UIImage(data: recipeImage)
         recipeNameTextLabel.text = recipe?.name
+        recipeNameTextLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)
         recipeServingsTextLabel.text = recipe?.servings
+        recipeServingsTextLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         recipePrepTimeTextLabel.text = recipe?.prepTime
-        recipeSaveCountTextLabel.text = "\(recipe?.saveCount ?? 0)"
+        recipePrepTimeTextLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        recipeSaveCountTextLabel.text = "♛ \(recipe?.saveCount ?? 0)"
+        recipeSaveCountTextLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
     }
     
     @IBAction func otherUserProfileButtonTapped(_ sender: UIButton) {
