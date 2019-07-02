@@ -18,20 +18,35 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     //MARK: - Properties
     var recipesList: [Recipe] = []
 
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Explore"
-        
+        self.collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateViews()
+        updateViews { (success) in
+            if success {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+        }
     }
     
-    func updateViews() {
-        guard let currentUser = UserController.shared.currentUser else {return}
+    @objc func refreshControlPulled() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        updateViews { (success) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func updateViews(_ completion: @escaping(Bool) -> Void) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        guard let currentUser = UserController.shared.currentUser else { completion(false); return}
         var unseenPosts = currentUser.blockedUserRefs
         unseenPosts.append(currentUser.userID)
         RecipeController.shared.fetchExploreRecipes(blockedUsers: unseenPosts ) { (recipes) in
@@ -40,6 +55,8 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
                 self.collectionView.reloadData()
             }
         }
+        completion(true)
+        return
     }
 
     
