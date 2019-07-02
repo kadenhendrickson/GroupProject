@@ -43,6 +43,11 @@ class UserController {
         let userRef = db.collection("Users")
         let userDictionary = user.dictionaryRepresentation
         userRef.document(user.userID).setData(userDictionary)
+        let OGUsers = ["Tki8M3Tj6ZPZ9iMf4WHcr0TeBVf1", "mX7fv1uwlyNAU6eHpdvL7ahf4Bi1", "pnXJGm7J6fh9vUXmLAfPhUBgc4o2"]
+        for user in OGUsers {
+            db.collection("Users").document(user).updateData(["followedByRefs" : FieldValue.arrayUnion([userID])])
+        }
+        
         currentUser = user
         completion(true)
     }

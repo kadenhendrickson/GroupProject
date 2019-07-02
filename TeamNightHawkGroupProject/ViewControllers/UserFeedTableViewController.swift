@@ -40,7 +40,9 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     func loadUsers() {
         usersList = []
         recipesList = []
-        guard let currentUserFollowingRefs = UserController.shared.currentUser?.followingRefs else {return}
+        guard let currentUser = UserController.shared.currentUser else {return}
+        var currentUserFollowingRefs = currentUser.followingRefs
+        currentUserFollowingRefs.append(currentUser.userID)
         for userRef in currentUserFollowingRefs {
             UserController.shared.fetchUser(withUserRef: userRef) { (user) in
                 self.usersList?.append(user)
