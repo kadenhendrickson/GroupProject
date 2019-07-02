@@ -121,6 +121,10 @@ class EditProfileViewController: UIViewController {
         
         let addItemAction = UIAlertAction(title: "Yes, delete me and all these tasty recipes.", style: .default) { (_) in
             UserController.shared.deleteUser(withID: userID)
+            UserController.shared.currentUser = nil
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignIn")
+            UIApplication.shared.windows.first?.rootViewController = signInViewController
         }
         
         alertController.addAction(cancelAction)
