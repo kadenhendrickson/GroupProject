@@ -117,6 +117,7 @@ class Section1TableViewCell: UITableViewCell {
             let measurementQuantity = measurementQuantityLabel.text
             else {return}
         
+        
         ingredientDelegate?.refreshIngredientData()
         
         ingredientDelegate?.addIngredient(ingredientName: name, measurementQuantity: measurementQuantity, measurementType: measurmentName)
@@ -132,6 +133,7 @@ class Section1TableViewCell: UITableViewCell {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: addSectionButtonSize)
         button.contentHorizontalAlignment = .center
         button.layer.cornerRadius = addSectionButtonCorner
+        button.setTitleColor(softBlue, for: .normal)
         
         return button
     }()

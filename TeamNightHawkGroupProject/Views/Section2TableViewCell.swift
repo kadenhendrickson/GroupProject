@@ -42,7 +42,8 @@ class Section2TableViewCell: UITableViewCell {
     func setUpStackView(){
         stackView.addArrangedSubview(directionSteps)
         stackView.addArrangedSubview(addSection)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0, height: (fontSize + 8))
+        directionSteps.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: addSection.leadingAnchor, paddingTop: 12, paddingBottom: 8, paddingLeading: 8, paddingTrailing: 0)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 10, paddingLeading: 8, paddingTrailing: 0)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
 
     }
@@ -56,7 +57,6 @@ class Section2TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "Step-by-step directions"
-        text.backgroundColor = backGround
         text.layer.cornerRadius = textFieldRounding
         
         return text
@@ -77,7 +77,7 @@ class Section2TableViewCell: UITableViewCell {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: addSectionButtonSize)
         button.contentHorizontalAlignment = .center
         button.layer.cornerRadius = addSectionButtonCorner
-        
+        button.setTitleColor(softBlue, for: .normal)
         return button
     }()
     

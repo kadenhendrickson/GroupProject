@@ -45,7 +45,7 @@ class UserFeedTableViewCell: UITableViewCell {
                 let currentUser = UserController.shared.currentUser else {return}
         saveAndRemoveRecipe(recipeRef: recipeID, currentUser: currentUser)
        toggleSavedStatus()
-        recipeSaveCountTextLabel.text = "\(recipe?.saveCount ?? 0)"
+        recipeSaveCountTextLabel.text = "♛ \(recipe?.saveCount ?? 0)"
     }
     
     @IBAction func moreOptionsButtonTapped(_ sender: Any) {

@@ -16,12 +16,15 @@ protocol AddRecipeTableViewDelegate {
 
 class AddRecipeTableViewController: UITableViewController {
     
+    
+    @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var servingTextField: UITextField!
     @IBOutlet weak var prepTimeTextField: UITextField!
     @IBOutlet weak var imageSelector: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var segmenter: UISegmentedControl!
     
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
@@ -67,14 +70,17 @@ class AddRecipeTableViewController: UITableViewController {
         servingTextField.delegate = self
         prepTimeTextField.delegate = self
         panGestureRecognizer.delegate = self
+        segmenter.tintColor = softBlue
         
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "addRecipeCell3")
         imageSelector.setTitle("Click to add image", for: .normal)
-        saveButton.backgroundColor = yellow
+        imageSelector.layer.borderWidth = 1
+        clearButton.setTitleColor(softBlue, for: .normal)
+        saveButton.backgroundColor = green
+        saveButton.setTitleColor(black, for: .normal)
         saveButton.layer.cornerRadius = buttonRounding
-        tableView.backgroundColor = green
     }
     
     @IBAction func clearButtonTapped(_ sender: Any) {

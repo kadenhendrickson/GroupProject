@@ -11,7 +11,7 @@ import UIKit
 class displayView: UIView {
 
     override func awakeFromNib() {
-        backgroundColor = green
+    
     }
 
 }
