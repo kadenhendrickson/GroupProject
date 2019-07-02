@@ -82,7 +82,7 @@ class ProfileTableViewController: UITableViewController {
         let followingsCount = currentUser.followingRefs.count
         let bioText = currentUser.biography
         
-        editButton.setTitleColor(green, for: .normal)
+//        editButton.setTitleColor(green, for: .normal)
         displayNameLabel.text = displayName
         displayNameLabel.font = UIFont(name: fontName, size: 24)
         bioLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)

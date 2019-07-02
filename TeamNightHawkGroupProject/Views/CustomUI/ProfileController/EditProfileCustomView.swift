@@ -8,14 +8,34 @@
 
 import UIKit
 
-class EditProfileCustomView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class editTextView: UITextView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.font = UIFont(name: fontName, size: fontSize)
+        self.layer.borderWidth = ProfileHeaderConstants.borderWidth
+        self.layer.borderColor = ProfileHeaderConstants.greyBorderColor
+        self.layer.cornerRadius = textFieldRounding
     }
-    */
-
 }
+
+class displayNameTextField: UITextField {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.font = UIFont(name: fontName, size: fontSize)
+        self.layer.borderWidth = ProfileHeaderConstants.borderWidth
+        self.layer.borderColor = ProfileHeaderConstants.greyBorderColor
+        self.layer.cornerRadius = textFieldRounding
+    }
+}
+
+class deleteProfileButton: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setTitleColor(white, for: .normal)
+        self.backgroundColor = UIColor.red
+        self.heightAnchor.constraint(equalToConstant: saveButtonSize)
+        self.layer.cornerRadius = ProfileHeaderConstants.buttonBorderRadius
+    }
+}
+
+
