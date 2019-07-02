@@ -24,6 +24,8 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followingsCountLabel: UILabel!
     @IBOutlet weak var bioTextLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var bioLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,7 +37,6 @@ class ProfileTableViewController: UITableViewController {
         updateUserRecipes()
         tableView.reloadData()
         tableView.separatorStyle = .none
-
     }
     
     
@@ -81,9 +82,12 @@ class ProfileTableViewController: UITableViewController {
         let followingsCount = currentUser.followingRefs.count
         let bioText = currentUser.biography
         
+        editButton.setTitleColor(green, for: .normal)
         displayNameLabel.text = displayName
+        displayNameLabel.font = UIFont(name: fontName, size: 24)
+        bioLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)
         bioTextLabel.text = bioText
-        followersCountLabel.text = bioText
+
         followersCountLabel.text = "\(followersCount)"
         followingsCountLabel.text = "\(followingsCount)"
     }

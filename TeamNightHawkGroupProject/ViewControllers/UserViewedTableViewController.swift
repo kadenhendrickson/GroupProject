@@ -44,6 +44,7 @@ class UserViewedTableViewController: UITableViewController {
     @IBOutlet weak var viewedUserFollowingCount: UILabel!
     @IBOutlet weak var viewedUserBiography: UILabel!
     @IBOutlet weak var followButon: UIButton!
+    @IBOutlet weak var bioLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,9 +78,10 @@ class UserViewedTableViewController: UITableViewController {
     func setUpViews(){
         guard let user = user,
             let imageData = user.profileImage else {print("🍒 Can't find that user or user has no profile image. Printing from \(#function) \n In \(String(describing: UserViewedTableViewController.self)) 🍒"); return}
-        
+        bioLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)
         viewedUserBiography.text = user.biography
         viewedUserDisplayName.text = user.displayName
+        viewedUserDisplayName.font = UIFont.boldSystemFont(ofSize: 24)
         viewedUserFollowersCount.text = "\(user.followedByRefs.count)"
         viewedUserFollowingCount.text = "\(user.followingRefs.count)"
         viewedUserProfileImage.image = UIImage(data: imageData)
@@ -110,7 +112,8 @@ class UserViewedTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        self.tableView.separatorStyle = .none
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "userProfileCell", for: indexPath) as? ViewedUserRecipeTableViewCell,
             let recipe = userRecipes?[indexPath.row]
             else { print("🍒 Failed to meet all the conditions for dequeing cell for index path at: \(indexPath.row). Printing from \(#function) \n In \(String(describing: UserViewedTableViewController.self)) 🍒"); return UITableViewCell()}

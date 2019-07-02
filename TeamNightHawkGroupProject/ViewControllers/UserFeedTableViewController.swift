@@ -14,7 +14,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     //MARK: - Properties
     var recipesList: [Recipe]? {
         didSet{
-            print("Recipe Count: \(self.recipesList?.count)")
+//            print("Recipe Count: \(self.recipesList?.count)")
             tableView.reloadData()
         }
     }
@@ -25,7 +25,6 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Home"
-//        loadUsers()
         
         self.tableView.separatorStyle = .none
         tableView.tableHeaderView?.tintColor = softBlue

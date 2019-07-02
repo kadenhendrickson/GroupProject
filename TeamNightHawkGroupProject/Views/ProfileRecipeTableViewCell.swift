@@ -32,7 +32,10 @@ class ProfileRecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeServingsTextLabel: UILabel!
     @IBOutlet weak var recipePrepTimeTextLabel: UILabel!
     @IBOutlet weak var recipeSaveCountTextLabel: UILabel!
+    @IBOutlet weak var editpostButton: UIButton!
     
+    
+    //MARK: -Actions
     @IBAction func editButtonTapped(_ sender: Any) {
         delegate?.editButtonTapped(self)
     }
@@ -46,13 +49,22 @@ class ProfileRecipeTableViewCell: UITableViewCell {
             let userImageData = user.profileImage else { return }
         
         userProfileImageView.image = UIImage(data: userImageData)
+        userProfileImageView.layer.cornerRadius = (userProfileImageView.frame.height/2)
         userDisplayName.setTitle(user.displayName, for: .normal)
+        userDisplayName.titleLabel?.font = UIFont(name: fontName, size: userNameFontSize)
+
+        userDisplayName.setTitleColor(softBlue, for: .normal)
+        editpostButton.setTitleColor(softBlue, for: .normal)
         
         recipeImageView.image = UIImage(data: recipeImageData)
+        
         recipeNameTextLabel.text = recipe.name
+        recipeNameTextLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)
         recipeServingsTextLabel.text = recipe.servings
+        recipeServingsTextLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         recipePrepTimeTextLabel.text = recipe.prepTime
-        recipeSaveCountTextLabel.text = "\(recipe.saveCount)"
+        recipePrepTimeTextLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        recipeSaveCountTextLabel.text = "♛ \(recipe.saveCount)"
         
     }
     
