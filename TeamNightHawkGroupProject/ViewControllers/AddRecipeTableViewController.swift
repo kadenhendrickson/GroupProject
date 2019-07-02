@@ -81,6 +81,8 @@ class AddRecipeTableViewController: UITableViewController {
         saveButton.backgroundColor = green
         saveButton.setTitleColor(black, for: .normal)
         saveButton.layer.cornerRadius = buttonRounding
+        
+
     }
     
     @IBAction func clearButtonTapped(_ sender: Any) {
@@ -162,7 +164,9 @@ class AddRecipeTableViewController: UITableViewController {
         }
     }
     
-    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if segmentIndex == 1 {
             
@@ -195,7 +199,7 @@ class AddRecipeTableViewController: UITableViewController {
             }
             
             self.delegate = cell
-
+            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell3", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
@@ -210,7 +214,7 @@ class AddRecipeTableViewController: UITableViewController {
             }
             
             self.delegate = cell
-
+            
             return cell
         }
         

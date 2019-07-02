@@ -50,8 +50,9 @@ class EditRecipeTableViewController: UITableViewController {
         servingTextField.text = recipe.servings
         prepTimeTextField.text = recipe.prepTime
         rearrangeButton.isHidden = true
-        deleteButton.backgroundColor = yellow
+        deleteButton.backgroundColor = green
         deleteButton.layer.cornerRadius = buttonRounding
+        deleteButton.setTitleColor(black, for: .normal)
         
         // Delegates for dismissing keyboard
         nameTextField.delegate = self
@@ -148,6 +149,11 @@ class EditRecipeTableViewController: UITableViewController {
             return (tags.count + tagRows)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let recipe = recipe,
             let steps = recipe.steps,

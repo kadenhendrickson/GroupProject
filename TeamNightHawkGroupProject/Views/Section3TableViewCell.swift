@@ -40,7 +40,7 @@ class Section3TableViewCell: UITableViewCell {
     func setUpStackView(){
         stackView.addArrangedSubview(tags)
         stackView.addArrangedSubview(addSection)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0, height: (fontSize + 8))
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 0, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
@@ -52,9 +52,10 @@ class Section3TableViewCell: UITableViewCell {
         let text = UITextField()
         text.font = UIFont(name: fontName, size: fontSize)
         text.placeholder = "tags"
-        text.backgroundColor = backGround
         text.layer.cornerRadius = textFieldRounding
-        
+        text.layer.borderWidth = 0.5
+        text.layer.borderColor = grey.cgColor
+
         return text
     }()
     
