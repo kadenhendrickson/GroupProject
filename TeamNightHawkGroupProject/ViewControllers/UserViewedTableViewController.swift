@@ -50,6 +50,9 @@ class UserViewedTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.navigationItem.title = navigationTitle
         setUpViews()
+        if let bioLabel = bioLabel as? BioTextLabel {
+            bioLabel.verticalAlignment = .top
+        }
     }
     
     @IBAction func followButtonTapped(_ sender: Any) {

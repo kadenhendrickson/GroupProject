@@ -8,14 +8,34 @@
 
 import UIKit
 
-class ProfileHeaderCustomView: UIView {
+import UIKit
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+struct ProfileHeaderConstants {
+    // Buttons
+    static let buttonBorderRadius = textFieldRounding
+    static let borderWidth = CGFloat(0.8)
+    
+    // TextFields
+    static let greyBorderColor = grey.cgColor
+    static let buttonColor = green
 }
+
+
+class ProfileButton: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setTitleColor(white, for: .normal)
+        self.backgroundColor = ProfileHeaderConstants.buttonColor
+        self.heightAnchor.constraint(equalToConstant: saveButtonSize)
+        self.layer.cornerRadius = EditProfileConstants.buttonBorderRadius
+    }
+}
+
+class ProfilePictureInDetailView: UIImageView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.layer.cornerRadius = (self.frame.height/2)
+        self.clipsToBounds = true
+    }
+}
+
