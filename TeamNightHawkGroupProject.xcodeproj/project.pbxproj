@@ -72,8 +72,6 @@
 		DC4BC2CD22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */; };
 		DC4BC2CF22BD2435001B20EE /* SavedRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */; };
 		DC4BC2D122BD4BD1001B20EE /* ExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */; };
-		DC5A580322CBBF2800FC2859 /* RecipeDetailLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A580222CBBF2800FC2859 /* RecipeDetailLabels.swift */; };
-		DC5A580522CBC30B00FC2859 /* RecipeSaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A580422CBC30B00FC2859 /* RecipeSaveButton.swift */; };
 		DC924DE422C2D9FF00D0AB5A /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */; };
 		DC924DE622C4096000D0AB5A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC924DE522C4096000D0AB5A /* FetchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -148,8 +146,6 @@
 		DC4BC2CC22BC3DC5001B20EE /* ViewedUserRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewedUserRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2CE22BD2435001B20EE /* SavedRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC4BC2D022BD4BD1001B20EE /* ExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionViewCell.swift; sourceTree = "<group>"; };
-		DC5A580222CBBF2800FC2859 /* RecipeDetailLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeDetailLabels.swift; path = TeamNightHawkGroupProject/Views/CustomUI/RecipeDetailLabels.swift; sourceTree = SOURCE_ROOT; };
-		DC5A580422CBC30B00FC2859 /* RecipeSaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSaveButton.swift; sourceTree = "<group>"; };
 		DC924DE322C2D9FF00D0AB5A /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = SOURCE_ROOT; };
 		DC924DE522C4096000D0AB5A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,7 +194,6 @@
 				DC5A57EA22CA630100FC2859 /* RecipeCell */,
 				0211C69622BAAE3E00D5F8C6 /* Constants.swift */,
 				0211C69822BAAED200D5F8C6 /* AnchorExtension.swift */,
-				DC5A580422CBC30B00FC2859 /* RecipeSaveButton.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -368,7 +363,6 @@
 		DC5A57EA22CA630100FC2859 /* RecipeCell */ = {
 			isa = PBXGroup;
 			children = (
-				DC5A580222CBBF2800FC2859 /* RecipeDetailLabels.swift */,
 			);
 			path = RecipeCell;
 			sourceTree = "<group>";
@@ -513,12 +507,10 @@
 				DC2C1ADD22B947E90098F68D /* User.swift in Sources */,
 				0226F25922BAD5EC00856910 /* IngredientsTableViewCell.swift in Sources */,
 				0211C69722BAAE3E00D5F8C6 /* Constants.swift in Sources */,
-				DC5A580522CBC30B00FC2859 /* RecipeSaveButton.swift in Sources */,
 				97C417BE22CABD9800823933 /* ProfileHeaderCustomView.swift in Sources */,
 				DC2C1AF322BAB3C10098F68D /* CreateUserViewController.swift in Sources */,
 				DC0C1A6522B4516500B219CB /* AppDelegate.swift in Sources */,
 				9732278322BB48F8006F0A15 /* ImagePickerHelper.swift in Sources */,
-				DC5A580322CBBF2800FC2859 /* RecipeDetailLabels.swift in Sources */,
 				0211C69522BAAE3400D5F8C6 /* Section2TableViewCell.swift in Sources */,
 				DC2C1AF122BAB3B40098F68D /* SignInViewController.swift in Sources */,
 				020D572C22C4189600A74632 /* displayView.swift in Sources */,
