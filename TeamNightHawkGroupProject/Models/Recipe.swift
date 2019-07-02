@@ -100,13 +100,13 @@ class Recipe {
     var dictionaryRepresentation: [String:Any] {
         return ["userReference": userReference,
                 "recipeID" : recipeID,
-                "image" : image,
+                "image" : image ?? Data(),
                 "name" : name,
                 "ingredientsDict" : ingredientsDict,
-                "steps" : steps,
+                "steps" : steps ?? [String].self,
                 "prepTime" : prepTime,
                 "servings" : servings,
-                "tags" : tags,
+                "tags" : tags ?? [String].self,
                 "savedByUsers" : savedByUsers,
                 "saveCount" : saveCount,
                 "timestamp" : timestamp

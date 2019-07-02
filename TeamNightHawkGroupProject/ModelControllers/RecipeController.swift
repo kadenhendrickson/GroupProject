@@ -203,12 +203,12 @@ class RecipeController {
         let recipeRef = db.collection("Recipes").document(recipeID)
         recipeRef.updateData([
             "name" : name,
-            "image" : image.jpegData(compressionQuality: 0.1),
+            "image" : image.jpegData(compressionQuality: 0.1) ?? UIImage(),
             "servings" : servingSize,
             "prepTime" : prepTime,
             "ingredientsDict" : ingredientsDictArray,
-            "steps" : steps,
-            "tags" : tags])
+            "steps" : steps ?? [String].self,
+            "tags" : tags ?? [String].self ])
     }
     
     func addRecipeToUsersSavedList(WithRecipeID id: String) {
