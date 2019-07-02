@@ -13,7 +13,7 @@ import UIKit
 struct ProfileHeaderConstants {
     // Buttons
     static let buttonBorderRadius = textFieldRounding
-    static let borderWidth = CGFloat(0.8)
+    static let borderWidth = CGFloat(0.5)
     
     // TextFields
     static let greyBorderColor = grey.cgColor
