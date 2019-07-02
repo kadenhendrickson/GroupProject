@@ -81,9 +81,12 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         cell?.recipe = recipe
         cell?.user = findUserForRecipe(with: recipe)
         if currentUserRecipeRefs.contains(recipe.recipeID) {
-            cell?.saveRecipeButton.setTitle("Saved", for: .normal)
+            
+            //cell?.saveRecipeButton.setTitle("", for: .normal)
+            cell?.saveRecipeButton.setBackgroundImage(UIImage(named: "savedBookmark"), for: .normal)
         } else {
-            cell?.saveRecipeButton.setTitle("Save", for: .normal)
+            //cell?.saveRecipeButton.setTitle("", for: .normal)
+            cell?.saveRecipeButton.setBackgroundImage(UIImage(named: "unsavedBookmark"), for: .normal)
         }
         
         //cell?.toggleSavedStatus()

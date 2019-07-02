@@ -10,31 +10,19 @@ import UIKit
 
 private let reuseIdentifier = "exploreRecipeCell"
 
-private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
 
 private let itemsPerRow: CGFloat = 3
 
 class ExploreCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     //MARK: - Properties
     var recipesList: [Recipe] = []
-//
-//        {
-//        var recipes: [Recipe] = []
-//        RecipeController.shared.fetchExploreRecipes { (exploreRecipes) in
-//            DispatchQueue.main.async {
-//
-//            }
-//        }
-//        return recipes
-//    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Explore"
-
-        // Register cell classes
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +32,9 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
     
     func updateViews() {
         guard let currentUser = UserController.shared.currentUser else {return}
-        RecipeController.shared.fetchExploreRecipes(blockedUsers: currentUser.blockedUserRefs ) { (recipes) in
+        var unseenPosts = currentUser.blockedUserRefs
+        unseenPosts.append(currentUser.userID)
+        RecipeController.shared.fetchExploreRecipes(blockedUsers: unseenPosts ) { (recipes) in
             DispatchQueue.main.async {
                 self.recipesList = recipes
                 self.collectionView.reloadData()
@@ -95,9 +85,7 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
         
     
     }
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "<#T##String#>", sender: <#T##Any?#>)
-//    }
+
     
 
 }

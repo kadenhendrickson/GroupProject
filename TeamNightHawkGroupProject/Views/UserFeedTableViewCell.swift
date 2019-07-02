@@ -61,10 +61,12 @@ class UserFeedTableViewCell: UITableViewCell {
         guard let currentUser = UserController.shared.currentUser,
                 let recipeID = recipe?.recipeID else {return}
         if currentUser.savedRecipeRefs.contains(recipeID) {
-            saveRecipeButton.setTitle("Saved", for: .normal)
+            saveRecipeButton.setBackgroundImage(UIImage(named: "savedBookmark"), for: .normal)
+            //saveRecipeButton.setTitle("Saved", for: .normal)
             recipe?.savedByUsers.append(currentUser.userID)
         } else {
-            saveRecipeButton.setTitle("Save", for: .normal)
+            saveRecipeButton.setBackgroundImage(UIImage(named: "unsavedBookmark"), for: .normal)
+            //saveRecipeButton.setTitle("Save", for: .normal)
             let indexPath = recipe?.savedByUsers.firstIndex(where: {$0 == currentUser.userID})
             recipe?.savedByUsers.remove(at: indexPath!)
         }
