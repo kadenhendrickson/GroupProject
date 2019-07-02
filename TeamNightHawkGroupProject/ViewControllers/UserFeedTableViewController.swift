@@ -14,7 +14,6 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     //MARK: - Properties
     var recipesList: [Recipe]? {
         didSet{
-//            print("Recipe Count: \(self.recipesList?.count)")
             tableView.reloadData()
         }
     }
@@ -22,27 +21,36 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     
     var selectedUser: User?
     
+    var refreshController = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Home"
         
+        tableView.refreshControl = refreshController
+        refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
+        
         self.tableView.separatorStyle = .none
         tableView.tableHeaderView?.tintColor = softBlue
-        loadUsers()
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        loadUsers { (success) in
+            if success {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+        }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
     
     //helper functions
-    func loadUsers() {
+    func loadUsers(_ completion: @escaping(Bool) -> Void) {
         usersList = []
         recipesList = []
-        guard let currentUser = UserController.shared.currentUser else {return}
+        guard let currentUser = UserController.shared.currentUser else { completion(false); return}
+        
         var currentUserFollowingRefs = currentUser.followingRefs
         currentUserFollowingRefs.append(currentUser.userID)
+        
         for userRef in currentUserFollowingRefs {
             UserController.shared.fetchUser(withUserRef: userRef) { (user) in
                 self.usersList?.append(user)
@@ -52,6 +60,9 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
                 })
             }
         }
+        
+        completion(true)
+        return
     }
     
     func findUserForRecipe(with recipe: Recipe) -> User? {
@@ -62,6 +73,14 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
             }
         }
         return nil
+    }
+    
+    @objc func refreshControlPulled() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.loadUsers { (success) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.refreshController.endRefreshing()
+        }
     }
     
     // MARK: - Table view data source
@@ -133,7 +152,9 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         let reportPost = UIAlertAction(title: "Report/Block", style: .default) { (_) in
             guard let userID = self.selectedUser?.userID else {return}
             UserController.shared.blockUser(withID: userID)
-            self.loadUsers()
+            self.loadUsers({ (success) in
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            })
             self.sendEmail(userID: userID)
         }
         
