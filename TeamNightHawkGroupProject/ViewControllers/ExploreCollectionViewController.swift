@@ -24,6 +24,8 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
         super.viewDidLoad()
         self.navigationItem.title = "Explore"
         self.collectionView.refreshControl = refreshControl
+        updateViews { (_) in
+        }
         refreshControl.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
     }
     
