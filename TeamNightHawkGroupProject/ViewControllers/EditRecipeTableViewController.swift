@@ -42,6 +42,7 @@ class EditRecipeTableViewController: UITableViewController {
     var delegateForKeyboardDissmiss: EditRecipeTableViewDelegate?
     
     override func viewDidLoad() {
+        stepsArray.append(contentsOf: recipe?.steps ?? [])
         super.viewDidLoad()
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "ingredientEditCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "stepEditCell")
@@ -84,7 +85,7 @@ class EditRecipeTableViewController: UITableViewController {
         recipe.ingredients.append(contentsOf: ingredientsArray)
         recipe.steps?.append(contentsOf: stepsArray)
         recipe.tags?.append(contentsOf: tagsArray)
-        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: recipe.ingredients, steps: recipe.steps, tags: recipe.tags, servingSize: servingSize, prepTime: prepTime)
+        RecipeController.shared.updateRecipeWith(recipeID: recipe.recipeID, name: name, image: image, ingredients: recipe.ingredients, steps: stepsArray, tags: recipe.tags, servingSize: servingSize, prepTime: prepTime)
 
         navigationController?.popViewController(animated: true)
     }
@@ -148,12 +149,11 @@ class EditRecipeTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let recipe = recipe,
-            let steps = recipe.steps,
             let tags = recipe.tags else {return 0}
         if segmentIndex == 1 {
             return (recipe.ingredients.count + ingredientRows)
         } else if segmentIndex == 2 {
-            return (steps.count + stepRows)
+            return (stepsArray.count + 1)
         } else {
             return (tags.count + tagRows)
         }
@@ -215,8 +215,8 @@ class EditRecipeTableViewController: UITableViewController {
             
             cell.directionSteps.tag = getCurrentTag()
 
-            if indexPath.row < (steps.count){
-                cell.directionSteps.text = steps[indexPath.row]
+            if indexPath.row < (stepsArray.count){
+                cell.directionSteps.text = stepsArray[indexPath.row]
                 cell.addSection.isHidden = true
                 cell.directionSteps.isEnabled = false
                 cell.stepDelegate = self
@@ -224,7 +224,7 @@ class EditRecipeTableViewController: UITableViewController {
                 return cell
             } else {
                 
-                if indexPath.row == steps.count + stepsArray.count {
+                if indexPath.row == stepsArray.count {
                     cell.addSection.isHidden = false
                     cell.stepDelegate = self
                     cell.directionSteps.isEnabled = true
@@ -272,7 +272,6 @@ class EditRecipeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let recipe = recipe,
-                var steps = recipe.steps,
                 var tags = recipe.tags else {print("♞♞♞♞♞♞♞♞"); return}
             if segmentIndex == 1 {
                 let ingredient = recipe.ingredients[indexPath.row]
@@ -284,10 +283,10 @@ class EditRecipeTableViewController: UITableViewController {
                     return
                 }
             } else if segmentIndex == 2 {
-                if indexPath.row != (stepRows + steps.count - 1){
-                let step = steps[indexPath.row]
-                guard let stepIndexPath = steps.firstIndex(of: step) else {return}
-                recipe.steps?.remove(at:stepIndexPath)
+                if indexPath.row != (stepsArray.count){
+                let step = stepsArray[indexPath.row]
+                guard let stepIndexPath = stepsArray.firstIndex(of: step) else {return}
+                stepsArray.remove(at:stepIndexPath)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } else {
                     return
@@ -309,14 +308,12 @@ class EditRecipeTableViewController: UITableViewController {
         return false
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let recipe = recipe,
-            let steps = recipe.steps,
-            let step = recipe.steps?[sourceIndexPath.row] else {return}
-        recipe.steps?.remove(at: sourceIndexPath.row)
-        if destinationIndexPath.row == (stepRows + steps.count - 1){
-            recipe.steps?.insert(step, at: destinationIndexPath.row - 1)
+            let step = stepsArray[sourceIndexPath.row] 
+        stepsArray.remove(at: sourceIndexPath.row)
+        if destinationIndexPath.row == (stepsArray.count - 1){
+            stepsArray.insert(step, at: destinationIndexPath.row - 1)
         } else {
-            recipe.steps?.insert(step, at: destinationIndexPath.row)
+            stepsArray.insert(step, at: destinationIndexPath.row)
         }
     }
 }
