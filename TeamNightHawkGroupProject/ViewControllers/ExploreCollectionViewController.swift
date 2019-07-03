@@ -27,15 +27,6 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
         refreshControl.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateViews { (success) in
-            if success {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            }
-        }
-    }
-    
     @objc func refreshControlPulled() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         updateViews { (success) in
