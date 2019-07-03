@@ -173,7 +173,7 @@ extension UserFeedTableViewController: MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["rectagram@gmail.com"])
+            mail.setToRecipients(["chefologydvm@gmail.com"])
             mail.setSubject("Reporting email")
             mail.setMessageBody("The following user has posted an inappropriate item. Please look into removing the account for \(userID). Regards \(UserController.shared.currentUser!.displayName)", isHTML: true)
             present(mail, animated: true)

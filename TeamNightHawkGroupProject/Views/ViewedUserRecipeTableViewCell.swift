@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol VieweduserRecipeCellDeleget: class {
+    func userRefSent(userRef: String)
+    func popAlert()
+}
+
+
 class ViewedUserRecipeTableViewCell: UITableViewCell {
     
     //MARK: - properties
@@ -17,6 +23,8 @@ class ViewedUserRecipeTableViewCell: UITableViewCell {
             updateViews()
         }
     }
+    weak var delegate: VieweduserRecipeCellDeleget?
+
     
     //MARK: - IBOutlets
     @IBOutlet weak var viewedUserProfileImage: UIImageView!
@@ -31,9 +39,9 @@ class ViewedUserRecipeTableViewCell: UITableViewCell {
     
     func updateViews() {
         guard let user = user,
-                let recipe = recipe,
-                let userImageData = user.profileImage,
-                let recipeImageData = recipe.image else {return}
+            let recipe = recipe,
+            let userImageData = user.profileImage,
+            let recipeImageData = recipe.image else {return}
         
         viewedUserProfileImage.image = UIImage(data: userImageData)
         viewedUserProfileImage.layer.cornerRadius = viewedUserProfileImage.frame.height/2
@@ -60,6 +68,10 @@ class ViewedUserRecipeTableViewCell: UITableViewCell {
     }
     
     @IBAction func moreButtonTapped(_ sender: Any) {
+        print("🇿🇼🇿🇼🇿🇼🇿🇼🇿🇼🇿🇼🇿🇼🇿🇼")
+        guard let userRef = user?.userID else {return}
+        delegate?.userRefSent(userRef: userRef)
+        delegate?.popAlert()
     }
     
     func setSavedButton(){
@@ -70,8 +82,6 @@ class ViewedUserRecipeTableViewCell: UITableViewCell {
             viewedUserSaveButton.setBackgroundImage(UIImage(named: "savedBookmark"), for: .normal)
         } else {
             viewedUserSaveButton.setBackgroundImage(UIImage(named: "unsavedBookmark"), for: .normal)
-            //saveRecipeButton.setTitle("Save", for: .normal)
-            let indexPath = recipe?.savedByUsers.firstIndex(where: {$0 == currentUser.userID})
         }
     }
     
