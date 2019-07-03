@@ -36,6 +36,9 @@ class EditRecipeTableViewController: UITableViewController {
     var tagRows: Int = 1
     var segmentIndex: Int = 1
     
+    // current text field index for navigating nextfield via return key, this will be used for the programmatic fields' tag.
+    var currentTextFieldIndex: Int = 2
+    
     var delegateForKeyboardDissmiss: EditRecipeTableViewDelegate?
     
     override func viewDidLoad() {
@@ -45,6 +48,12 @@ class EditRecipeTableViewController: UITableViewController {
         tableView.register(Section3TableViewCell.self, forCellReuseIdentifier: "tagEditCell")
         guard let recipe = recipe,
             let imageData = recipe.image else {return}
+        
+        // tags for switching textFields with return key
+        nameTextField.tag = 0
+        servingTextField.tag = 1
+        prepTimeTextField.tag = 2
+        
         recipeImageView.image = UIImage(data: imageData)
         nameTextField.text = recipe.name
         servingTextField.text = recipe.servings
@@ -355,8 +364,14 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
 }
 
 extension EditRecipeTableViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
         return true
     }
     

@@ -39,6 +39,7 @@ class AddRecipeTableViewController: UITableViewController {
     var stepRows: Int = 1
     var tagRows: Int = 1
     var segmentIndex: Int = 1
+    var currentTextFieldIndex = 2
     
     var delegate: AddRecipeTableViewDelegate?
     
@@ -67,10 +68,13 @@ class AddRecipeTableViewController: UITableViewController {
         imagePicker.delegate = self
         nameTextField.delegate = self
         servingTextField.delegate = self
-        servingTextField.delegate = self
         prepTimeTextField.delegate = self
         panGestureRecognizer.delegate = self
         segmenter.tintColor = softBlue
+        
+        nameTextField.tag = 0
+        servingTextField.tag = 1
+        prepTimeTextField.tag = 2
         
         tableView.register(Section1TableViewCell.self, forCellReuseIdentifier: "addRecipeCell")
         tableView.register(Section2TableViewCell.self, forCellReuseIdentifier: "addRecipeCell2")
@@ -282,7 +286,13 @@ extension AddRecipeTableViewController: ImagePickerHelperDelegate {
 
 extension AddRecipeTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
         return true
     }
     

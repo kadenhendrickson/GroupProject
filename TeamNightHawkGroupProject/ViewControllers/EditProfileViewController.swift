@@ -148,8 +148,15 @@ extension EditProfileViewController: ImagePickerHelperDelegate {
 
 extension EditProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.bioTextView.becomeFirstResponder()
+        
+        if let nextTextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
+            nextTextField.becomeFirstResponder()
+        } else {
+            //go to textview
+            let bioTextView = self.view.viewWithTag(textField.tag + 1) as? UITextView
+            bioTextView?.becomeFirstResponder()
+        }
+        
         return true
     }
     
