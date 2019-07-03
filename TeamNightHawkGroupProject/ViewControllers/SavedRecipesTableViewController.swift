@@ -27,19 +27,27 @@ class SavedRecipesTableViewController: UITableViewController {
         
         loadRecipes { (success) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            guard success else { return }
+            self.tableView.reloadData()
         }
     }
     
     @objc func refreshControlPulled() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         loadRecipes { (success) in
+            guard success else { return }
+
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
         }
     }
     
 
     func loadRecipes(_ completion: @escaping(Bool) -> Void) {
+        // must reset fetched recipe before fetching to avoid duplicate recipes
+        self.recipesList = []
         
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
         
@@ -50,10 +58,9 @@ class SavedRecipesTableViewController: UITableViewController {
             for recipe in recipes {
                 
                 self.recipesList += [recipe]
-                
+                self.recipesList.sort{$1.timestamp < $0.timestamp}
             }
             
-            self.tableView.reloadData()
             completion(true)
             return
         }
