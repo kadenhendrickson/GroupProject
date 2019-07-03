@@ -58,7 +58,7 @@ class SavedRecipesTableViewController: UITableViewController {
             for recipe in recipes {
                 
                 self.recipesList += [recipe]
-                
+                self.recipesList.sort{$1.timestamp < $0.timestamp}
             }
             
             completion(true)
