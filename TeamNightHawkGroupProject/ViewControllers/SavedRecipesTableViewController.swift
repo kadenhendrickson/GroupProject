@@ -27,14 +27,21 @@ class SavedRecipesTableViewController: UITableViewController {
         tableView.refreshControl = refreshController
         refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
         
-        refreshControlPulled()
-        
+        loadRecipes { (success) in
+            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
+        }
     }
     
     @objc func refreshControlPulled() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         loadRecipes { (success) in
-            guard success else { return }
+            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
 
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             DispatchQueue.main.async {
