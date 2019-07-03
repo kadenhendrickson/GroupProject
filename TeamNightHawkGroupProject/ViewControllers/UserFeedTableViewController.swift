@@ -34,9 +34,10 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         tableView.tableHeaderView?.tintColor = softBlue
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        loadUsers { (success) in
-            if success {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        loadUsers { (_) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
@@ -80,8 +81,9 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     }
     
     @objc func refreshControlPulled() {
+        
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        self.loadUsers { (success) in
+        self.loadUsers { (_) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.refreshController.endRefreshing()
         }

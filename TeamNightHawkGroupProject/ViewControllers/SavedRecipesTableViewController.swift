@@ -17,6 +17,8 @@ class SavedRecipesTableViewController: UITableViewController {
     
     var recipesList: [Recipe] = []
     
+    // reference to recipe's user
+    var usersList: [String: User] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,21 +28,26 @@ class SavedRecipesTableViewController: UITableViewController {
         refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
         
         loadRecipes { (success) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
             
-            guard success else { return }
-            self.tableView.reloadData()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
         }
     }
     
     @objc func refreshControlPulled() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         loadRecipes { (success) in
-            guard success else { return }
+            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
 
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            self.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -48,6 +55,7 @@ class SavedRecipesTableViewController: UITableViewController {
     func loadRecipes(_ completion: @escaping(Bool) -> Void) {
         // must reset fetched recipe before fetching to avoid duplicate recipes
         self.recipesList = []
+        self.usersList = [:]
         
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
         
@@ -59,6 +67,14 @@ class SavedRecipesTableViewController: UITableViewController {
                 
                 self.recipesList += [recipe]
                 self.recipesList.sort{$1.timestamp < $0.timestamp}
+                
+                
+                self.findUserForRecipe(with: recipe) { (fetchedUser) in
+                    if let fetchedUser = fetchedUser {
+                        self.usersList[recipe.recipeID] = fetchedUser
+                    }
+                }
+                
             }
             
             completion(true)
@@ -91,18 +107,9 @@ class SavedRecipesTableViewController: UITableViewController {
         }
         
         let recipe = self.recipesList[indexPath.row]
-        var user: User? = nil
-        
-        self.findUserForRecipe(with: recipe) { (fetchedUser) in
-            if let fetchedUser = fetchedUser {
-                user = fetchedUser
-                
-                // User must get assign into cell before recipe. Or you will experience traumatic debugging event.
-                cell.user = user
-                cell.recipe = recipe
-            }
-        }
-        
+        let user = self.usersList[recipe.recipeID]
+        cell.user = user
+        cell.recipe = recipe
         cell.delegate = self
         
         return cell
