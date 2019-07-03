@@ -27,24 +27,7 @@ class SavedRecipesTableViewController: UITableViewController {
         tableView.refreshControl = refreshController
         refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
         
-        loadRecipes { (success) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            
-            guard success else { return }
-            self.tableView.reloadData()
-        }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadRecipes { (success) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            
-            guard success else { return }
-            self.tableView.reloadData()
-        }
+        refreshControlPulled()
         
     }
     
@@ -54,8 +37,10 @@ class SavedRecipesTableViewController: UITableViewController {
             guard success else { return }
 
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            self.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -63,6 +48,7 @@ class SavedRecipesTableViewController: UITableViewController {
     func loadRecipes(_ completion: @escaping(Bool) -> Void) {
         // must reset fetched recipe before fetching to avoid duplicate recipes
         self.recipesList = []
+        self.usersList = [:]
         
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
         
