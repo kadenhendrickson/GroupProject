@@ -13,7 +13,7 @@ class SavedRecipesTableViewController: UITableViewController {
     //MARK: - Properties
     // This will be passed through delegate
     var selectedUser: User?
-    
+    var refreshController = UIRefreshControl()
     var recipesIDs: [String] = []
     
     // somehow fetching here makes user and recipe swaps, for now store them as dictionary to make it work
@@ -43,17 +43,29 @@ class SavedRecipesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
         tableView.separatorStyle = .none
+        loadUsersAndRecipes { (_) in
+            
+        }
+        tableView.refreshControl = refreshController
+        refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
 
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadUsersAndRecipes()
-        tableView.reloadData()
+    @objc func refreshControlPulled() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        loadUsersAndRecipes { (success) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.refreshControl?.endRefreshing()
+        }
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tableView.reloadData()
+//    }
+    
 
-    func loadUsersAndRecipes() {
+    func loadUsersAndRecipes(_ completion: @escaping(Bool) -> Void) {
         
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
         
@@ -61,7 +73,7 @@ class SavedRecipesTableViewController: UITableViewController {
 
         RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs) { (recipes) in
             
-            guard recipes.count > 0 else {return}
+            guard recipes.count > 0 else {completion(false) ;return}
             
             for recipe in recipes {
                 self.recipesList[recipe.recipeID] = recipe
@@ -71,6 +83,9 @@ class SavedRecipesTableViewController: UITableViewController {
                     self.usersList[recipe.recipeID] = user
                 })
             }
+            self.tableView.reloadData()
+            completion (true)
+            return
         }
     }
     
@@ -106,7 +121,9 @@ class SavedRecipesTableViewController: UITableViewController {
                 else { print("🍒 Can't cast cell as saved recipe cell. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒") ; return }
             UserController.shared.currentUser?.savedRecipeRefs.remove(at: indexPath.row)
             RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipe.recipeID)
-            loadUsersAndRecipes()
+            loadUsersAndRecipes { (_) in
+                
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
