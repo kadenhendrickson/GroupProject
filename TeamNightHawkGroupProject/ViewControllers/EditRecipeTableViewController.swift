@@ -159,6 +159,13 @@ class EditRecipeTableViewController: UITableViewController {
         }
     }
     
+    func getCurrentTag() -> Int {
+        self.currentTextFieldIndex += 1
+        return self.currentTextFieldIndex
+    }
+    
+    // MARK: - Tableview Datasources
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 20
     }
@@ -171,6 +178,11 @@ class EditRecipeTableViewController: UITableViewController {
 
         if segmentIndex == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientEditCell", for: indexPath) as? Section1TableViewCell else {return UITableViewCell()}
+            
+            cell.measurementQuantityLabel.tag = getCurrentTag()
+            cell.measuremenTypeLabel.tag = getCurrentTag()
+            cell.ingredientLabel.tag = getCurrentTag()
+            
             if indexPath.row < (recipe.ingredients.count ){
                 cell.measurementQuantityLabel.text = recipe.ingredients[indexPath.row].measurementQuantity
                 cell.measuremenTypeLabel.text = recipe.ingredients[indexPath.row].measurementName
@@ -201,6 +213,8 @@ class EditRecipeTableViewController: UITableViewController {
         } else if segmentIndex == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "stepEditCell", for: indexPath) as? Section2TableViewCell else {return UITableViewCell()}
             
+            cell.directionSteps.tag = getCurrentTag()
+
             if indexPath.row < (steps.count){
                 cell.directionSteps.text = steps[indexPath.row]
                 cell.addSection.isHidden = true
@@ -209,6 +223,7 @@ class EditRecipeTableViewController: UITableViewController {
                 self.delegateForKeyboardDissmiss = cell
                 return cell
             } else {
+                
                 if indexPath.row == steps.count + stepsArray.count {
                     cell.addSection.isHidden = false
                     cell.stepDelegate = self
@@ -223,7 +238,11 @@ class EditRecipeTableViewController: UITableViewController {
                 }
             }
         } else {
+
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "tagEditCell", for: indexPath) as? Section3TableViewCell else {return UITableViewCell()}
+            
+            cell.tags.tag = getCurrentTag()
+
             if indexPath.row < (tags.count){
                 cell.tags.text = tags[indexPath.row]
                 cell.addSection.isHidden = true
@@ -364,9 +383,9 @@ extension EditRecipeTableViewController: ingredientCellDelegate, stepCellDelegat
 }
 
 extension EditRecipeTableViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+        
+        if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
