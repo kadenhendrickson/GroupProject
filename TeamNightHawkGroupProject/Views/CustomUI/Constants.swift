@@ -15,7 +15,7 @@ let fontName: String = "Helvetica"
 let backGround: UIColor = .gray
 let textFieldRounding: CGFloat = 4
 let measurementQuantityWidth: CGFloat = 5
-let userNameFontSize: CGFloat = 20
+let userNameFontSize: CGFloat = 17
 
 //MARK: -SaveButton
 let saveButtonSize: CGFloat = 24
