@@ -41,6 +41,8 @@ class AddRecipeTableViewController: UITableViewController {
     var segmentIndex: Int = 1
     var currentTextFieldIndex = 2
     
+    
+    
     var delegate: AddRecipeTableViewDelegate?
     
     //MARK: - Methods
@@ -62,6 +64,19 @@ class AddRecipeTableViewController: UITableViewController {
         delegate?.userTappedView()
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +101,8 @@ class AddRecipeTableViewController: UITableViewController {
         saveButton.setTitleColor(black, for: .normal)
         saveButton.layer.cornerRadius = buttonRounding
         
-
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @IBAction func clearButtonTapped(_ sender: Any) {
