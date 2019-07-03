@@ -79,7 +79,9 @@ class RecipeDetailTableViewController: UITableViewController {
             }
         }
     }
-    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
     func updateDetails() {
         loadViewIfNeeded()
         guard let recipe = recipe,
@@ -90,6 +92,7 @@ class RecipeDetailTableViewController: UITableViewController {
         self.recipeImageView.image = recipeImage
 
         let displayName = user.displayName
+        
         let imageData = user.profileImage
         
         if let imageData = imageData,
@@ -99,7 +102,7 @@ class RecipeDetailTableViewController: UITableViewController {
             userImageView.image = UIImage(named: "duck")
 
         }
-        
+        userImageView.layer.cornerRadius = userImageView.frame.height/2
         self.userNameLabel.setTitle(displayName, for: .normal)
         self.nameLabel.text = recipe.name
         self.servingsLabel.text = recipe.servings
