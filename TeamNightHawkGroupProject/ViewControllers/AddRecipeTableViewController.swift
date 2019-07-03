@@ -187,6 +187,10 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearTextFields()
             }
             
+            cell.measurementQuantityLabel.tag = getCurrentTag()
+            cell.measuremenTypeLabel.tag = getCurrentTag()
+            cell.ingredientLabel.tag = getCurrentTag()
+
             self.delegate = cell
             
             return cell
@@ -202,6 +206,7 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearCell()
             }
             
+            cell.directionSteps.tag = getCurrentTag()
             self.delegate = cell
             
             return cell
@@ -217,6 +222,7 @@ class AddRecipeTableViewController: UITableViewController {
                 cell.clearText()
             }
             
+            cell.tags.tag = getCurrentTag()
             self.delegate = cell
             
             return cell
@@ -274,6 +280,11 @@ extension AddRecipeTableViewController: ingredientCellDelegate, stepCellDelegate
     func refreshIngredientData() {
         tableView.reloadData()
     }
+    
+    func getCurrentTag() -> Int {
+        self.currentTextFieldIndex += 1
+        return self.currentTextFieldIndex
+    }
 }
 
 extension AddRecipeTableViewController: ImagePickerHelperDelegate {
@@ -287,7 +298,7 @@ extension AddRecipeTableViewController: ImagePickerHelperDelegate {
 extension AddRecipeTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+        if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
@@ -309,3 +320,5 @@ extension AddRecipeTableViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+
