@@ -734,7 +734,7 @@
                                             </constraints>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jee-Ib-lTg">
-                                            <rect key="frame" x="20" y="442" width="133.5" height="41.5"/>
+                                            <rect key="frame" x="20" y="442" width="119.5" height="41.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="251" text="Servings:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="it3-0K-jhy">
                                                     <rect key="frame" x="0.0" y="0.0" width="71.5" height="41.5"/>
@@ -742,18 +742,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1G-gS-NkL">
-                                                    <rect key="frame" x="76.5" y="0.0" width="57" height="41.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="10-12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1G-gS-NkL">
+                                                    <rect key="frame" x="76.5" y="0.0" width="43" height="41.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nmK-j4-FeP">
-                                            <rect key="frame" x="168.5" y="442" width="133.5" height="41.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nmK-j4-FeP">
+                                            <rect key="frame" x="154.5" y="442" width="133.5" height="41.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Prep Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCy-oL-X28">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Prep Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCy-oL-X28">
                                                     <rect key="frame" x="0.0" y="0.0" width="82.5" height="41.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -785,7 +785,6 @@
                                         <constraint firstItem="nmK-j4-FeP" firstAttribute="top" secondItem="ctk-Hz-DJm" secondAttribute="bottom" constant="10" id="P26-OZ-Afx"/>
                                         <constraint firstItem="jee-Ib-lTg" firstAttribute="top" secondItem="ctk-Hz-DJm" secondAttribute="bottom" constant="10" id="Pv9-Tu-HBu"/>
                                         <constraint firstAttribute="bottom" secondItem="jee-Ib-lTg" secondAttribute="bottom" constant="15" id="XOi-0o-rgO"/>
-                                        <constraint firstItem="jee-Ib-lTg" firstAttribute="width" secondItem="nmK-j4-FeP" secondAttribute="width" id="YhP-cR-2gK"/>
                                         <constraint firstItem="8sH-uO-d7s" firstAttribute="centerX" secondItem="r8v-eg-mqK" secondAttribute="centerX" id="aRI-uj-vGO"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ctk-Hz-DJm" secondAttribute="trailing" id="bYT-1h-F0y"/>
                                         <constraint firstAttribute="bottom" secondItem="nmK-j4-FeP" secondAttribute="bottom" constant="15" id="fRj-wN-4bC"/>
@@ -974,6 +973,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Tjl-vf-46f"/>
         <segue reference="vZv-MN-JCV"/>
-        <segue reference="Eef-vH-7i3"/>
+        <segue reference="LBb-cA-Aqf"/>
     </inferredMetricsTieBreakers>
 </document>
