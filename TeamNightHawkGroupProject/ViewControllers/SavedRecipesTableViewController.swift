@@ -17,6 +17,8 @@ class SavedRecipesTableViewController: UITableViewController {
     
     var recipesList: [Recipe] = []
     
+    // reference to recipe's user
+    var usersList: [String: User] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,19 @@ class SavedRecipesTableViewController: UITableViewController {
             guard success else { return }
             self.tableView.reloadData()
         }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadRecipes { (success) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            guard success else { return }
+            self.tableView.reloadData()
+        }
+        
     }
     
     @objc func refreshControlPulled() {
@@ -59,6 +74,14 @@ class SavedRecipesTableViewController: UITableViewController {
                 
                 self.recipesList += [recipe]
                 self.recipesList.sort{$1.timestamp < $0.timestamp}
+                
+                
+                self.findUserForRecipe(with: recipe) { (fetchedUser) in
+                    if let fetchedUser = fetchedUser {
+                        self.usersList[recipe.recipeID] = fetchedUser
+                    }
+                }
+                
             }
             
             completion(true)
@@ -91,18 +114,9 @@ class SavedRecipesTableViewController: UITableViewController {
         }
         
         let recipe = self.recipesList[indexPath.row]
-        var user: User? = nil
-        
-        self.findUserForRecipe(with: recipe) { (fetchedUser) in
-            if let fetchedUser = fetchedUser {
-                user = fetchedUser
-                
-                // User must get assign into cell before recipe. Or you will experience traumatic debugging event.
-                cell.user = user
-                cell.recipe = recipe
-            }
-        }
-        
+        let user = self.usersList[recipe.recipeID]
+        cell.user = user
+        cell.recipe = recipe
         cell.delegate = self
         
         return cell

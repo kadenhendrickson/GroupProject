@@ -68,5 +68,23 @@ class SavedRecipeTableViewCell: UITableViewCell {
         recipeSaveCountTextLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
 
     }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        recipe = nil
+        user = nil
+        delegate = nil
+        
+        //MARK: - IBOutlets
+        userProfileImageView.image = nil
+        recipeImageView.image = nil
+        userDisplayName.setTitle("(Display name)", for: .normal)
+        recipeNameTextLabel.text = "(Recipe)"
+        recipeServingsTextLabel.text = "--"
+        recipePrepTimeTextLabel.text = "--"
+        recipeSaveCountTextLabel.text = "0"
+    }
 
 }
