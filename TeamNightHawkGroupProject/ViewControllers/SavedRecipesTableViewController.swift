@@ -14,84 +14,66 @@ class SavedRecipesTableViewController: UITableViewController {
     // This will be passed through delegate
     var selectedUser: User?
     var refreshController = UIRefreshControl()
-    var recipesIDs: [String] = []
     
-    // somehow fetching here makes user and recipe swaps, for now store them as dictionary to make it work
-    
-    // dictionaries of recipekey : recipe
-    var recipesList: [String: Recipe] = [:] {
-        didSet{
-            print("🌎🌎🌎Recipes set!😝😝😝")
-            print(self.recipesList.count)
-        }
-    }
-    
-    // dictionaries of recipekey : user
-    var usersList: [String: User] = [:] {
-        didSet {
-            print("😝😝😝Users was set😝😝😝")
-            print(self.usersList.count)
-            
-            guard usersList.count > 0,
-                usersList.count == recipesIDs.count else {return}
-            tableView.reloadData()
-        }
-    }
+    var recipesList: [Recipe] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
         tableView.separatorStyle = .none
-        loadUsersAndRecipes { (_) in
-            
-        }
         tableView.refreshControl = refreshController
         refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
-
+        
+        loadRecipes { (success) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
     }
+    
     @objc func refreshControlPulled() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        loadUsersAndRecipes { (success) in
+        loadRecipes { (success) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.refreshControl?.endRefreshing()
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tableView.reloadData()
-//    }
-    
 
-    func loadUsersAndRecipes(_ completion: @escaping(Bool) -> Void) {
+    func loadRecipes(_ completion: @escaping(Bool) -> Void) {
         
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
         
-        self.recipesIDs = recipeRefs
-
         RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs) { (recipes) in
             
             guard recipes.count > 0 else {completion(false) ;return}
             
             for recipe in recipes {
-                self.recipesList[recipe.recipeID] = recipe
                 
-                let userRef = recipe.userReference
-                UserController.shared.fetchUser(withUserRef: userRef, completion: { (user) in
-                    self.usersList[recipe.recipeID] = user
-                })
+                self.recipesList += [recipe]
+                
             }
+            
             self.tableView.reloadData()
-            completion (true)
+            completion(true)
             return
         }
     }
     
+    func findUserForRecipe(with recipe: Recipe, completion: @escaping (User?)-> Void) {
+        
+        UserController.shared.fetchUser(withUserRef: recipe.userReference) { (user) in
+            
+            completion(user)
+            return
+        }
+        
+        completion(nil)
+        return
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipesIDs.count
+        return recipesList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,14 +83,20 @@ class SavedRecipesTableViewController: UITableViewController {
                 return UITableViewCell()
         }
         
-        let dicKey = self.recipesIDs[indexPath.row]
-        let recipe = self.recipesList[dicKey]
-        let user = self.usersList[dicKey]
+        let recipe = self.recipesList[indexPath.row]
+        var user: User? = nil
         
-        // User must get assign into cell before recipe. Or you will experience traumatic debugging event.
+        self.findUserForRecipe(with: recipe) { (fetchedUser) in
+            if let fetchedUser = fetchedUser {
+                user = fetchedUser
+                
+                // User must get assign into cell before recipe. Or you will experience traumatic debugging event.
+                cell.user = user
+                cell.recipe = recipe
+            }
+        }
+        
         cell.delegate = self
-        cell.user = user
-        cell.recipe = recipe
         
         return cell
     }
@@ -119,11 +107,15 @@ class SavedRecipesTableViewController: UITableViewController {
             guard let cell = tableView.cellForRow(at: indexPath) as? SavedRecipeTableViewCell,
                  let recipe = cell.recipe
                 else { print("🍒 Can't cast cell as saved recipe cell. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒") ; return }
-            UserController.shared.currentUser?.savedRecipeRefs.remove(at: indexPath.row)
+            
+//            print("Index path: \(indexPath.row)\nNo. of recipeList: \(recipesList.count).")
+            
+            // this remove from both fire store and source of truth
             RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipe.recipeID)
-            loadUsersAndRecipes { (_) in
-                
-            }
+            
+            // this remove from the fetched result
+            self.recipesList.remove(at: indexPath.row)
+
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
