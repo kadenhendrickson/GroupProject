@@ -180,7 +180,9 @@ class AddRecipeTableViewController: UITableViewController {
             if indexPath.row != ingredients.count{
                 cell.addSection.isHidden = true
             } else {
+                // for the last cell which should have an add button
                 cell.addSection.isHidden = false
+                cell.measurementQuantityLabel.becomeFirstResponder()
             }
             cell.ingredientDelegate = self
             if tableView.numberOfRows(inSection: 0) == 1 {
@@ -199,7 +201,9 @@ class AddRecipeTableViewController: UITableViewController {
             if indexPath.row != steps.count {
                 cell.addSection.isHidden = true
             } else {
+                // last cell of section
                 cell.addSection.isHidden = false
+                cell.directionSteps.becomeFirstResponder()
             }
             cell.stepDelegate = self
             if tableView.numberOfRows(inSection: 0) == 1 {
@@ -215,7 +219,9 @@ class AddRecipeTableViewController: UITableViewController {
             if indexPath.row != tags.count {
                 cell.addSection.isHidden = true
             } else {
+                // last cell
                 cell.addSection.isHidden = false
+                cell.tags.becomeFirstResponder()
             }
             cell.tagDelegate = self
             if tableView.numberOfRows(inSection: 0) == 1 {
