@@ -384,9 +384,9 @@
                     <connections>
                         <segue destination="T6R-Op-2qz" kind="relationship" relationship="viewControllers" id="yfU-AF-WOt"/>
                         <segue destination="qeV-Bo-dkR" kind="relationship" relationship="viewControllers" id="nsI-jw-gKH"/>
-                        <segue destination="t6n-CS-vcd" kind="relationship" relationship="viewControllers" id="0P0-3a-892"/>
-                        <segue destination="neh-Dv-IMm" kind="relationship" relationship="viewControllers" id="rlx-wL-iUV"/>
                         <segue destination="3P6-Ln-CnM" kind="relationship" relationship="viewControllers" id="OG8-i5-zFq"/>
+                        <segue destination="neh-Dv-IMm" kind="relationship" relationship="viewControllers" id="rlx-wL-iUV"/>
+                        <segue destination="t6n-CS-vcd" kind="relationship" relationship="viewControllers" id="0P0-3a-892"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GH1-af-nB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -971,7 +971,7 @@
         <image name="unsavedBookmark" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tjl-vf-46f"/>
+        <segue reference="OG8-i5-zFq"/>
         <segue reference="vZv-MN-JCV"/>
         <segue reference="LBb-cA-Aqf"/>
     </inferredMetricsTieBreakers>
