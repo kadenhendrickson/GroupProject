@@ -60,11 +60,11 @@ class Section1TableViewCell: UITableViewCell {
         measuremenTypeLabel.delegate = self
         ingredientLabel.delegate = self
         
-        measurementQuantityLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenTypeLabel.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8, width: 60)
-        measuremenTypeLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantityLabel.trailingAnchor, trailing: ingredientLabel.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8,width: 125)
-        ingredientLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measuremenTypeLabel.trailingAnchor, trailing: addSection.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8)
+        measurementQuantityLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenTypeLabel.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0, width: 60)
+        measuremenTypeLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantityLabel.trailingAnchor, trailing: ingredientLabel.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 8,width: 125)
+        ingredientLabel.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measuremenTypeLabel.trailingAnchor, trailing: addSection.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 0, paddingTrailing: 8)
         addSection.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 20, paddingLeading: 20, paddingTrailing: -4)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 20, paddingTrailing: -4)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
 

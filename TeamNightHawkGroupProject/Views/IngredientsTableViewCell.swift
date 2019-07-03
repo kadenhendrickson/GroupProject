@@ -37,9 +37,9 @@ class IngredientsTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(measurementQuantity)
         stackView.addArrangedSubview(measuremenType)
         stackView.addArrangedSubview(ingredient)
-        measuremenType.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantity.trailingAnchor, trailing: ingredient.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8,width: 125)
-        measurementQuantity.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenType.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 8, width: 50)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 20, paddingTrailing: 20)
+        measuremenType.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: measurementQuantity.trailingAnchor, trailing: ingredient.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0,width: 125)
+        measurementQuantity.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: measuremenType.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0, width: 50)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 20, paddingTrailing: 0)
     }
     
     

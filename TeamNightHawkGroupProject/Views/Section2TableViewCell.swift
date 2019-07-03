@@ -42,10 +42,10 @@ class Section2TableViewCell: UITableViewCell {
     func setUpStackView(){
         stackView.addArrangedSubview(directionSteps)
         stackView.addArrangedSubview(addSection)
-        directionSteps.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: addSection.leadingAnchor, paddingTop: 12, paddingBottom: 8, paddingLeading: 8, paddingTrailing: 0)
+        directionSteps.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: addSection.leadingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0)
         addSection.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: directionSteps.trailingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: 0)
         addSection.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
-        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 10, paddingLeading: 8, paddingTrailing: -4)
+        stackView.anchor(top: safeArea.topAnchor, bottom: safeArea.bottomAnchor, leading: safeArea.leadingAnchor, trailing: safeArea.trailingAnchor, paddingTop: 12, paddingBottom: 0, paddingLeading: 8, paddingTrailing: -4)
         addSection.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
 
     }
