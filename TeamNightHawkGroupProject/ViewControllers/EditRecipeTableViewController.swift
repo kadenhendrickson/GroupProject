@@ -200,6 +200,8 @@ class EditRecipeTableViewController: UITableViewController {
                     cell.ingredientDelegate = self
                     cell.ingredientLabel.isEnabled = true
                     self.delegateForKeyboardDissmiss = cell
+                    cell.measurementQuantityLabel.becomeFirstResponder()
+
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -229,6 +231,8 @@ class EditRecipeTableViewController: UITableViewController {
                     cell.stepDelegate = self
                     cell.directionSteps.isEnabled = true
                     self.delegateForKeyboardDissmiss = cell
+                    cell.directionSteps.becomeFirstResponder()
+
                     return cell
                 } else {
                     cell.addSection.isHidden = true
@@ -257,6 +261,7 @@ class EditRecipeTableViewController: UITableViewController {
                     cell.tagDelegate = self
                     cell.tags.isEnabled = true
                     self.delegateForKeyboardDissmiss = cell
+                    cell.tags.becomeFirstResponder()
 
                     return cell
                 } else {
