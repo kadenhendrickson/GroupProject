@@ -49,7 +49,11 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         guard let currentUser = UserController.shared.currentUser else { completion(false); return}
         
         var currentUserFollowingRefs = currentUser.followingRefs
-        currentUserFollowingRefs.append(currentUser.userID)
+        
+        // prevent user's recipe from populating twice because of refreshing
+        if !currentUserFollowingRefs.contains(currentUser.userID) {
+            currentUserFollowingRefs.append(currentUser.userID)
+        }
         
         for userRef in currentUserFollowingRefs {
             UserController.shared.fetchUser(withUserRef: userRef) { (user) in
