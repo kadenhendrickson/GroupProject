@@ -31,7 +31,11 @@ class CreateUserViewController: UIViewController {
         
         self.navigationItem.title = "Sign Up"
 
-        profileImagePickerButton.setTitle("Select an image", for: .normal)
+        profileImagePickerButton.setTitle("Select image", for: .normal)
+        profileImagePickerButton.layer.cornerRadius = 2
+        profileImagePickerButton.layer.borderWidth = 0.5
+        profileImagePickerButton.layer.borderColor = grey.cgColor
+        
         emailTextField.delegate = self
         displayNameTextField.delegate = self
         passwordTextField.delegate = self
@@ -146,6 +150,7 @@ extension  CreateUserViewController: ImagePickerHelperDelegate {
         resignAllTextFields()
         profileImageView.image = image
         profileImagePickerButton.setTitle("", for: .normal)
+        profileImagePickerButton.layer.borderWidth = 0
     }
 }
 
