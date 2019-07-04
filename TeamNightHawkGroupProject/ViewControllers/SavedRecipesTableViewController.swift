@@ -63,18 +63,16 @@ class SavedRecipesTableViewController: UITableViewController {
             
             guard recipes.count > 0 else {completion(false) ;return}
             
-            for recipe in recipes {
-                
-                self.recipesList += [recipe]
-                self.recipesList.sort{$1.timestamp < $0.timestamp}
-                
-                
+            self.recipesList += recipes
+            
+            self.recipesList.sort{$1.timestamp < $0.timestamp}
+            
+            for recipe in self.recipesList {
                 self.findUserForRecipe(with: recipe) { (fetchedUser) in
                     if let fetchedUser = fetchedUser {
                         self.usersList[recipe.recipeID] = fetchedUser
                     }
                 }
-                
             }
             
             completion(true)
