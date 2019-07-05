@@ -13,51 +13,65 @@ class SavedRecipesTableViewController: UITableViewController {
     //MARK: - Properties
     // This will be passed through delegate
     var selectedUser: User?
-    var refreshController = UIRefreshControl()
+   // var refreshController = UIRefreshControl()
     
     var recipesList: [Recipe] = []
     
     // reference to recipe's user
-    var usersList: [String: User] = [:]
+    var usersList: [String: User] = [:] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
         tableView.separatorStyle = .none
-        tableView.refreshControl = refreshController
-        refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
-        
-        loadRecipes { (success) in
-            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            DispatchQueue.main.async {
-                self.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
+//        tableView.refreshControl = refreshController
+//        refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
+//
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let currentUser = UserController.shared.currentUser else {
+            return
+        }
+        if currentUser.savedRecipeRefs.count > recipesList.count {
+            loadRecipes { (success) in
+                guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
+                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                DispatchQueue.main.async {
+                    //self.refreshControl?.endRefreshing()
+                    self.tableView.reloadData()
+                }
             }
         }
     }
     
-    @objc func refreshControlPulled() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        loadRecipes { (success) in
-            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
-
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            DispatchQueue.main.async {
-                self.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
-            }
-        }
-    }
+//    @objc func refreshControlPulled() {
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        loadRecipes { (success) in
+//            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
+//
+//            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//            DispatchQueue.main.async {
+//                self.refreshControl?.endRefreshing()
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     
 
     func loadRecipes(_ completion: @escaping(Bool) -> Void) {
         // must reset fetched recipe before fetching to avoid duplicate recipes
         self.recipesList = []
         self.usersList = [:]
-        
-        guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {return}
+        guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {
+            return
+        }
         
         RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs) { (recipes) in
             
@@ -65,8 +79,7 @@ class SavedRecipesTableViewController: UITableViewController {
             
             self.recipesList += recipes
             
-            self.recipesList.sort{$1.timestamp < $0.timestamp}
-            
+            //self.recipesList.sort{$1.timestamp < $0.timestamp}
             for recipe in self.recipesList {
                 self.findUserForRecipe(with: recipe) { (fetchedUser) in
                     if let fetchedUser = fetchedUser {
@@ -74,9 +87,10 @@ class SavedRecipesTableViewController: UITableViewController {
                     }
                 }
             }
+                completion(true)
+                return
             
-            completion(true)
-            return
+            
         }
     }
     
