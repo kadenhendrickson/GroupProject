@@ -43,6 +43,7 @@ class RecipeDetailTableViewController: UITableViewController {
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredentCell")
         tableView.register(StepsTableViewCell.self, forCellReuseIdentifier: "stepsCell")
         tableView.register(TagsTableViewCell.self, forCellReuseIdentifier: "tagsCell")
+        
     }
    
     
@@ -79,6 +80,7 @@ class RecipeDetailTableViewController: UITableViewController {
             }
         }
     }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 20
     }
