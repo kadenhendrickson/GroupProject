@@ -96,7 +96,7 @@ class ImagePickerHelper: UIViewController {
         self.controller = controller
         
         /* Alert Controller */
-        let alertController = UIAlertController(title: "Add new photo from ..", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Add new photo from ..", message: nil, preferredStyle: .alert)
 
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
