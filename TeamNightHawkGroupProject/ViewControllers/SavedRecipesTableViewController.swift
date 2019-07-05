@@ -13,7 +13,7 @@ class SavedRecipesTableViewController: UITableViewController {
     //MARK: - Properties
     // This will be passed through delegate
     var selectedUser: User?
-    var refreshController = UIRefreshControl()
+    //var refreshController = UIRefreshControl()
     
     var recipesList: [Recipe] = []
     
@@ -24,32 +24,36 @@ class SavedRecipesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
         tableView.separatorStyle = .none
-        tableView.refreshControl = refreshController
-        refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
+       // tableView.refreshControl = refreshController
+        //refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadRecipes { (success) in
             guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             DispatchQueue.main.async {
-                self.refreshControl?.endRefreshing()
+                //self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
         }
     }
     
-    @objc func refreshControlPulled() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        loadRecipes { (success) in
-            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
-
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            DispatchQueue.main.async {
-                self.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
-            }
-        }
-    }
+//    @objc func refreshControlPulled() {
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        loadRecipes { (success) in
+//            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
+//
+//            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//            DispatchQueue.main.async {
+//                //self.refreshControl?.endRefreshing()
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     
 
     func loadRecipes(_ completion: @escaping(Bool) -> Void) {
@@ -74,7 +78,6 @@ class SavedRecipesTableViewController: UITableViewController {
                     }
                 }
             }
-            
             completion(true)
             return
         }
