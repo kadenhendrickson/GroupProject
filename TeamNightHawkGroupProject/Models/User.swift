@@ -49,9 +49,7 @@ class User: Codable {
         self.recipesRef = recipesRef
         self.profileImage = profileImage?.jpegData(compressionQuality: 0.1 )
     }
-    
-    
-    
+
     var dictionaryRepresentation: [String : Any] {
         return ["userID" : userID,
                 "recipeRef" : recipesRef,
@@ -82,7 +80,6 @@ class User: Codable {
         self.init(userID: userID, recipesRef: recipeRef, email: email, displayName: displayName, biography: biography, profileImage: UIImage(data: profileImage), savedRecipeRefs: savedRecipeRefs, followedBy: followedByRefs, following: followingRefs, blockedUserRefs: blockedUserRefs)
     }
 }
-
 
 extension User: Equatable {
     static func == (lhs: User, rhs: User) -> Bool {

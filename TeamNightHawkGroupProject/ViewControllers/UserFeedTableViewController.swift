@@ -11,6 +11,7 @@ import FirebaseAuth
 import MessageUI
 
 class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellDelegate{
+   
     //MARK: - Properties
     var recipesList: [Recipe]? {
         didSet{
@@ -18,9 +19,7 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         }
     }
     var usersList: [User]?
-    
     var selectedUser: User?
-    
     var refreshController = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -42,20 +41,16 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         }
     }
 
-    
-    //helper functions
+    //MARK: - Helper Functions
     func loadUsers(_ completion: @escaping(Bool) -> Void) {
         usersList = []
         recipesList = []
         guard let currentUser = UserController.shared.currentUser else { completion(false); return}
-        
         var currentUserFollowingRefs = currentUser.followingRefs
         
-        // prevent user's recipe from populating twice because of refreshing
         if !currentUserFollowingRefs.contains(currentUser.userID) {
             currentUserFollowingRefs.append(currentUser.userID)
         }
-        
         for userRef in currentUserFollowingRefs {
             UserController.shared.fetchUser(withUserRef: userRef) { (user) in
                 self.usersList?.append(user)
@@ -65,7 +60,6 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
                 })
             }
         }
-        
         completion(true)
         return
     }
@@ -81,11 +75,18 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
     }
     
     @objc func refreshControlPulled() {
-        
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.loadUsers { (_) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.refreshController.endRefreshing()
+        }
+    }
+    
+    //MARK: - Delegate Functions
+    func userRefSent(userRef: String) {
+        UserController.shared.fetchUser(withUserRef: userRef) { (user) in
+            self.selectedUser = user
+            self.performSegue(withIdentifier: "fromFeedToOtherUserVC", sender: nil)
         }
     }
     
@@ -96,7 +97,6 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         return numberOfRows
     }
     
-    //dont forget to change reuseIdentifier
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userFeedRecipeCell", for: indexPath) as? UserFeedTableViewCell
         guard let recipe = recipesList?[indexPath.row],
@@ -106,15 +106,10 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         cell?.recipe = recipe
         cell?.user = findUserForRecipe(with: recipe)
         if currentUserRecipeRefs.contains(recipe.recipeID) {
-            
-            //cell?.saveRecipeButton.setTitle("", for: .normal)
             cell?.saveRecipeButton.setBackgroundImage(UIImage(named: "savedBookmark"), for: .normal)
         } else {
-            //cell?.saveRecipeButton.setTitle("", for: .normal)
             cell?.saveRecipeButton.setBackgroundImage(UIImage(named: "unsavedBookmark"), for: .normal)
         }
-        
-        //cell?.toggleSavedStatus()
         return cell ?? UITableViewCell()
     }
     
@@ -132,25 +127,18 @@ class UserFeedTableViewController: UITableViewController, UserFeedTableViewCellD
         
         if segue.identifier == "fromFeedToOtherUserVC" {
             guard let destinationVC = segue.destination as? UserViewedTableViewController else {return}
-            
             destinationVC.user = selectedUser
-            
             guard let displayName = selectedUser?.displayName else { return }
             destinationVC.navigationTitle = displayName
         }
     }
     
+    //MARK: - Alert Functions
+    
     func popAlert() {
         alertUser(withMessage: "Would you like to report this post and block this user?")
     }
     
-    func userRefSent(userRef: String) {
-        UserController.shared.fetchUser(withUserRef: userRef) { (user) in
-            self.selectedUser = user
-            self.performSegue(withIdentifier: "fromFeedToOtherUserVC", sender: nil)
-            
-        }
-    }
     func alertUser(withMessage message: String){
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         

@@ -21,8 +21,7 @@ class Ingredient  {
     var ingredientDict: [String:Any] {
         return [ "name" : name,
                  "measurementName" : measurementName,
-                 "measurementQuantity" : measurementQuantity ]
-    }
+                 "measurementQuantity" : measurementQuantity ]}
     
     convenience init?(dictionary: [String:Any]) {
         guard let name = dictionary["name"] as? String,
@@ -30,10 +29,7 @@ class Ingredient  {
             let measurementQuantity = dictionary["measurementQuantity"] as? String else {return nil}
         self.init(name: name, measurementName: measurementName, measurementQuantity: measurementQuantity)
     }
-    
-
 }
-
 
 extension Ingredient: Equatable {
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {

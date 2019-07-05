@@ -8,16 +8,15 @@
 
 import UIKit
 
+//MARK: - CollectionView Properties
 private let reuseIdentifier = "exploreRecipeCell"
-
 private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
-
 private let itemsPerRow: CGFloat = 3
 
 class ExploreCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
     //MARK: - Properties
     var recipesList: [Recipe] = []
-
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -52,7 +51,6 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
         return
     }
 
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("clicked")
@@ -62,17 +60,13 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
             let recipe = recipesList[indexPath[0].row]
             destinationVC.recipe = recipe
         }
-      
     }
-    
 
     // MARK: UICollectionViewDataSource
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recipesList.count
     }
     
-
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "exploreRecipeCell", for: indexPath) as? ExploreCollectionViewCell else {print("This problem is the big dumb");return UICollectionViewCell()}
         
@@ -82,22 +76,6 @@ class ExploreCollectionViewController: UICollectionViewController, UICollectionV
          
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-
-
-
-    
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-        
-    
-    }
-
-    
-
 }
 
 // MARK: - Collection View Flow Layout Delegate
@@ -113,20 +91,16 @@ extension ExploreCollectionViewController {
         
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
-    
     //3
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
-    
     // 4
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
-
-    
 }

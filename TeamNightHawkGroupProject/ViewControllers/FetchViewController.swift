@@ -11,14 +11,12 @@ import FirebaseAuth
 
 class FetchViewController: UIViewController {
     
+    //MARK: - Properties
+    var handle: AuthStateDidChangeListenerHandle?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         UINavigationBar.appearance().backgroundColor = green
-
-        
-        var handle: AuthStateDidChangeListenerHandle?
-        
         handle = Auth.auth().addStateDidChangeListener({ (auth, retrievedUser) in
             if retrievedUser == nil {
                 self.performSegue(withIdentifier: "toLogin", sender: nil)
@@ -35,7 +33,6 @@ class FetchViewController: UIViewController {
                     UIApplication.shared.windows.first?.rootViewController = tabBar
                 })
             }
-            })
-            
-        }
+        })
+    }
 }

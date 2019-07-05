@@ -12,9 +12,7 @@ import FirebaseAuth
 class ProfileTableViewController: UITableViewController {
     
     // MARK: - Properties
-    
     var currentUser: User?
-    
     var recipeList: [Recipe] = []
     var selectedRecipe: Recipe?
     
@@ -30,17 +28,14 @@ class ProfileTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         currentUser = UserController.shared.currentUser
-        
         self.navigationItem.title = currentUser?.displayName
-
         updateViews()
         updateUserRecipes()
         tableView.reloadData()
         tableView.separatorStyle = .none
     }
     
-    
-    
+    //MARK: - IBActions
     @IBAction func signOutButtonTapped(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do{
@@ -48,12 +43,12 @@ class ProfileTableViewController: UITableViewController {
             let storybord = UIStoryboard(name: "Login", bundle: nil)
             let loginVC = storybord.instantiateViewController(withIdentifier: "SignIn")
             self.present(loginVC, animated: true, completion: nil)
-        }catch let signoutError as NSError {
+        } catch let signoutError as NSError {
             print("Error signing out: \(signoutError.localizedDescription)")
         }
     }
     
-    // MARK: - Methods
+    // MARK: - Helper Methods
     func updateUserRecipes(){
         var recipes: [Recipe] = []
         guard let currentUser = UserController.shared.currentUser else { print("🍒 Tried to get all recipes from current user but can't find current user. Printing from \(#function) \n In \(String(describing: ProfileTableViewController.self)) 🍒"); return}
@@ -67,7 +62,6 @@ class ProfileTableViewController: UITableViewController {
         }
     }
     
-    
     func updateViews(){
         guard let currentUser = UserController.shared.currentUser else { print("🍒 Cannot find a current user. Printing from \(#function) \n In \(String(describing: ProfileTableViewController.self)) 🍒"); return }
         
@@ -76,29 +70,23 @@ class ProfileTableViewController: UITableViewController {
         } else {
             profileImageView.image = UIImage(named: "duck")
         }
-        
         let displayName = currentUser.displayName
         let followersCount = currentUser.followedByRefs.count
         let followingsCount = currentUser.followingRefs.count
         let bioText = currentUser.biography
-        
-//        editButton.setTitleColor(green, for: .normal)
         displayNameLabel.text = displayName
         displayNameLabel.font = UIFont(name: fontName, size: 24)
         bioLabel.font = UIFont.boldSystemFont(ofSize: titleFontSize)
         bioTextLabel.text = bioText
-
         followersCountLabel.text = "\(followersCount)"
         followingsCountLabel.text = "\(followingsCount)"
     }
-    
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeList.count
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "profileRecipeCell", for: indexPath) as? ProfileRecipeTableViewCell
@@ -112,7 +100,6 @@ class ProfileTableViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         guard segue.identifier != "toEditProfileVC" else { return }
         
         if segue.identifier == "fromProfileToRecipeDVC"{
@@ -125,15 +112,12 @@ class ProfileTableViewController: UITableViewController {
             destinationVC.user = currentUser
             destinationVC.recipe = recipe
             destinationVC.navigationTitle = recipe.name
-            
         } else {
             guard let destinationVC = segue.destination as? EditRecipeTableViewController else { return }
             print(segue.destination)
             destinationVC.recipe = self.selectedRecipe
         }
-        
     }
-    
 }
 
 extension ProfileTableViewController : ProfileRecipeCellEditButtonDelegate {
@@ -142,5 +126,4 @@ extension ProfileTableViewController : ProfileRecipeCellEditButtonDelegate {
         guard let recipe = cell.recipe else { return }
         self.selectedRecipe = recipe
     }
-    
 }

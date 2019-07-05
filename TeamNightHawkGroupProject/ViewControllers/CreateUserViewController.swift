@@ -15,6 +15,7 @@ class CreateUserViewController: UIViewController {
 
     //MARK: - Properties
     var imagePicker = ImagePickerHelper()
+    let defaultPlaceholderText: String = "Something about yourself ..."
 
     //MARK: - IBOutlets
     @IBOutlet weak var profileImagePickerButton: UIButton!
@@ -23,8 +24,6 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var biographyTextView: UITextView!
     @IBOutlet weak var profileImageView: UIImageView!
-    
-    let defaultPlaceholderText: String = "Something about yourself ..."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,14 +71,10 @@ class CreateUserViewController: UIViewController {
     }
     
     // MARK: - Functions
-    
     func alertUser(withMessage message: String){
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
         alertController.addAction(cancelAction)
-        
         self.present(alertController, animated: true)
     }
     
@@ -91,8 +86,6 @@ class CreateUserViewController: UIViewController {
     }
     
     func triggerCreatUser(){
-        
-        // Assign default in case user didn't provide data
         var biography = ""
         var profileImage = UIImage(named: "duck")
         
@@ -101,21 +94,17 @@ class CreateUserViewController: UIViewController {
                 alertUser(withMessage: "Please limit your displayname to less than 20.")
                 return
         }
-        
         guard let email = emailTextField.text,
             let password = passwordTextField.text else {
                 alertUser(withMessage: "Please fill our email and password.")
                 return
         }
-        
         if let bioTextViewText = biographyTextView.text, bioTextViewText != defaultPlaceholderText {
             biography = bioTextViewText
         }
-        
         if let image = profileImageView.image {
             profileImage = image
         }
-        
         resignAllTextFields()
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -164,7 +153,6 @@ extension CreateUserViewController: UITextFieldDelegate {
             let bioTextView = self.view.viewWithTag(textField.tag + 1) as? UITextView
             bioTextView?.becomeFirstResponder()
         }
-        
         return true
     }
     
