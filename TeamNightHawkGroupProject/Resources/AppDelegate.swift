@@ -25,73 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         FirebaseApp.configure()
-
-    
-
-//            UserController.shared.createUser(withEmail: "kadenhendrickson4@gmail.com", displayName: "kaden", biography: "I am a person", profileImage: UIImage(named: "AnneCelery"))
-//            RecipeController.shared.createRecipe(name: "pizza", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "1", prepTime: "1")
-//            RecipeController.shared.createRecipe(name: "pizza", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "1", prepTime: "1")
-//            RecipeController.shared.createRecipe(name: "pizza", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "1", prepTime: "1")
-//
-//            UserController.shared.createUser(withEmail: "anne@gmail.com", displayName: "Anne", biography: "I am a person", profileImage: UIImage(named: "AnneCelery"))
-//            RecipeController.shared.createRecipe(name: "Chicken", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "2", prepTime: "4")
-//            RecipeController.shared.createRecipe(name: "Chicken", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "2", prepTime: "4")
-//            RecipeController.shared.createRecipe(name: "Chicken", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "2", prepTime: "4")
-//
-//           UserController.shared.createUser(withEmail: "shane@gmail.com", displayName: "shane", biography: "I am a person", profileImage: UIImage(named: "AnneCelery"))
-//            RecipeController.shared.createRecipe(name: "Steak", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "4", prepTime: "4")
-//            RecipeController.shared.createRecipe(name: "Steak", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "4", prepTime: "4")
-//            RecipeController.shared.createRecipe(name: "Steak", image: UIImage(named: "AnneCelery")!, ingredients: [], steps: [], tags: [], servingSize: "4", prepTime: "4")
-////////
-        //Kaden
-//        UserController.shared.fetchUser(withUserRef: MockUserKey.kaden) { (user) in
-//                UserController.shared.currentUser = user
-//            // Anne
-//            UserController.shared.followUser(withID: MockUserKey.anne)
-//
-//            // Shane
-//            UserController.shared.followUser(withID: MockUserKey.shane)
-//            print("!!!!!!! \(UserController.shared.currentUser?.displayName)")
-//        }
-////
-////
-////        //Anne is now current
-//        UserController.shared.fetchUser(withUserRef: MockUserKey.anne) { (user) in
-//            UserController.shared.currentUser = user
-//            UserController.shared.followUser(withID: MockUserKey.shane)
-//            UserController.shared.followUser(withID: MockUserKey.kaden)
-//            print("!!!!!!! \(UserController.shared.currentUser?.displayName)")
-//        }
-//
-////        // Shane become current
-//        UserController.shared.fetchUser(withUserRef: MockUserKey.shane) { (user) in
-//            UserController.shared.currentUser = user
-//            // Anne
-//            UserController.shared.followUser(withID: MockUserKey.anne)
-//
-//            // Shane
-//            UserController.shared.followUser(withID: MockUserKey.kaden)
-//            print("!!!!!!! \(UserController.shared.currentUser?.displayName)")
-//        }
-//
-////
-////        // back to kaden
-//        UserController.shared.fetchUser(withUserRef: MockUserKey.kaden) { (user) in
-//            UserController.shared.currentUser = user
-//            print("!!!!!!! \(UserController.shared.currentUser?.displayName)")
-//        }
-//////
-//        MockData.shared.resetMockData()
-//        MockData.shared.loadUser()
-//        MockData.shared.printDummyInfo()
-//        
-//        let randomUser = UserController.shared.users.randomElement()?.value
-//        UserController.shared.currentUser = randomUser
-//        
-        //MockData.shared.chooseDummyUser(withName: "bigBeardShane")
-        
         return true
     }
 

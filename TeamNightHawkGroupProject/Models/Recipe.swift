@@ -38,7 +38,6 @@ class Recipe {
         }
         return array
     }
-
     var steps: [String]?
     var prepTime: String
     var servings: String
@@ -48,7 +47,6 @@ class Recipe {
         return savedByUsers.count
     }
     var timestamp: Date
-    //changed image to 'Data?' from 'UIImage?' to test local Persistence. also changed self.image = image to self.image = image.png?Data()
     init(userReference: String, recipeID: String = UUID().uuidString, name: String, image: UIImage?, ingredients: [Ingredient] = [], steps: [String]?, prepTime: String, servings: String, tags: [String]?, savedByUsers: [String] = [], timestamp: Date = Date()) {
 
         self.userReference = userReference
@@ -81,7 +79,6 @@ class Recipe {
                 return nil
         }
         let timestamp = timestampAsTimeStamp.dateValue()
-        
         var ingredients: [Ingredient] = []
         if let ingredientsDict = document[RecipeKeys.ingredientsDictKey] as? [[String:Any]] {
             for ingredient in ingredientsDict {
@@ -89,13 +86,10 @@ class Recipe {
                     ingredients.append(ingredient)
                 }
             }
-            
         }
     
         self.init(userReference: userReference, recipeID: recipeId, name: name, image: UIImage(data: image!) ?? UIImage(named: "AnneCelery"), ingredients: ingredients, steps: steps, prepTime: prepTime, servings: servings, tags: tags, savedByUsers: savedByUsers, timestamp: timestamp )
-        
     }
-    
     
     var dictionaryRepresentation: [String:Any] {
         return ["userReference": userReference,
@@ -114,11 +108,8 @@ class Recipe {
     }
 }
 
-
 extension Recipe: Equatable {
     static func == (lhs: Recipe, rhs: Recipe) -> Bool {
         return lhs.recipeID == rhs.recipeID
     }
-    
-   
 }

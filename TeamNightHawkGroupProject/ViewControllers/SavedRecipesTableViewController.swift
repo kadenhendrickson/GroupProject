@@ -11,13 +11,8 @@ import UIKit
 class SavedRecipesTableViewController: UITableViewController {
     
     //MARK: - Properties
-    // This will be passed through delegate
     var selectedUser: User?
-   // var refreshController = UIRefreshControl()
-    
     var recipesList: [Recipe] = []
-    
-    // reference to recipe's user
     var usersList: [String: User] = [:] {
         didSet {
             tableView.reloadData()
@@ -28,9 +23,6 @@ class SavedRecipesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Saved Recipes"
         tableView.separatorStyle = .none
-//        tableView.refreshControl = refreshController
-//        refreshController.addTarget(self, action: #selector(refreshControlPulled), for: .valueChanged)
-//
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,35 +30,20 @@ class SavedRecipesTableViewController: UITableViewController {
         guard let currentUser = UserController.shared.currentUser else {
             return
         }
-        if currentUser.savedRecipeRefs.count > recipesList.count {
+        if currentUser.savedRecipeRefs.count != recipesList.count {
             loadRecipes { (success) in
                 guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
                 
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 DispatchQueue.main.async {
-                    //self.refreshControl?.endRefreshing()
                     self.tableView.reloadData()
                 }
             }
         }
     }
     
-//    @objc func refreshControlPulled() {
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//        loadRecipes { (success) in
-//            guard success else { print("🍒 Failed to load. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒"); return }
-//
-//            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//            DispatchQueue.main.async {
-//                self.refreshControl?.endRefreshing()
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
-    
-
+    //MARK: - Helper Functions
     func loadRecipes(_ completion: @escaping(Bool) -> Void) {
-        // must reset fetched recipe before fetching to avoid duplicate recipes
         self.recipesList = []
         self.usersList = [:]
         guard let recipeRefs = UserController.shared.currentUser?.savedRecipeRefs else {
@@ -74,13 +51,10 @@ class SavedRecipesTableViewController: UITableViewController {
         }
         
         RecipeController.shared.fetchRecipesWith(recipeReferences: recipeRefs) { (recipes) in
-            
             guard recipes.count > 0 else {completion(false) ;return}
-            
+
             self.recipesList += recipes
-            
-            //self.recipesList.sort{$1.timestamp < $0.timestamp}
-            for recipe in self.recipesList {
+                for recipe in self.recipesList {
                 self.findUserForRecipe(with: recipe) { (fetchedUser) in
                     if let fetchedUser = fetchedUser {
                         self.usersList[recipe.recipeID] = fetchedUser
@@ -89,19 +63,14 @@ class SavedRecipesTableViewController: UITableViewController {
             }
                 completion(true)
                 return
-            
-            
         }
     }
     
     func findUserForRecipe(with recipe: Recipe, completion: @escaping (User?)-> Void) {
-        
         UserController.shared.fetchUser(withUserRef: recipe.userReference) { (user) in
-            
             completion(user)
             return
         }
-        
         completion(nil)
         return
     }
@@ -123,25 +92,17 @@ class SavedRecipesTableViewController: UITableViewController {
         cell.user = user
         cell.recipe = recipe
         cell.delegate = self
-        
         return cell
     }
     
-    // Swipe to delete
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let cell = tableView.cellForRow(at: indexPath) as? SavedRecipeTableViewCell,
                  let recipe = cell.recipe
                 else { print("🍒 Can't cast cell as saved recipe cell. Printing from \(#function) \n In \(String(describing: SavedRecipesTableViewController.self)) 🍒") ; return }
             
-//            print("Index path: \(indexPath.row)\nNo. of recipeList: \(recipesList.count).")
-            
-            // this remove from both fire store and source of truth
             RecipeController.shared.deleteRecipeFromUsersSavedList(WithRecipeID: recipe.recipeID)
-            
-            // this remove from the fetched result
             self.recipesList.remove(at: indexPath.row)
-
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -171,7 +132,6 @@ class SavedRecipesTableViewController: UITableViewController {
 
         }
     }
-
 }
 
 extension SavedRecipesTableViewController: SavedRecipeTableViewCellDelegate {

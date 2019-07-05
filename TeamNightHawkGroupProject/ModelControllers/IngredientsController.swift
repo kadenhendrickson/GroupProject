@@ -10,18 +10,19 @@ import Foundation
 
 class IngredientsController {
     
+    //MARK: - Singleton
     static let shared = IngredientsController()
+    //MARK: - Properties
     var recipe: Recipe?
+    
+    //MARK: - CRUD Funtions
     
     func addIngredient(name: String, measurementName: String, measurementQuantity: String) {
         guard let recipe = recipe else {return}
         let ingredient = Ingredient(name: name, measurementName: measurementName, measurementQuantity: measurementQuantity)
         recipe.ingredients.append(ingredient)
     }
-    func 🏘(ingredient: Ingredient) {
-        guard let indexOfIngredient = recipe?.ingredients.firstIndex(of: ingredient) else {return}
-        recipe?.ingredients.remove(at: indexOfIngredient)
-    }
+    
     func updateIngredient(ingredient: Ingredient, name: String, measurementName: String, measurementQuantity: String) {
         ingredient.name = name
         ingredient.measurementName = measurementName

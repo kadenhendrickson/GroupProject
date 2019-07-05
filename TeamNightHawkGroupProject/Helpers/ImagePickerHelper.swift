@@ -97,8 +97,6 @@ class ImagePickerHelper: UIViewController {
         
         /* Alert Controller */
         let alertController = UIAlertController(title: "Add new photo from ..", message: nil, preferredStyle: .alert)
-
-
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             // nothing
         }
@@ -118,47 +116,35 @@ class ImagePickerHelper: UIViewController {
             }
             alertController.addAction(openLibraryAction)
         }
-
         alertController.addAction(cancelAction)
-
         controller.present(alertController, animated: true, completion: nil)
     }
 
     func dismissPicker(){
         self.controller?.dismiss(animated: true, completion: nil)
     }
-    
-
 }
 
 
 extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismissPicker()
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         var image: UIImage? = nil
-        
+
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             image = editedImage
-            
         } else if let libraryImage = info[.originalImage] as? UIImage {
             image = libraryImage
         }
         
         guard let selectedImage = image else {
-            print("🍒 Cannot find an image selected or edited by user. Printing from \(#function) \n In \(String(describing: ImagePickerHelper.self)) 🍒")
-            return
-        }
-        
+            print("🍒 Cannot find an image selected or edited by user. Printing from \(#function) \n In \(String(describing: ImagePickerHelper.self)) 🍒"); return}
         
         guard let delegate = delegate else {
-            print("🍒 Please extend your viewcontroller with ImagePickerHelper and conform to ImagePickerHelperDelegate. Printing from \(#function) \n In \(String(describing: ImagePickerHelperDelegate.self)) 🍒"); return
-        }
+            print("🍒 Please extend your viewcontroller with ImagePickerHelper and conform to ImagePickerHelperDelegate. Printing from \(#function) \n In \(String(describing: ImagePickerHelperDelegate.self)) 🍒"); return}
         
         dismissPicker()
         
@@ -166,5 +152,4 @@ extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationContr
         delegate.fireActionsForSelectedImage(selectedImage)
         
     }
- 
 }
